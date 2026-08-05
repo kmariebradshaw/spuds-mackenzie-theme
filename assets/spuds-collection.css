@@ -43,8 +43,8 @@
 
 .spuds-collection-hero__inner {
   display: grid;
-  grid-template-columns: minmax(22rem, 36%) minmax(0, 1fr);
-  min-height: clamp(26rem, 32vw, 38rem);
+  grid-template-columns: 36% minmax(0, 1fr);
+  min-height: 25vw;
 }
 
 .spuds-collection-hero__copy {
@@ -53,7 +53,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(3rem, 6vw, 6rem) clamp(2rem, 5vw, 5.5rem);
+  padding: 1.25vw 2.4vw;
 }
 
 .spuds-collection-hero h1 {
@@ -65,7 +65,7 @@
 .spuds-collection-hero__title-primary {
   display: block;
   font-family: var(--spuds-brush);
-  font-size: clamp(4.8rem, 7.5vw, 8.25rem);
+  font-size: 7.5vw;
   font-weight: 400;
   letter-spacing: -.035em;
   line-height: .7;
@@ -75,14 +75,14 @@
 .spuds-collection-hero__title-accent-row {
   display: flex;
   align-items: center;
-  gap: clamp(.25rem, .7vw, .7rem);
-  margin-top: clamp(.3rem, .8vw, .75rem);
+  gap: .7vw;
+  margin-top: .8vw;
 }
 
 .spuds-collection-hero__title-accent {
   color: var(--spuds-collection-accent, var(--spuds-teal));
   font-family: var(--spuds-script);
-  font-size: clamp(4.6rem, 7vw, 7.75rem);
+  font-size: 7vw;
   font-weight: 400;
   letter-spacing: -.025em;
   line-height: .72;
@@ -90,26 +90,28 @@
 
 .spuds-collection-hero__paw {
   display: block;
-  width: clamp(2.65rem, 3.7vw, 4rem);
+  width: 3.7vw;
   flex: 0 0 auto;
   aspect-ratio: 57.256 / 58.173;
   background-color: var(--spuds-collection-accent, var(--spuds-teal));
   -webkit-mask: url("Graphic-5.svg") center / contain no-repeat;
   mask: url("Graphic-5.svg") center / contain no-repeat;
-  transform: rotate(4deg) translateY(.3rem);
+  transform: rotate(4deg) translateY(.3vw);
 }
 
 .spuds-collection-hero__description {
-  max-width: 31rem;
-  margin-top: clamp(1.75rem, 2.5vw, 2.7rem);
+  max-width: 31vw;
+  margin-top: 2.25vw;
   color: inherit;
   font-family: var(--spuds-scale);
-  font-size: clamp(1.05rem, 1.3vw, 1.35rem);
+  font-size: 1.5vw;
   font-stretch: expanded;
   font-variation-settings: "wght" 550, "wdth" 112;
   font-weight: 600;
   letter-spacing: .01em;
-  line-height: 1.25;
+  line-height: 1.15;
+  transform: skewX(-7deg);
+  transform-origin: left center;
   text-transform: uppercase;
 }
 
@@ -123,8 +125,9 @@
 
 .spuds-collection-hero__underline {
   display: block;
-  width: min(100%, 19.4rem);
-  margin-top: clamp(.4rem, .8vw, .85rem);
+  width: 14.5vw;
+  margin-top: .55vw;
+  margin-left: 9.5vw;
   aspect-ratio: 309.505 / 57.185;
   background-color: var(--spuds-collection-accent, var(--spuds-teal));
   -webkit-mask: url("Graphic-7.svg") center / contain no-repeat;
@@ -148,7 +151,7 @@
 .spuds-collection-hero__media::after {
   position: absolute;
   inset: 0 auto 0 0;
-  width: clamp(1.5rem, 4vw, 5rem);
+  width: 4vw;
   background: linear-gradient(90deg, var(--spuds-collection-hero-background, var(--spuds-cream)), transparent);
   content: "";
   pointer-events: none;
@@ -404,8 +407,8 @@
   }
 
   .spuds-collection-hero__copy {
-    padding-right: 2.5rem;
-    padding-left: 2.5rem;
+    padding-right: 3vw;
+    padding-left: 3vw;
   }
 }
 
@@ -415,9 +418,21 @@
   }
 
   .spuds-collection-hero__copy {
-    min-height: 25rem;
-    padding: 4rem 1.5rem 3.5rem;
+    min-height: 58vw;
+    padding: 5vw 4vw;
     text-align: center;
+  }
+
+  .spuds-collection-hero__title-primary {
+    font-size: 10vw;
+  }
+
+  .spuds-collection-hero__title-accent {
+    font-size: 9.5vw;
+  }
+
+  .spuds-collection-hero__paw {
+    width: 6vw;
   }
 
   .spuds-collection-hero__title-accent-row {
@@ -425,23 +440,28 @@
   }
 
   .spuds-collection-hero__description {
+    max-width: 80vw;
+    margin-top: 4vw;
     margin-right: auto;
     margin-left: auto;
+    font-size: 3.4vw;
+    transform-origin: center;
   }
 
   .spuds-collection-hero__underline {
+    width: 40vw;
     margin-right: auto;
     margin-left: auto;
   }
 
   .spuds-collection-hero__media {
-    min-height: min(88vw, 40rem);
+    min-height: 70vw;
   }
 
   .spuds-collection-hero__media::after {
     inset: 0 0 auto;
     width: 100%;
-    height: 3.5rem;
+    height: 7vw;
     background: linear-gradient(180deg, var(--spuds-collection-hero-background, var(--spuds-cream)), transparent);
   }
 
