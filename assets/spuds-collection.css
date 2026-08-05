@@ -296,7 +296,18 @@
 .spuds-collection-products [ref="productTitleLink"] .text-block > * {
   width: 100%;
   color: #fff !important;
+  /* Horizon assigns a font preset directly to this inner <p>. Apply the
+     collection description treatment here as well, otherwise the product
+     title falls back to the theme's heading font. */
+  font-family: var(--spuds-scale) !important;
+  font-stretch: expanded;
+  font-variation-settings: "wght" 550, "wdth" 112;
+  font-weight: 600 !important;
+  font-size: inherit !important;
+  letter-spacing: inherit !important;
+  line-height: inherit !important;
   text-align: center;
+  text-transform: uppercase !important;
 }
 
 .spuds-collection-products .product-grid__item:nth-child(3n + 1) [ref="productTitleLink"] .text-block {
