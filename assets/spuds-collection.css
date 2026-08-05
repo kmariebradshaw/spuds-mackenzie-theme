@@ -22,9 +22,9 @@
   --spuds-green: #62a331;
   --spuds-cream: #faf0e4;
   --spuds-yellow: #ffbd20;
-  /* The theme's configured heading font is loaded by Shopify. Scale was not
-     included as an asset, so using it here fell through to Impact. */
-  --spuds-scale: var(--font-heading--family), Arial, sans-serif;
+  /* Adobe Fonts is loaded globally in layout/theme.liquid. Keep this aligned
+     with the homepage rather than substituting Shopify's heading font. */
+  --spuds-scale: "Scale VF", "scale-variable", Impact, sans-serif;
   --spuds-brush: "Casual Brush", cursive;
   --spuds-script: "Beach Club Script", cursive;
   --spuds-body: "Work Sans", Arial, sans-serif;
@@ -295,6 +295,7 @@
 
 .spuds-collection-products [ref="productTitleLink"] .text-block > * {
   width: 100%;
+  color: #fff !important;
   text-align: center;
 }
 
@@ -312,12 +313,19 @@
 }
 
 .spuds-collection-products product-price.text-block {
-  display: none;
+  order: 3;
+  display: block;
+  padding: .35rem 1rem .6rem !important;
+  color: var(--spuds-navy);
+  font-family: var(--spuds-body) !important;
+  font-size: 1rem !important;
+  font-weight: 700;
+  text-align: center;
 }
 
 .spuds-collection-products .product-card__content > .quick-add {
   position: relative;
-  order: 3;
+  order: 4;
   inset: auto;
   z-index: 2;
   display: block;
@@ -352,7 +360,9 @@
   color: #fff;
   font-family: var(--spuds-scale);
   font-size: 1rem;
-  font-weight: 700;
+  font-stretch: expanded;
+  font-variation-settings: "wght" 500, "wdth" 120;
+  font-weight: 600;
   letter-spacing: .03em;
   opacity: 1;
   text-transform: uppercase;
