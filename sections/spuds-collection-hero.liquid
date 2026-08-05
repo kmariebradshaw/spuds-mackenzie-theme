@@ -1,0 +1,155 @@
+{{ 'spuds-collection.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign hero_image = collection.image
+  if hero_image == blank
+    assign hero_image = collection.products.first.featured_image
+  endif
+
+  assign hero_alt = collection.image.alt | default: collection.title
+  assign primary_label = collection.metafields.custom.header_button_1_label.value | default: section.settings.primary_label
+  assign primary_link = collection.metafields.custom.header_button_1_link.value | default: section.settings.primary_link | default: routes.all_products_collection_url
+  assign secondary_label = collection.metafields.custom.header_button_2_label.value | default: section.settings.secondary_label
+  assign secondary_link = collection.metafields.custom.header_button_2_link.value | default: section.settings.secondary_link | default: routes.root_url
+  assign title_words = collection.title | strip | split: ' '
+  assign accent_color = collection.metafields.custom.accent_color.value | default: section.settings.accent_color
+%}
+
+<section
+  class="spuds-collection-hero"
+  id="SpudsCollectionHero-{{ section.id }}"
+  style="
+    --spuds-collection-hero-background: {{ section.settings.background_color }};
+    --spuds-collection-hero-text: {{ section.settings.text_color }};
+    --spuds-collection-accent: {{ accent_color }};
+  "
+>
+  <div class="spuds-collection-hero__inner">
+    <div class="spuds-collection-hero__copy">
+      <h1>
+        <span class="spuds-collection-hero__title-primary">{{ title_words.first | escape }}</span>
+        {% if title_words.size > 1 %}
+          <span class="spuds-collection-hero__title-accent-row">
+            <span class="spuds-collection-hero__title-accent">
+              {% for title_word in title_words offset: 1 %}{% unless forloop.first %} {% endunless %}{{ title_word | escape }}{% endfor %}
+            </span>
+            <span class="spuds-collection-hero__paw" aria-hidden="true"></span>
+          </span>
+        {% endif %}
+      </h1>
+
+      {% if collection.description != blank %}
+        <div class="spuds-collection-hero__description rte">
+          {{ collection.description }}
+        </div>
+        <span class="spuds-collection-hero__underline" aria-hidden="true"></span>
+      {% endif %}
+    </div>
+
+    <div class="spuds-collection-hero__media{% if hero_image == blank %} spuds-collection-hero__media--placeholder{% endif %}">
+      {% if hero_image != blank %}
+        {{
+          hero_image
+          | image_url: width: 2400
+          | image_tag:
+            widths: '600, 900, 1200, 1600, 2000, 2400',
+            sizes: '(max-width: 749px) 100vw, 50vw',
+            loading: 'eager',
+            fetchpriority: 'high',
+            alt: hero_alt
+        }}
+      {% else %}
+        {{ 'collection-apparel-1' | placeholder_svg_tag: 'spuds-collection-hero__placeholder' }}
+      {% endif %}
+    </div>
+  </div>
+
+  <nav class="spuds-collection-nav" aria-label="{{ section.settings.navigation_label | escape }}">
+    {% if primary_label != blank %}
+      <a class="spuds-collection-nav__link" href="{{ primary_link }}">
+        {{ primary_label | escape }}
+        {% render 'spuds-shape', shape: 'arrow', color: '#ffffff', class: 'spuds-collection-nav__arrow' %}
+      </a>
+    {% endif %}
+
+    {% if secondary_label != blank %}
+      <a class="spuds-collection-nav__link" href="{{ secondary_link }}">
+        {{ secondary_label | escape }}
+        {% render 'spuds-shape', shape: 'arrow', color: '#ffffff', class: 'spuds-collection-nav__arrow' %}
+      </a>
+    {% endif %}
+  </nav>
+</section>
+
+{% schema %}
+{
+  "name": "Spuds collection hero",
+  "tag": "section",
+  "class": "section-spuds-collection-hero",
+  "enabled_on": {
+    "templates": ["collection"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Navigation buttons"
+    },
+    {
+      "type": "text",
+      "id": "navigation_label",
+      "label": "Accessible navigation label",
+      "default": "Shop Spuds collections"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "First button label",
+      "default": "Shop all"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "First button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Second button label",
+      "default": "Meet Spuds"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Second button link"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Hero background",
+      "default": "#faf0e4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Hero text",
+      "default": "#071b3d"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Default accent color",
+      "info": "Used when this collection does not have a custom.accent_color metafield.",
+      "default": "#09a8b5"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spuds collection hero"
+    }
+  ]
+}
+{% endschema %}

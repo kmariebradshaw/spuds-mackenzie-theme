@@ -1,0 +1,219 @@
+{{ 'spuds-homepage.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign hero_image = section.settings.hero_image
+  assign old_image = section.settings.old_image
+  assign today_image = section.settings.today_image
+%}
+
+<section class="spuds-home" id="SpudsHome-{{ section.id }}">
+  <div class="spuds-shell">
+    <div class="spuds-hero">
+      <div class="spuds-hero__image">
+        {% if hero_image != blank %}
+          {{ hero_image | image_url: width: 2400 | image_tag: widths: '750,1100,1500,2000,2400', sizes: '(max-width: 990px) 100vw, 76vw', loading: 'eager', fetchpriority: 'high' }}
+        {% else %}
+          <img src="{{ 'spuds-hero.png' | asset_url }}" width="1537" height="1023" alt="Spuds MacKenzie relaxing at a pool party" loading="eager" fetchpriority="high">
+        {% endif %}
+      </div>
+      {% comment %} <svg class="spuds-hero__copy-bg" viewBox="0 0 1920 850" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="SpudsCreamFade-{{ section.id }}" x1="0" x2="1">
+            <stop offset="0" stop-color="#fff4e5"/>
+            <stop offset=".82" stop-color="#fff4e5"/>
+            <stop offset="1" stop-color="#fff4e5" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#SpudsCreamFade-{{ section.id }})" d="M0 0H590L610 110 535 205 570 285 670 355 650 445 690 535 600 610 560 705 505 850H0Z"/>
+      </svg> {% endcomment %}
+
+      <div class="spuds-hero__copy">
+        <p class="spuds-hero__eyebrow">{{ section.settings.hero_eyebrow }}</p>
+        <div class="spuds-hero__brush" style="background-image: url('{{ 'spuds-original-brush.png' | asset_url }}');">
+          {{ section.settings.hero_kicker }}
+        </div>
+        <h1 class="spuds-display">{{ section.settings.hero_title }}</h1>
+        <div class="spuds-hero__back">
+          {{ section.settings.hero_subtitle }}
+          {% render 'spuds-shape', shape: 'paw', color: '#ff2e6c', class: 'spuds-hero__back-paw' %}
+        </div>
+        <a class="spuds-button" href="{{ section.settings.hero_link }}">
+          {{ section.settings.hero_button }}
+          {% render 'spuds-shape', shape: 'arrow', color: '#ff2e6c' %}
+        </a>
+      </div>
+
+      <div class="spuds-hero__polaroids" aria-hidden="true">
+        {% for i in (1..4) %}
+          {% assign setting_key = 'hero_polaroid_' | append: i %}
+          {% assign selected = section.settings[setting_key] %}
+          <div class="spuds-polaroid spuds-hero__polaroid">
+            {% if selected != blank %}
+              {{ selected | image_url: width: 500 | image_tag: loading: 'eager' }}
+            {% else %}
+              {% case i %}
+                {% when 1 %}<img src="{{ 'spuds-photo-skateboard.png' | asset_url }}" alt="">
+                {% when 2 %}<img src="{{ 'spuds-photo-captain.png' | asset_url }}" alt="">
+                {% when 3 %}<img src="{{ 'spuds-photo-birthday.png' | asset_url }}" alt="">
+                {% when 4 %}<img src="{{ 'spuds-photo-lounger.png' | asset_url }}" alt="">
+              {% endcase %}
+            {% endif %}
+          </div>
+        {% endfor %}
+        {% render 'spuds-shape', shape: 'paw', color: '#ff2e6c', class: 'spuds-hero__polaroid-paw' %}
+      </div>
+      {% render 'spuds-shape', shape: 'triangle', color: '#45c4cc', class: 'spuds-float-shape spuds-float-shape--one' %}
+      {% render 'spuds-shape', shape: 'zigzag', color: '#ffbd20', class: 'spuds-float-shape spuds-float-shape--two' %}
+      {% render 'spuds-shape', shape: 'zigzag', color: '#ffbd20', class: 'spuds-float-shape spuds-float-shape--three' %}
+      {% render 'spuds-shape', shape: 'triangle', color: '#45c4cc', class: 'spuds-float-shape spuds-float-shape--four' %}
+      {% render 'spuds-shape', shape: 'zigzag', color: '#ffbd20', class: 'spuds-float-shape spuds-float-shape--five' %}
+    </div>
+
+    <div class="spuds-categories" aria-label="Shop product categories">
+      {% render 'spuds-shape', shape: 'zigzag', color: '#ffbd20', class: 'spuds-float-shape spuds-categories__zigzag--left' %}
+      {% render 'spuds-shape', shape: 'zigzag', color: '#ffbd20', class: 'spuds-float-shape spuds-categories__zigzag--right' %}
+      {% for block in section.blocks %}
+        {% if block.type == 'category' %}
+          <article class="spuds-category" {{ block.shopify_attributes }}>
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 800 | image_tag: class: 'spuds-category__image', loading: 'lazy' }}
+            {% else %}
+              <img class="spuds-category__image" src="{{ 'spuds-products.png' | asset_url }}" alt="" loading="lazy">
+            {% endif %}
+            <div>
+              <h2><strong>Spuds</strong>{{ block.settings.title }}</h2>
+              <p>{{ block.settings.products | newline_to_br }}</p>
+              <a class="spuds-text-link" href="{{ block.settings.link }}">{{ block.settings.link_label }} →</a>
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="spuds-story">
+      {% render 'spuds-shape', shape: 'torn-panel', color: '#071b3d', class: 'spuds-story__paper' %}
+      <div class="spuds-story__grid">
+        <div class="spuds-polaroid spuds-story__polaroid">
+          {% if old_image != blank %}
+            {{ old_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: 'Spuds MacKenzie in 1987' }}
+          {% else %}
+            <img src="{{ 'spuds-photo-1987.png' | asset_url }}" alt="Spuds MacKenzie in 1987" loading="lazy">
+          {% endif %}
+        </div>
+        <div class="spuds-story__label">
+          <div class="spuds-kicker">1987</div>
+          <h3>Advertising <span class="spuds-script">Icon</span></h3>
+          <p>{{ section.settings.old_copy }}</p>
+        </div>
+        {% render 'spuds-shape', shape: 'arrow', color: '#fff4e5', class: 'spuds-story__arrow' %}
+        <div class="spuds-polaroid spuds-story__polaroid">
+          {% if today_image != blank %}
+            {{ today_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: 'Spuds MacKenzie today' }}
+          {% else %}
+            <img src="{{ 'spuds-photo-today.png' | asset_url }}" alt="Spuds MacKenzie today" loading="lazy">
+          {% endif %}
+        </div>
+        <div class="spuds-story__label spuds-story__label--today">
+          <div class="spuds-kicker">Today</div>
+          <h3>Pet <span class="spuds-script">Legend</span></h3>
+          <p>{{ section.settings.today_copy }}</p>
+        </div>
+      </div>
+      <div class="spuds-story__mission">{{ section.settings.mission_top }} <span>{{ section.settings.mission_bottom }}</span></div>
+    </div>
+
+    <div class="spuds-gallery">
+      {% render 'spuds-shape', shape: 'triangle', color: '#45c4cc', class: 'spuds-float-shape spuds-gallery__triangle' %}
+      {% render 'spuds-shape', shape: 'zigzag', color: '#ffbd20', class: 'spuds-float-shape spuds-gallery__zigzag' %}
+      <div class="spuds-rating"><strong>★★★★★ {{ section.settings.rating }}</strong>{{ section.settings.rating_copy }}</div>
+      <h2>{{ section.settings.gallery_heading }} <span>{{ section.settings.gallery_accent }}</span></h2>
+      <div class="spuds-gallery__line" aria-hidden="true"></div>
+      <div class="spuds-gallery__grid">
+        {% assign gallery_count = 0 %}
+        {% for block in section.blocks %}
+          {% if block.type == 'pet' %}
+            {% assign gallery_count = gallery_count | plus: 1 %}
+            <div class="spuds-pet" {{ block.shopify_attributes }}>
+              {% if block.settings.image != blank %}
+                {{ block.settings.image | image_url: width: 700 | image_tag: loading: 'lazy', alt: block.settings.alt }}
+              {% else %}
+                <img src="{{ 'pet-gallery-' | append: gallery_count | append: '.png' | asset_url }}" alt="{{ block.settings.alt | escape }}" loading="lazy">
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <a class="spuds-button" href="{{ section.settings.upload_link }}">{{ section.settings.upload_label }} ↑</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Spuds homepage",
+  "tag": "section",
+  "class": "section-spuds-homepage",
+  "settings": [
+    {"type":"header","content":"Hero"},
+    {"type":"image_picker","id":"hero_image","label":"Hero image"},
+    {"type":"text","id":"hero_eyebrow","label":"Eyebrow","default":"Pet treats & wellness inspired by a legend."},
+    {"type":"text","id":"hero_kicker","label":"Brush label","default":"The Original"},
+    {"type":"text","id":"hero_title","label":"Heading","default":"Party Animal"},
+    {"type":"text","id":"hero_subtitle","label":"Accent heading","default":"Is Back!"},
+    {"type":"text","id":"hero_button","label":"Button label","default":"Shop now"},
+    {"type":"url","id":"hero_link","label":"Button link"},
+    {"type":"image_picker","id":"hero_polaroid_1","label":"Hero Polaroid 1"},
+    {"type":"image_picker","id":"hero_polaroid_2","label":"Hero Polaroid 2"},
+    {"type":"image_picker","id":"hero_polaroid_3","label":"Hero Polaroid 3"},
+    {"type":"image_picker","id":"hero_polaroid_4","label":"Hero Polaroid 4"},
+    {"type":"header","content":"Story"},
+    {"type":"image_picker","id":"old_image","label":"1987 Polaroid"},
+    {"type":"textarea","id":"old_copy","label":"1987 copy","default":"Spuds MacKenzie became one of the most recognizable dogs in America."},
+    {"type":"image_picker","id":"today_image","label":"Today Polaroid"},
+    {"type":"textarea","id":"today_copy","label":"Today copy","default":"That legendary personality inspires a new generation of treats, wellness products, and dogs who know how to have a good time."},
+    {"type":"text","id":"mission_top","label":"Mission line 1","default":"Same legendary spirit."},
+    {"type":"text","id":"mission_bottom","label":"Mission line 2","default":"New mission."},
+    {"type":"header","content":"Pet gallery"},
+    {"type":"text","id":"rating","label":"Rating","default":"4.6"},
+    {"type":"text","id":"rating_copy","label":"Rating caption","default":"Based on 50 reviews on Amazon"},
+    {"type":"text","id":"gallery_heading","label":"Heading","default":"Showcase"},
+    {"type":"text","id":"gallery_accent","label":"Accent heading","default":"Your Pets"},
+    {"type":"text","id":"upload_label","label":"Upload button","default":"Upload your pet"},
+    {"type":"url","id":"upload_link","label":"Upload link"}
+  ],
+  "blocks": [
+    {
+      "type":"category",
+      "name":"Category",
+      "limit":3,
+      "settings":[
+        {"type":"image_picker","id":"image","label":"Product image"},
+        {"type":"text","id":"title","label":"Title","default":"Snacks"},
+        {"type":"textarea","id":"products","label":"Product list","default":"Treat chips\nTreat chews\nChew sticks"},
+        {"type":"text","id":"link_label","label":"Link label","default":"Shop now"},
+        {"type":"url","id":"link","label":"Link"}
+      ]
+    },
+    {
+      "type":"pet",
+      "name":"Pet photo",
+      "limit":5,
+      "settings":[
+        {"type":"image_picker","id":"image","label":"Image"},
+        {"type":"text","id":"alt","label":"Alt text","default":"A happy dog enjoying a Spuds treat"}
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name":"Spuds homepage",
+      "blocks":[
+        {"type":"category","settings":{"title":"Snacks","products":"Treat chips\nTreat chews\nChew sticks"}},
+        {"type":"category","settings":{"title":"Health","products":"Dental chews\nJoint care chews\nVitamin chews"}},
+        {"type":"category","settings":{"title":"Salon","products":"Nose & paw balm\nEar wipes\nShampoo"}},
+        {"type":"pet"},{"type":"pet"},{"type":"pet"},{"type":"pet"},{"type":"pet"}
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,118 @@
+{{ 'spuds-homepage.css' | asset_url | stylesheet_tag }}
+{% assign hero_image = section.settings.hero_image %}
+
+<section class="spuds-home" id="SpudsHero-{{ section.id }}">
+  <div class="spuds-shell">
+    <div class="spuds-hero">
+      <div class="spuds-hero__image">
+        {% if hero_image != blank %}
+          {{ hero_image | image_url: width: 2400 | image_tag: widths: '750,1100,1500,2000,2400', sizes: '(max-width: 990px) 100vw, 76vw', loading: 'eager', fetchpriority: 'high' }}
+        {% else %}
+          <img src="{{ 'spuds-hero.png' | asset_url }}" width="1537" height="1023" alt="Spuds MacKenzie relaxing at a pool party" loading="eager" fetchpriority="high">
+        {% endif %}
+      </div>
+
+      <div class="spuds-hero__copy">
+        <p class="spuds-hero__eyebrow">{{ section.settings.hero_eyebrow }}</p>
+        <div class="spuds-hero__brush" style="background-image:url('{{ 'Graphic-6.svg' | asset_url }}')">{{ section.settings.hero_kicker }}</div>
+        <h1 class="spuds-display">{{ section.settings.hero_title }}</h1>
+        <div class="spuds-hero__back">
+          {{ section.settings.hero_subtitle }}
+          {% render 'spuds-shape', shape: 'paw', color: '#ff2e6c', class: 'spuds-hero__back-paw' %}
+        </div>
+        <a class="spuds-button" href="{{ section.settings.hero_link }}">
+          {{ section.settings.hero_button }}
+          {% render 'spuds-shape', shape: 'arrow', color: '#ff2e6c' %}
+        </a>
+      </div>
+
+      <div class="spuds-hero__polaroids" aria-hidden="true">
+        {% for i in (1..4) %}
+          {% assign setting_key = 'hero_polaroid_' | append: i %}
+          {% assign selected = section.settings[setting_key] %}
+          <div class="spuds-polaroid spuds-hero__polaroid">
+            {% if selected != blank %}
+              {{ selected | image_url: width: 500 | image_tag: loading: 'eager' }}
+            {% else %}
+              {% case i %}
+                {% when 1 %}<img src="{{ 'spuds-photo-skateboard.png' | asset_url }}" alt="">
+                {% when 2 %}<img src="{{ 'spuds-photo-captain.png' | asset_url }}" alt="">
+                {% when 3 %}<img src="{{ 'spuds-photo-birthday.png' | asset_url }}" alt="">
+                {% when 4 %}<img src="{{ 'spuds-photo-lounger.png' | asset_url }}" alt="">
+              {% endcase %}
+            {% endif %}
+          </div>
+        {% endfor %}
+        {% render 'spuds-shape', shape: 'paw', color: '#ff2e6c', class: 'spuds-hero__polaroid-paw' %}
+      </div>
+      {% render 'spuds-shape', shape: 'triangle', color: '#45c4cc', class: 'spuds-float-shape spuds-float-shape--one' %}
+      {% render 'spuds-shape', shape: 'zigzag', color: '#ffbd20', class: 'spuds-float-shape spuds-float-shape--two' %}
+      {% render 'spuds-shape', shape: 'zigzag', color: '#ffbd20', class: 'spuds-float-shape spuds-float-shape--three' %}
+      {% render 'spuds-shape', shape: 'triangle', color: '#45c4cc', class: 'spuds-float-shape spuds-float-shape--four' %}
+    </div>
+
+    <div class="spuds-categories" aria-label="Shop product categories">
+      {% render 'spuds-shape', shape: 'zigzag', color: '#ffbd20', class: 'spuds-float-shape spuds-categories__zigzag--left' %}
+      {% render 'spuds-shape', shape: 'zigzag', color: '#ffbd20', class: 'spuds-float-shape spuds-categories__zigzag--right' %}
+      {% for block in section.blocks %}
+        <article class="spuds-category" {{ block.shopify_attributes }}>
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 800 | image_tag: class: 'spuds-category__image', loading: 'lazy' }}
+          {% else %}
+            <img class="spuds-category__image" src="{{ 'spuds-products.png' | asset_url }}" alt="" loading="lazy">
+          {% endif %}
+          <div>
+            <h2><strong>Spuds</strong>{{ block.settings.title }}</h2>
+            <p>{{ block.settings.products | newline_to_br }}</p>
+            <a class="spuds-text-link" href="{{ block.settings.link }}">{{ block.settings.link_label }} →</a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name":"Spuds hero",
+  "tag":"section",
+  "class":"section-spuds-hero",
+  "settings":[
+    {"type":"image_picker","id":"hero_image","label":"Hero image"},
+    {"type":"text","id":"hero_eyebrow","label":"Eyebrow","default":"Pet treats & wellness inspired by a legend."},
+    {"type":"text","id":"hero_kicker","label":"Brush label","default":"The Original"},
+    {"type":"text","id":"hero_title","label":"Heading","default":"Party Animal"},
+    {"type":"text","id":"hero_subtitle","label":"Accent heading","default":"Is Back!"},
+    {"type":"text","id":"hero_button","label":"Button label","default":"Shop now"},
+    {"type":"url","id":"hero_link","label":"Button link"},
+    {"type":"image_picker","id":"hero_polaroid_1","label":"Hero Polaroid 1 photo"},
+    {"type":"image_picker","id":"hero_polaroid_2","label":"Hero Polaroid 2 photo"},
+    {"type":"image_picker","id":"hero_polaroid_3","label":"Hero Polaroid 3 photo"},
+    {"type":"image_picker","id":"hero_polaroid_4","label":"Hero Polaroid 4 photo"}
+  ],
+  "blocks":[
+    {
+      "type":"category",
+      "name":"Product category",
+      "limit":3,
+      "settings":[
+        {"type":"image_picker","id":"image","label":"Product image"},
+        {"type":"text","id":"title","label":"Title","default":"Snacks"},
+        {"type":"textarea","id":"products","label":"Product list","default":"Treat chips\nTreat chews\nChew sticks"},
+        {"type":"text","id":"link_label","label":"Link label","default":"Shop now"},
+        {"type":"url","id":"link","label":"Link"}
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name":"Spuds hero",
+      "blocks":[
+        {"type":"category","settings":{"title":"Snacks","products":"Treat chips\nTreat chews\nChew sticks"}},
+        {"type":"category","settings":{"title":"Health","products":"Dental chews\nJoint care chews\nVitamin chews"}},
+        {"type":"category","settings":{"title":"Salon","products":"Nose & paw balm\nEar wipes\nShampoo"}}
+      ]
+    }
+  ]
+}
+{% endschema %}

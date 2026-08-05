@@ -1,0 +1,49 @@
+{% comment %}
+  Usage: {% render 'spuds-shape', shape: 'graphic-1', class: 'my-class' %}
+  Graphic 1–5 use the supplied production SVG assets. Arrow and legacy utility
+  shapes remain inline because they were not included in the replacement set.
+{% endcomment %}
+{% assign stroke = color | default: '#08a7b4' %}
+{% case shape %}
+  {% when 'graphic-1' %}
+    <img class="{{ class }}" src="{{ 'Graphic-1.svg' | asset_url }}" alt="" aria-hidden="true">
+  {% when 'graphic-2' %}
+    <img class="{{ class }}" src="{{ 'Graphic-2.svg' | asset_url }}" alt="" aria-hidden="true">
+  {% when 'graphic-3' %}
+    <img class="{{ class }}" src="{{ 'Graphic-3.svg' | asset_url }}" alt="" aria-hidden="true">
+  {% when 'graphic-4' %}
+    <img class="{{ class }}" src="{{ 'Graphic-4.svg' | asset_url }}" alt="" aria-hidden="true">
+  {% when 'graphic-5' %}
+    <img class="{{ class }}" src="{{ 'Graphic-5.svg' | asset_url }}" alt="" aria-hidden="true">
+  {% when 'zigzag' %}
+    <img class="{{ class }}" src="{{ 'Graphic-4.svg' | asset_url }}" alt="" aria-hidden="true">
+  {% when 'triangle' %}
+    <img class="{{ class }}" src="{{ 'Graphic-3.svg' | asset_url }}" alt="" aria-hidden="true">
+  {% when 'arrow' %}
+    <svg class="{{ class }}" viewBox="0 0 210 72" aria-hidden="true" focusable="false">
+      <path d="M8 35h158M139 8l33 27-33 28" fill="none" stroke="{{ stroke }}" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter"/>
+    </svg>
+  {% when 'paw' %}
+    <img class="{{ class }}" src="{{ 'Graphic-5.svg' | asset_url }}" alt="" aria-hidden="true">
+  {% when 'brush' %}
+    <svg class="{{ class }}" viewBox="0 0 420 94" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <path d="M4 34 42 21 34 14c103-9 230-8 374 5l-28 12 35 7-47 12 32 10c-123 0-253 8-388 27l17-19L1 62l32-13Z" fill="{{ stroke }}"/>
+      <path d="m18 78 74-9-34 13Z" fill="{{ stroke }}" opacity=".82"/>
+      <path d="m332 16 63-3-31 9Z" fill="{{ stroke }}" opacity=".82"/>
+    </svg>
+  {% when 'torn-edge' %}
+    <svg class="{{ class }}" viewBox="0 0 1200 90" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <path d="M0 28 55 12l51 20 63-21 51 18 72-16 65 18 68-23 61 22 73-18 71 20 70-22 65 18 74-18 66 22 67-21 68 20 66-19 79 21 76-20 56 18v59H0Z" fill="{{ stroke }}"/>
+    </svg>
+  {% when 'torn-panel' %}
+    <svg class="{{ class }}" viewBox="0 0 1600 620" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="spuds-paper-noise">
+          <feTurbulence type="fractalNoise" baseFrequency=".018 .11" numOctaves="3" seed="8" result="noise"/>
+          <feColorMatrix in="noise" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 .2 0" result="grain"/>
+          <feBlend in="SourceGraphic" in2="grain" mode="screen"/>
+        </filter>
+      </defs>
+      <path filter="url(#spuds-paper-noise)" fill="{{ stroke }}" d="M0 36 58 18l56 22 77-26 62 21 82-23 71 27 78-25 84 20 75-21 93 26 80-22 83 19 94-23 80 25 96-22 85 21 89-19 88 24 83-18 86 20 74-16v548l-72-17-81 24-88-20-95 23-91-25-87 23-99-20-92 22-89-25-92 24-92-21-93 25-91-23-96 19-83-23-86 24-81-20-76 17Z"/>
+    </svg>
+{% endcase %}
