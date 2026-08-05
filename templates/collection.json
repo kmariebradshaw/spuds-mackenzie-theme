@@ -123,8 +123,8 @@
             }
           },
           "block_order": [
-            "card-gallery",
             "product_title",
+            "card-gallery",
             "price"
           ]
         }
