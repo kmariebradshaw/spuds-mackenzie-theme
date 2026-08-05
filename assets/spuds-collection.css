@@ -110,7 +110,7 @@
   font-weight: 600;
   letter-spacing: .01em;
   line-height: 1.15;
-  transform: skewX(-7deg);
+  transform: rotate(-7deg);
   transform-origin: left center;
   text-transform: uppercase;
 }
