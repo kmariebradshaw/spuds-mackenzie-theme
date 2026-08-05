@@ -281,12 +281,21 @@
   padding: .78rem 1rem !important;
   border-radius: .9rem .9rem 0 0;
   color: #fff;
+  /* Match the collection-header description exactly. */
   font-family: var(--spuds-scale) !important;
-  font-size: clamp(1rem, 1.25vw, 1.35rem) !important;
-  font-weight: 700;
+  font-size: clamp(1.05rem, 1.3vw, 1.35rem) !important;
+  font-stretch: expanded;
+  font-variation-settings: "wght" 550, "wdth" 112;
+  font-weight: 600;
   letter-spacing: .01em;
-  line-height: 1 !important;
+  line-height: 1.25 !important;
+  text-align: center;
   text-transform: uppercase;
+}
+
+.spuds-collection-products [ref="productTitleLink"] .text-block > * {
+  width: 100%;
+  text-align: center;
 }
 
 .spuds-collection-products .product-grid__item:nth-child(3n + 1) [ref="productTitleLink"] .text-block {
