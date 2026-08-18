@@ -1,0 +1,430 @@
+{{ 'spuds-product.css' | asset_url | stylesheet_tag }}
+<script
+  src="{{ 'spuds-product.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign title_downcase = product.title | downcase
+  assign use_delivered_assets = false
+  if section.settings.use_delivered_chicken_assets and title_downcase contains 'chicken' and title_downcase contains 'bundle'
+    assign use_delivered_assets = true
+  endif
+
+  assign breadcrumb_collection = collection
+  if breadcrumb_collection == blank
+    assign breadcrumb_collection = product.collections.first
+  endif
+
+  assign eyebrow = product.metafields.custom.pdp_eyebrow.value
+  if eyebrow == blank and breadcrumb_collection != blank
+    assign eyebrow = breadcrumb_collection.title
+  endif
+  if eyebrow == blank
+    assign eyebrow = section.settings.eyebrow
+  endif
+
+  assign review_count = product.metafields.custom.review_count.value
+  if review_count == blank
+    assign review_count = product.metafields.reviews.rating_count.value
+  endif
+  if review_count == blank
+    assign review_count = section.settings.review_count
+  endif
+
+  capture description_content
+    if section.settings.description_override != blank
+      echo section.settings.description_override
+    elsif product.description != blank
+      echo product.description
+    else
+      echo section.settings.description_fallback
+    endif
+  endcapture
+  assign description_plain = description_content | strip_html | strip
+  assign description_words = description_plain | split: ' '
+
+  assign ingredients = product.metafields.custom.ingredients.value
+  if ingredients == blank
+    assign ingredients = section.settings.ingredients
+  endif
+  if ingredients == blank and use_delivered_assets
+    assign ingredients = 'Chicken.'
+  endif
+
+  assign first_subscription = current_variant.selling_plan_allocations.first
+  assign form_id = 'SpudsProductForm-' | append: section.id
+%}
+
+<section
+  class="spuds-pdp"
+  data-spuds-product
+  data-delivered-gallery="{{ use_delivered_assets }}"
+  style="--spuds-pdp-accent: {{ section.settings.accent_color }};"
+  {{ section.shopify_attributes }}
+>
+  <div class="spuds-pdp__inner">
+    <nav class="spuds-pdp__breadcrumbs" aria-label="Breadcrumb">
+      <a href="{{ routes.all_products_collection_url }}">All Spuds</a>
+      <span aria-hidden="true">&gt;</span>
+      {% if breadcrumb_collection != blank %}
+        <a href="{{ breadcrumb_collection.url }}">{{ breadcrumb_collection.title }}</a>
+        <span aria-hidden="true">&gt;</span>
+      {% elsif eyebrow != blank %}
+        <span>{{ eyebrow }}</span>
+        <span aria-hidden="true">&gt;</span>
+      {% endif %}
+      <span aria-current="page">{{ product.title }}</span>
+    </nav>
+
+    <div class="spuds-pdp__grid">
+      <div class="spuds-pdp__gallery">
+        <div class="spuds-pdp__main-media">
+          {% if use_delivered_assets %}
+            <img
+              src="{{ 'Chicken-Bundle-PI.webp' | asset_url }}"
+              alt="{{ product.title | escape }}"
+              width="1392"
+              height="1052"
+              loading="eager"
+              fetchpriority="high"
+              data-spuds-main-image
+            >
+          {% else %}
+            {% assign featured_media = current_variant.featured_media | default: product.featured_media %}
+            {% if featured_media.preview_image != blank %}
+              <img
+                src="{{ featured_media.preview_image | image_url: width: 1600 }}"
+                alt="{{ featured_media.alt | default: product.title | escape }}"
+                width="{{ featured_media.preview_image.width }}"
+                height="{{ featured_media.preview_image.height }}"
+                loading="eager"
+                fetchpriority="high"
+                data-spuds-main-image
+              >
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag: 'spuds-pdp__placeholder' }}
+            {% endif %}
+          {% endif %}
+        </div>
+
+        <div class="spuds-pdp__thumb-rail">
+          <button
+            class="spuds-pdp__gallery-arrow spuds-pdp__gallery-arrow--previous"
+            type="button"
+            aria-label="Previous product image"
+            data-spuds-gallery-previous
+          >
+            &lsaquo;
+          </button>
+
+          <div class="spuds-pdp__thumbnails" data-spuds-thumbnails>
+            {% if use_delivered_assets %}
+              {% assign delivered_thumbs = 'Chicken-Bundle2-PI.png|ChickenChips-PI.png|Recommended-PI.png' | split: '|' %}
+              {% for delivered_thumb in delivered_thumbs %}
+                <button
+                  class="spuds-pdp__thumbnail{% if forloop.first %} is-active{% endif %}"
+                  type="button"
+                  aria-label="View {{ product.title | escape }} image {{ forloop.index }}"
+                  aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
+                  data-spuds-gallery-thumb
+                  data-image="{{ delivered_thumb | asset_url }}"
+                  data-alt="{{ product.title | escape }} image {{ forloop.index }}"
+                >
+                  <img
+                    src="{{ delivered_thumb | asset_url }}"
+                    alt=""
+                    width="404"
+                    height="304"
+                    loading="lazy"
+                  >
+                </button>
+              {% endfor %}
+            {% else %}
+              {% for media in product.media limit: 5 %}
+                {% if media.preview_image != blank %}
+                  <button
+                    class="spuds-pdp__thumbnail{% if media.id == featured_media.id %} is-active{% endif %}"
+                    type="button"
+                    aria-label="View {{ media.alt | default: product.title | escape }}"
+                    aria-pressed="{% if media.id == featured_media.id %}true{% else %}false{% endif %}"
+                    data-spuds-gallery-thumb
+                    data-image="{{ media.preview_image | image_url: width: 1600 }}"
+                    data-alt="{{ media.alt | default: product.title | escape }}"
+                  >
+                    <img
+                      src="{{ media.preview_image | image_url: width: 360 }}"
+                      alt=""
+                      width="{{ media.preview_image.width }}"
+                      height="{{ media.preview_image.height }}"
+                      loading="lazy"
+                    >
+                  </button>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </div>
+
+          <button
+            class="spuds-pdp__gallery-arrow spuds-pdp__gallery-arrow--next"
+            type="button"
+            aria-label="Next product image"
+            data-spuds-gallery-next
+          >
+            &rsaquo;
+          </button>
+        </div>
+      </div>
+
+      <div class="spuds-pdp__details">
+        {% if eyebrow != blank %}
+          <p class="spuds-pdp__eyebrow">{{ eyebrow }}</p>
+        {% endif %}
+
+        <h1 class="spuds-pdp__title">{{ product.title }}</h1>
+
+        <div class="spuds-pdp__reviews">
+          <img
+            src="{{ '5Stars.svg' | asset_url }}"
+            alt="5 out of 5 stars"
+            width="176"
+            height="31"
+          >
+          {% if review_count != blank %}
+            <span>{{ review_count }}</span>
+          {% endif %}
+        </div>
+
+        <product-form-component
+          id="{{ form_id }}-Component"
+          class="spuds-pdp__product-form"
+          data-section-id="{{ section.id }}"
+          data-product-id="{{ product.id }}"
+          data-product-url="{{ product.url }}"
+          data-quantity-default="{{ current_variant.quantity_rule.min | default: 1 }}"
+          on:submit="/handleSubmit"
+        >
+          <div class="visually-hidden" aria-live="assertive" role="status" aria-atomic="true" ref="liveRegion"></div>
+
+          {% form 'product', product, id: form_id, data-type: 'add-to-cart-form' %}
+            <input
+              type="hidden"
+              name="id"
+              value="{{ current_variant.id }}"
+              ref="variantId"
+              data-spuds-variant-id
+            >
+            <input
+              type="hidden"
+              name="selling_plan"
+              value=""
+              disabled
+              data-spuds-selling-plan
+            >
+
+            {% unless product.has_only_default_variant %}
+              <div class="spuds-pdp__variant-row">
+                <label for="SpudsVariant-{{ section.id }}">Choose an option:</label>
+                <select id="SpudsVariant-{{ section.id }}" data-spuds-variant-select>
+                  {% for variant in product.variants %}
+                    {% assign variant_subscription = variant.selling_plan_allocations.first %}
+                    <option
+                      value="{{ variant.id }}"
+                      data-price="{{ variant.price | money | escape }}"
+                      data-available="{{ variant.available }}"
+                      data-image="{% if variant.featured_media.preview_image != blank %}{{ variant.featured_media.preview_image | image_url: width: 1600 }}{% endif %}"
+                      data-subscription-plan="{{ variant_subscription.selling_plan.id }}"
+                      data-subscription-price="{{ variant_subscription.price | money | escape }}"
+                      data-subscription-name="{{ variant_subscription.selling_plan.name | escape }}"
+                      {% if variant.id == current_variant.id %}selected{% endif %}
+                    >
+                      {{ variant.title }}
+                    </option>
+                  {% endfor %}
+                </select>
+              </div>
+            {% endunless %}
+
+            <fieldset class="spuds-pdp__purchase-options">
+              <legend class="visually-hidden">Purchase options</legend>
+              <label class="spuds-pdp__purchase-option">
+                <input type="radio" name="spuds-purchase-option" value="one-time" checked data-spuds-purchase-option>
+                <span class="spuds-pdp__radio-mark" aria-hidden="true"></span>
+                <span>{{ section.settings.one_time_label }}: <strong data-spuds-one-time-price>{{ current_variant.price | money }}</strong></span>
+              </label>
+
+              <label
+                class="spuds-pdp__purchase-option spuds-pdp__purchase-option--subscription{% if first_subscription == blank %} is-hidden{% endif %}"
+                data-spuds-subscription-option
+                data-selling-plan-id="{{ first_subscription.selling_plan.id }}"
+              >
+                <input
+                  type="radio"
+                  name="spuds-purchase-option"
+                  value="subscription"
+                  data-spuds-purchase-option
+                  {% if first_subscription == blank %}disabled{% endif %}
+                >
+                <span class="spuds-pdp__radio-mark" aria-hidden="true"></span>
+                <span>
+                  {{ section.settings.subscribe_label }}:
+                  <strong data-spuds-subscription-price>{{ first_subscription.price | money }}</strong>
+                  {% if first_subscription.selling_plan.name != blank %}
+                    <small data-spuds-subscription-name>{{ first_subscription.selling_plan.name }}</small>
+                  {% endif %}
+                </span>
+              </label>
+            </fieldset>
+
+            <div class="spuds-pdp__actions">
+              <div class="spuds-pdp__quantity" data-spuds-quantity>
+                <button type="button" aria-label="Decrease quantity" data-spuds-quantity-minus>&minus;</button>
+                <input
+                  type="number"
+                  name="quantity"
+                  value="{{ current_variant.quantity_rule.min | default: 1 }}"
+                  min="{{ current_variant.quantity_rule.min | default: 1 }}"
+                  step="{{ current_variant.quantity_rule.increment | default: 1 }}"
+                  {% if current_variant.quantity_rule.max != blank %}max="{{ current_variant.quantity_rule.max }}"{% endif %}
+                  aria-label="Quantity"
+                  data-spuds-quantity-input
+                >
+                <button type="button" aria-label="Increase quantity" data-spuds-quantity-plus>&plus;</button>
+              </div>
+
+              <add-to-cart-component
+                ref="addToCartButtonContainer"
+                data-product-variant-media="{% if current_variant.featured_media.preview_image != blank %}{{ current_variant.featured_media.preview_image | image_url: width: 100 }}{% elsif product.featured_media.preview_image != blank %}{{ product.featured_media.preview_image | image_url: width: 100 }}{% endif %}"
+                data-add-to-cart-animation="{{ settings.add_to_cart_animation }}"
+              >
+                <button
+                  type="submit"
+                  name="add"
+                  class="spuds-pdp__add-to-cart"
+                  ref="addToCartButton"
+                  on:click="/handleClick"
+                  {% unless current_variant.available %}disabled{% endunless %}
+                  data-spuds-add-to-cart
+                >
+                  <span data-spuds-add-label>
+                    {% if current_variant.available %}Add to cart{% else %}Sold out{% endif %}
+                  </span>
+                  <span class="spuds-pdp__add-arrow" aria-hidden="true">&longrightarrow;</span>
+                  <span class="add-to-cart__added" aria-hidden="true">
+                    <span class="svg-wrapper add-to-cart__added-icon">
+                      {{- 'icon-checkmark-burst.svg' | inline_asset_content -}}
+                    </span>
+                  </span>
+                </button>
+              </add-to-cart-component>
+            </div>
+
+            <p class="spuds-pdp__error hidden" ref="addToCartTextError" role="alert"></p>
+          {% endform %}
+        </product-form-component>
+
+        {% if description_plain != blank %}
+          <div class="spuds-pdp__description" data-spuds-description>
+            <p>
+              <strong>Product Description:</strong>
+              <span data-spuds-description-short>
+                {% if description_words.size > 24 %}
+                  {{ description_plain | truncatewords: 24, '' }}
+                {% else %}
+                  {{ description_plain }}
+                {% endif %}
+              </span>
+              {% if description_words.size > 24 %}
+                <button type="button" data-spuds-read-more>Read More.</button>
+              {% endif %}
+            </p>
+            {% if description_words.size > 24 %}
+              <div class="spuds-pdp__description-full" hidden data-spuds-description-full>
+                {{ description_content }}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if ingredients != blank %}
+          <div class="spuds-pdp__ingredients">
+            <strong>Ingredients:</strong>
+            <span>{{ ingredients }}</span>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Spuds product page",
+  "tag": "section",
+  "class": "section-spuds-product-page",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Fallback category label",
+      "default": "SPUDS SNACKS"
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "label": "Fallback review text",
+      "default": "12,406 Reviews"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_delivered_chicken_assets",
+      "label": "Use supplied artwork for Chicken Bundle",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "description_override",
+      "label": "Description override"
+    },
+    {
+      "type": "textarea",
+      "id": "description_fallback",
+      "label": "Fallback description",
+      "default": "Crunchy Chicken Chips made for backyard hangs, game days, tailgates, and treat-time celebrations everywhere."
+    },
+    {
+      "type": "text",
+      "id": "ingredients",
+      "label": "Fallback ingredients"
+    },
+    {
+      "type": "text",
+      "id": "one_time_label",
+      "label": "One-time purchase label",
+      "default": "One Time Purchase"
+    },
+    {
+      "type": "text",
+      "id": "subscribe_label",
+      "label": "Subscription label",
+      "default": "Subscribe and Save"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#ff2f69"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spuds product page"
+    }
+  ]
+}
+{% endschema %}

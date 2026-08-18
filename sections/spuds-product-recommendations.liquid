@@ -1,0 +1,138 @@
+{{ 'spuds-product.css' | asset_url | stylesheet_tag }}
+<script
+  src="{{ 'product-recommendations.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+<product-recommendations
+  id="SpudsProductRecommendations-{{ section.id }}"
+  class="spuds-pdp-recommendations"
+  data-url="{{ routes.product_recommendations_url }}?limit={{ section.settings.max_products }}"
+  data-section-id="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-intent="related"
+  data-recommendations-performed="{{ recommendations.performed }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="spuds-pdp-recommendations__inner">
+    <h2>{{ section.settings.heading }}</h2>
+
+    {% if recommendations.performed %}
+      {% assign recommended_products = recommendations.products %}
+      {% if recommended_products.size == 0 %}
+        {% assign recommended_products = collections.all.products | reject: 'id', product.id %}
+      {% endif %}
+
+      {% if recommended_products.size > 0 %}
+        <div class="spuds-pdp-recommendations__grid">
+          {% for recommended_product in recommended_products limit: section.settings.max_products %}
+            {% assign recommended_variant = recommended_product.selected_or_first_available_variant %}
+            {% assign recommendation_form_id = 'SpudsRecommendationForm-' | append: section.id | append: '-' | append: recommended_product.id %}
+            <article class="spuds-pdp-recommendation-card spuds-pdp-recommendation-card--{{ forloop.index }}">
+              <a class="spuds-pdp-recommendation-card__title" href="{{ recommended_product.url }}">
+                {{ recommended_product.title }}
+              </a>
+
+              <a class="spuds-pdp-recommendation-card__media" href="{{ recommended_product.url }}" aria-label="View {{ recommended_product.title | escape }}">
+                {% if recommended_product.featured_image != blank %}
+                  <img
+                    src="{{ recommended_product.featured_image | image_url: width: 900 }}"
+                    alt="{{ recommended_product.featured_image.alt | default: recommended_product.title | escape }}"
+                    width="{{ recommended_product.featured_image.width }}"
+                    height="{{ recommended_product.featured_image.height }}"
+                    loading="lazy"
+                  >
+                {% else %}
+                  <img
+                    src="{{ 'Recommended-PI.png' | asset_url }}"
+                    alt="{{ recommended_product.title | escape }}"
+                    width="712"
+                    height="536"
+                    loading="lazy"
+                  >
+                {% endif %}
+              </a>
+
+              <product-form-component
+                id="{{ recommendation_form_id }}-Component"
+                class="spuds-pdp-recommendation-card__form"
+                data-section-id="{{ section.id }}"
+                data-product-id="{{ recommended_product.id }}"
+                data-product-url="{{ recommended_product.url }}"
+                data-quantity-default="1"
+                on:submit="/handleSubmit"
+              >
+                <div class="visually-hidden" aria-live="assertive" role="status" aria-atomic="true" ref="liveRegion"></div>
+                {% form 'product', recommended_product, id: recommendation_form_id, data-type: 'add-to-cart-form' %}
+                  <input type="hidden" name="id" value="{{ recommended_variant.id }}" ref="variantId">
+                  <input type="hidden" name="quantity" value="1">
+                  <add-to-cart-component
+                    ref="addToCartButtonContainer"
+                    data-product-variant-media="{% if recommended_variant.featured_media.preview_image != blank %}{{ recommended_variant.featured_media.preview_image | image_url: width: 100 }}{% elsif recommended_product.featured_media.preview_image != blank %}{{ recommended_product.featured_media.preview_image | image_url: width: 100 }}{% endif %}"
+                    data-add-to-cart-animation="{{ settings.add_to_cart_animation }}"
+                  >
+                    <button
+                      type="submit"
+                      name="add"
+                      class="spuds-pdp-recommendation-card__button"
+                      ref="addToCartButton"
+                      on:click="/handleClick"
+                      {% unless recommended_variant.available %}disabled{% endunless %}
+                    >
+                      {% if recommended_variant.available %}Add to cart{% else %}Sold out{% endif %}
+                      <span class="add-to-cart__added" aria-hidden="true">
+                        <span class="svg-wrapper add-to-cart__added-icon">
+                          {{- 'icon-checkmark-burst.svg' | inline_asset_content -}}
+                        </span>
+                      </span>
+                    </button>
+                  </add-to-cart-component>
+                {% endform %}
+              </product-form-component>
+            </article>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="spuds-pdp-recommendations__grid" aria-label="Loading recommendations">
+        {% for i in (1..section.settings.max_products) %}
+          <div class="spuds-pdp-recommendation-card spuds-pdp-recommendation-card--skeleton"></div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</product-recommendations>
+
+{% schema %}
+{
+  "name": "Spuds recommendations",
+  "tag": "section",
+  "class": "section-spuds-product-recommendations",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Pairs well with:"
+    },
+    {
+      "type": "range",
+      "id": "max_products",
+      "label": "Maximum products",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 3
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spuds recommendations"
+    }
+  ]
+}
+{% endschema %}
