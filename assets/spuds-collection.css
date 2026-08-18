@@ -60,6 +60,8 @@
   margin: 0;
   color: inherit;
   line-height: 1;
+  transform: rotate(-7deg);
+  transform-origin: left center;
 }
 
 .spuds-collection-hero__title-primary {
@@ -110,8 +112,6 @@
   font-weight: 600;
   letter-spacing: .01em;
   line-height: 1.15;
-  transform: rotate(-7deg);
-  transform-origin: left center;
   text-transform: uppercase;
 }
 
