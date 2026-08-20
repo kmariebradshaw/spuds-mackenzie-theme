@@ -48,12 +48,12 @@
 }
 
 .spuds-collection-hero__copy {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 4vw 2vw 0;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4vw 2vw 0 4vw;
 }
 
 .spuds-collection-hero h1 {
