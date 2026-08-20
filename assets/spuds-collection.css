@@ -192,6 +192,8 @@
   transition: box-shadow .18s ease, transform .18s ease;
 }
 
+
+
 .spuds-collection-nav__link:hover,
 .spuds-collection-nav__link:focus-visible {
   box-shadow: .2rem .2rem 0 var(--spuds-collection-button-accent, var(--spuds-pink));
