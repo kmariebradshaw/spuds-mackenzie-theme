@@ -115,7 +115,7 @@
   line-height: 1.15;
   text-transform: uppercase;
 }
-spuds-collection-hero__description { white-space: nowrap;}
+spuds-collection-hero__description p { white-space: nowrap;}
 
 .spuds-collection-hero__description > *:first-child {
   margin-top: 0;
