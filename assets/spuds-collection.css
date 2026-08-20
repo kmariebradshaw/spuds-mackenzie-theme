@@ -178,7 +178,7 @@
   gap: .75rem;
   padding: 1rem 1.35rem;
   background: var(--spuds-navy);
-  box-shadow: .38rem .38rem 0 var(--spuds-pink);
+  box-shadow: .38rem .38rem 0 var(--spuds-collection-button-accent, var(--spuds-pink));
   color: #fff;
   font-family: var(--spuds-scale);
   font-size: clamp(1rem, 1.25vw, 1.3rem);
@@ -194,7 +194,7 @@
 
 .spuds-collection-nav__link:hover,
 .spuds-collection-nav__link:focus-visible {
-  box-shadow: .2rem .2rem 0 var(--spuds-pink);
+  box-shadow: .2rem .2rem 0 var(--spuds-collection-button-accent, var(--spuds-pink));
   transform: translate(.18rem, .18rem);
 }
 
