@@ -19,7 +19,7 @@
   assign secondary_button_accent = collection.metafields.custom.custom_header_button_2_accent_color.value | default: section.settings.secondary_button_accent_color
 
   assign title_words = collection.title | strip | split: ' '
-  assign accent_color = collection.metafields.custom.accent_color.value | default: section.settings.accent_color
+  assign accent_color = collection.metafields.custom.custom_accent_color.value | default: section.settings.accent_color
 %}
 
 <section
