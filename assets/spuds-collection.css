@@ -57,11 +57,11 @@
 }
 
 .spuds-collection-hero h1 {
-    margin: 5vw 0 0;
-    color: inherit;
-    line-height: 1;
-    transform: rotate(-9deg);
-    transform-origin: left center;
+  margin: 0;
+  color: inherit;
+  line-height: 1;
+  transform: rotate(-7deg);
+  transform-origin: left center;
 }
 
 .spuds-collection-hero__title-primary {
