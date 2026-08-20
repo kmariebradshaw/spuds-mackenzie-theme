@@ -40,6 +40,7 @@
   justify-content: center;
   padding: 2vw;
   text-align: center;
+  transform: translateY(3vw);
 }
 
 .spuds-collection-hero h1 {
