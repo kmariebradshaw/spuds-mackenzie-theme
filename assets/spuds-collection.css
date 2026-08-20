@@ -93,6 +93,7 @@
 .spuds-collection-hero__paw {
   display: block;
   width: 3.7vw;
+  margin-top: -3vw;
   flex: 0 0 auto;
   aspect-ratio: 57.256 / 58.173;
   background-color: var(--spuds-collection-accent, var(--spuds-teal));
