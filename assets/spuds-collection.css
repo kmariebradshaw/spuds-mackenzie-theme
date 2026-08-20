@@ -125,10 +125,11 @@
 }
 
 .spuds-collection-hero__underline {
-  display: block;
-  width: 14.5vw;
-  margin-top: .55vw;
-  margin-left: 9.5vw;
+    display: block;
+    width: 13.5vw;
+    margin-top: 0;
+    transform: rotate(6deg);
+    margin-left: 10.5vw;
   aspect-ratio: 309.505 / 57.185;
   background-color: var(--spuds-collection-accent, var(--spuds-teal));
   -webkit-mask: url("Graphic-7.svg") center / contain no-repeat;
@@ -439,6 +440,7 @@
   .spuds-collection-hero__title-accent-row {
     justify-content: center;
   }
+
 
 
   .spuds-collection-hero__description {
