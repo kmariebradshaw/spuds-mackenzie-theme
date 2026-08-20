@@ -67,7 +67,7 @@
 .spuds-collection-hero__title-primary {
   display: block;
   font-family: var(--spuds-brush);
-  font-size: 7.5vw;
+  font-size: 9vw;
   font-weight: 400;
   letter-spacing: -.035em;
   line-height: .7;
@@ -78,7 +78,7 @@
   display: flex;
   align-items: center;
   gap: .7vw;
-  margin-top: .8vw;
+  margin-top: 1.5vw;
 }
 
 .spuds-collection-hero__title-accent {
