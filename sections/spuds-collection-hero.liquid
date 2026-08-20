@@ -7,10 +7,17 @@
   endif
 
   assign hero_alt = collection.image.alt | default: collection.title
+
   assign primary_label = collection.metafields.custom.header_button_1_label.value | default: section.settings.primary_label
-  assign primary_link = collection.metafields.custom.header_button_1_link.value | default: section.settings.primary_link | default: routes.all_products_collection_url
+  assign primary_link_value = collection.metafields.custom.header_button_1_link.value
+  assign primary_link = primary_link_value.url | default: primary_link_value | default: section.settings.primary_link | default: routes.all_products_collection_url
+  assign primary_button_accent = collection.metafields.custom.header_button_1_accent_color.value | default: section.settings.primary_button_accent_color
+
   assign secondary_label = collection.metafields.custom.header_button_2_label.value | default: section.settings.secondary_label
-  assign secondary_link = collection.metafields.custom.header_button_2_link.value | default: section.settings.secondary_link | default: routes.root_url
+  assign secondary_link_value = collection.metafields.custom.header_button_2_link.value
+  assign secondary_link = secondary_link_value.url | default: secondary_link_value | default: section.settings.secondary_link | default: routes.root_url
+  assign secondary_button_accent = collection.metafields.custom.header_button_2_accent_color.value | default: section.settings.secondary_button_accent_color
+
   assign title_words = collection.title | strip | split: ' '
   assign accent_color = collection.metafields.custom.accent_color.value | default: section.settings.accent_color
 %}
@@ -66,14 +73,22 @@
 
   <nav class="spuds-collection-nav" aria-label="{{ section.settings.navigation_label | escape }}">
     {% if primary_label != blank %}
-      <a class="spuds-collection-nav__link" href="{{ primary_link }}">
+      <a
+        class="spuds-collection-nav__link"
+        href="{{ primary_link }}"
+        style="--spuds-collection-button-accent: {{ primary_button_accent }};"
+      >
         {{ primary_label | escape }}
         {% render 'spuds-shape', shape: 'arrow', color: '#ffffff', class: 'spuds-collection-nav__arrow' %}
       </a>
     {% endif %}
 
     {% if secondary_label != blank %}
-      <a class="spuds-collection-nav__link" href="{{ secondary_link }}">
+      <a
+        class="spuds-collection-nav__link"
+        href="{{ secondary_link }}"
+        style="--spuds-collection-button-accent: {{ secondary_button_accent }};"
+      >
         {{ secondary_label | escape }}
         {% render 'spuds-shape', shape: 'arrow', color: '#ffffff', class: 'spuds-collection-nav__arrow' %}
       </a>
@@ -121,6 +136,20 @@
       "type": "url",
       "id": "secondary_link",
       "label": "Second button link"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_accent_color",
+      "label": "First button accent",
+      "info": "Fallback for custom.header_button_1_accent_color.",
+      "default": "#ff2f69"
+    },
+    {
+      "type": "color",
+      "id": "secondary_button_accent_color",
+      "label": "Second button accent",
+      "info": "Fallback for custom.header_button_2_accent_color.",
+      "default": "#ff2f69"
     },
     {
       "type": "header",
