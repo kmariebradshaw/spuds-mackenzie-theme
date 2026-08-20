@@ -13,7 +13,45 @@
         href="{{ settings.favicon | image_url: width: 32, height: 32 }}"
       >
     {%- endif -%}
-<link rel="stylesheet" href="https://use.typekit.net/vgg4gke.css">
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin>
+    <link rel="preconnect" href="https://p.typekit.net" crossorigin>
+    <link rel="stylesheet" href="https://use.typekit.net/vgg4gke.css">
+
+    {% if template.name == 'collection' %}
+      <link
+        rel="preload"
+        href="{{ 'beach-club-script.woff2' | asset_url }}"
+        as="font"
+        type="font/woff2"
+        crossorigin
+        fetchpriority="high"
+      >
+      <link
+        rel="preload"
+        href="{{ 'casual-brush.woff2' | asset_url }}"
+        as="font"
+        type="font/woff2"
+        crossorigin
+        fetchpriority="high"
+      >
+      <style>
+        @font-face {
+          font-family: "Beach Club Script";
+          src: url("{{ 'beach-club-script.woff2' | asset_url }}") format("woff2");
+          font-style: normal;
+          font-weight: 400;
+          font-display: block;
+        }
+
+        @font-face {
+          font-family: "Casual Brush";
+          src: url("{{ 'casual-brush.woff2' | asset_url }}") format("woff2");
+          font-style: normal;
+          font-weight: 400;
+          font-display: block;
+        }
+      </style>
+    {% endif %}
 
     {% comment %}
       Opt into cross-document (MPA) view transitions and hold first paint until #MainContent
