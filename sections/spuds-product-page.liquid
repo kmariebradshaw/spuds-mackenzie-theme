@@ -1,4 +1,5 @@
-{{ 'spuds-product.css' | asset_url | stylesheet_tag }}
+{% assign spuds_product_stylesheet = 'spuds-product.css' | asset_url | append: '&spuds=20260821-2' %}
+{{ spuds_product_stylesheet | stylesheet_tag }}
 <script
   src="{{ 'spuds-product.js' | asset_url }}"
   type="module"
