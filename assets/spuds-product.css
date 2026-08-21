@@ -67,7 +67,7 @@
   margin-bottom: 1.1vw;
   color: #8a929e;
   font-size: .88vw;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.2;
 }
 
@@ -163,15 +163,19 @@
 }
 
 .spuds-pdp__gallery-arrow {
+  --icon-stroke-width: .14vw;
   display: flex;
   width: 2.4vw;
   height: 3.2vw;
   align-items: center;
   justify-content: center;
   padding: 0;
-  font-size: 3.15vw;
-  font-weight: 300;
-  line-height: .7;
+}
+
+.spuds-pdp__gallery-arrow svg {
+  display: block;
+  width: 1.55vw;
+  height: 2.35vw;
 }
 
 .spuds-pdp__details {
@@ -184,7 +188,7 @@
   font-family: var(--spuds-pdp-scale);
   font-size: 1.22vw;
   font-stretch: expanded;
-  font-variation-settings: "wght" 600, "wdth" 115;
+  font-variation-settings: "wght" 350, "wdth" 115;
   font-weight: 600;
   letter-spacing: .01em;
   line-height: 1;
@@ -340,8 +344,11 @@
   border: 0;
   background: transparent;
   color: var(--spuds-pdp-navy);
+  font-family: var(--spuds-pdp-scale);
   font-size: 1.12vw;
-  font-weight: 700;
+  font-stretch: expanded;
+  font-variation-settings: "wght" 500, "wdth" 115;
+  font-weight: 600;
   text-align: center;
 }
 
@@ -421,7 +428,7 @@
 .spuds-pdp__ingredients {
   color: var(--spuds-pdp-navy);
   font-size: 1vw;
-  font-weight: 550;
+  font-weight: 400;
   line-height: 1.45;
 }
 
@@ -626,9 +633,14 @@
   }
 
   .spuds-pdp__gallery-arrow {
+    --icon-stroke-width: .45vw;
     width: 7vw;
     height: 10vw;
-    font-size: 9vw;
+  }
+
+  .spuds-pdp__gallery-arrow svg {
+    width: 4.6vw;
+    height: 6.9vw;
   }
 
   .spuds-pdp__details {
