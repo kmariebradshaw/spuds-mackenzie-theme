@@ -27,7 +27,7 @@
   --spuds-pdp-green: #62a331;
   --spuds-pdp-cream: #faf0e4;
   --spuds-pdp-scale: "Scale VF", "scale-variable", Impact, sans-serif;
-  --spuds-pdp-body: "Work Sans", Arial, sans-serif;
+  --spuds-pdp-body: "work-sans", "Work Sans", Arial, sans-serif;
   background: var(--spuds-pdp-cream);
   color: var(--spuds-pdp-navy);
   font-family: var(--spuds-pdp-body);
@@ -66,8 +66,10 @@
   gap: 1vw;
   margin-bottom: 1.1vw;
   color: #8a929e;
+  font-family: var(--spuds-pdp-body);
   font-size: .88vw;
   font-weight: 400;
+  letter-spacing: .01em;
   line-height: 1.2;
 }
 
@@ -163,7 +165,7 @@
 }
 
 .spuds-pdp__gallery-arrow {
-  --icon-stroke-width: .14vw;
+  --icon-stroke-width: .65;
   display: flex;
   width: 2.4vw;
   height: 3.2vw;
@@ -238,8 +240,9 @@
   align-items: center;
   gap: .8vw;
   margin-bottom: 1.15vw;
+  font-family: var(--spuds-pdp-body);
   font-size: .98vw;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .spuds-pdp__variant-row select {
@@ -265,8 +268,9 @@
   gap: .8vw;
   color: var(--spuds-pdp-navy);
   cursor: pointer;
+  font-family: var(--spuds-pdp-body);
   font-size: 1.04vw;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.25;
 }
 
@@ -344,11 +348,9 @@
   border: 0;
   background: transparent;
   color: var(--spuds-pdp-navy);
-  font-family: var(--spuds-pdp-scale);
+  font-family: var(--spuds-pdp-body);
   font-size: 1.12vw;
-  font-stretch: expanded;
-  font-variation-settings: "wght" 500, "wdth" 115;
-  font-weight: 600;
+  font-weight: 700;
   text-align: center;
 }
 
@@ -381,7 +383,7 @@
   cursor: pointer;
   font-family: var(--spuds-pdp-scale);
   font-stretch: expanded;
-  font-variation-settings: "wght" 520, "wdth" 118;
+  font-variation-settings: "wght" 620, "wdth" 112;
   font-weight: 600;
   letter-spacing: .02em;
   line-height: 1;
@@ -427,8 +429,10 @@
 .spuds-pdp__description,
 .spuds-pdp__ingredients {
   color: var(--spuds-pdp-navy);
+  font-family: var(--spuds-pdp-body);
   font-size: 1vw;
   font-weight: 400;
+  letter-spacing: .005em;
   line-height: 1.45;
 }
 
@@ -481,7 +485,7 @@
   color: var(--spuds-pdp-navy);
   font-family: var(--spuds-pdp-body);
   font-size: 1.28vw;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.2;
   text-align: center;
 }
@@ -633,7 +637,7 @@
   }
 
   .spuds-pdp__gallery-arrow {
-    --icon-stroke-width: .45vw;
+    --icon-stroke-width: .65;
     width: 7vw;
     height: 10vw;
   }
