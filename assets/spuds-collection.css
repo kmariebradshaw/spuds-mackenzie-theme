@@ -117,6 +117,7 @@
   display: block;
   width: 13.5vw;
   margin: 0 auto;
+  margin-left: 14vw;
   aspect-ratio: 309.505 / 57.185;
   background-color: var(--spuds-collection-accent, var(--spuds-teal));
   -webkit-mask: url("Graphic-7.svg") center / contain no-repeat;
