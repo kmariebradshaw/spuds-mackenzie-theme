@@ -381,10 +381,10 @@
   box-shadow: .38vw .38vw 0 var(--spuds-pdp-accent, var(--spuds-pdp-pink));
   color: #fff;
   cursor: pointer;
-  font-family: var(--spuds-pdp-scale);
-  font-stretch: expanded;
-  font-variation-settings: "wght" 500, "wdth" 120;
-  font-weight: 600;
+  font-family: var(--spuds-pdp-scale) !important;
+  font-stretch: expanded !important;
+  font-variation-settings: "wght" 500, "wdth" 120 !important;
+  font-weight: 600 !important;
   letter-spacing: .03em;
   line-height: 1;
   text-transform: uppercase;
@@ -399,7 +399,11 @@
 
 .spuds-pdp button.spuds-pdp__add-to-cart [data-spuds-add-label] {
   flex: 0 0 auto;
-  white-space: nowrap;
+  font-family: var(--spuds-pdp-scale) !important;
+  font-stretch: expanded !important;
+  font-variation-settings: "wght" 500, "wdth" 120 !important;
+  font-weight: 600 !important;
+  white-space: nowrap !important;
 }
 
 .spuds-pdp__add-arrow {
