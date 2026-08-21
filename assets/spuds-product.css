@@ -381,9 +381,11 @@
   box-shadow: .38vw .38vw 0 var(--spuds-pdp-accent, var(--spuds-pdp-pink));
   color: #fff;
   cursor: pointer;
-  font-family: var(--spuds-pdp-body);
-  font-weight: 700;
-  letter-spacing: .02em;
+  font-family: var(--spuds-pdp-scale);
+  font-stretch: expanded;
+  font-variation-settings: "wght" 500, "wdth" 120;
+  font-weight: 600;
+  letter-spacing: .03em;
   line-height: 1;
   text-transform: uppercase;
 }
@@ -392,24 +394,26 @@
   min-height: 3.35vw;
   gap: 2vw;
   padding: .65vw 2vw;
-  font-size: 1.9vw;
+  font-size: 1.8vw;
+}
+
+.spuds-pdp button.spuds-pdp__add-to-cart [data-spuds-add-label] {
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .spuds-pdp__add-arrow {
-  --icon-stroke-width: 2.5;
   display: block;
   width: 4.5vw;
-  height: 1.95vw;
+  height: 2.55vw;
   flex: 0 0 4.5vw;
   color: var(--spuds-pdp-accent, var(--spuds-pdp-pink));
 }
 
 .spuds-pdp__add-arrow svg {
   display: block;
-  width: 2vw;
+  width: 100%;
   height: 100%;
-  transform: scaleX(2.25);
-  transform-origin: center;
 }
 
 .spuds-pdp button.spuds-pdp__add-to-cart:hover,
@@ -748,13 +752,12 @@
 
   .spuds-pdp__add-arrow {
     width: 12vw;
-    height: 5.2vw;
+    height: 7vw;
     flex-basis: 12vw;
   }
 
   .spuds-pdp__add-arrow svg {
-    width: 5.2vw;
-    transform: scaleX(2.3);
+    width: 100%;
   }
 
   .spuds-pdp__error {
