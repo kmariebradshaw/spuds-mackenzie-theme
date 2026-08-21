@@ -270,7 +270,7 @@
   cursor: pointer;
   font-family: var(--spuds-pdp-body);
   font-size: 1.04vw;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.25;
 }
 
@@ -298,11 +298,11 @@
 }
 
 .spuds-pdp__purchase-option input:checked + .spuds-pdp__radio-mark::after {
-  position: absolute;
-  inset: .2vw;
-  border-radius: 50%;
+  display: none;
+}
+
+.spuds-pdp__purchase-option input:checked + .spuds-pdp__radio-mark {
   background: var(--spuds-pdp-navy);
-  content: "";
 }
 
 .spuds-pdp__purchase-option input:focus-visible + .spuds-pdp__radio-mark {
@@ -318,7 +318,7 @@
   display: block;
   margin-top: .18vw;
   font-size: .9vw;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .spuds-pdp__actions {
@@ -350,7 +350,7 @@
   color: var(--spuds-pdp-navy);
   font-family: var(--spuds-pdp-body);
   font-size: 1.12vw;
-  font-weight: 700;
+  font-weight: 400;
   text-align: center;
 }
 
@@ -381,10 +381,8 @@
   box-shadow: .38vw .38vw 0 var(--spuds-pdp-accent, var(--spuds-pdp-pink));
   color: #fff;
   cursor: pointer;
-  font-family: var(--spuds-pdp-scale);
-  font-stretch: expanded;
-  font-variation-settings: "wght" 620, "wdth" 112;
-  font-weight: 600;
+  font-family: var(--spuds-pdp-body);
+  font-weight: 700;
   letter-spacing: .02em;
   line-height: 1;
   text-transform: uppercase;
@@ -392,18 +390,25 @@
 
 .spuds-pdp__add-to-cart {
   min-height: 3.35vw;
-  padding: .65vw 3.8vw;
-  font-size: 1.36vw;
+  padding: .65vw 5.6vw .65vw 3.2vw;
+  font-size: 1.9vw;
 }
 
 .spuds-pdp__add-arrow {
+  --icon-stroke-width: 1.5;
   position: absolute;
-  right: 3vw;
+  right: 4.5vw;
+  display: block;
+  width: 4.5vw;
+  height: 1.95vw;
   color: var(--spuds-pdp-accent, var(--spuds-pdp-pink));
-  font-family: Arial, sans-serif;
-  font-size: 2.45vw;
-  font-weight: 300;
-  line-height: .5;
+}
+
+.spuds-pdp__add-arrow svg {
+  display: block;
+  width: 2vw;
+  height: 100%;
+  transform: scaleX(2.25);
 }
 
 .spuds-pdp__add-to-cart:hover,
@@ -734,14 +739,20 @@
 
   .spuds-pdp__add-to-cart {
     min-height: 13vw;
-    padding: 2vw 11vw 2vw 4vw;
+    padding: 2vw 18vw 2vw 8vw;
     box-shadow: 1.1vw 1.1vw 0 var(--spuds-pdp-accent, var(--spuds-pdp-pink));
-    font-size: 4.2vw;
+    font-size: 5.4vw;
   }
 
   .spuds-pdp__add-arrow {
-    right: 4vw;
-    font-size: 7vw;
+    right: 6vw;
+    width: 12vw;
+    height: 5.2vw;
+  }
+
+  .spuds-pdp__add-arrow svg {
+    width: 5.2vw;
+    transform: scaleX(2.3);
   }
 
   .spuds-pdp__error {

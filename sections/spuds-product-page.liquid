@@ -272,7 +272,7 @@
                   {{ section.settings.subscribe_label }}:
                   <strong data-spuds-subscription-price>{{ first_subscription.price | money }}</strong>
                   {% if first_subscription.selling_plan.name != blank %}
-                    <small data-spuds-subscription-name>{{ first_subscription.selling_plan.name }}</small>
+                    <small data-spuds-subscription-name>{{ first_subscription.selling_plan.name | split: ',' | first | replace: 'Deliver every', 'Delivery every' }}</small>
                   {% endif %}
                 </span>
               </label>
@@ -311,7 +311,9 @@
                   <span data-spuds-add-label>
                     {% if current_variant.available %}Add to cart{% else %}Sold out{% endif %}
                   </span>
-                  <span class="spuds-pdp__add-arrow" aria-hidden="true">&longrightarrow;</span>
+                  <span class="spuds-pdp__add-arrow" aria-hidden="true">
+                    {{- 'icon-arrow.svg' | inline_asset_content -}}
+                  </span>
                   <span class="add-to-cart__added" aria-hidden="true">
                     <span class="svg-wrapper add-to-cart__added-icon">
                       {{- 'icon-checkmark-burst.svg' | inline_asset_content -}}

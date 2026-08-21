@@ -114,7 +114,11 @@ const initializeSpudsProduct = (root) => {
       if (subscriptionRadio) subscriptionRadio.disabled = !planId;
     }
     if (subscriptionPrice) subscriptionPrice.textContent = option.dataset.subscriptionPrice || '';
-    if (subscriptionName) subscriptionName.textContent = option.dataset.subscriptionName || '';
+    if (subscriptionName) {
+      subscriptionName.textContent = (option.dataset.subscriptionName || '')
+        .split(',')[0]
+        .replace('Deliver every', 'Delivery every');
+    }
 
     const selectedPurchase = purchaseOptions.find((purchaseOption) => purchaseOption.checked);
     if (!planId && selectedPurchase?.value === 'subscription') {
