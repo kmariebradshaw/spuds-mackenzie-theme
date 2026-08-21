@@ -368,8 +368,8 @@
   appearance: none;
 }
 
-.spuds-pdp__add-to-cart,
-.spuds-pdp-recommendation-card__button {
+.spuds-pdp button.spuds-pdp__add-to-cart,
+.spuds-pdp-recommendations button.spuds-pdp-recommendation-card__button {
   position: relative;
   display: flex;
   width: 100%;
@@ -388,19 +388,19 @@
   text-transform: uppercase;
 }
 
-.spuds-pdp__add-to-cart {
+.spuds-pdp button.spuds-pdp__add-to-cart {
   min-height: 3.35vw;
-  padding: .65vw 5.6vw .65vw 3.2vw;
+  gap: 2vw;
+  padding: .65vw 2vw;
   font-size: 1.9vw;
 }
 
 .spuds-pdp__add-arrow {
-  --icon-stroke-width: 1.5;
-  position: absolute;
-  right: 4.5vw;
+  --icon-stroke-width: 2.5;
   display: block;
   width: 4.5vw;
   height: 1.95vw;
+  flex: 0 0 4.5vw;
   color: var(--spuds-pdp-accent, var(--spuds-pdp-pink));
 }
 
@@ -409,18 +409,19 @@
   width: 2vw;
   height: 100%;
   transform: scaleX(2.25);
+  transform-origin: center;
 }
 
-.spuds-pdp__add-to-cart:hover,
-.spuds-pdp__add-to-cart:focus-visible,
-.spuds-pdp-recommendation-card__button:hover,
-.spuds-pdp-recommendation-card__button:focus-visible {
+.spuds-pdp button.spuds-pdp__add-to-cart:hover,
+.spuds-pdp button.spuds-pdp__add-to-cart:focus-visible,
+.spuds-pdp-recommendations button.spuds-pdp-recommendation-card__button:hover,
+.spuds-pdp-recommendations button.spuds-pdp-recommendation-card__button:focus-visible {
   box-shadow: .2vw .2vw 0 var(--spuds-pdp-accent, var(--spuds-pdp-pink));
   transform: translate(.18vw, .18vw);
 }
 
-.spuds-pdp__add-to-cart:disabled,
-.spuds-pdp-recommendation-card__button:disabled {
+.spuds-pdp button.spuds-pdp__add-to-cart:disabled,
+.spuds-pdp-recommendations button.spuds-pdp-recommendation-card__button:disabled {
   cursor: not-allowed;
   opacity: .55;
 }
@@ -566,7 +567,7 @@
   left: 1.55vw;
 }
 
-.spuds-pdp-recommendation-card__button {
+.spuds-pdp-recommendations button.spuds-pdp-recommendation-card__button {
   min-height: 3.35vw;
   padding: .75vw 1.1vw;
   font-size: 1.33vw;
@@ -737,17 +738,18 @@
     font-size: 4.5vw;
   }
 
-  .spuds-pdp__add-to-cart {
+  .spuds-pdp button.spuds-pdp__add-to-cart {
     min-height: 13vw;
-    padding: 2vw 18vw 2vw 8vw;
+    gap: 4vw;
+    padding: 2vw 4vw;
     box-shadow: 1.1vw 1.1vw 0 var(--spuds-pdp-accent, var(--spuds-pdp-pink));
     font-size: 5.4vw;
   }
 
   .spuds-pdp__add-arrow {
-    right: 6vw;
     width: 12vw;
     height: 5.2vw;
+    flex-basis: 12vw;
   }
 
   .spuds-pdp__add-arrow svg {
@@ -815,7 +817,7 @@
     left: 5vw;
   }
 
-  .spuds-pdp-recommendation-card__button {
+  .spuds-pdp-recommendations button.spuds-pdp-recommendation-card__button {
     min-height: 13vw;
     padding: 3vw 4vw;
     box-shadow: 1.1vw 1.1vw 0 var(--spuds-pdp-accent, var(--spuds-pdp-pink));
