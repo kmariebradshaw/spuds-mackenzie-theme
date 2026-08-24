@@ -75,9 +75,9 @@
   background: var(--navy);
   color: #fff;
   font-family: var(--scale);
-  font-weight: 650;
+  font-weight: 400;
   font-stretch: expanded;
-  font-variation-settings: "wght" 500, "wdth" 120;
+  font-variation-settings: "wght" 400, "wdth" 120;
   line-height: 1;
   text-decoration: none;
   text-transform: uppercase;
@@ -109,9 +109,9 @@
 
 .spuds-hero__eyebrow {
   font-family: var(--scale);
-  font-weight: 650;
+  font-weight: 400;
   font-stretch: expanded;
-  font-variation-settings: "wght" 500, "wdth" 120;
+  font-variation-settings: "wght" 400, "wdth" 120;
   line-height: 1.15;
   text-transform: uppercase;
   text-shadow: 1.4vw .42vw 1.4vw white;
