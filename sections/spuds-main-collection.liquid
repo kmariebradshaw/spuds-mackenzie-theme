@@ -41,6 +41,49 @@
   class="spuds-collection-products"
   view-event-payload="{{ collection | standard_event_data: 'view' | escape }}"
 >
+  {% if section.settings.show_collection_accents %}
+    <div class="spuds-collection-accents" aria-hidden="true">
+      {% for accent_index in (1..4) %}
+        {% liquid
+          assign accent_setting_id = 'collection_accent_' | append: accent_index
+          assign accent_image = section.settings[accent_setting_id]
+          assign accent_class = 'spuds-collection-accent spuds-collection-accent--' | append: accent_index
+          case accent_index
+            when 1
+              assign accent_fallback = 'Graphic-1.svg'
+            when 2
+              assign accent_fallback = 'Graphic-2.svg'
+            when 3
+              assign accent_fallback = 'Graphic-4.svg'
+            when 4
+              assign accent_fallback = 'Graphic-5.svg'
+          endcase
+        %}
+        {% if accent_image != blank %}
+          {{
+            accent_image
+            | image_url: width: 800
+            | image_tag:
+              class: accent_class,
+              loading: 'lazy',
+              widths: '200, 400, 600, 800',
+              sizes: '12vw',
+              alt: ''
+          }}
+        {% else %}
+          <img
+            class="spuds-collection-accent spuds-collection-accent--{{ accent_index }}"
+            src="{{ accent_fallback | asset_url }}"
+            alt=""
+            loading="lazy"
+            width="800"
+            height="800"
+          >
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
   <results-list
     class="section product-grid-container{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
     style="--padding-block-start: {{ section.settings.padding-block-start }}px; --padding-block-end: {{ section.settings.padding-block-end }}px;"
@@ -247,6 +290,36 @@
     {
       "type": "header",
       "content": "t:content.section_layout"
+    },
+    {
+      "type": "header",
+      "content": "Decorative accents"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_accents",
+      "label": "Show decorative accents",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_accent_1",
+      "label": "Accent 1 — upper left"
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_accent_2",
+      "label": "Accent 2 — upper right"
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_accent_3",
+      "label": "Accent 3 — lower left"
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_accent_4",
+      "label": "Accent 4 — lower right"
     },
     {
       "type": "color",
