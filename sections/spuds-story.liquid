@@ -1,4 +1,6 @@
 {{ 'spuds-homepage.css' | asset_url | stylesheet_tag }}
+{% assign story_arrow = section.settings.story_arrow %}
+{% assign mission_brush = section.settings.mission_brush %}
 
 <section class="spuds-home" id="SpudsStory-{{ section.id }}">
   <div class="spuds-shell">
@@ -25,12 +27,21 @@
         </div>
 
         <div class="spuds-story__center">
-          <svg class="spuds-story__arrow" viewBox="0 0 260 95" aria-hidden="true">
-            <path d="M9 53c55-3 113-5 183-3-13-10-26-18-37-27 22 7 50 22 76 36-25 10-52 23-75 35 12-10 24-20 36-30-72 0-128 1-182 5" fill="none" stroke="#faf0e4" stroke-width="9" stroke-linecap="square" stroke-linejoin="miter"/>
-          </svg>
-          <div class="spuds-story__mission" style="background-image:url('{{ 'spuds-history-mission-brush.svg' | asset_url }}')">
-            {{ section.settings.mission_top }}
-            <span>{{ section.settings.mission_bottom }}</span>
+          {% if story_arrow != blank %}
+            {{ story_arrow | image_url: width: 1200 | image_tag: widths: '400,700,900,1200', sizes: '16vw', class: 'spuds-story__arrow', loading: 'lazy', alt: '' }}
+          {% else %}
+            <img class="spuds-story__arrow" src="{{ 'HP-History-Arrow.webp' | asset_url }}" width="900" height="384" alt="" loading="lazy">
+          {% endif %}
+          <div class="spuds-story__mission">
+            {% if mission_brush != blank %}
+              {{ mission_brush | image_url: width: 1000 | image_tag: widths: '400,700,1000', sizes: '21vw', class: 'spuds-story__mission-brush', loading: 'lazy', alt: '' }}
+            {% else %}
+              <img class="spuds-story__mission-brush" src="{{ 'spuds-history-mission-brush.svg' | asset_url }}" width="447" height="116" alt="" loading="lazy">
+            {% endif %}
+            <div class="spuds-story__mission-copy">
+              {{ section.settings.mission_top }}
+              <span>{{ section.settings.mission_bottom }}</span>
+            </div>
           </div>
         </div>
 
@@ -72,6 +83,8 @@
     {"type":"text","id":"today_accent","label":"Script word","default":"Legend"},
     {"type":"textarea","id":"today_copy","label":"Copy","default":"That legendary personality inspires a new generation of treats, wellness products, and dogs who know how to have a good time."},
     {"type":"header","content":"Center mission"},
+    {"type":"image_picker","id":"story_arrow","label":"Arrow graphic"},
+    {"type":"image_picker","id":"mission_brush","label":"Mission brush graphic"},
     {"type":"text","id":"mission_top","label":"Mission line 1","default":"Same legendary spirit."},
     {"type":"text","id":"mission_bottom","label":"Mission line 2","default":"New mission."}
   ],
