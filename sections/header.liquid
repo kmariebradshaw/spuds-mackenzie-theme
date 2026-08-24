@@ -1419,33 +1419,63 @@
       grid-column: 1 / -1;
       width: 100%;
       min-height: 12vw;
-      grid-template-areas: "left center right";
-      grid-template-columns: auto 1fr auto;
-      column-gap: 1.5vw;
-      padding: .8vw 2.5vw;
+      display: block;
+      padding: 0;
     }
 
-    #header-component .header__column--left {
-      grid-area: left;
-      display: flex;
-      align-items: center;
-      gap: 2vw;
-    }
-
+    #header-component .header__column--left,
     #header-component .header__column--right {
-      grid-area: right;
+      display: contents;
+    }
+
+    #header-component header-drawer {
+      position: absolute;
+      z-index: calc(var(--layer-header-menu) + 2);
+      top: 50%;
+      left: 2.5vw;
+      transform: translateY(-50%);
+    }
+
+    #header-component .spuds-header-actions {
+      position: absolute;
+      z-index: calc(var(--layer-header-menu) + 2);
+      top: 50%;
+      right: 2.5vw;
       display: flex;
       align-items: center;
       justify-content: flex-end;
+      flex-wrap: nowrap;
+      gap: 1.5vw;
+      height: auto;
+      transform: translateY(-50%);
     }
 
-    #header-component .spuds-header-actions,
     #header-component header-actions {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: nowrap;
       gap: 1.5vw;
     }
 
     #header-component .header__column--right header-actions {
       margin-inline-start: 0;
+    }
+
+    #header-component .header-actions__action,
+    #header-component .account-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #header-component shopify-account,
+    #header-component .account-button [slot="signed-out-avatar"] {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
     }
 
     #header-component .header-logo {
