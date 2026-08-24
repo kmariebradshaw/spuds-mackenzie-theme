@@ -1382,6 +1382,7 @@
       background: var(--spuds-header-pink) !important;
       color: #fff !important;
       border-radius: 50% !important;
+      clip-path: circle(50%);
     }
 
     #header-component .header-actions__cart-icon--has-cart .cart-bubble__background {
@@ -1409,28 +1410,51 @@
 
   @media screen and (max-width: 749px) {
     #header-component {
-      min-height: 18vw;
-      border-bottom-width: .35vw;
+      min-height: 14.5vw;
+      border-bottom-width: .3vw;
       border-bottom-color: var(--spuds-header-pink);
     }
 
     #header-component .header__row--top .header__columns {
-      min-height: 18vw;
-      grid-template-areas: "leftA leftB center rightA rightB";
-      grid-template-columns: 10vw 34vw 1fr 12vw 12vw;
-      padding: 2.5vw 3vw 2.5vw 1.5vw;
+      min-height: 14.5vw;
+      grid-template-areas: "left center right";
+      grid-template-columns: auto 1fr auto;
+      column-gap: 2vw;
+      padding: 1.4vw 3vw;
+    }
+
+    #header-component .header__column--left {
+      grid-area: left;
+      display: flex;
+      align-items: center;
+      gap: 2.7vw;
+    }
+
+    #header-component .header__column--right {
+      grid-area: right;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    #header-component .spuds-header-actions,
+    #header-component header-actions {
+      gap: 2.8vw;
+    }
+
+    #header-component .header__column--right header-actions {
+      margin-inline-start: 0;
     }
 
     #header-component .header-logo {
-      grid-area: leftB;
       justify-self: start;
       align-self: center;
-      width: 32vw;
-      max-width: 32vw;
+      width: 24vw;
+      max-width: 24vw;
     }
 
     #header-component .header-logo .header-logo__image {
-      width: 32vw !important;
+      width: 24vw !important;
       height: auto !important;
       max-width: none;
     }
@@ -1443,14 +1467,14 @@
     #header-component .header-actions__action:not(.account-button) svg,
     #header-component .account-button svg,
     #header-component .header__icon--menu svg {
-      width: 7vw;
-      height: 7vw;
+      width: 5.2vw;
+      height: 5.2vw;
     }
 
     #header-component .header-actions__cart-icon {
-      --cart-bubble-size: 4vw;
-      --cart-bubble-top: -1vw;
-      --cart-bubble-right: -1vw;
+      --cart-bubble-size: 3.5vw;
+      --cart-bubble-top: -1.1vw;
+      --cart-bubble-right: -1.1vw;
     }
 
     #header-component .header-actions__cart-icon--has-cart .cart-bubble {
@@ -1465,6 +1489,7 @@
       background: var(--spuds-header-pink) !important;
       color: #fff !important;
       border-radius: 50% !important;
+      clip-path: circle(50%);
     }
 
     #header-component .header-actions__cart-icon--has-cart .cart-bubble__background {
@@ -1475,7 +1500,7 @@
       width: 100%;
       height: 100%;
       font-family: var(--spuds-header-font);
-      font-size: 2.2vw;
+      font-size: 1.9vw;
       font-weight: 500;
     }
   }
