@@ -706,6 +706,10 @@
     transform: translateY(-.2vw);
   }
 
+  .spuds-story__era--today .spuds-story__polaroid {
+    transform: translateY(-1vw);
+  }
+
   .spuds-story__year {
     position: absolute;
     z-index: 3;
@@ -737,9 +741,9 @@
   }
 
   .spuds-story__label p {
-    max-width: 12.7vw;
+    max-width: 13.5vw;
     margin: .8vw auto 0;
-    font-size: .78vw;
+    font-size: .96vw;
   }
 
   .spuds-story__arrow {
@@ -762,6 +766,10 @@
   .spuds-story__mission-copy {
     padding: 1.45vw 1.4vw 0;
     white-space: nowrap;
+  }
+
+  .spuds-story__mission-top {
+    transform: translateY(.35vw);
   }
 
   .spuds-story__mission-copy span {
