@@ -22,7 +22,7 @@
           {% if hero_headline_graphic != blank %}
             {{ hero_headline_graphic | image_url: width: 1400 | image_tag: widths: '500,750,1000,1400', sizes: '31vw', class: 'spuds-hero__headline-image', loading: 'eager', alt: '' }}
           {% else %}
-            <img class="spuds-hero__headline-image" src="{{ 'HP-ATF-TextVectorized.svg' | asset_url }}" width="609" height="564" alt="" loading="eager">
+            <img class="spuds-hero__headline-image" src="{{ 'HP-ATF-TextVectorized.webp' | asset_url }}" width="1400" height="1297" alt="" loading="eager">
           {% endif %}
           <span class="visually-hidden">{{ section.settings.hero_kicker }} {{ section.settings.hero_title }} {{ section.settings.hero_subtitle }}</span>
         </h1>
