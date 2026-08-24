@@ -2,6 +2,8 @@
 {% assign hero_image = section.settings.hero_image %}
 {% assign hero_headline_graphic = section.settings.hero_headline_graphic %}
 {% assign hero_polaroid_cluster = section.settings.hero_polaroid_cluster %}
+{% assign hero_button_accent_left = section.settings.hero_button_accent_left %}
+{% assign hero_button_accent_right = section.settings.hero_button_accent_right %}
 {% assign category_accent_left = section.settings.category_accent_left %}
 {% assign category_accent_right = section.settings.category_accent_right %}
 
@@ -40,6 +42,16 @@
         {% endif %}
         {% render 'spuds-shape', shape: 'paw', color: '#ff2e6c', class: 'spuds-hero__polaroid-paw' %}
       </div>
+      {% if hero_button_accent_left != blank %}
+        {{ hero_button_accent_left | image_url: width: 300 | image_tag: widths: '100,200,300', sizes: '4vw', class: 'spuds-float-shape spuds-hero__button-accent spuds-hero__button-accent--left', loading: 'eager', alt: '' }}
+      {% else %}
+        {% render 'spuds-shape', shape: 'graphic-3', class: 'spuds-float-shape spuds-hero__button-accent spuds-hero__button-accent--left' %}
+      {% endif %}
+      {% if hero_button_accent_right != blank %}
+        {{ hero_button_accent_right | image_url: width: 300 | image_tag: widths: '100,200,300', sizes: '4vw', class: 'spuds-float-shape spuds-hero__button-accent spuds-hero__button-accent--right', loading: 'eager', alt: '' }}
+      {% else %}
+        {% render 'spuds-shape', shape: 'graphic-3', class: 'spuds-float-shape spuds-hero__button-accent spuds-hero__button-accent--right' %}
+      {% endif %}
       {% render 'spuds-shape', shape: 'triangle', color: '#45c4cc', class: 'spuds-float-shape spuds-float-shape--one' %}
       {% render 'spuds-shape', shape: 'zigzag', color: '#ffbd20', class: 'spuds-float-shape spuds-float-shape--two' %}
       {% render 'spuds-shape', shape: 'zigzag', color: '#ffbd20', class: 'spuds-float-shape spuds-float-shape--three' %}
@@ -84,6 +96,8 @@
     {"type":"image_picker","id":"hero_image","label":"Hero image"},
     {"type":"image_picker","id":"hero_headline_graphic","label":"Hero headline graphic"},
     {"type":"image_picker","id":"hero_polaroid_cluster","label":"Polaroids and treats graphic"},
+    {"type":"image_picker","id":"hero_button_accent_left","label":"Button left triangle graphic"},
+    {"type":"image_picker","id":"hero_button_accent_right","label":"Button right triangle graphic"},
     {"type":"image_picker","id":"category_accent_left","label":"Category left accent graphic"},
     {"type":"image_picker","id":"category_accent_right","label":"Category right accent graphic"},
     {"type":"text","id":"hero_eyebrow","label":"Eyebrow","default":"Pet treats & wellness inspired by a legend."},

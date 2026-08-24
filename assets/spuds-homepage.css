@@ -553,6 +553,22 @@
     transform: rotate(20deg);
   }
 
+  .spuds-float-shape.spuds-hero__button-accent {
+    z-index: 6;
+    width: 3.8vw;
+    pointer-events: none;
+  }
+
+  .spuds-hero__button-accent--left {
+    bottom: .3vw;
+    left: -.7vw;
+  }
+
+  .spuds-hero__button-accent--right {
+    bottom: 3vw;
+    left: 23.2vw;
+  }
+
   .spuds-float-shape {
     width: 3.35vw;
   }
