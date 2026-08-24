@@ -71,16 +71,26 @@
       {% endif %}
       {% for block in section.blocks %}
         <article class="spuds-category" {{ block.shopify_attributes }}>
-          {% if block.settings.image != blank %}
-            {{ block.settings.image | image_url: width: 800 | image_tag: class: 'spuds-category__image', loading: 'lazy' }}
+          {% if block.settings.link != blank %}
+            <a class="spuds-category__link" href="{{ block.settings.link }}">
           {% else %}
-            <img class="spuds-category__image" src="{{ 'spuds-products.png' | asset_url }}" alt="" loading="lazy">
+            <div class="spuds-category__link">
           {% endif %}
-          <div>
-            <h2><strong>Spuds</strong>{{ block.settings.title }}</h2>
-            <p>{{ block.settings.products | newline_to_br }}</p>
-            <a class="spuds-text-link" href="{{ block.settings.link }}">{{ block.settings.link_label }} →</a>
-          </div>
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 800 | image_tag: class: 'spuds-category__image', loading: 'lazy' }}
+            {% else %}
+              <img class="spuds-category__image" src="{{ 'spuds-products.png' | asset_url }}" alt="" loading="lazy">
+            {% endif %}
+            <div>
+              <h2><strong>Spuds</strong>{{ block.settings.title }}</h2>
+              <p>{{ block.settings.products | newline_to_br }}</p>
+              <span class="spuds-text-link">{{ block.settings.link_label }} →</span>
+            </div>
+          {% if block.settings.link != blank %}
+            </a>
+          {% else %}
+            </div>
+          {% endif %}
         </article>
       {% endfor %}
     </div>
