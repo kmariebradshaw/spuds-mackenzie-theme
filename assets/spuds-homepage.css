@@ -606,9 +606,9 @@
 .spuds-categories::before {
         content: "";
         position: absolute;
-        left: 0;
+        left: 24%;
         top: -4vw;
-        width: 104%;
+        width: 80%;
         height: 5vw;
         background: linear-gradient(to top, #f8f0e5 35%, #f8f0e500);
         filter: blur(0.5vw);
