@@ -173,9 +173,12 @@ class HeaderComponent extends Component {
 
   #updateScrollState = () => {
     const stickyMode = this.getAttribute('sticky');
+    const scrollTop = getScrollTop();
+
+    this.toggleAttribute('data-spuds-scrolled', scrollTop > 1);
+
     if (!this.#offscreen && stickyMode !== 'always') return;
 
-    const scrollTop = getScrollTop();
     const headerTop = this.getBoundingClientRect().top;
     const isScrollingUp = scrollTop < this.#lastScrollTop;
     const isAtTop = headerTop >= 0;
@@ -225,6 +228,7 @@ class HeaderComponent extends Component {
     super.connectedCallback();
     this.#resizeObserver.observe(this);
     this.addEventListener('overflowMinimum', this.#handleOverflowMinimum);
+    this.toggleAttribute('data-spuds-scrolled', getScrollTop() > 1);
 
     const stickyMode = this.getAttribute('sticky');
     if (stickyMode) {
