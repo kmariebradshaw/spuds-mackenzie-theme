@@ -154,6 +154,13 @@
   max-width: none;
 }
 
+.spuds-hero__headline-image {
+  filter:
+    drop-shadow(0 0 .45vw rgba(250,240,228,.98))
+    drop-shadow(0 0 1vw rgba(250,240,228,.9))
+    drop-shadow(0 0 1.8vw rgba(250,240,228,.72));
+}
+
 .spuds-hero__back {
   position: relative;
   width: max-content;
