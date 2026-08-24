@@ -622,15 +622,15 @@
   }
 
   .spuds-categories__accent--left {
-    bottom: -4.7vw;
-    left: -1.7vw;
-    width: 11vw;
+    bottom: -5.8vw;
+    left: -2.8vw;
+    width: 9.2vw;
   }
 
   .spuds-categories__accent--right {
-    right: -1.8vw;
-    bottom: -4.8vw;
-    width: 10vw;
+    right: -1.6vw;
+    bottom: -5.8vw;
+    width: 9.2vw;
   }
 
   .spuds-category {
@@ -643,23 +643,23 @@
   }
 
   .spuds-category h2 {
-        margin: 0 0 1vw;
-        font-size: 2.3vw;
-        transform: rotate(-9deg);
-    }
+    margin: 0 0 1vw;
+    font-size: 2.6vw;
+    transform: rotate(-9deg);
+  }
 
 
   .spuds-category h2 strong {
-    font-size: 2vw;
+    font-size: 2.3vw;
   }
 
   .spuds-category p {
     margin: 0 0 .62vw;
-    font-size: .92vw;
+    font-size: 1.08vw;
   }
 
   .spuds-text-link {
-    font-size: 1vw;
+    font-size: 1.18vw;
     letter-spacing: .03vw;
   }
 
