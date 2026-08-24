@@ -758,12 +758,12 @@
   }
 
   .spuds-story__mission-copy {
-    padding: .65vw 1.4vw 0;
+    padding: 1.3vw 1.4vw 0;
     white-space: nowrap;
   }
 
   .spuds-story__mission-copy span {
-    margin-top: .85vw;
+    margin-top: 1.35vw;
     font-size: 1vw;
   }
 
