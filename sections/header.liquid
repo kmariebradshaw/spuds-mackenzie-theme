@@ -1410,24 +1410,25 @@
 
   @media screen and (max-width: 749px) {
     #header-component {
-      min-height: 14.5vw;
-      border-bottom-width: .3vw;
+      min-height: 12vw;
+      border-bottom-width: .25vw;
       border-bottom-color: var(--spuds-header-pink);
     }
 
     #header-component .header__row--top .header__columns {
-      min-height: 14.5vw;
+      position: relative;
+      min-height: 12vw;
       grid-template-areas: "left center right";
       grid-template-columns: auto 1fr auto;
-      column-gap: 2vw;
-      padding: 1.4vw 3vw;
+      column-gap: 1.5vw;
+      padding: .8vw 2.5vw;
     }
 
     #header-component .header__column--left {
       grid-area: left;
       display: flex;
       align-items: center;
-      gap: 2.7vw;
+      gap: 2vw;
     }
 
     #header-component .header__column--right {
@@ -1439,7 +1440,7 @@
 
     #header-component .spuds-header-actions,
     #header-component header-actions {
-      gap: 2.8vw;
+      gap: 2.1vw;
     }
 
     #header-component .header__column--right header-actions {
@@ -1447,14 +1448,18 @@
     }
 
     #header-component .header-logo {
-      justify-self: start;
-      align-self: center;
-      width: 24vw;
-      max-width: 24vw;
+      position: absolute;
+      z-index: calc(var(--layer-header-menu) + 2);
+      top: 50%;
+      left: 50%;
+      width: 20vw;
+      max-width: 20vw;
+      height: auto;
+      transform: translate(-50%, -50%);
     }
 
     #header-component .header-logo .header-logo__image {
-      width: 24vw !important;
+      width: 20vw !important;
       height: auto !important;
       max-width: none;
     }
@@ -1467,14 +1472,14 @@
     #header-component .header-actions__action:not(.account-button) svg,
     #header-component .account-button svg,
     #header-component .header__icon--menu svg {
-      width: 5.2vw;
-      height: 5.2vw;
+      width: 4.3vw;
+      height: 4.3vw;
     }
 
     #header-component .header-actions__cart-icon {
-      --cart-bubble-size: 3.5vw;
-      --cart-bubble-top: -1.1vw;
-      --cart-bubble-right: -1.1vw;
+      --cart-bubble-size: 3vw;
+      --cart-bubble-top: -.9vw;
+      --cart-bubble-right: -.9vw;
     }
 
     #header-component .header-actions__cart-icon--has-cart .cart-bubble {
@@ -1500,7 +1505,7 @@
       width: 100%;
       height: 100%;
       font-family: var(--spuds-header-font);
-      font-size: 1.9vw;
+      font-size: 1.6vw;
       font-weight: 500;
     }
   }
