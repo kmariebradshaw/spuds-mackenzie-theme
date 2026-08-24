@@ -394,7 +394,9 @@
   object-fit: contain;
 }
 
-@media (min-width: 991px) {
+/* Keep the desktop composition at every viewport width. Because this layout is
+   sized in vw units, it scales down proportionally on mobile without reflowing. */
+@media (min-width: 0px) {
   .spuds-kicker {
     font-size: 4.2vw;
   }
@@ -779,7 +781,9 @@
   }
 }
 
-@media (max-width: 990px) {
+/* Previous mobile reflow retained but disabled while the scaled desktop
+   composition is being evaluated. */
+@media (max-width: 0px) {
   .spuds-kicker {
     font-size: 10vw;
   }
