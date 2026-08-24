@@ -750,21 +750,23 @@
   }
 
   .spuds-story__mission {
-    width: 21vw;
+    left: 50%;
+    width: 23vw;
     min-height: 4.8vw;
-    margin: .8vw auto 0;
-    font-size: .95vw;
+    margin: 1.2vw 0 0;
+    font-size: 1.08vw;
     line-height: 1.2;
+    transform: translateX(-50%);
   }
 
   .spuds-story__mission-copy {
-    padding: 1.3vw 1.4vw 0;
+    padding: 1.45vw 1.4vw 0;
     white-space: nowrap;
   }
 
   .spuds-story__mission-copy span {
-    margin-top: 1.35vw;
-    font-size: 1vw;
+    margin-top: 1.15vw;
+    font-size: 1.1vw;
   }
 
   .spuds-gallery {
