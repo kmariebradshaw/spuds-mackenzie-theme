@@ -1,5 +1,9 @@
 {{ 'spuds-homepage.css' | asset_url | stylesheet_tag }}
 {% assign hero_image = section.settings.hero_image %}
+{% assign hero_headline_graphic = section.settings.hero_headline_graphic %}
+{% assign hero_polaroid_cluster = section.settings.hero_polaroid_cluster %}
+{% assign category_accent_left = section.settings.category_accent_left %}
+{% assign category_accent_right = section.settings.category_accent_right %}
 
 <section class="spuds-home" id="SpudsHero-{{ section.id }}">
   <div class="spuds-shell">
@@ -14,12 +18,14 @@
 
       <div class="spuds-hero__copy">
         <p class="spuds-hero__eyebrow">{{ section.settings.hero_eyebrow }}</p>
-        <div class="spuds-hero__brush" style="background-image:url('{{ 'Graphic-6.svg' | asset_url }}')">{{ section.settings.hero_kicker }}</div>
-        <h1 class="spuds-display">{{ section.settings.hero_title }}</h1>
-        <div class="spuds-hero__back">
-          {{ section.settings.hero_subtitle }}
-          {% render 'spuds-shape', shape: 'paw', color: '#ff2e6c', class: 'spuds-hero__back-paw' %}
-        </div>
+        <h1 class="spuds-hero__headline">
+          {% if hero_headline_graphic != blank %}
+            {{ hero_headline_graphic | image_url: width: 1400 | image_tag: widths: '500,750,1000,1400', sizes: '31vw', class: 'spuds-hero__headline-image', loading: 'eager', alt: '' }}
+          {% else %}
+            <img class="spuds-hero__headline-image" src="{{ 'HP-ATF-TextVectorized.svg' | asset_url }}" width="609" height="564" alt="" loading="eager">
+          {% endif %}
+          <span class="visually-hidden">{{ section.settings.hero_kicker }} {{ section.settings.hero_title }} {{ section.settings.hero_subtitle }}</span>
+        </h1>
         <a class="spuds-button" href="{{ section.settings.hero_link }}">
           {{ section.settings.hero_button }}
           {% render 'spuds-shape', shape: 'arrow', color: '#ff2e6c' %}
@@ -27,22 +33,11 @@
       </div>
 
       <div class="spuds-hero__polaroids" aria-hidden="true">
-        {% for i in (1..4) %}
-          {% assign setting_key = 'hero_polaroid_' | append: i %}
-          {% assign selected = section.settings[setting_key] %}
-          <div class="spuds-polaroid spuds-hero__polaroid">
-            {% if selected != blank %}
-              {{ selected | image_url: width: 500 | image_tag: loading: 'eager' }}
-            {% else %}
-              {% case i %}
-                {% when 1 %}<img src="{{ 'spuds-photo-skateboard.png' | asset_url }}" alt="">
-                {% when 2 %}<img src="{{ 'spuds-photo-captain.png' | asset_url }}" alt="">
-                {% when 3 %}<img src="{{ 'spuds-photo-birthday.png' | asset_url }}" alt="">
-                {% when 4 %}<img src="{{ 'spuds-photo-lounger.png' | asset_url }}" alt="">
-              {% endcase %}
-            {% endif %}
-          </div>
-        {% endfor %}
+        {% if hero_polaroid_cluster != blank %}
+          {{ hero_polaroid_cluster | image_url: width: 1800 | image_tag: widths: '500,750,1000,1400,1800', sizes: '19vw', class: 'spuds-hero__polaroid-cluster', loading: 'eager', alt: '' }}
+        {% else %}
+          <img class="spuds-hero__polaroid-cluster" src="{{ 'HP-ATF-Polaroids-Chips.webp' | asset_url }}" width="1009" height="1731" alt="" loading="eager">
+        {% endif %}
         {% render 'spuds-shape', shape: 'paw', color: '#ff2e6c', class: 'spuds-hero__polaroid-paw' %}
       </div>
       {% render 'spuds-shape', shape: 'triangle', color: '#45c4cc', class: 'spuds-float-shape spuds-float-shape--one' %}
@@ -52,8 +47,16 @@
     </div>
 
     <div class="spuds-categories" aria-label="Shop product categories">
-      {% render 'spuds-shape', shape: 'zigzag', color: '#ffbd20', class: 'spuds-float-shape spuds-categories__zigzag--left' %}
-      {% render 'spuds-shape', shape: 'zigzag', color: '#ffbd20', class: 'spuds-float-shape spuds-categories__zigzag--right' %}
+      {% if category_accent_left != blank %}
+        {{ category_accent_left | image_url: width: 700 | image_tag: widths: '250,400,550,700', sizes: '11vw', class: 'spuds-float-shape spuds-categories__accent spuds-categories__accent--left', loading: 'lazy', alt: '' }}
+      {% else %}
+        {% render 'spuds-shape', shape: 'graphic-2', class: 'spuds-float-shape spuds-categories__accent spuds-categories__accent--left' %}
+      {% endif %}
+      {% if category_accent_right != blank %}
+        {{ category_accent_right | image_url: width: 700 | image_tag: widths: '250,400,550,700', sizes: '10vw', class: 'spuds-float-shape spuds-categories__accent spuds-categories__accent--right', loading: 'lazy', alt: '' }}
+      {% else %}
+        {% render 'spuds-shape', shape: 'graphic-1', class: 'spuds-float-shape spuds-categories__accent spuds-categories__accent--right' %}
+      {% endif %}
       {% for block in section.blocks %}
         <article class="spuds-category" {{ block.shopify_attributes }}>
           {% if block.settings.image != blank %}
@@ -79,16 +82,16 @@
   "class":"section-spuds-hero",
   "settings":[
     {"type":"image_picker","id":"hero_image","label":"Hero image"},
+    {"type":"image_picker","id":"hero_headline_graphic","label":"Hero headline graphic"},
+    {"type":"image_picker","id":"hero_polaroid_cluster","label":"Polaroids and treats graphic"},
+    {"type":"image_picker","id":"category_accent_left","label":"Category left accent graphic"},
+    {"type":"image_picker","id":"category_accent_right","label":"Category right accent graphic"},
     {"type":"text","id":"hero_eyebrow","label":"Eyebrow","default":"Pet treats & wellness inspired by a legend."},
     {"type":"text","id":"hero_kicker","label":"Brush label","default":"The Original"},
     {"type":"text","id":"hero_title","label":"Heading","default":"Party Animal"},
     {"type":"text","id":"hero_subtitle","label":"Accent heading","default":"Is Back!"},
     {"type":"text","id":"hero_button","label":"Button label","default":"Shop now"},
-    {"type":"url","id":"hero_link","label":"Button link"},
-    {"type":"image_picker","id":"hero_polaroid_1","label":"Hero Polaroid 1 photo"},
-    {"type":"image_picker","id":"hero_polaroid_2","label":"Hero Polaroid 2 photo"},
-    {"type":"image_picker","id":"hero_polaroid_3","label":"Hero Polaroid 3 photo"},
-    {"type":"image_picker","id":"hero_polaroid_4","label":"Hero Polaroid 4 photo"}
+    {"type":"url","id":"hero_link","label":"Button link"}
   ],
   "blocks":[
     {
