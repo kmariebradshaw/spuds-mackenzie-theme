@@ -748,16 +748,17 @@
 
   .spuds-pdp button.spuds-pdp__add-to-cart {
     min-height: 13vw;
-    gap: 4vw;
-    padding: 2vw 4vw;
+    min-width: 0;
+    gap: 2.5vw;
+    padding: 2vw 3vw;
     box-shadow: 1.1vw 1.1vw 0 var(--spuds-pdp-accent, var(--spuds-pdp-pink));
-    font-size: 5.4vw;
+    font-size: 4.3vw;
   }
 
   .spuds-pdp__add-arrow {
-    width: 12vw;
-    height: 7vw;
-    flex-basis: 12vw;
+    width: 9vw;
+    height: 5.2vw;
+    flex-basis: 9vw;
   }
 
   .spuds-pdp__add-arrow svg {
