@@ -869,6 +869,21 @@
 }
 
 @media (max-width: 749px) {
+  .spuds-hero__polaroids {
+    display: none;
+  }
+
+  .spuds-hero__copy {
+    width: 50%;
+    min-width: 0;
+    padding: 4.8vw 0 1.8vw 2.85vw;
+  }
+
+  .spuds-hero h1.spuds-hero__headline {
+    width: 39vw;
+    margin: 0 0 1.5vw 7vw;
+  }
+
   .spuds-hero__copy > .spuds-hero__eyebrow {
     display: none;
   }
