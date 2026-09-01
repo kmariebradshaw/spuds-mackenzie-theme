@@ -886,6 +886,7 @@
   }
 
   .spuds-hero__copy {
+    z-index: 7;
     width: 64%;
     min-width: 0;
     padding: 1.2vw 0 0 3vw;
@@ -897,25 +898,28 @@
   }
 
   .spuds-hero__copy .spuds-button {
-    gap: 1.1vw;
-    padding: 1.05vw 1.8vw;
-    box-shadow: .45vw .45vw 0 var(--pink);
-    font-size: 2.25vw;
+    position: relative;
+    z-index: 2;
+    gap: 1.4vw;
+    padding: 1.4vw 2.5vw;
+    box-shadow: .55vw .55vw 0 var(--pink);
+    font-size: 2.8vw;
+    white-space: nowrap;
   }
 
   .spuds-hero__copy .spuds-button svg {
-    width: 2.7vw;
-    height: 1.45vw;
+    width: 3.4vw;
+    height: 1.8vw;
   }
 
   .spuds-hero__button-accent--left {
-    bottom: .8vw;
-    left: 4vw;
+    bottom: 1vw;
+    left: -2.5vw;
   }
 
   .spuds-hero__button-accent--right {
-    bottom: 4vw;
-    left: 28vw;
+    bottom: 5vw;
+    left: 38vw;
   }
 
   .spuds-hero__copy > .spuds-hero__eyebrow {
