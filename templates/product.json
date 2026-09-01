@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -6,8 +15,13 @@
         "eyebrow": "SPUDS SNACKS",
         "review_count": "12,406 Reviews",
         "use_delivered_chicken_assets": true,
+        "description_override": "",
         "description_fallback": "Crunchy Chicken Chips made for backyard hangs, game days, tailgates, and treat-time celebrations everywhere.",
         "ingredients": "",
+        "ingredients_expander_label": "Ingredients & Nutritional Facts",
+        "natural_ingredients": "<p>Crunchy Chicken Chips made for backyard hangs, game days, tailgates, and treat-time celebrations everywhere.</p>",
+        "single_ingredients": "<p>Crunchy Chicken Chips made for backyard hangs, game days, tailgates, and treat-time celebrations everywhere.</p>",
+        "nutritional_facts": "<p>Crunchy Chicken Chips made for backyard hangs, game days, tailgates, and treat-time celebrations everywhere.</p>",
         "one_time_label": "One Time Purchase",
         "subscribe_label": "Subscribe and Save (20%)",
         "accent_color": "#ff2f69"
