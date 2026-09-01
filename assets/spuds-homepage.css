@@ -923,48 +923,66 @@
   }
 
   .spuds-categories {
-    gap: 1.5vw;
+    gap: .75vw;
     margin-top: 5vw;
-    padding: 4vw 2vw 4.5vw;
+    padding: 4vw 1vw 4.5vw;
   }
 
   .spuds-category__link {
     position: relative;
-    display: block;
-    text-align: center;
+    display: grid;
+    grid-template-columns: 42% 58%;
+    grid-template-rows: auto 1fr auto;
+    column-gap: .35vw;
+    align-items: center;
+    text-align: left;
+  }
+
+  .spuds-category__link > div {
+    display: contents;
   }
 
   .spuds-category__image {
+    grid-column: 2;
+    grid-row: 2 / 4;
     width: 100%;
-    height: 20vw;
-    margin-bottom: 1vw;
+    height: 22vw;
+    margin: 0;
   }
 
   .spuds-category h2 {
-    position: absolute;
-    z-index: 2;
-    top: .5vw;
-    left: 50%;
-    width: 94%;
-    margin: 0;
-    font-size: 3.5vw;
+    position: static;
+    grid-column: 1 / -1;
+    grid-row: 1;
+    width: 100%;
+    margin: 0 0 1.2vw;
+    font-size: 3.7vw;
     text-align: center;
-    text-shadow: 0 0 1vw var(--cream);
-    transform: translateX(-50%) rotate(-9deg);
+    text-shadow: none;
+    transform: rotate(-9deg);
   }
 
   .spuds-category h2 strong {
-    font-size: 3.1vw;
+    font-size: 3.3vw;
   }
 
   .spuds-category p {
-    margin: 0 0 .8vw;
-    font-size: 1.25vw;
+    grid-column: 1;
+    grid-row: 2;
+    align-self: end;
+    margin: 0 0 1vw;
+    font-size: 1.4vw;
+    text-align: left;
   }
 
   .spuds-text-link {
+    grid-column: 1;
+    grid-row: 3;
+    align-self: start;
     display: block;
-    font-size: 1.35vw;
+    font-size: 1.55vw;
+    text-align: left;
+    white-space: nowrap;
   }
 
   .spuds-hero__copy > .spuds-hero__eyebrow {
