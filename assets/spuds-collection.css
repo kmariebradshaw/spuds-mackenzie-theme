@@ -468,14 +468,30 @@
 }
 
 @media screen and (max-width: 749px) {
+  .spuds-collection-hero__inner {
+    min-height: 36vw;
+  }
+
   .spuds-collection-nav {
     flex-direction: column;
     align-items: center;
-    padding: 2.25rem 1.25rem 2.75rem;
+    justify-content: center;
+    gap: 3vw;
+    padding: 6vw 4vw;
   }
 
   .spuds-collection-nav__link {
-    width: min(100%, 19rem);
+    width: 68vw;
+    min-width: 0;
+    gap: 1.8vw;
+    padding: 2.5vw 3vw;
+    box-shadow: .9vw .9vw 0 var(--spuds-collection-button-accent, var(--spuds-pink));
+    font-size: 3.4vw;
+  }
+
+  .spuds-collection-nav__arrow {
+    width: 5vw;
+    height: 2.5vw;
   }
 
   .spuds-collection-products .collection-wrapper {
