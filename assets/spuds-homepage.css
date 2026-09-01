@@ -925,7 +925,7 @@
   .spuds-categories {
     gap: .75vw;
     margin-top: 0;
-    padding: 4vw 1vw 4.5vw;
+    padding: 4vw 1vw 2vw;
   }
 
   .spuds-category__link {
