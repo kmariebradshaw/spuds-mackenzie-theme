@@ -922,6 +922,51 @@
     left: 38vw;
   }
 
+  .spuds-categories {
+    gap: 1.5vw;
+    margin-top: 5vw;
+    padding: 4vw 2vw 4.5vw;
+  }
+
+  .spuds-category__link {
+    position: relative;
+    display: block;
+    text-align: center;
+  }
+
+  .spuds-category__image {
+    width: 100%;
+    height: 20vw;
+    margin-bottom: 1vw;
+  }
+
+  .spuds-category h2 {
+    position: absolute;
+    z-index: 2;
+    top: .5vw;
+    left: 50%;
+    width: 94%;
+    margin: 0;
+    font-size: 3.5vw;
+    text-align: center;
+    text-shadow: 0 0 1vw var(--cream);
+    transform: translateX(-50%) rotate(-9deg);
+  }
+
+  .spuds-category h2 strong {
+    font-size: 3.1vw;
+  }
+
+  .spuds-category p {
+    margin: 0 0 .8vw;
+    font-size: 1.25vw;
+  }
+
+  .spuds-text-link {
+    display: block;
+    font-size: 1.35vw;
+  }
+
   .spuds-hero__copy > .spuds-hero__eyebrow {
     display: none;
   }
