@@ -477,7 +477,7 @@
     align-items: center;
     justify-content: center;
     gap: 3vw;
-    padding: 6vw 4vw 0;
+    padding: 6vw 4vw;
   }
 
   .spuds-collection-nav__link {
@@ -492,6 +492,10 @@
   .spuds-collection-nav__arrow {
     width: 5vw;
     height: 2.5vw;
+  }
+
+  .spuds-collection-products .facets-block-wrapper:not(.facets-block-wrapper--vertical) {
+    display: none;
   }
 
   .spuds-collection-products .collection-wrapper {
