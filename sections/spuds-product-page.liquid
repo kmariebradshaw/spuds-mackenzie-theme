@@ -47,12 +47,39 @@
   assign description_plain = description_content | strip_html | strip
   assign description_words = description_plain | split: ' '
 
-  assign ingredients = product.metafields.custom.ingredients.value
+  assign ingredients_metafield = product.metafields.custom.ingredients
+  assign ingredients = ingredients_metafield.value
   if ingredients == blank
     assign ingredients = section.settings.ingredients
   endif
   if ingredients == blank and use_delivered_assets
     assign ingredients = 'Chicken.'
+  endif
+
+  assign natural_ingredients_metafield = product.metafields.custom.natural_ingredients
+  assign natural_ingredients = natural_ingredients_metafield.value
+  if natural_ingredients == blank
+    assign natural_ingredients = section.settings.natural_ingredients
+  endif
+
+  assign single_ingredients_metafield = product.metafields.custom.single_ingredients
+  assign single_ingredients = single_ingredients_metafield.value
+  if single_ingredients == blank
+    assign single_ingredients = section.settings.single_ingredients
+  endif
+
+  assign nutritional_facts_metafield = product.metafields.custom.nutritional_facts
+  if nutritional_facts_metafield == blank
+    assign nutritional_facts_metafield = product.metafields.custom.nutrition_facts
+  endif
+  assign nutritional_facts = nutritional_facts_metafield.value
+  if nutritional_facts == blank
+    assign nutritional_facts = section.settings.nutritional_facts
+  endif
+
+  assign has_ingredient_details = false
+  if ingredients != blank or natural_ingredients != blank or single_ingredients != blank or nutritional_facts != blank
+    assign has_ingredient_details = true
   endif
 
   assign first_subscription = current_variant.selling_plan_allocations.first
@@ -351,11 +378,58 @@
           </div>
         {% endif %}
 
-        {% if ingredients != blank %}
-          <div class="spuds-pdp__ingredients">
-            <strong>Ingredients:</strong>
-            <span>{{ ingredients }}</span>
-          </div>
+        {% if has_ingredient_details %}
+          <details class="spuds-pdp__ingredients-accordion">
+            <summary>
+              <span>{{ section.settings.ingredients_expander_label }}</span>
+              <span class="spuds-pdp__ingredients-toggle" aria-hidden="true">+</span>
+            </summary>
+            <div class="spuds-pdp__ingredients-content">
+              {% if ingredients != blank %}
+                <div class="spuds-pdp__ingredients-item">
+                  <h3>Ingredients</h3>
+                  {% if ingredients_metafield != blank %}
+                    {{ ingredients_metafield | metafield_tag }}
+                  {% else %}
+                    <p>{{ ingredients | newline_to_br }}</p>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {% if natural_ingredients != blank %}
+                <div class="spuds-pdp__ingredients-item">
+                  <h3>Natural Ingredients</h3>
+                  {% if natural_ingredients_metafield != blank %}
+                    {{ natural_ingredients_metafield | metafield_tag }}
+                  {% else %}
+                    {{ natural_ingredients }}
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {% if single_ingredients != blank %}
+                <div class="spuds-pdp__ingredients-item">
+                  <h3>Single Ingredients</h3>
+                  {% if single_ingredients_metafield != blank %}
+                    {{ single_ingredients_metafield | metafield_tag }}
+                  {% else %}
+                    {{ single_ingredients }}
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {% if nutritional_facts != blank %}
+                <div class="spuds-pdp__ingredients-item">
+                  <h3>Nutritional Facts</h3>
+                  {% if nutritional_facts_metafield != blank %}
+                    {{ nutritional_facts_metafield | metafield_tag }}
+                  {% else %}
+                    {{ nutritional_facts }}
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          </details>
         {% endif %}
       </div>
     </div>
@@ -404,6 +478,27 @@
       "type": "text",
       "id": "ingredients",
       "label": "Fallback ingredients"
+    },
+    {
+      "type": "text",
+      "id": "ingredients_expander_label",
+      "label": "Ingredients expander label",
+      "default": "Ingredients & Nutritional Facts"
+    },
+    {
+      "type": "richtext",
+      "id": "natural_ingredients",
+      "label": "Fallback natural ingredients"
+    },
+    {
+      "type": "richtext",
+      "id": "single_ingredients",
+      "label": "Fallback single ingredients"
+    },
+    {
+      "type": "richtext",
+      "id": "nutritional_facts",
+      "label": "Fallback nutritional facts"
     },
     {
       "type": "text",
