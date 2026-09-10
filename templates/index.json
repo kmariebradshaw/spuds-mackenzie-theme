@@ -49,6 +49,7 @@
         "salon"
       ],
       "settings": {
+        "hero_image": "shopify://shop_images/image.png",
         "hero_eyebrow": "Pet treats & wellness inspired by a legend.",
         "hero_kicker": "The Original",
         "hero_title": "Party Animal",
