@@ -326,6 +326,9 @@
 <header-component
   id="header-component"
   class="{{ class }}"
+  {% if template.name == 'index' %}
+    data-spuds-homepage
+  {% endif %}
   data-theme-color="rgb({{ section.settings.background_color_top.rgb | default: settings.page_background_color.rgb }})"
   data-bubble-style="{{ section.settings.bubble_style }}"
   {% if transparent %}
@@ -1272,7 +1275,8 @@
       transition: left .38s ease;
     }
 
-    #header-component[data-spuds-scrolled]::after {
+    #header-component[data-spuds-scrolled]::after,
+    #header-component:not([data-spuds-homepage])::after {
       left: 0;
     }
 
@@ -1316,14 +1320,16 @@
       transition: width .38s ease;
     }
 
-    #header-component[data-spuds-scrolled] .header-logo {
+    #header-component[data-spuds-scrolled] .header-logo,
+    #header-component:not([data-spuds-homepage]) .header-logo {
       top: .15vw;
       left: -2vw;
       width: 7vw;
       max-width: 7vw;
     }
 
-    #header-component[data-spuds-scrolled] .header-logo .header-logo__image {
+    #header-component[data-spuds-scrolled] .header-logo .header-logo__image,
+    #header-component:not([data-spuds-homepage]) .header-logo .header-logo__image {
       width: 7vw !important;
     }
 
