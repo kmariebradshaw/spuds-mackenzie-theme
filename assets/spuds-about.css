@@ -1,0 +1,111 @@
+@font-face {
+  font-family: 'Beach Club Script';
+  src: url('beach-club-script.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+.spuds-about {
+  --navy: #071b3d;
+  --pink: #ff2e6c;
+  --teal: #09a8b5;
+  --cream: #faf0e4;
+  --yellow: #ffbd20;
+  --scale: 'Scale VF', 'scale-variable', Impact, sans-serif;
+  background: var(--cream);
+  color: var(--navy);
+  font-family: 'Work Sans', Arial, sans-serif;
+  font-size: 1.25vw;
+  line-height: 1.65;
+  overflow: hidden;
+}
+.spuds-about *, .spuds-about *::before, .spuds-about *::after { box-sizing: border-box; }
+.spuds-about h1, .spuds-about h2, .spuds-about h3, .spuds-about p { margin: 0; }
+.spuds-about p + p { margin-top: 1.3vw; }
+.spuds-about h1, .spuds-about h2, .spuds-about h3 {
+  color: inherit;
+  font-family: var(--scale);
+  font-weight: 600;
+  font-variation-settings: 'wght' 600, 'wdth' 85;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.spuds-about h1 { font-size: 5.7vw; line-height: .98; transform: rotate(-4deg); margin: 1.8vw 0 2.6vw; }
+.spuds-about h2 { font-size: 3.6vw; line-height: 1.08; }
+.spuds-about h3 { font-size: 2.15vw; line-height: 1.12; }
+.spuds-about img { display: block; max-width: 100%; height: auto; }
+.spuds-about__eyebrow { font-size: 1vw; font-weight: 600; letter-spacing: .15vw; text-transform: uppercase; }
+.spuds-about .spuds-about__script { font-family: 'Beach Club Script', cursive; font-size: 4.1vw; line-height: 1.2; color: var(--pink); font-weight: 400; }
+.spuds-about__hero { display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: 6vw; padding: 6vw 9vw 5vw; position: relative; }
+.spuds-about__hero-copy { position: relative; z-index: 1; }
+.spuds-about__intro { max-width: 35vw; margin-top: 2vw; }
+.spuds-about__portrait { position: relative; padding: 1vw; }
+.spuds-about__photo { width: 100%; transform: rotate(5deg); }
+.spuds-about__triangles { position: absolute; width: 7vw; top: 1.7vw; left: 1vw; }
+.spuds-about__zigzag { position: absolute; width: 8vw; bottom: -1vw; left: -5vw; }
+.spuds-about__paw { position: absolute; width: 6vw; top: 1vw; right: -5vw; transform: rotate(15deg); }
+.spuds-about__chapter { background: var(--navy); color: white; display: grid; grid-template-columns: 1fr 1.1fr; gap: 8vw; padding: 6vw 9vw; }
+.spuds-about__chapter .spuds-about__eyebrow { color: var(--yellow); margin-bottom: 1.8vw; }
+.spuds-about__underline { display: block; width: 18vw; height: 2vw; margin-top: 1.7vw; }
+.spuds-about__team { display: grid; grid-template-columns: .8fr 1.2fr; align-items: center; gap: 8vw; padding: 6vw 11vw; }
+.spuds-about__team h2 { margin-bottom: 2vw; }
+.spuds-about__stat { position: relative; text-align: center; padding: 2vw 2vw 3vw; background: var(--yellow); box-shadow: .7vw .7vw 0 var(--navy); transform: rotate(-3deg); }
+.spuds-about__number { display: block; font-family: var(--scale); font-size: 13vw; font-weight: 600; line-height: 1; }
+.spuds-about__stat p { font-family: var(--scale); font-size: 1.8vw; text-transform: uppercase; line-height: 1.2; }
+.spuds-about__stat-shape { position: absolute; width: 8vw; bottom: -3vw; right: -3vw; }
+.spuds-about__values { padding: 4vw 9vw 7vw; text-align: center; }
+.spuds-about__values-intro { max-width: 57vw; margin: 2vw auto 3vw; }
+.spuds-about__cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2vw; text-align: left; }
+.spuds-about__card { background: var(--teal); padding: 2.5vw; box-shadow: .45vw .45vw 0 var(--navy); }
+.spuds-about__card:nth-child(2) { background: var(--pink); }
+.spuds-about__card:nth-child(3) { background: var(--yellow); }
+.spuds-about__card-number { display: block; font-family: var(--scale); font-size: 1.2vw; margin-bottom: 2vw; }
+.spuds-about__card h3 { margin-bottom: 1.2vw; }
+.spuds-about__closing { position: relative; background: var(--navy); color: white; padding: 6vw 18vw 7vw; text-align: center; }
+.spuds-about__closing h2 { font-size: 4.4vw; color: var(--yellow); }
+.spuds-about__closing-copy { max-width: 53vw; margin: 2vw auto; }
+.spuds-about__closing .spuds-about__script { color: var(--pink); margin: 2vw 0; }
+.spuds-about__closing-shape { position: absolute; width: 9vw; left: 3vw; top: 4vw; }
+.spuds-about__button { display: inline-flex; justify-content: center; align-items: center; gap: 2vw; padding: 1.4vw 2.4vw; background: var(--cream); color: var(--navy); font-family: var(--scale); font-weight: 500; font-size: 1.7vw; line-height: 1.2; text-transform: uppercase; text-decoration: none; box-shadow: .4vw .4vw 0 var(--pink); }
+.spuds-about__button img { width: 3vw; }
+.spuds-about__button:hover { background: var(--yellow); }
+.spuds-about__button:focus-visible { outline: .2vw solid var(--yellow); outline-offset: .8vw; }
+@media screen and (max-width: 749px) {
+  .spuds-about { font-size: 4.2vw; line-height: 1.65; }
+  .spuds-about p + p { margin-top: 4vw; }
+  .spuds-about h1 { font-size: 11.8vw; margin: 6vw 0 7vw; }
+  .spuds-about h2 { font-size: 9vw; }
+  .spuds-about h3 { font-size: 7vw; }
+  .spuds-about__eyebrow { font-size: 3vw; letter-spacing: .4vw; }
+  .spuds-about .spuds-about__script { font-size: 9.5vw; }
+  .spuds-about__hero { grid-template-columns: 1fr; gap: 8vw; padding: 13vw 8vw 12vw; }
+  .spuds-about__hero-copy { text-align: center; }
+  .spuds-about__intro { max-width: none; margin-top: 6vw; }
+  .spuds-about__portrait { width: 68vw; margin: 0 auto; padding: 2vw; }
+  .spuds-about__triangles { width: 11vw; top: 2vw; left: 2vw; }
+  .spuds-about__zigzag { width: 17vw; left: -7vw; bottom: -2vw; }
+  .spuds-about__paw { width: 13vw; top: 0; right: -7vw; }
+  .spuds-about__chapter { grid-template-columns: 1fr; gap: 6vw; padding: 12vw 8vw; }
+  .spuds-about__chapter .spuds-about__eyebrow { margin-bottom: 5vw; }
+  .spuds-about__underline { width: 44vw; height: 5vw; margin-top: 4vw; }
+  .spuds-about__team { grid-template-columns: 1fr; gap: 12vw; padding: 13vw 8vw; }
+  .spuds-about__stat { width: 64vw; margin: 0 auto; padding: 6vw 7vw 9vw; box-shadow: 1.5vw 1.5vw 0 var(--navy); }
+  .spuds-about__number { font-size: 32vw; }
+  .spuds-about__stat p { font-size: 5vw; }
+  .spuds-about__stat-shape { width: 20vw; right: -7vw; bottom: -6vw; }
+  .spuds-about__team h2 { margin-bottom: 6vw; }
+  .spuds-about__values { padding: 3vw 8vw 14vw; }
+  .spuds-about__values-intro { max-width: none; margin: 6vw auto 8vw; }
+  .spuds-about__cards { grid-template-columns: 1fr; gap: 6vw; }
+  .spuds-about__card { padding: 7vw; box-shadow: 1.2vw 1.2vw 0 var(--navy); }
+  .spuds-about__card-number { font-size: 4vw; margin-bottom: 5vw; }
+  .spuds-about__card h3 { margin-bottom: 4vw; }
+  .spuds-about__closing { padding: 15vw 8vw; }
+  .spuds-about__closing h2 { font-size: 10vw; }
+  .spuds-about__closing-copy { max-width: none; margin: 6vw auto; }
+  .spuds-about__closing .spuds-about__script { margin: 7vw 0; }
+  .spuds-about__closing-shape { width: 10vw; left: 2vw; top: 2vw; }
+  .spuds-about__button { font-size: 5.5vw; gap: 6vw; padding: 4vw 7vw; box-shadow: 1vw 1vw 0 var(--pink); }
+  .spuds-about__button img { width: 9vw; }
+  .spuds-about__button:focus-visible { outline-width: .6vw; outline-offset: 2vw; }
+}

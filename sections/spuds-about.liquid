@@ -1,0 +1,223 @@
+{{ 'spuds-about.css' | asset_url | stylesheet_tag }}
+{% assign shop_link = section.settings.button_link | default: routes.all_products_collection_url %}
+<div class="spuds-about" id="SpudsAbout-{{ section.id }}">
+  <div class="spuds-about__hero">
+    {% render 'spuds-shape', shape: 'graphic-3', class: 'spuds-about__triangles' %}
+    <div class="spuds-about__hero-copy">
+      <p class="spuds-about__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <h1>{{ section.settings.heading | escape }}</h1>
+      <p class="spuds-about__script">{{ section.settings.accent | escape }}</p>
+      <div class="spuds-about__intro">{{ section.settings.intro }}</div>
+    </div>
+    <div class="spuds-about__portrait">
+      {% if section.settings.hero_image != blank %}
+        {{ section.settings.hero_image | image_url: width: 1400 | image_tag: widths: '400, 700, 1000, 1400', sizes: '(max-width: 749px) 70vw, 34vw', loading: 'eager', fetchpriority: 'high', class: 'spuds-about__photo' }}
+      {% else %}
+        <img class="spuds-about__photo" src="{{ 'spuds-polaroid-today.png' | asset_url }}" width="611" height="816" alt="Spuds MacKenzie dressed for the party in sunglasses and a bow tie" fetchpriority="high">
+      {% endif %}
+      {% render 'spuds-shape', shape: 'graphic-1', class: 'spuds-about__zigzag' %}
+      {% render 'spuds-shape', shape: 'paw', class: 'spuds-about__paw' %}
+    </div>
+  </div>
+  <div class="spuds-about__chapter">
+    <div>
+      <p class="spuds-about__eyebrow">{{ section.settings.chapter_label | escape }}</p>
+      <h2>{{ section.settings.chapter_heading | escape }}</h2>
+      {% render 'spuds-shape', shape: 'brush', color: '#ff2e6c', class: 'spuds-about__underline' %}
+    </div>
+    <div class="spuds-about__copy">{{ section.settings.chapter_copy }}</div>
+  </div>
+  <div class="spuds-about__team">
+    <div class="spuds-about__stat">
+      <span class="spuds-about__number">{{ section.settings.experience_number | escape }}</span>
+      <p>{{ section.settings.experience_label | escape }}</p>
+      {% render 'spuds-shape', shape: 'graphic-4', class: 'spuds-about__stat-shape' %}
+    </div>
+    <div>
+      <h2>{{ section.settings.team_heading | escape }}</h2>
+      <div class="spuds-about__copy">{{ section.settings.team_copy }}</div>
+    </div>
+  </div>
+  <div class="spuds-about__values">
+    <h2>{{ section.settings.values_heading | escape }}</h2>
+    <div class="spuds-about__values-intro">{{ section.settings.values_copy }}</div>
+    {% if section.blocks.size > 0 %}
+      <div class="spuds-about__cards">
+        {% for block in section.blocks %}
+          <div class="spuds-about__card" {{ block.shopify_attributes }}>
+            <span class="spuds-about__card-number" aria-hidden="true">0{{ forloop.index }}</span>
+            <h3>{{ block.settings.heading | escape }}</h3>
+            <div>{{ block.settings.copy }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+  <div class="spuds-about__closing">
+    {% render 'spuds-shape', shape: 'graphic-2', class: 'spuds-about__closing-shape' %}
+    <h2>{{ section.settings.closing_heading | escape }}</h2>
+    <div class="spuds-about__closing-copy">{{ section.settings.closing_copy }}</div>
+    <p class="spuds-about__script">{{ section.settings.closing_accent | escape }}</p>
+    {% if section.settings.button_label != blank %}
+      <a class="spuds-about__button" href="{{ shop_link }}">
+        {{ section.settings.button_label | escape }}
+        <img src="{{ 'spuds-cta-arrow.svg' | asset_url }}" width="210" height="72" alt="" aria-hidden="true" loading="lazy">
+      </a>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Spuds About us",
+  "tag": "section",
+  "enabled_on": {
+    "templates": [
+      "page"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Intro label",
+      "default": "The Spuds story"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main heading",
+      "default": "The original party animal."
+    },
+    {
+      "type": "text",
+      "id": "accent",
+      "label": "Hero accent",
+      "default": "All dogs invited."
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Introduction",
+      "default": "<p>A legend. A new mission. A whole lot of tail wagging.</p><p>The Original Party Animal has a new party to throw, and this time, every dog is invited.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image",
+      "info": "Uses the Spuds Today Polaroid when left empty."
+    },
+    {
+      "type": "text",
+      "id": "chapter_label",
+      "label": "Story label",
+      "default": "Same legendary spirit. New mission."
+    },
+    {
+      "type": "text",
+      "id": "chapter_heading",
+      "label": "Story heading",
+      "default": "A new chapter. For the dogs."
+    },
+    {
+      "type": "richtext",
+      "id": "chapter_copy",
+      "label": "Story copy",
+      "default": "<p>Spuds MacKenzie became a pop-culture legend by doing things differently. Now he’s back with a new mission: bringing that same legendary personality to pet products.</p><p>Under new ownership, Spuds is entering an entirely new chapter with a purpose focused completely on pets. Our founders grew up remembering one of the most iconic dogs ever. They saw a chance to give a legendary character a new life, dedicated to dogs and the people who love them.</p>"
+    },
+    {
+      "type": "text",
+      "id": "experience_number",
+      "label": "Experience number",
+      "default": "45"
+    },
+    {
+      "type": "text",
+      "id": "experience_label",
+      "label": "Experience label",
+      "default": "Years of combined pet-industry experience"
+    },
+    {
+      "type": "text",
+      "id": "team_heading",
+      "label": "Team heading",
+      "default": "Pet people. Through & through."
+    },
+    {
+      "type": "richtext",
+      "id": "team_copy",
+      "label": "Team copy",
+      "default": "<p>Behind Spuds Pet is a team of lifelong pet-product people. Our founders have a combined <strong>45 years of experience working exclusively in the pet industry</strong>, developing and building products for the animals we love.</p><p>Giving back is part of who we are, too. Through multiple charities run by our founders, we continue to support the pet community that means so much to us.</p>"
+    },
+    {
+      "type": "text",
+      "id": "values_heading",
+      "label": "Products heading",
+      "default": "Good for pets. Big on personality."
+    },
+    {
+      "type": "richtext",
+      "id": "values_copy",
+      "label": "Products introduction",
+      "default": "<p>Great pet products don’t need endless ingredient lists, unnecessary additives, or complicated promises. They should be thoughtfully made, easy to understand, and something you feel good about giving your pet.</p>"
+    },
+    {
+      "type": "text",
+      "id": "closing_heading",
+      "label": "Closing heading",
+      "default": "Healthy can still be fun."
+    },
+    {
+      "type": "richtext",
+      "id": "closing_copy",
+      "label": "Closing copy",
+      "default": "<p>Somewhere along the way, pet brands got a little too boring. We’re here to bring personality back to the pet aisle with amazing products, unforgettable experiences, and a brand that does things its own way.</p>"
+    },
+    {
+      "type": "text",
+      "id": "closing_accent",
+      "label": "Closing accent",
+      "default": "Let’s get the party started!"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop Spuds"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "info": "Defaults to all products."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Product pillar",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Thoughtfully made"
+        },
+        {
+          "type": "richtext",
+          "id": "copy",
+          "label": "Copy",
+          "default": "<p>Products for the dogs we love.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Spuds About us"
+    }
+  ]
+}
+{% endschema %}

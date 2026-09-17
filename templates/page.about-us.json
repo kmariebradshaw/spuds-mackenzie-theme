@@ -1,0 +1,39 @@
+{
+  "sections": {
+    "main": {
+      "type": "spuds-about",
+      "settings": {},
+      "blocks": {
+        "treats": {
+          "type": "value",
+          "settings": {
+            "heading": "Limited-ingredient treats",
+            "copy": "<p>Simple, thoughtfully made treats. More tail wags, less guesswork.</p>"
+          }
+        },
+        "wellness": {
+          "type": "value",
+          "settings": {
+            "heading": "Functional wellness",
+            "copy": "<p>Products made to support pets in living their best lives.</p>"
+          }
+        },
+        "essentials": {
+          "type": "value",
+          "settings": {
+            "heading": "Everyday essentials",
+            "copy": "<p>A little legendary personality for your pet\u2019s everyday routine.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "treats",
+        "wellness",
+        "essentials"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
