@@ -63,6 +63,9 @@
       </div>
     {% endif %}
   {% else %}
+    {% if section.settings.spuds_simple_desktop_menu %}
+      {% render 'spuds-desktop-nav', menu: block_settings.menu, section: section, block: block %}
+    {% else %}
     {% liquid
       assign block_settings = block.settings
       assign menu_content_type = block_settings.menu_style | default: 'text'
@@ -199,6 +202,7 @@
         fetchpriority="low"
       ></script>
     </header-menu>
+    {% endif %}
 {% endcase %}
 
 {% style %}

@@ -1,0 +1,10 @@
+{% for item in links %}
+  {% if only_handle == blank or item.handle == only_handle %}
+    <li>
+      <a href="{{ item.url }}"{% if item.current %} aria-current="page"{% endif %}>{{ item.title | escape }}</a>
+      {% if item.links != blank %}
+        <ul role="list">{% render 'spuds-nav-links', links: item.links %}</ul>
+      {% endif %}
+    </li>
+  {% endif %}
+{% endfor %}
