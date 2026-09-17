@@ -1,8 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "spuds-about",
-      "settings": {},
       "blocks": {
         "treats": {
           "type": "value",
@@ -22,7 +30,7 @@
           "type": "value",
           "settings": {
             "heading": "Everyday essentials",
-            "copy": "<p>A little legendary personality for your pet\u2019s everyday routine.</p>"
+            "copy": "<p>A little legendary personality for your pet’s everyday routine.</p>"
           }
         }
       },
@@ -30,7 +38,27 @@
         "treats",
         "wellness",
         "essentials"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "The Spuds story",
+        "heading": "The original party animal.",
+        "accent": "All dogs invited.",
+        "intro": "<p>A legend. A new mission. A whole lot of tail wagging.</p><p>The Original Party Animal has a new party to throw, and this time, every dog is invited.</p>",
+        "chapter_label": "Same legendary spirit. New mission.",
+        "chapter_heading": "A new chapter. For the dogs.",
+        "chapter_copy": "<p>Spuds MacKenzie became a pop-culture legend by doing things differently. Now he’s back with a new mission: bringing that same legendary personality to pet products.</p><p>Under new ownership, Spuds is entering an entirely new chapter with a purpose focused completely on pets. Our founders grew up remembering one of the most iconic dogs ever. They saw a chance to give a legendary character a new life, dedicated to dogs and the people who love them.</p>",
+        "experience_number": "45",
+        "experience_label": "Years of combined pet-industry experience",
+        "team_heading": "Pet people. Through & through.",
+        "team_copy": "<p>Behind Spuds Pet is a team of lifelong pet-product people. Our founders have a combined <strong>45 years of experience working exclusively in the pet industry</strong>, developing and building products for the animals we love.</p><p>Giving back is part of who we are, too. Through multiple charities run by our founders, we continue to support the pet community that means so much to us.</p>",
+        "values_heading": "Good for pets. Big on personality.",
+        "values_copy": "<p>Great pet products don’t need endless ingredient lists, unnecessary additives, or complicated promises. They should be thoughtfully made, easy to understand, and something you feel good about giving your pet.</p>",
+        "closing_heading": "Healthy can still be fun.",
+        "closing_copy": "<p>Somewhere along the way, pet brands got a little too boring. We’re here to bring personality back to the pet aisle with amazing products, unforgettable experiences, and a brand that does things its own way.</p>",
+        "closing_accent": "Let’s get the party started!",
+        "button_label": "Shop Spuds",
+        "button_link": "shopify://collections/spuds-salon-copy"
+      }
     }
   },
   "order": [
