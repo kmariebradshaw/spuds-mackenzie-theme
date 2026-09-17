@@ -1,4 +1,8 @@
 {% liquid
+  assign bundles_url = collections['spuds-bundles'].url
+  if bundles_url == blank
+    assign bundles_url = routes.root_url | append: 'collections/spuds-bundles'
+  endif
   assign about_url = routes.root_url | append: 'pages/about-us'
   assign contact_url = routes.root_url | append: 'pages/contact'
   for link in menu.links
@@ -12,31 +16,12 @@
   assign contact_url = section.settings.spuds_contact_link | default: contact_url
 %}
 {{ 'spuds-desktop-nav.css' | asset_url | stylesheet_tag }}
-<spuds-desktop-nav ref="headerMenu" data-hydration-key="header-menu" class="spuds-desktop-nav" {{ block.shopify_attributes }}>
+<div ref="headerMenu" data-hydration-key="header-menu" class="spuds-desktop-nav" {{ block.shopify_attributes }}>
   <nav aria-label="{{ 'accessibility.header_navigation_label' | t }}">
     <ul class="spuds-desktop-nav__items" role="list">
-      <li>
-        <details class="spuds-desktop-nav__shop">
-          <summary class="spuds-desktop-nav__link">Shop <span class="spuds-desktop-nav__chevron" aria-hidden="true"></span></summary>
-          <div class="spuds-desktop-nav__dropdown">
-            <a class="spuds-desktop-nav__all" href="{{ routes.all_products_collection_url }}">Shop all products</a>
-            <ul class="spuds-desktop-nav__categories" role="list">
-              {% for link in menu.links %}
-                {% unless link.type == 'frontpage_link' or link.handle == 'home' or link.handle == 'about' or link.handle == 'about-us' or link.handle == 'our-story' or link.handle == 'contact' or link.handle == 'contact-us' %}
-                  {% if link.handle == 'shop' and link.links != blank %}
-                    {% render 'spuds-nav-links', links: link.links %}
-                  {% else %}
-                    {% render 'spuds-nav-links', links: menu.links, only_handle: link.handle %}
-                  {% endif %}
-                {% endunless %}
-              {% endfor %}
-            </ul>
-          </div>
-        </details>
-      </li>
+      <li><a class="spuds-desktop-nav__link" href="{{ bundles_url }}"{% if request.path == bundles_url %} aria-current="page"{% endif %}>Shop</a></li>
       <li><a class="spuds-desktop-nav__link" href="{{ about_url }}"{% if request.path == about_url %} aria-current="page"{% endif %}>About Us</a></li>
       <li><a class="spuds-desktop-nav__link" href="{{ contact_url }}"{% if request.path == contact_url %} aria-current="page"{% endif %}>Contact</a></li>
     </ul>
   </nav>
-</spuds-desktop-nav>
-<script src="{{ 'spuds-desktop-nav.js' | asset_url }}" type="module" fetchpriority="low"></script>
+</div>
