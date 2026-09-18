@@ -15,22 +15,22 @@
         "treats": {
           "type": "value",
           "settings": {
-            "heading": "Limited-ingredient treats",
-            "copy": "<p>Simple, thoughtfully made treats. More tail wags, less guesswork.</p>"
+            "heading": "Less is more.",
+            "copy": "<p>Limited-ingredient treats. Simple recipes. More tail wags.</p>"
           }
         },
         "wellness": {
           "type": "value",
           "settings": {
-            "heading": "Functional wellness",
-            "copy": "<p>Products made to support pets in living their best lives.</p>"
+            "heading": "Keep it simple.",
+            "copy": "<p>Our philosophy: no endless ingredient lists or unnecessary additives.</p>"
           }
         },
         "essentials": {
           "type": "value",
           "settings": {
-            "heading": "Everyday essentials",
-            "copy": "<p>A little legendary personality for your pet’s everyday routine.</p>"
+            "heading": "Made with purpose.",
+            "copy": "<p>Thoughtful products to help pets live their best lives.</p>"
           }
         }
       },
@@ -43,21 +43,21 @@
         "eyebrow": "The Spuds story",
         "heading": "The original party animal.",
         "accent": "All dogs invited.",
-        "intro": "<p>A legend. A new mission. A whole lot of tail wagging.</p><p>The Original Party Animal has a new party to throw, and this time, every dog is invited.</p>",
-        "chapter_label": "Same legendary spirit. New mission.",
-        "chapter_heading": "A new chapter. For the dogs.",
-        "chapter_copy": "<p>Spuds MacKenzie became a pop-culture legend by doing things differently. Now he’s back with a new mission: bringing that same legendary personality to pet products.</p><p>Under new ownership, Spuds is entering an entirely new chapter with a purpose focused completely on pets. Our founders grew up remembering one of the most iconic dogs ever. They saw a chance to give a legendary character a new life, dedicated to dogs and the people who love them.</p>",
+        "intro": "<p>Legendary personality. Lifelong pet people. A new chapter dedicated to dogs.</p>",
+        "chapter_copy": "<p>An iconic dog. A new purpose. Under new ownership, Spuds is bringing his legendary personality to treats, wellness products, and everyday essentials, all focused on pets.</p>",
         "experience_number": "45",
         "experience_label": "Years of combined pet-industry experience",
-        "team_heading": "Pet people. Through & through.",
-        "team_copy": "<p>Behind Spuds Pet is a team of lifelong pet-product people. Our founders have a combined <strong>45 years of experience working exclusively in the pet industry</strong>, developing and building products for the animals we love.</p><p>Giving back is part of who we are, too. Through multiple charities run by our founders, we continue to support the pet community that means so much to us.</p>",
-        "values_heading": "Good for pets. Big on personality.",
-        "values_copy": "<p>Great pet products don’t need endless ingredient lists, unnecessary additives, or complicated promises. They should be thoughtfully made, easy to understand, and something you feel good about giving your pet.</p>",
-        "closing_heading": "Healthy can still be fun.",
-        "closing_copy": "<p>Somewhere along the way, pet brands got a little too boring. We’re here to bring personality back to the pet aisle with amazing products, unforgettable experiences, and a brand that does things its own way.</p>",
-        "closing_accent": "Let’s get the party started!",
+        "team_heading": "Experience that gives back.",
+        "team_copy": "<p>Our founders bring <strong>45 years of combined experience exclusively in the pet industry</strong>, creating products for the animals we love.</p>",
+        "values_heading": "Simple ingredients. Thoughtfully made.",
+        "values_copy": "<p>We believe great pet products should be easy to understand and something you feel good about giving your pet.</p>",
+        "closing_heading": "Same spirit. New mission.",
+        "closing_copy": "<p>Healthy can still be fun. Let’s get the party started!</p>",
+        "closing_accent": "All dogs invited.",
         "button_label": "Shop Spuds",
-        "button_link": "shopify://collections/spuds-bundles"
+        "button_link": "shopify://collections/spuds-bundles",
+        "charity_heading": "Giving back is part of who we are.",
+        "charity_copy": "<p>Through multiple charities run by our founders, we continue to support the pet community that means so much to us.</p>"
       }
     }
   },

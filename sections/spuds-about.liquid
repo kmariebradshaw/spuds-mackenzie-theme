@@ -11,7 +11,7 @@
     </div>
     <div class="spuds-about__portrait">
       {% if section.settings.hero_image != blank %}
-        {{ section.settings.hero_image | image_url: width: 1400 | image_tag: widths: '400, 700, 1000, 1400', sizes: '(max-width: 749px) 70vw, 34vw', loading: 'eager', fetchpriority: 'high', class: 'spuds-about__photo' }}
+        {{ section.settings.hero_image | image_url: width: 1400 | image_tag: widths: '400, 700, 1000, 1400', sizes: '(max-width: 749px) 34vw, 20vw', loading: 'eager', fetchpriority: 'high', class: 'spuds-about__photo' }}
       {% else %}
         <img class="spuds-about__photo" src="{{ 'spuds-polaroid-today.png' | asset_url }}" width="611" height="816" alt="Spuds MacKenzie dressed for the party in sunglasses and a bow tie" fetchpriority="high">
       {% endif %}
@@ -19,23 +19,19 @@
       {% render 'spuds-shape', shape: 'paw', class: 'spuds-about__paw' %}
     </div>
   </div>
-  <div class="spuds-about__chapter">
-    <div>
-      <p class="spuds-about__eyebrow">{{ section.settings.chapter_label | escape }}</p>
-      <h2>{{ section.settings.chapter_heading | escape }}</h2>
-      {% render 'spuds-shape', shape: 'brush', color: '#ff2e6c', class: 'spuds-about__underline' %}
-    </div>
-    <div class="spuds-about__copy">{{ section.settings.chapter_copy }}</div>
-  </div>
   <div class="spuds-about__team">
     <div class="spuds-about__stat">
       <span class="spuds-about__number">{{ section.settings.experience_number | escape }}</span>
       <p>{{ section.settings.experience_label | escape }}</p>
       {% render 'spuds-shape', shape: 'graphic-4', class: 'spuds-about__stat-shape' %}
     </div>
-    <div>
+    <div class="spuds-about__team-copy">
       <h2>{{ section.settings.team_heading | escape }}</h2>
       <div class="spuds-about__copy">{{ section.settings.team_copy }}</div>
+      <div class="spuds-about__charity">
+        <h3>{{ section.settings.charity_heading | escape }}</h3>
+        <div class="spuds-about__copy">{{ section.settings.charity_copy }}</div>
+      </div>
     </div>
   </div>
   <div class="spuds-about__values">
@@ -56,7 +52,7 @@
   <div class="spuds-about__closing">
     {% render 'spuds-shape', shape: 'graphic-2', class: 'spuds-about__closing-shape' %}
     <h2>{{ section.settings.closing_heading | escape }}</h2>
-    <div class="spuds-about__closing-copy">{{ section.settings.closing_copy }}</div>
+    <div class="spuds-about__closing-copy">{{ section.settings.chapter_copy }}{{ section.settings.closing_copy }}</div>
     <p class="spuds-about__script">{{ section.settings.closing_accent | escape }}</p>
     {% if section.settings.button_label != blank %}
       <a class="spuds-about__button" href="{{ shop_link }}">
@@ -99,7 +95,7 @@
       "type": "richtext",
       "id": "intro",
       "label": "Introduction",
-      "default": "<p>A legend. A new mission. A whole lot of tail wagging.</p><p>The Original Party Animal has a new party to throw, and this time, every dog is invited.</p>"
+      "default": "<p>Legendary personality. Lifelong pet people. A new chapter dedicated to dogs.</p>"
     },
     {
       "type": "image_picker",
@@ -108,22 +104,10 @@
       "info": "Uses the Spuds Today Polaroid when left empty."
     },
     {
-      "type": "text",
-      "id": "chapter_label",
-      "label": "Story label",
-      "default": "Same legendary spirit. New mission."
-    },
-    {
-      "type": "text",
-      "id": "chapter_heading",
-      "label": "Story heading",
-      "default": "A new chapter. For the dogs."
-    },
-    {
       "type": "richtext",
       "id": "chapter_copy",
       "label": "Story copy",
-      "default": "<p>Spuds MacKenzie became a pop-culture legend by doing things differently. Now he’s back with a new mission: bringing that same legendary personality to pet products.</p><p>Under new ownership, Spuds is entering an entirely new chapter with a purpose focused completely on pets. Our founders grew up remembering one of the most iconic dogs ever. They saw a chance to give a legendary character a new life, dedicated to dogs and the people who love them.</p>"
+      "default": "<p>An iconic dog. A new purpose. Under new ownership, Spuds is bringing his legendary personality to treats, wellness products, and everyday essentials, all focused on pets.</p>"
     },
     {
       "type": "text",
@@ -141,43 +125,55 @@
       "type": "text",
       "id": "team_heading",
       "label": "Team heading",
-      "default": "Pet people. Through & through."
+      "default": "Experience that gives back."
     },
     {
       "type": "richtext",
       "id": "team_copy",
       "label": "Team copy",
-      "default": "<p>Behind Spuds Pet is a team of lifelong pet-product people. Our founders have a combined <strong>45 years of experience working exclusively in the pet industry</strong>, developing and building products for the animals we love.</p><p>Giving back is part of who we are, too. Through multiple charities run by our founders, we continue to support the pet community that means so much to us.</p>"
+      "default": "<p>Our founders bring <strong>45 years of combined experience exclusively in the pet industry</strong>, creating products for the animals we love.</p>"
+    },
+    {
+      "type": "text",
+      "id": "charity_heading",
+      "label": "Giving back heading",
+      "default": "Giving back is part of who we are."
+    },
+    {
+      "type": "richtext",
+      "id": "charity_copy",
+      "label": "Giving back copy",
+      "default": "<p>Through multiple charities run by our founders, we continue to support the pet community that means so much to us.</p>"
     },
     {
       "type": "text",
       "id": "values_heading",
       "label": "Products heading",
-      "default": "Good for pets. Big on personality."
+      "default": "Simple ingredients. Thoughtfully made."
     },
     {
       "type": "richtext",
       "id": "values_copy",
       "label": "Products introduction",
-      "default": "<p>Great pet products don’t need endless ingredient lists, unnecessary additives, or complicated promises. They should be thoughtfully made, easy to understand, and something you feel good about giving your pet.</p>"
+      "default": "<p>We believe great pet products should be easy to understand and something you feel good about giving your pet.</p>"
     },
     {
       "type": "text",
       "id": "closing_heading",
       "label": "Closing heading",
-      "default": "Healthy can still be fun."
+      "default": "Same spirit. New mission."
     },
     {
       "type": "richtext",
       "id": "closing_copy",
       "label": "Closing copy",
-      "default": "<p>Somewhere along the way, pet brands got a little too boring. We’re here to bring personality back to the pet aisle with amazing products, unforgettable experiences, and a brand that does things its own way.</p>"
+      "default": "<p>Healthy can still be fun. Let’s get the party started!</p>"
     },
     {
       "type": "text",
       "id": "closing_accent",
       "label": "Closing accent",
-      "default": "Let’s get the party started!"
+      "default": "All dogs invited."
     },
     {
       "type": "text",
