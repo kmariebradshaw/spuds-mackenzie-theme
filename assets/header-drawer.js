@@ -19,12 +19,23 @@ class HeaderDrawer extends Component {
 
     this.addEventListener('keyup', this.#onKeyUp);
     this.#setupAnimatedElementListeners();
+    window.addEventListener('resize', this.#updateMobileDrawerHeight);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.removeEventListener('keyup', this.#onKeyUp);
+    window.removeEventListener('resize', this.#updateMobileDrawerHeight);
   }
+
+  // Measure the visible header edge, including announcement bars and sticky state.
+  #updateMobileDrawerHeight = () => {
+    if (!window.matchMedia('(max-width: 749px)').matches) return;
+    const header = this.closest('#header-component');
+    if (!header) return;
+    const bottom = Math.max(0, header.getBoundingClientRect().bottom);
+    this.style.setProperty('--spuds-mobile-header-bottom', `${bottom / window.innerWidth * 100}vw`);
+  };
 
   /**
    * Close the main menu drawer when the Escape key is pressed
@@ -67,6 +78,7 @@ class HeaderDrawer extends Component {
    * @param {Event} [event]
    */
   open(target, event) {
+    this.#updateMobileDrawerHeight();
     const details = this.#getDetailsElement(event);
     const summary = details.querySelector('summary');
 

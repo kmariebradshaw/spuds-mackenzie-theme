@@ -1,0 +1,127 @@
+/* Keep the drawer beneath the complete logo/header, including on the homepage. */
+@media screen and (max-width: 749px) {
+  #header-component header-drawer.header-drawer {
+    inset: 0;
+    transform: none;
+    pointer-events: none;
+  }
+
+  #header-component header-drawer > details > .header__icon--menu {
+    position: absolute;
+    top: 50%;
+    left: 1vw;
+    transform: translateY(-50%);
+    width: 14vw;
+    height: 12vw;
+    pointer-events: auto;
+  }
+
+  #header-component .menu-drawer {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-width: none;
+    height: calc(100dvh - var(--spuds-mobile-header-bottom, var(--header-height)));
+    background: var(--spuds-header-cream);
+    color: var(--spuds-header-navy);
+    border: 0;
+    border-top: .5vw solid var(--spuds-header-pink);
+    padding: 4vw 6vw 8vw;
+    overscroll-behavior: contain;
+    pointer-events: auto;
+  }
+
+  /* The original header toggle becomes the close button. */
+  #header-component .menu-drawer > .menu-drawer__close-button,
+  #header-component .menu-drawer__backdrop {
+    display: none;
+  }
+
+  #header-component .menu-drawer__navigation {
+    flex: 0 0 auto;
+  }
+
+  #header-component .menu-drawer__menu {
+    padding-inline: 0;
+    margin: 0;
+  }
+
+  #header-component .menu-drawer__menu.has-submenu > li {
+    border-bottom: .25vw solid #071b3d26;
+  }
+
+  #header-component .menu-drawer__menu-item--mainlist {
+    min-height: 19vw;
+    padding: 4vw 0;
+    font-family: var(--spuds-header-font);
+    font-size: 8vw;
+    font-weight: 400;
+    font-variation-settings: "wght" 400, "wdth" 100;
+    line-height: 1.15;
+    letter-spacing: .05vw;
+    text-transform: uppercase;
+  }
+
+  #header-component .menu-drawer__menu-item:is(.menu-drawer__menu-item--parent, .menu-drawer__menu-item--child) {
+    min-height: 14vw;
+    padding: 3vw 0;
+    font-family: var(--spuds-header-font);
+    font-size: 5vw;
+    font-weight: 400;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  #header-component .menu-drawer__menu-item-text {
+    overflow: visible;
+    white-space: normal;
+  }
+
+  #header-component .menu-drawer__menu-item > .svg-wrapper {
+    padding: 2vw;
+  }
+
+  #header-component .menu-drawer svg {
+    width: 4vw;
+    height: 4vw;
+  }
+
+  #header-component .menu-drawer [aria-current="page"] {
+    text-decoration: underline;
+    text-decoration-color: var(--spuds-header-pink);
+    text-decoration-thickness: .65vw;
+    text-underline-offset: 1.4vw;
+  }
+
+  #header-component .menu-drawer :is(a, button, summary):focus-visible,
+  #header-component header-drawer > details > summary:focus-visible {
+    outline: .6vw solid var(--spuds-header-pink);
+    outline-offset: .8vw;
+  }
+
+  #header-component .menu-drawer__submenu {
+    height: 100%;
+    padding: 4vw 6vw 8vw;
+    background: var(--spuds-header-cream);
+  }
+
+  #header-component .menu-drawer__nav-buttons {
+    min-height: 14vw;
+    border-bottom: .5vw solid var(--spuds-header-pink);
+    margin-bottom: 3vw;
+  }
+
+  #header-component .menu-drawer__nav-buttons button {
+    min-height: 14vw;
+    padding: 3vw;
+    font-family: var(--spuds-header-font);
+    font-size: 5vw;
+    text-transform: uppercase;
+  }
+
+  #header-component .menu-drawer__utility-links {
+    padding: 6vw 0;
+    background: transparent;
+  }
+}
