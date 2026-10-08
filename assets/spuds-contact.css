@@ -34,18 +34,10 @@
   line-height: 1.15;
   text-align: center;
   text-transform: uppercase;
-  transform: rotate(-3deg);
+  transform: none;
 }
 #MainContent .section-wrapper:first-child h1::before {
-  content: "";
-  position: absolute;
-  width: 4.8vw;
-  height: 4.8vw;
-  top: -1.9vw;
-  right: -2.7vw;
-  background: url("Graphic-5.svg") center / contain no-repeat;
-  transform: rotate(18deg);
-  pointer-events: none;
+  content: none;
 }
 #MainContent .section-wrapper:first-child h1::after {
   content: "";
@@ -55,7 +47,7 @@
   left: 32%;
   bottom: -.5vw;
   background: var(--spuds-contact-teal);
-  transform: rotate(-3deg);
+  transform: none;
 }
 #MainContent .section-wrapper:first-child .rte,
 #MainContent .section-wrapper:first-child .text-block {
@@ -138,12 +130,6 @@
     max-width: 86vw;
     padding: 0 4vw;
     font-size: 11vw !important;
-  }
-  #MainContent .section-wrapper:first-child h1::before {
-    top: -5vw;
-    right: -3vw;
-    width: 11vw;
-    height: 11vw;
   }
   #MainContent .section-wrapper:first-child h1::after {
     height: 1.2vw;
