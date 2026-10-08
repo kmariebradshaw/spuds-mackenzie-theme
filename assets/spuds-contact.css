@@ -1,0 +1,186 @@
+/* Spuds Mackenzie · Contact page only · initial-shopify-theme */
+#MainContent {
+  --spuds-contact-navy: #071b3d;
+  --spuds-contact-pink: #ff2e6c;
+  --spuds-contact-teal: #09a8b5;
+  --spuds-contact-cream: #faf0e4;
+  --spuds-contact-yellow: #ffbd20;
+  --spuds-contact-scale: "Scale VF", "scale-variable", Impact, sans-serif;
+  background: var(--spuds-contact-cream);
+  color: var(--spuds-contact-navy);
+  font-family: "Work Sans", Arial, sans-serif;
+}
+#MainContent .section-background,
+#MainContent .section-wrapper,
+#MainContent .section-content-wrapper {
+  background-color: var(--spuds-contact-cream) !important;
+  color: var(--spuds-contact-navy);
+}
+#MainContent .section-wrapper:first-child .section-content-wrapper {
+  padding-top: 4vw;
+  gap: 1.7vw;
+}
+#MainContent .section-wrapper:first-child h1 {
+  position: relative;
+  width: fit-content;
+  max-width: 86vw;
+  margin: 0 auto;
+  padding: 0 3vw;
+  color: var(--spuds-contact-navy);
+  font-family: var(--spuds-contact-scale) !important;
+  font-size: 5vw !important;
+  font-weight: 600;
+  font-variation-settings: "wght" 600, "wdth" 85;
+  line-height: 1.15;
+  text-align: center;
+  text-transform: uppercase;
+  transform: rotate(-3deg);
+}
+#MainContent .section-wrapper:first-child h1::before {
+  content: "";
+  position: absolute;
+  width: 4.8vw;
+  height: 4.8vw;
+  top: -1.9vw;
+  right: -2.7vw;
+  background: url("Graphic-5.svg") center / contain no-repeat;
+  transform: rotate(18deg);
+  pointer-events: none;
+}
+#MainContent .section-wrapper:first-child h1::after {
+  content: "";
+  position: absolute;
+  width: 38%;
+  height: .5vw;
+  left: 32%;
+  bottom: -.5vw;
+  background: var(--spuds-contact-teal);
+  transform: rotate(-3deg);
+}
+#MainContent .section-wrapper:first-child .rte,
+#MainContent .section-wrapper:first-child .text-block {
+  font-family: "Work Sans", Arial, sans-serif;
+  color: var(--spuds-contact-navy);
+}
+#MainContent .section-wrapper:first-child .rte p {
+  font-size: 1.2vw;
+  line-height: 1.6;
+}
+#MainContent .contact-form {
+  width: 58vw !important;
+  max-width: 58vw !important;
+  margin: 0 auto;
+  font-family: "Work Sans", Arial, sans-serif;
+  color: var(--spuds-contact-navy);
+}
+#MainContent .contact-form__form,
+#MainContent .contact-form__form-row { gap: 1.4vw; }
+#MainContent .contact-form__input {
+  min-width: 0;
+  padding: 1.1vw 1.3vw;
+  border: .12vw solid var(--spuds-contact-navy);
+  border-radius: 0;
+  background: #fff;
+  color: var(--spuds-contact-navy);
+  font-family: "Work Sans", Arial, sans-serif;
+  font-size: 1.12vw;
+  line-height: 1.5;
+  box-shadow: .18vw .18vw 0 rgba(7,27,61,.12);
+}
+#MainContent .contact-form__input::placeholder { color: #55627a; opacity: 1; }
+#MainContent .contact-form__input:focus-visible {
+  outline: .2vw solid var(--spuds-contact-teal);
+  outline-offset: .15vw;
+  border-color: var(--spuds-contact-navy);
+}
+#MainContent .contact-form__input--textarea {
+  min-height: 12vw;
+  resize: vertical;
+}
+#MainContent .contact-form button[type="submit"] {
+  align-self: flex-start;
+  width: auto;
+  padding: 1.1vw 2.6vw;
+  border: 0;
+  border-radius: 0;
+  background: var(--spuds-contact-navy);
+  box-shadow: .4vw .4vw 0 var(--spuds-contact-pink);
+  color: #fff;
+  font-family: var(--spuds-contact-scale) !important;
+  font-size: 1.35vw;
+  font-weight: 500;
+  font-variation-settings: "wght" 500, "wdth" 120;
+  line-height: 1.2;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+#MainContent .contact-form button[type="submit"]:hover {
+  transform: translate(.15vw, .15vw);
+  box-shadow: .25vw .25vw 0 var(--spuds-contact-pink);
+}
+#MainContent .contact-form button[type="submit"]:focus-visible {
+  outline: .2vw solid var(--spuds-contact-teal);
+  outline-offset: .65vw;
+}
+#MainContent .contact-form__success,
+#MainContent .contact-form__error {
+  font-family: "Work Sans", Arial, sans-serif;
+  font-size: 1.12vw;
+  color: var(--spuds-contact-navy);
+}
+@media screen and (max-width: 749px) {
+  #MainContent .section-wrapper:first-child .section-content-wrapper {
+    padding: 9vw 7vw 1vw;
+    gap: 5vw;
+  }
+  #MainContent .section-wrapper:first-child h1 {
+    max-width: 86vw;
+    padding: 0 4vw;
+    font-size: 11vw !important;
+  }
+  #MainContent .section-wrapper:first-child h1::before {
+    top: -5vw;
+    right: -3vw;
+    width: 11vw;
+    height: 11vw;
+  }
+  #MainContent .section-wrapper:first-child h1::after {
+    height: 1.2vw;
+    bottom: -1.6vw;
+  }
+  #MainContent .section-wrapper:first-child .rte p {
+    font-size: 4vw;
+    line-height: 1.55;
+  }
+  #MainContent .contact-form {
+    width: 86vw !important;
+    max-width: 86vw !important;
+  }
+  #MainContent .contact-form__form,
+  #MainContent .contact-form__form-row { gap: 3.8vw; }
+  #MainContent .contact-form__input {
+    padding: 3.5vw 4vw;
+    border-width: .4vw;
+    box-shadow: .6vw .6vw 0 rgba(7,27,61,.12);
+    font-size: 4vw;
+  }
+  #MainContent .contact-form__input:focus-visible {
+    outline-width: .6vw;
+    outline-offset: .4vw;
+  }
+  #MainContent .contact-form__input--textarea { min-height: 38vw; }
+  #MainContent .contact-form button[type="submit"] {
+    width: 100%;
+    justify-content: center;
+    padding: 4vw 6vw;
+    box-shadow: 1.2vw 1.2vw 0 var(--spuds-contact-pink);
+    font-size: 5vw;
+  }
+  #MainContent .contact-form button[type="submit"]:hover {
+    transform: translate(.5vw, .5vw);
+    box-shadow: .7vw .7vw 0 var(--spuds-contact-pink);
+  }
+  #MainContent .contact-form__success,
+  #MainContent .contact-form__error { font-size: 3.8vw; }
+}
