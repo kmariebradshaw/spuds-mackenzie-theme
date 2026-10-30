@@ -8,6 +8,13 @@
  * ------------------------------------------------------------
  */
 {
+  "spuds_foundation": {
+    "navigation_label": "Foundation",
+    "portrait_alt": "Spuds MacKenzie wearing sunglasses and a bow tie",
+    "disclaimer": "The Spuds MacKenzie Pet Foundation is a separate 501(c)(3) nonprofit. Merchandise purchases are not tax-deductible charitable contributions.",
+    "page_title": "Spuds MacKenzie Pet Foundation",
+    "page_description": "Meet the Spuds MacKenzie Pet Foundation, helping pets access veterinary care and supporting animal-care organizations and veterinary professionals."
+  },
   "accessibility": {
     "account": "Account",
     "active_filters": "Active filters:",

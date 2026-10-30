@@ -1,63 +1,48 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
       "type": "spuds-about",
       "blocks": {
-        "treats": {
+        "access": {
           "type": "value",
           "settings": {
-            "heading": "Less is more.",
-            "copy": "<p>Limited-ingredient treats. Simple recipes. More tail wags.</p>"
+            "heading": "More access to care.",
+            "copy": "<p>Helping make veterinary care more accessible for pets whose families face financial barriers.</p>"
           }
         },
-        "wellness": {
+        "community": {
           "type": "value",
           "settings": {
-            "heading": "Keep it simple.",
-            "copy": "<p>Our philosophy: no endless ingredient lists or unnecessary additives.</p>"
+            "heading": "Stronger pet communities.",
+            "copy": "<p>Supporting nonprofit veterinary and animal-care organizations working to help animals in need.</p>"
           }
         },
-        "essentials": {
+        "wellbeing": {
           "type": "value",
           "settings": {
-            "heading": "Made with purpose.",
-            "copy": "<p>Thoughtful products to help pets live their best lives.</p>"
+            "heading": "Care for the caregivers.",
+            "copy": "<p>Championing the well-being of veterinary professionals and the teams who care for our pets.</p>"
           }
         }
       },
       "block_order": [
-        "treats",
-        "wellness",
-        "essentials"
+        "access",
+        "community",
+        "wellbeing"
       ],
       "settings": {
-        "eyebrow": "The Spuds story",
-        "heading": "The original party animal.",
-        "accent": "All dogs invited.",
-        "intro": "<p>Legendary personality. Lifelong pet people. A new chapter dedicated to dogs.</p>",
-        "chapter_copy": "<p>An iconic dog. A new purpose. Under new ownership, Spuds is bringing his legendary personality to treats, wellness products, and everyday essentials, all focused on pets.</p>",
-        "experience_number": "45",
-        "experience_label": "Years of combined pet-industry experience",
-        "team_heading": "Experience that gives back.",
-        "team_copy": "<p>Our founders bring <strong>45 years of combined experience exclusively in the pet industry</strong>, creating products for the animals we love.</p>",
-        "values_heading": "Simple ingredients. Thoughtfully made.",
-        "values_copy": "<p>We believe great pet products should be easy to understand and something you feel good about giving your pet.</p>",
-        "closing_heading": "Same spirit. New mission.",
-        "closing_copy": "<p>Healthy can still be fun. Let’s get the party started!</p>",
-        "closing_accent": "All dogs invited.",
-        "button_label": "Shop Spuds",
-        "button_link": "shopify://collections/spuds-bundles",
-        "charity_heading": "Giving back is part of who we are.",
-        "charity_copy": "<p>Through multiple charities run by our founders, we continue to support the pet community that means so much to us.</p>"
+        "eyebrow": "The Spuds MacKenzie Pet Foundation",
+        "heading": "Spuds Has Heart.",
+        "accent": "(And Great Shades.)",
+        "intro": "<p>Cool merch. Big heart. Real impact.</p>",
+        "mission_copy": "<p>Spuds MacKenzie knows how to make people smile. Through the Spuds MacKenzie Pet Foundation, that fun has a purpose: helping pets get the care they need and supporting the people who care for them.</p>",
+        "values_heading": "Big heart. Shared purpose.",
+        "values_copy": "<p>The Foundation focuses on pets, their communities, and the veterinary teams who care for them.</p>",
+        "closing_heading": "Shop Spuds. Share the Love.",
+        "closing_copy": "<p>There is a big heart behind those great shades. Get to know the Foundation and explore ways to help pets and the people who care for them.</p>",
+        "closing_accent": "Make pet health fun.",
+        "button_label": "Meet the Foundation",
+        "button_link": "https://spudsmackenzie.org/"
       }
     }
   },

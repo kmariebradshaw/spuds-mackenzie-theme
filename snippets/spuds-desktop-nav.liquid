@@ -20,7 +20,7 @@
   <nav aria-label="{{ 'accessibility.header_navigation_label' | t }}">
     <ul class="spuds-desktop-nav__items" role="list">
       <li><a class="spuds-desktop-nav__link" href="{{ bundles_url }}"{% if request.path == bundles_url %} aria-current="page"{% endif %}>Shop</a></li>
-      <li><a class="spuds-desktop-nav__link" href="{{ about_url }}"{% if request.path == about_url %} aria-current="page"{% endif %}>About Us</a></li>
+      <li><a class="spuds-desktop-nav__link" href="{{ about_url }}"{% if request.path == about_url %} aria-current="page"{% endif %}>{{ 'spuds_foundation.navigation_label' | t }}</a></li>
       <li><a class="spuds-desktop-nav__link" href="{{ contact_url }}"{% if request.path == contact_url %} aria-current="page"{% endif %}>Contact</a></li>
     </ul>
   </nav>

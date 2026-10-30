@@ -19,6 +19,10 @@
 >
 
 {%- liquid
+  if template.name == 'page' and template.suffix == 'about-us'
+    assign page_title = 'spuds_foundation.page_title' | t
+    assign page_description = 'spuds_foundation.page_description' | t
+  endif
   assign og_title = page_title | default: shop.name
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'

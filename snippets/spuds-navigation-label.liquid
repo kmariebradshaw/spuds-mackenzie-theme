@@ -1,0 +1,16 @@
+{% doc %}
+  Renders the Foundation label for the existing About Us page link.
+  @param {link} link - Navigation link to label.
+  @param {section} [section] - Header section with an optional About Us URL.
+{% enddoc %}
+{%- liquid
+  assign foundation_url = routes.root_url | append: 'pages/about-us'
+  assign foundation_url = section.settings.spuds_about_link | default: foundation_url
+  if link.url == foundation_url
+    echo 'spuds_foundation.navigation_label' | t
+  elsif link.type == 'page_link' and link.object.template_suffix == 'about-us'
+    echo 'spuds_foundation.navigation_label' | t
+  else
+    echo link.title | escape
+  endif
+-%}

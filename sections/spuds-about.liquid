@@ -1,43 +1,33 @@
-{{ 'spuds-about.css' | asset_url | stylesheet_tag }}
-{% assign shop_link = section.settings.button_link | default: routes.all_products_collection_url %}
+{% if template.suffix != 'about-us' %}
+  {{ 'spuds-about.css' | asset_url | stylesheet_tag }}
+{% endif %}
+{% assign foundation_link = section.settings.button_link | default: 'https://spudsmackenzie.org/' %}
 <div class="spuds-about" id="SpudsAbout-{{ section.id }}">
   <div class="spuds-about__hero">
     {% render 'spuds-shape', shape: 'graphic-3', class: 'spuds-about__triangles' %}
     <div class="spuds-about__hero-copy">
       <p class="spuds-about__eyebrow">{{ section.settings.eyebrow | escape }}</p>
       <h1>{{ section.settings.heading | escape }}</h1>
-      <p class="spuds-about__script">{{ section.settings.accent | escape }}</p>
+      {% if section.settings.accent != blank %}
+        <p class="spuds-about__script">{{ section.settings.accent | escape }}</p>
+      {% endif %}
       <div class="spuds-about__intro">{{ section.settings.intro }}</div>
+      <div class="spuds-about__mission">{{ section.settings.mission_copy }}</div>
     </div>
     <div class="spuds-about__portrait">
       {% if section.settings.hero_image != blank %}
-        {{ section.settings.hero_image | image_url: width: 1400 | image_tag: widths: '400, 700, 1000, 1400', sizes: '(max-width: 749px) 34vw, 20vw', loading: 'eager', fetchpriority: 'high', class: 'spuds-about__photo' }}
+        {{ section.settings.hero_image | image_url: width: 900 | image_tag: widths: '300, 450, 600, 900', sizes: '(max-width: 749px) 34vw, 20vw', loading: 'eager', fetchpriority: 'high', class: 'spuds-about__photo' }}
       {% else %}
-        <img class="spuds-about__photo" src="{{ 'spuds-polaroid-today.png' | asset_url }}" width="611" height="816" alt="Spuds MacKenzie dressed for the party in sunglasses and a bow tie" fetchpriority="high">
+        <img class="spuds-about__photo" src="{{ 'spuds-polaroid-today.png' | asset_url }}" width="611" height="816" alt="{{ 'spuds_foundation.portrait_alt' | t | escape }}" loading="eager" fetchpriority="high">
       {% endif %}
       {% render 'spuds-shape', shape: 'graphic-1', class: 'spuds-about__zigzag' %}
       {% render 'spuds-shape', shape: 'paw', class: 'spuds-about__paw' %}
     </div>
   </div>
-  <div class="spuds-about__team">
-    <div class="spuds-about__stat">
-      <span class="spuds-about__number">{{ section.settings.experience_number | escape }}</span>
-      <p>{{ section.settings.experience_label | escape }}</p>
-      {% render 'spuds-shape', shape: 'graphic-4', class: 'spuds-about__stat-shape' %}
-    </div>
-    <div class="spuds-about__team-copy">
-      <h2>{{ section.settings.team_heading | escape }}</h2>
-      <div class="spuds-about__copy">{{ section.settings.team_copy }}</div>
-      <div class="spuds-about__charity">
-        <h3>{{ section.settings.charity_heading | escape }}</h3>
-        <div class="spuds-about__copy">{{ section.settings.charity_copy }}</div>
-      </div>
-    </div>
-  </div>
-  <div class="spuds-about__values">
-    <h2>{{ section.settings.values_heading | escape }}</h2>
-    <div class="spuds-about__values-intro">{{ section.settings.values_copy }}</div>
-    {% if section.blocks.size > 0 %}
+  {% if section.blocks.size > 0 %}
+    <div class="spuds-about__values">
+      <h2>{{ section.settings.values_heading | escape }}</h2>
+      <div class="spuds-about__values-intro">{{ section.settings.values_copy }}</div>
       <div class="spuds-about__cards">
         {% for block in section.blocks %}
           <div class="spuds-about__card" {{ block.shopify_attributes }}>
@@ -47,25 +37,33 @@
           </div>
         {% endfor %}
       </div>
-    {% endif %}
-  </div>
+    </div>
+  {% endif %}
   <div class="spuds-about__closing">
     {% render 'spuds-shape', shape: 'graphic-2', class: 'spuds-about__closing-shape' %}
     <h2>{{ section.settings.closing_heading | escape }}</h2>
-    <div class="spuds-about__closing-copy">{{ section.settings.chapter_copy }}{{ section.settings.closing_copy }}</div>
-    <p class="spuds-about__script">{{ section.settings.closing_accent | escape }}</p>
+    <div class="spuds-about__closing-copy">{{ section.settings.closing_copy }}</div>
+    {% assign donation_text = section.settings.donation_statement | strip_html | strip %}
+    {% if donation_text != blank %}
+      <div class="spuds-about__donation">{{ section.settings.donation_statement }}</div>
+    {% endif %}
+    {% if section.settings.closing_accent != blank %}
+      <p class="spuds-about__script">{{ section.settings.closing_accent | escape }}</p>
+    {% endif %}
     {% if section.settings.button_label != blank %}
-      <a class="spuds-about__button" href="{{ shop_link }}">
+      <a class="spuds-about__button" href="{{ foundation_link | escape }}" target="_blank" rel="noopener noreferrer">
         {{ section.settings.button_label | escape }}
+        <span class="visually-hidden">{{ 'accessibility.new_window' | t }}</span>
         <img src="{{ 'spuds-cta-arrow.svg' | asset_url }}" width="210" height="72" alt="" aria-hidden="true" loading="lazy">
       </a>
     {% endif %}
+    <p class="spuds-about__disclaimer">{{ 'spuds_foundation.disclaimer' | t }}</p>
   </div>
 </div>
 
 {% schema %}
 {
-  "name": "Spuds About us",
+  "name": "Spuds Foundation",
   "tag": "section",
   "enabled_on": {
     "templates": [
@@ -77,25 +75,31 @@
       "type": "text",
       "id": "eyebrow",
       "label": "Intro label",
-      "default": "The Spuds story"
+      "default": "The Spuds MacKenzie Pet Foundation"
     },
     {
       "type": "text",
       "id": "heading",
       "label": "Main heading",
-      "default": "The original party animal."
+      "default": "Spuds Has Heart."
     },
     {
       "type": "text",
       "id": "accent",
       "label": "Hero accent",
-      "default": "All dogs invited."
+      "default": "(And Great Shades.)"
     },
     {
       "type": "richtext",
       "id": "intro",
       "label": "Introduction",
-      "default": "<p>Legendary personality. Lifelong pet people. A new chapter dedicated to dogs.</p>"
+      "default": "<p>Cool merch. Big heart. Real impact.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "mission_copy",
+      "label": "Foundation mission",
+      "default": "<p>Spuds MacKenzie knows how to make people smile. Through the Spuds MacKenzie Pet Foundation, that fun has a purpose: helping pets get the care they need and supporting the people who care for them.</p>"
     },
     {
       "type": "image_picker",
@@ -104,107 +108,69 @@
       "info": "Uses the Spuds Today Polaroid when left empty."
     },
     {
-      "type": "richtext",
-      "id": "chapter_copy",
-      "label": "Story copy",
-      "default": "<p>An iconic dog. A new purpose. Under new ownership, Spuds is bringing his legendary personality to treats, wellness products, and everyday essentials, all focused on pets.</p>"
-    },
-    {
-      "type": "text",
-      "id": "experience_number",
-      "label": "Experience number",
-      "default": "45"
-    },
-    {
-      "type": "text",
-      "id": "experience_label",
-      "label": "Experience label",
-      "default": "Years of combined pet-industry experience"
-    },
-    {
-      "type": "text",
-      "id": "team_heading",
-      "label": "Team heading",
-      "default": "Experience that gives back."
-    },
-    {
-      "type": "richtext",
-      "id": "team_copy",
-      "label": "Team copy",
-      "default": "<p>Our founders bring <strong>45 years of combined experience exclusively in the pet industry</strong>, creating products for the animals we love.</p>"
-    },
-    {
-      "type": "text",
-      "id": "charity_heading",
-      "label": "Giving back heading",
-      "default": "Giving back is part of who we are."
-    },
-    {
-      "type": "richtext",
-      "id": "charity_copy",
-      "label": "Giving back copy",
-      "default": "<p>Through multiple charities run by our founders, we continue to support the pet community that means so much to us.</p>"
-    },
-    {
       "type": "text",
       "id": "values_heading",
-      "label": "Products heading",
-      "default": "Simple ingredients. Thoughtfully made."
+      "label": "Mission priorities heading",
+      "default": "Big heart. Shared purpose."
     },
     {
       "type": "richtext",
       "id": "values_copy",
-      "label": "Products introduction",
-      "default": "<p>We believe great pet products should be easy to understand and something you feel good about giving your pet.</p>"
+      "label": "Mission priorities introduction",
+      "default": "<p>The Foundation focuses on pets, their communities, and the veterinary teams who care for them.</p>"
     },
     {
       "type": "text",
       "id": "closing_heading",
       "label": "Closing heading",
-      "default": "Same spirit. New mission."
+      "default": "Shop Spuds. Share the Love."
     },
     {
       "type": "richtext",
       "id": "closing_copy",
       "label": "Closing copy",
-      "default": "<p>Healthy can still be fun. Let’s get the party started!</p>"
+      "default": "<p>There is a big heart behind those great shades. Get to know the Foundation and explore ways to help pets and the people who care for them.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "donation_statement",
+      "label": "Confirmed merchandise donation statement",
+      "info": "Leave blank until the percentage, qualifying merchandise, and whether it applies to sales or net profits are confirmed. Hidden when blank."
     },
     {
       "type": "text",
       "id": "closing_accent",
       "label": "Closing accent",
-      "default": "All dogs invited."
+      "default": "Make pet health fun."
     },
     {
       "type": "text",
       "id": "button_label",
-      "label": "Button label",
-      "default": "Shop Spuds"
+      "label": "Foundation button label",
+      "default": "Meet the Foundation"
     },
     {
       "type": "url",
       "id": "button_link",
-      "label": "Button link",
-      "info": "Defaults to all products."
+      "label": "Foundation website",
+      "default": "https://spudsmackenzie.org/"
     }
   ],
   "blocks": [
     {
       "type": "value",
-      "name": "Product pillar",
+      "name": "Mission priority",
       "limit": 3,
       "settings": [
         {
           "type": "text",
           "id": "heading",
-          "label": "Heading",
-          "default": "Thoughtfully made"
+          "label": "Heading"
         },
         {
           "type": "richtext",
           "id": "copy",
-          "label": "Copy",
-          "default": "<p>Products for the dogs we love.</p>"
+          "label": "Copy"
         }
       ]
     }
@@ -212,7 +178,30 @@
   "max_blocks": 3,
   "presets": [
     {
-      "name": "Spuds About us"
+      "name": "Spuds Foundation",
+      "blocks": [
+        {
+          "type": "value",
+          "settings": {
+            "heading": "More access to care.",
+            "copy": "<p>Helping make veterinary care more accessible for pets whose families face financial barriers.</p>"
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "heading": "Stronger pet communities.",
+            "copy": "<p>Supporting nonprofit veterinary and animal-care organizations working to help animals in need.</p>"
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "heading": "Care for the caregivers.",
+            "copy": "<p>Championing the well-being of veterinary professionals and the teams who care for our pets.</p>"
+          }
+        }
+      ]
     }
   ]
 }
