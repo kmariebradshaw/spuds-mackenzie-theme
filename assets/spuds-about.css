@@ -20,6 +20,7 @@
   overflow: hidden;
 }
 .spuds-about *, .spuds-about *::before, .spuds-about *::after { box-sizing: border-box; }
+.spuds-about__team { display: none; }
 .spuds-about h1, .spuds-about h2, .spuds-about h3, .spuds-about p { margin: 0; }
 .spuds-about p + p { margin-top: 1.3vw; }
 .spuds-about h1, .spuds-about h2, .spuds-about h3 {
