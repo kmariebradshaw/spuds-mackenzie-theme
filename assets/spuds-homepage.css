@@ -486,9 +486,10 @@
   }
 
   .spuds-hero__eyebrow {
-    max-width: 20.3vw;
+    max-width: 29vw;
     font-size: 1.15vw;
     letter-spacing: .04vw;
+    text-wrap: balance;
   }
 
   .spuds-hero__brush {

@@ -160,6 +160,29 @@
   background: var(--spuds-cream);
 }
 
+.spuds-collection-hero__intro {
+  width: 57vw;
+  margin: 0 auto;
+  padding-top: 2.4vw;
+  color: inherit;
+  font-family: var(--spuds-body);
+  font-size: 1.35vw;
+  line-height: 1.5;
+  text-align: center;
+  text-wrap: pretty;
+}
+
+.spuds-collection-hero__intro + .spuds-collection-nav {
+  padding-top: 1.6vw;
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .spuds-collection-hero__intro {
+    width: 74vw;
+    font-size: 2vw;
+  }
+}
+
 .spuds-collection-nav__link {
   display: inline-flex;
   min-width: clamp(12rem, 18vw, 17rem);
@@ -469,6 +492,16 @@
 }
 
 @media screen and (max-width: 749px) {
+  .spuds-collection-hero__intro {
+    width: 88vw;
+    padding-top: 5vw;
+    font-size: 4.1vw;
+  }
+
+  .spuds-collection-hero__intro + .spuds-collection-nav {
+    padding-top: 4vw;
+  }
+
   .spuds-collection-hero__inner {
     min-height: 36vw;
   }

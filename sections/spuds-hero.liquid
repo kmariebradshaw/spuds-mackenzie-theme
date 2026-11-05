@@ -79,7 +79,7 @@
             {% if block.settings.image != blank %}
               {{ block.settings.image | image_url: width: 800 | image_tag: class: 'spuds-category__image', loading: 'lazy' }}
             {% else %}
-              <img class="spuds-category__image" src="{{ 'spuds-products.png' | asset_url }}" alt="" loading="lazy">
+              <img class="spuds-category__image" src="{{ 'spuds-products.png' | asset_url }}" width="1640" height="959" alt="" loading="lazy">
             {% endif %}
             <div>
               <h2><strong>Spuds</strong>{{ block.settings.title }}</h2>
@@ -112,7 +112,7 @@
     {"type":"image_picker","id":"hero_button_accent_right","label":"Button right triangle graphic"},
     {"type":"image_picker","id":"category_accent_left","label":"Category left accent graphic"},
     {"type":"image_picker","id":"category_accent_right","label":"Category right accent graphic"},
-    {"type":"text","id":"hero_eyebrow","label":"Eyebrow","default":"Pet treats & wellness inspired by a legend."},
+    {"type":"text","id":"hero_eyebrow","label":"Eyebrow","default":"Dog treats and supplements from a team with over 70 years of combined pet industry experience."},
     {"type":"text","id":"hero_kicker","label":"Brush label","default":"The Original"},
     {"type":"text","id":"hero_title","label":"Heading","default":"Party Animal"},
     {"type":"text","id":"hero_subtitle","label":"Accent heading","default":"Is Back!"},

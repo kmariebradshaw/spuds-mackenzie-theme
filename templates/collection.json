@@ -11,6 +11,23 @@
   "sections": {
     "spuds_collection_hero": {
       "type": "spuds-collection-hero",
+      "blocks": {
+        "health_intro": {
+          "type": "collection_intro",
+          "settings": {
+            "collection": "spuds-health",
+            "text": "Veterinarians, PhD scientists and animal nutritionists formulate our supplements, from multivitamins to joint care chews."
+          }
+        },
+        "snacks_intro": {
+          "type": "collection_intro",
+          "settings": {
+            "collection": "spuds-snacks",
+            "text": "Our team has developed hundreds of pet products and launched thousands. At Spuds, we put that experience into limited-ingredient treats for the dog who hears the bag open from two rooms away."
+          }
+        }
+      },
+      "block_order": ["health_intro", "snacks_intro"],
       "settings": {
         "navigation_label": "Shop Spuds collections",
         "primary_label": "Shop all",

@@ -71,6 +71,13 @@
     </div>
   </div>
 
+  {% for block in section.blocks %}
+    {% if block.settings.collection.id == collection.id and block.settings.collection != blank and block.settings.text != blank %}
+      <p class="spuds-collection-hero__intro" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</p>
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
   <nav class="spuds-collection-nav" aria-label="{{ section.settings.navigation_label | escape }}">
     {% if primary_label != blank %}
       <a
@@ -104,6 +111,16 @@
   "enabled_on": {
     "templates": ["collection"]
   },
+  "blocks": [
+    {
+      "type": "collection_intro",
+      "name": "Collection introduction",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "textarea", "id": "text", "label": "Introduction" }
+      ]
+    }
+  ],
   "settings": [
     {
       "type": "header",
