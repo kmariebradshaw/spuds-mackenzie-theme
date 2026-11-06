@@ -1,3 +1,12 @@
+{%- liquid
+  assign simple_page_types = 'search,cart,list-collections,policy,404,blog,article' | split: ','
+  assign use_simple_page_styles = false
+  if simple_page_types contains request.page_type
+    assign use_simple_page_styles = true
+  elsif request.page_type == 'page' and template.suffix == blank
+    assign use_simple_page_styles = true
+  endif
+-%}
 <!doctype html>
 <html
   {% if request.design_mode %}
@@ -88,6 +97,9 @@
     {%- render 'scripts' -%}
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-palette' -%}
+    {% if use_simple_page_styles %}
+      {{ 'spuds-simple-pages.css' | asset_url | stylesheet_tag }}
+    {% endif %}
 
     {% if request.design_mode %}
       {%- render 'theme-editor' -%}
@@ -97,7 +109,7 @@
     {{ content_for_header }}
   </head>
 
-  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
+  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}{% if use_simple_page_styles %} spuds-simple-page spuds-simple-page--{{ request.page_type }}{% endif %}">
     {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
 
     {% render 'chat-drawer' %}

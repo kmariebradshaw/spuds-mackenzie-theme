@@ -107,9 +107,13 @@
     {% # theme-check-enable AssetPreload %}
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-palette' -%}
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin>
+    <link rel="preconnect" href="https://p.typekit.net" crossorigin>
+    <link rel="stylesheet" href="https://use.typekit.net/vgg4gke.css">
+    {{ 'spuds-simple-pages.css' | asset_url | stylesheet_tag }}
   </head>
 
-  <body class="gift-card">
+  <body class="gift-card spuds-simple-page spuds-simple-page--gift-card">
     <header>
       <div class="gift-card__text-wrapper">
         <h1>{{ shop.name }}</h1>
@@ -117,21 +121,12 @@
     </header>
 
     <main class="gift-card__main">
-      <div class="gift-card__image-wrapper">
-        {%- if settings.logo != blank -%}
+      {%- if settings.logo != blank -%}
+        <div class="gift-card__image-wrapper">
           {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
           {{ settings.logo | image_url: width: 324 | image_tag: class: 'gift-card__image', alt: logo_alt }}
-        {%- else %}
-          <img
-            class="gift-card__image gift-card__image-generic"
-            src="{{ 'gift-card/card.svg' | shopify_asset_url }}"
-            alt=""
-            height="200"
-            width="334"
-            loading="eager"
-          >
-        {%- endif %}
-      </div>
+        </div>
+      {%- endif -%}
       <div class="gift-card__price">
         <h2>
           {{ gift_card.balance | money_with_currency }}

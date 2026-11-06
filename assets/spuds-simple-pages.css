@@ -1,0 +1,342 @@
+.spuds-simple-page {
+  --spuds-simple-navy: #071b3d;
+  --spuds-simple-cream: #faf0e4;
+  --spuds-simple-body: "work-sans", "Work Sans", Arial, sans-serif;
+  --spuds-simple-heading: "Scale VF", "scale-variable", Impact, sans-serif;
+  --spuds-simple-size: 1.12vw;
+  --spuds-simple-title: 3.8vw;
+  --spuds-simple-h2: 2.3vw;
+  --spuds-simple-h3: 1.65vw;
+  --spuds-simple-space: 2vw;
+  --spuds-simple-radius: 0.8vw;
+  --spuds-simple-border: 0.08vw;
+  --spuds-simple-reading-width: 58vw;
+  background: var(--spuds-simple-cream);
+}
+
+.spuds-simple-page :where(#MainContent, .password-dialog, .password-footer, .gift-card__main, .gift-card > header) {
+  --font-body--family: var(--spuds-simple-body);
+  --font-paragraph--family: var(--spuds-simple-body);
+  --font-paragraph--size: var(--spuds-simple-size);
+  --font-paragraph--line-height: 1.7;
+  --font-heading--family: var(--spuds-simple-heading);
+  --font-subheading--family: var(--spuds-simple-heading);
+  --font-accent--family: var(--spuds-simple-body);
+  --font-h1--family: var(--spuds-simple-heading);
+  --font-h2--family: var(--spuds-simple-heading);
+  --font-h3--family: var(--spuds-simple-heading);
+  --font-h4--family: var(--spuds-simple-body);
+  --font-h5--family: var(--spuds-simple-body);
+  --font-h6--family: var(--spuds-simple-body);
+  --font-h1--size: var(--spuds-simple-title);
+  --font-h2--size: var(--spuds-simple-h2);
+  --font-h3--size: var(--spuds-simple-h3);
+  --font-h4--size: var(--spuds-simple-size);
+  --font-h5--size: var(--spuds-simple-size);
+  --font-h6--size: var(--spuds-simple-size);
+  --button-font-family-primary: var(--spuds-simple-body);
+  --button-font-family-secondary: var(--spuds-simple-body);
+  --cart-primary-font-family: var(--spuds-simple-body);
+  --cart-secondary-font-family: var(--spuds-simple-body);
+  --color-foreground: var(--spuds-simple-navy);
+  --color-foreground-rgb: 7 27 61;
+  --color-background: var(--spuds-simple-cream);
+  --color-background-rgb: 250 240 228;
+  --color-border: rgb(7 27 61 / 18%);
+  --color-input-text: var(--spuds-simple-navy);
+  --color-input-text-rgb: 7 27 61;
+  --color-input-background: #fff;
+  --color-input-border: rgb(7 27 61 / 28%);
+  --color-link: var(--spuds-simple-navy);
+  color: var(--spuds-simple-navy);
+  font-family: var(--spuds-simple-body);
+  font-size: var(--spuds-simple-size);
+  line-height: 1.7;
+}
+
+.spuds-simple-page #MainContent {
+  background: var(--spuds-simple-cream);
+  padding-block: 3.5vw 5vw;
+}
+
+.spuds-simple-page #MainContent :is(.section, .section-background, [class*="color-custom-"]) {
+  --color-foreground: var(--spuds-simple-navy);
+  --color-foreground-rgb: 7 27 61;
+  --color-background: var(--spuds-simple-cream);
+  --color-background-rgb: 250 240 228;
+  --color-border: rgb(7 27 61 / 18%);
+  color: var(--spuds-simple-navy);
+  background-color: var(--spuds-simple-cream);
+}
+
+.spuds-simple-page #MainContent .section {
+  --page-margin: 8vw;
+  --page-content-width: 84vw;
+  --page-width: 100vw;
+}
+
+.spuds-simple-page :is(#MainContent, .password-dialog, .gift-card__main, .gift-card > header) :is(h1, h2, h3, .h1, .h2, .h3) {
+  color: var(--spuds-simple-navy);
+  font-family: var(--spuds-simple-heading);
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1.15;
+  letter-spacing: 0;
+}
+
+.spuds-simple-page #MainContent h1,
+.spuds-simple-page #MainContent .search-page__header h3 {
+  font-size: var(--spuds-simple-title);
+}
+
+.spuds-simple-page :is(#MainContent, .password-dialog, .gift-card__main) :is(p, li, label, input, textarea, select) {
+  font-family: var(--spuds-simple-body);
+}
+
+.spuds-simple-page :is(#MainContent, .password-dialog, .gift-card__main) :is(.rte, .shopify-policy__body) {
+  font-size: var(--spuds-simple-size);
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.spuds-simple-page :is(#MainContent, .password-dialog, .gift-card__main) :is(.rte, .shopify-policy__body) :is(h2, h3, h4) {
+  margin-block: 1.5em 0.6em;
+}
+
+.spuds-simple-page #MainContent :is(.rte, .shopify-policy__body) a {
+  color: var(--spuds-simple-navy);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.spuds-simple-page :is(#MainContent, .password-dialog, .gift-card__main) :is(.button:not(.cart-items__remove, .button-unstyled), .pc--opt-out-form-button) {
+  --button-background-color: var(--spuds-simple-navy);
+  --button-color: #fff;
+  --button-border-color: var(--spuds-simple-navy);
+  --button-hover-background-color: #173456;
+  --button-hover-color: #fff;
+  --button-hover-border-color: #173456;
+  --button-focus-outline-color: var(--spuds-simple-navy);
+  color: var(--button-color);
+  background-color: var(--button-background-color);
+  border: 0;
+  height: auto;
+  max-height: none;
+  letter-spacing: normal;
+  font-family: var(--spuds-simple-body);
+  font-size: var(--spuds-simple-size);
+  font-weight: 600;
+  border-radius: 0.4vw;
+  padding: 0.95vw 1.6vw;
+  min-height: 3.3vw;
+  text-transform: none;
+  text-decoration: none;
+}
+
+.spuds-simple-page :is(#MainContent, .password-dialog, .gift-card__main) .button-secondary {
+  --button-background-color: transparent;
+  --button-color: var(--spuds-simple-navy);
+  --button-hover-background-color: #fff;
+  --button-hover-color: var(--spuds-simple-navy);
+}
+
+.spuds-simple-page :is(#MainContent, .password-dialog, .gift-card__main) :is(.button:not(.cart-items__remove, .button-unstyled), .pc--opt-out-form-button):hover {
+  --button-background-color: var(--button-hover-background-color);
+  --button-color: var(--button-hover-color);
+  --button-border-color: var(--button-hover-border-color);
+}
+
+.spuds-simple-page :is(#MainContent, .password-dialog) :is(input[type="search"], input[type="email"], input[type="password"], input[type="text"], textarea) {
+  color: var(--spuds-simple-navy);
+  background: #fff;
+  font-size: var(--spuds-simple-size);
+  border: var(--spuds-simple-border) solid rgb(7 27 61 / 28%);
+  border-radius: 0.4vw;
+  min-height: 3.4vw;
+}
+
+.spuds-simple-page :is(#MainContent, .password-dialog, .gift-card__main, .password-footer) :focus-visible {
+  outline: 0.16vw solid var(--spuds-simple-navy);
+  outline-offset: 0.25vw;
+}
+
+.spuds-simple-page #MainContent .pc--show-email-field label {
+  width: auto;
+  max-width: 100%;
+  justify-content: flex-start;
+}
+
+.spuds-simple-page #MainContent .pc--show-email-field input {
+  flex-shrink: 0;
+  accent-color: var(--spuds-simple-navy);
+}
+
+.spuds-simple-page--page #MainContent .section,
+.spuds-simple-page--article #MainContent .section {
+  --page-margin: 6vw;
+  --page-content-width: var(--spuds-simple-reading-width);
+  --page-width: calc(var(--spuds-simple-reading-width) + 12vw);
+}
+
+.spuds-simple-page--page #MainContent .section-content-wrapper {
+  padding-block: 0;
+  gap: var(--spuds-simple-space);
+}
+
+.spuds-simple-page .shopify-policy__container {
+  width: var(--spuds-simple-reading-width);
+  max-width: 88vw;
+  padding: 0;
+  margin-inline: auto;
+}
+
+.spuds-simple-page .shopify-policy__title {
+  text-align: left;
+  margin-block-end: var(--spuds-simple-space);
+}
+
+.spuds-simple-page #MainContent :is(.search-page__header, .section-resource-list, .blog-posts, .cart-page) {
+  padding-block-start: 0;
+}
+
+.spuds-simple-page #MainContent .search-page-input__parent {
+  width: 100%;
+  max-width: var(--spuds-simple-reading-width);
+  margin-inline: auto;
+}
+
+.spuds-simple-page #MainContent search-page-input-component {
+  max-width: 100%;
+  background: transparent;
+}
+
+.spuds-simple-page #MainContent .cart-summary__inner {
+  background: #fff;
+  border: var(--spuds-simple-border) solid rgb(7 27 61 / 14%);
+  border-radius: var(--spuds-simple-radius);
+  padding: var(--spuds-simple-space);
+}
+
+.spuds-simple-page #MainContent .cart-page__title {
+  margin-block-end: var(--spuds-simple-space);
+}
+
+.spuds-simple-page--password #MainContent {
+  display: flex;
+  align-items: center;
+  padding-block: 5vw 3vw;
+}
+
+.spuds-simple-page--password #MainContent .section-content-wrapper {
+  width: var(--spuds-simple-reading-width);
+  max-width: 100%;
+  margin-inline: auto;
+  padding: 3.5vw;
+  background: #fff;
+  border: var(--spuds-simple-border) solid rgb(7 27 61 / 14%);
+  border-radius: var(--spuds-simple-radius);
+}
+
+.spuds-simple-page .password-footer {
+  padding: var(--spuds-simple-space) 6vw;
+  background: var(--spuds-simple-cream);
+}
+
+.spuds-simple-page--password #MainContent .email-signup-block {
+  width: 100%;
+  max-width: 40vw;
+}
+
+.spuds-simple-page .password-dialog {
+  background: var(--spuds-simple-cream);
+  border-radius: var(--spuds-simple-radius);
+}
+
+.spuds-simple-page--gift-card {
+  padding: 4vw 6vw;
+}
+
+.spuds-simple-page--gift-card > header h1 {
+  font-size: var(--spuds-simple-title);
+  margin-block-end: var(--spuds-simple-space);
+}
+
+.spuds-simple-page .gift-card__main {
+  max-width: var(--spuds-simple-reading-width);
+  margin: 0 auto;
+  padding: 3vw;
+  background: #fff;
+  border: var(--spuds-simple-border) solid rgb(7 27 61 / 14%);
+  border-radius: var(--spuds-simple-radius);
+}
+
+.spuds-simple-page .gift-card__price h2 {
+  font-size: var(--spuds-simple-title);
+}
+
+.spuds-simple-page .gift-card__code {
+  font-family: var(--spuds-simple-body);
+  font-size: var(--spuds-simple-h3);
+  overflow-wrap: anywhere;
+}
+
+@media screen and (min-width: 750px) and (max-width: 1099px) {
+  .spuds-simple-page {
+    --spuds-simple-size: 1.8vw;
+    --spuds-simple-reading-width: 74vw;
+    --spuds-simple-h2: 3vw;
+    --spuds-simple-h3: 2.3vw;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .spuds-simple-page {
+    --spuds-simple-size: 4.3vw;
+    --spuds-simple-title: 9vw;
+    --spuds-simple-h2: 6.6vw;
+    --spuds-simple-h3: 5.4vw;
+    --spuds-simple-space: 5vw;
+    --spuds-simple-radius: 2.5vw;
+    --spuds-simple-border: 0.25vw;
+    --spuds-simple-reading-width: 88vw;
+  }
+
+  .spuds-simple-page #MainContent {
+    padding-block: 8vw 12vw;
+  }
+
+  .spuds-simple-page #MainContent .section {
+    --page-margin: 6vw;
+    --page-content-width: 88vw;
+    --page-width: 100vw;
+  }
+
+  .spuds-simple-page :is(#MainContent, .password-dialog, .gift-card__main) :is(.button:not(.cart-items__remove, .button-unstyled), .pc--opt-out-form-button) {
+    border-radius: 1.2vw;
+    padding: 3.5vw 5vw;
+    min-height: 12vw;
+  }
+
+  .spuds-simple-page :is(#MainContent, .password-dialog) :is(input[type="search"], input[type="email"], input[type="password"], input[type="text"], textarea) {
+    border-radius: 1.2vw;
+    min-height: 12vw;
+  }
+
+  .spuds-simple-page :is(#MainContent, .password-dialog, .gift-card__main, .password-footer) :focus-visible {
+    outline-width: 0.5vw;
+    outline-offset: 0.7vw;
+  }
+
+  .spuds-simple-page--password #MainContent .section-content-wrapper,
+  .spuds-simple-page .gift-card__main {
+    padding: 7vw 5vw;
+  }
+
+  .spuds-simple-page--gift-card {
+    padding: 9vw 6vw;
+  }
+
+  .spuds-simple-page--password #MainContent .email-signup-block {
+    max-width: 100%;
+  }
+}
