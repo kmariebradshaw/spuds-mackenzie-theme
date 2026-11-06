@@ -57,16 +57,17 @@ const initializeSpudsProduct = (root) => {
   quantityMinus?.addEventListener('click', () => adjustQuantity(-1));
   quantityPlus?.addEventListener('click', () => adjustQuantity(1));
 
-  const readMoreButton = root.querySelector('[data-spuds-read-more]');
-  const descriptionShort = root.querySelector('[data-spuds-description-short]');
-  const descriptionFull = root.querySelector('[data-spuds-description-full]');
-
-  readMoreButton?.addEventListener('click', () => {
+  root.addEventListener('click', (event) => {
+    const readMoreButton = event.target.closest('[data-spuds-read-more]');
+    if (!readMoreButton || !root.contains(readMoreButton)) return;
+    const description = readMoreButton.closest('[data-spuds-description]');
+    const descriptionShort = description?.querySelector('[data-spuds-description-short]');
+    const descriptionFull = description?.querySelector('[data-spuds-description-full]');
     if (!descriptionFull || !descriptionShort) return;
     const isExpanded = !descriptionFull.hidden;
     descriptionFull.hidden = isExpanded;
     descriptionShort.hidden = !isExpanded;
-    readMoreButton.textContent = isExpanded ? 'Read More.' : 'Read Less.';
+    readMoreButton.textContent = isExpanded ? readMoreButton.dataset.labelMore : readMoreButton.dataset.labelLess;
     readMoreButton.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
   });
 
@@ -94,6 +95,54 @@ const initializeSpudsProduct = (root) => {
   const subscriptionName = root.querySelector('[data-spuds-subscription-name]');
   const addButton = root.querySelector('[data-spuds-add-to-cart]');
   const addLabel = root.querySelector('[data-spuds-add-label]');
+
+  const content = root.querySelector('[data-spuds-content]');
+  const contentCache = new Map();
+  let contentRequest;
+  let contentSequence = 0;
+  if (content) contentCache.set(content.dataset.variantId, content.innerHTML);
+
+  const updateVariantContent = async (variantId) => {
+    if (!content || root.dataset.variantContent !== 'true') return;
+
+    contentRequest?.abort();
+    const sequence = ++contentSequence;
+    const accordionOpen = Boolean(content.querySelector('details')?.open);
+    const variantUrl = new URL(window.location.href);
+    variantUrl.searchParams.set('variant', variantId);
+    variantUrl.searchParams.delete('section_id');
+    window.history.replaceState(window.history.state, '', variantUrl);
+    content.setAttribute('aria-busy', 'true');
+    content.style.visibility = 'hidden';
+
+    try {
+      if (!contentCache.has(variantId)) {
+        const request = new AbortController();
+        contentRequest = request;
+        const sectionUrl = new URL(variantUrl);
+        sectionUrl.searchParams.set('section_id', root.dataset.sectionId);
+        const response = await fetch(sectionUrl, { signal: request.signal });
+        if (!response.ok) throw new Error('Product content request failed');
+        const html = await response.text();
+        if (sequence !== contentSequence) return;
+        const parsed = new DOMParser().parseFromString(html, 'text/html');
+        const incoming = parsed.querySelector('[data-spuds-content]');
+        if (!incoming || incoming.dataset.variantId !== variantId) throw new Error('Selected variant content missing');
+        contentCache.set(variantId, incoming.innerHTML);
+      }
+
+      if (sequence !== contentSequence) return;
+      content.innerHTML = contentCache.get(variantId);
+      content.dataset.variantId = variantId;
+      const accordion = content.querySelector('details');
+      if (accordion) accordion.open = accordionOpen;
+      content.style.visibility = '';
+      content.setAttribute('aria-busy', 'false');
+    } catch (error) {
+      if (error.name === 'AbortError' || sequence !== contentSequence) return;
+      window.location.assign(variantUrl);
+    }
+  };
 
   const updateVariant = () => {
     const option = variantSelect?.selectedOptions[0];
@@ -126,6 +175,7 @@ const initializeSpudsProduct = (root) => {
       if (oneTimeOption) oneTimeOption.checked = true;
     }
     updateSellingPlan();
+    updateVariantContent(option.value);
 
     if (root.dataset.deliveredGallery !== 'true' && option.dataset.image && mainImage) {
       mainImage.removeAttribute('srcset');

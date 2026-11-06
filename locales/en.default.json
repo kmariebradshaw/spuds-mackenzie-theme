@@ -8,6 +8,16 @@
  * ------------------------------------------------------------
  */
 {
+  "spuds_product": {
+    "description": "Product Description:",
+    "read_more": "Read More.",
+    "read_less": "Read Less.",
+    "ingredients": "Ingredients",
+    "feeding_directions": "Feeding Directions",
+    "how_to_use": "How to Use",
+    "ingredients_feeding": "Ingredients & Feeding Directions",
+    "ingredients_use": "Ingredients & How to Use"
+  },
   "spuds_foundation": {
     "navigation_label": "Foundation",
     "portrait_alt": "Spuds MacKenzie wearing sunglasses and a bow tie",

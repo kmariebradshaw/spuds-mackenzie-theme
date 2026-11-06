@@ -35,8 +35,21 @@
     assign review_count = section.settings.review_count
   endif
 
+  assign use_variant_content = product.metafields.custom.variant_content_enabled.value
+  assign product_type = product.type | downcase
+  assign directions_label = 'spuds_product.feeding_directions' | t
+  assign ingredient_details_label = 'spuds_product.ingredients_feeding' | t
+  if product_type == 'salon'
+    assign directions_label = 'spuds_product.how_to_use' | t
+    assign ingredient_details_label = 'spuds_product.ingredients_use' | t
+  endif
+
   capture description_content
-    if section.settings.description_override != blank
+    if use_variant_content
+      if current_variant.metafields.custom.description.value != blank
+        echo current_variant.metafields.custom.description | metafield_tag
+      endif
+    elsif section.settings.description_override != blank
       echo section.settings.description_override
     elsif product.description != blank
       echo product.description
@@ -44,11 +57,15 @@
       echo section.settings.description_fallback
     endif
   endcapture
-  assign description_plain = description_content | strip_html | strip
+  assign description_plain = description_content | replace: '</p>', '</p> ' | strip_html | strip
   assign description_words = description_plain | split: ' '
 
   assign ingredients_metafield = product.metafields.custom.ingredients
   assign feeding_directions_metafield = product.metafields.custom.feeding_directions
+  if use_variant_content
+    assign ingredients_metafield = current_variant.metafields.custom.ingredients
+    assign feeding_directions_metafield = current_variant.metafields.custom.feeding_directions
+  endif
 
   assign has_ingredient_details = false
   if ingredients_metafield.value != blank or feeding_directions_metafield.value != blank
@@ -62,6 +79,8 @@
 <section
   class="spuds-pdp"
   data-spuds-product
+  data-section-id="{{ section.id }}"
+  data-variant-content="{{ use_variant_content }}"
   data-delivered-gallery="{{ use_delivered_assets }}"
   style="--spuds-pdp-accent: {{ section.settings.accent_color }};"
   {{ section.shopify_attributes }}
@@ -328,52 +347,60 @@
           {% endform %}
         </product-form-component>
 
-        {% if description_plain != blank %}
-          <div class="spuds-pdp__description" data-spuds-description>
-            <p>
-              <strong>Product Description:</strong>
-              <span data-spuds-description-short>
+        <div data-spuds-content data-variant-id="{{ current_variant.id }}" aria-live="polite" aria-busy="false">
+          {% if description_plain != blank %}
+            <div class="spuds-pdp__description" data-spuds-description>
+              <p>
+                <strong>{{ 'spuds_product.description' | t }}</strong>
+                <span data-spuds-description-short>
+                  {% if description_words.size > 24 %}
+                    {{ description_plain | truncatewords: 24, '' }}
+                  {% else %}
+                    {{ description_plain }}
+                  {% endif %}
+                </span>
                 {% if description_words.size > 24 %}
-                  {{ description_plain | truncatewords: 24, '' }}
-                {% else %}
-                  {{ description_plain }}
+                  <button
+                    type="button"
+                    data-spuds-read-more
+                    data-label-more="{{ 'spuds_product.read_more' | t | escape }}"
+                    data-label-less="{{ 'spuds_product.read_less' | t | escape }}"
+                    aria-expanded="false"
+                  >{{ 'spuds_product.read_more' | t }}</button>
                 {% endif %}
-              </span>
+              </p>
               {% if description_words.size > 24 %}
-                <button type="button" data-spuds-read-more>Read More.</button>
-              {% endif %}
-            </p>
-            {% if description_words.size > 24 %}
-              <div class="spuds-pdp__description-full" hidden data-spuds-description-full>
-                {{ description_content }}
-              </div>
-            {% endif %}
-          </div>
-        {% endif %}
-
-        {% if has_ingredient_details %}
-          <details class="spuds-pdp__ingredients-accordion">
-            <summary>
-              <span>Ingredients &amp; Feeding Directions</span>
-              <span class="spuds-pdp__ingredients-toggle" aria-hidden="true">+</span>
-            </summary>
-            <div class="spuds-pdp__ingredients-content">
-              {% if ingredients_metafield.value != blank %}
-                <div class="spuds-pdp__ingredients-item">
-                  <h3>Ingredients</h3>
-                  {{ ingredients_metafield | metafield_tag }}
-                </div>
-              {% endif %}
-
-              {% if feeding_directions_metafield.value != blank %}
-                <div class="spuds-pdp__ingredients-item">
-                  <h3>Feeding Directions</h3>
-                  {{ feeding_directions_metafield | metafield_tag }}
+                <div class="spuds-pdp__description-full" hidden data-spuds-description-full>
+                  {{ description_content }}
                 </div>
               {% endif %}
             </div>
-          </details>
-        {% endif %}
+          {% endif %}
+
+          {% if has_ingredient_details %}
+            <details class="spuds-pdp__ingredients-accordion">
+              <summary>
+                <span>{{ ingredient_details_label }}</span>
+                <span class="spuds-pdp__ingredients-toggle" aria-hidden="true">+</span>
+              </summary>
+              <div class="spuds-pdp__ingredients-content">
+                {% if ingredients_metafield.value != blank %}
+                  <div class="spuds-pdp__ingredients-item">
+                    <h3>{{ 'spuds_product.ingredients' | t }}</h3>
+                    {{ ingredients_metafield | metafield_tag }}
+                  </div>
+                {% endif %}
+
+                {% if feeding_directions_metafield.value != blank %}
+                  <div class="spuds-pdp__ingredients-item">
+                    <h3>{{ directions_label }}</h3>
+                    {{ feeding_directions_metafield | metafield_tag }}
+                  </div>
+                {% endif %}
+              </div>
+            </details>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
@@ -419,7 +446,7 @@
     },
     {
       "type": "paragraph",
-      "content": "Ingredients & Feeding Directions uses product metafields custom.ingredients and custom.feeding_directions. Create both as Rich text in Settings > Metafields and metaobjects > Products. Empty fields are hidden; when both are empty, the dropdown is hidden."
+      "content": "Content uses product metafields custom.ingredients and custom.feeding_directions. Enable custom.variant_content_enabled to use the selected variant's custom.description, custom.ingredients and custom.feeding_directions rich text fields instead. Empty fields are hidden. Salon products use How to Use labels."
     },
     {
       "type": "text",
