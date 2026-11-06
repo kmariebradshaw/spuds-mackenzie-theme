@@ -8,6 +8,7 @@
 
 {% liquid
   assign current_variant = product.selected_or_first_available_variant
+  assign gallery_media = product.media | where: 'preview_image'
   assign title_downcase = product.title | downcase
   assign use_delivered_assets = false
   if section.settings.use_delivered_chicken_assets and title_downcase contains 'chicken' and title_downcase contains 'bundle'
@@ -81,13 +82,14 @@
   data-spuds-product
   data-section-id="{{ section.id }}"
   data-variant-content="{{ use_variant_content }}"
+  data-cart-error="{{ 'products.product.add_to_cart_error' | t | escape }}"
   data-delivered-gallery="{{ use_delivered_assets }}"
   style="--spuds-pdp-accent: {{ section.settings.accent_color }};"
   {{ section.shopify_attributes }}
 >
   <div class="spuds-pdp__inner">
     <nav class="spuds-pdp__breadcrumbs" aria-label="Breadcrumb">
-      <a href="{{ routes.all_products_collection_url }}">All Spuds</a>
+      <a href="{{ collections['spuds-bundles'].url | default: routes.all_products_collection_url }}">All Spuds</a>
       <span aria-hidden="true">&gt;</span>
       {% if breadcrumb_collection != blank %}
         <a href="{{ breadcrumb_collection.url }}">{{ breadcrumb_collection.title }}</a>
@@ -130,6 +132,7 @@
           {% endif %}
         </div>
 
+        {% if use_delivered_assets or gallery_media.size > 1 %}
         <div class="spuds-pdp__thumb-rail">
           <button
             class="spuds-pdp__gallery-arrow spuds-pdp__gallery-arrow--previous"
@@ -163,7 +166,7 @@
                 </button>
               {% endfor %}
             {% else %}
-              {% for media in product.media limit: 5 %}
+              {% for media in gallery_media limit: 5 %}
                 {% if media.preview_image != blank %}
                   <button
                     class="spuds-pdp__thumbnail{% if media.id == featured_media.id %} is-active{% endif %}"
@@ -196,6 +199,7 @@
             {{- 'icon-chevron-right.svg' | inline_asset_content -}}
           </button>
         </div>
+        {% endif %}
       </div>
 
       <div class="spuds-pdp__details">

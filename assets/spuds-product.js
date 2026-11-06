@@ -2,6 +2,14 @@ const initializeSpudsProduct = (root) => {
   if (root.dataset.spudsProductInitialized === 'true') return;
   root.dataset.spudsProductInitialized = 'true';
 
+  root.addEventListener('shopify:cart:error', (event) => {
+    if (event.code !== 'SERVICE_UNAVAILABLE') return;
+    const errorMessage = root.querySelector('[ref="addToCartTextError"]');
+    if (!errorMessage) return;
+    errorMessage.textContent = root.dataset.cartError;
+    errorMessage.classList.remove('hidden');
+  });
+
   const mainImage = root.querySelector('[data-spuds-main-image]');
   const thumbnails = [...root.querySelectorAll('[data-spuds-gallery-thumb]')];
   const previousButton = root.querySelector('[data-spuds-gallery-previous]');
