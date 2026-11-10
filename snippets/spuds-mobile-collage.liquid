@@ -7,12 +7,9 @@
   <div class="spuds-collage__intro">
     {% render 'spuds-shape', shape: 'graphic-4', class: 'spuds-collage__accent spuds-collage__accent--headline' %}
     <h1 class="spuds-collage__headline">
-      {% if section.settings.hero_headline_graphic != blank %}
-        {{ section.settings.hero_headline_graphic | image_url: width: 1000 | image_tag: widths: '300,500,750,1000', sizes: '52vw', class: 'spuds-collage__headline-image', loading: 'eager', alt: '' }}
-      {% else %}
-        <img class="spuds-collage__headline-image" src="{{ 'HP-ATF-TextVectorized.webp' | asset_url }}" width="1400" height="1297" alt="" loading="eager">
-      {% endif %}
-      <span class="visually-hidden">{{ section.settings.hero_kicker | escape }} {{ section.settings.hero_title | escape }} {{ section.settings.hero_subtitle | escape }}</span>
+      <span class="spuds-collage__kicker">{{ section.settings.hero_kicker | escape }}</span>
+      <span class="spuds-collage__title">{{ section.settings.hero_title | escape }}</span>
+      <span class="spuds-collage__subtitle">{{ section.settings.hero_subtitle | escape }}</span>
     </h1>
     {% render 'spuds-shape', shape: 'graphic-3', class: 'spuds-collage__accent spuds-collage__accent--triangle' %}
   </div>
@@ -25,7 +22,7 @@
       {% endif %}
     </div>
     {% for block in section.blocks %}
-      <a class="spuds-collage__category spuds-collage__category--{{ forloop.index }}" href="{{ block.settings.link | default: section.settings.hero_link }}" {{ block.shopify_attributes }}>
+      <a class="spuds-collage__category spuds-collage__category--{{ block.settings.title | handleize }}" href="{{ block.settings.link | default: section.settings.hero_link }}" {{ block.shopify_attributes }}>
         <span class="spuds-collage__category-title"><strong>Spuds</strong>{{ block.settings.title | escape }}</span>
         {% if block.settings.image != blank %}
           {{ block.settings.image | image_url: width: 700 | image_tag: widths: '200,350,500,700', sizes: '44vw', loading: 'eager', alt: '' }}
@@ -35,7 +32,6 @@
     {% endfor %}
   </div>
   <div class="spuds-collage__cta">
-    {% render 'spuds-shape', shape: 'graphic-2', class: 'spuds-collage__accent spuds-collage__accent--cta' %}
     <a class="spuds-button spuds-collage__button" href="{{ section.settings.hero_link }}">{{ section.settings.hero_button | escape }} {% render 'spuds-shape', shape: 'arrow', color: '#ff2e6c' %}</a>
   </div>
   <p class="spuds-collage__proof">{{ section.settings.hero_eyebrow | escape }}</p>
