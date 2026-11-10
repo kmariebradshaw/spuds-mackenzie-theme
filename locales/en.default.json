@@ -8,6 +8,7 @@
  * ------------------------------------------------------------
  */
 {
+  "spuds_navigation": {"contact": "Contact"},
   "spuds_product": {
     "description": "Product Description:",
     "read_more": "Read More.",

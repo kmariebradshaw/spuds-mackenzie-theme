@@ -1,0 +1,13 @@
+{% doc %}
+  Preserves the Spuds Shop destination in Horizon navigation.
+  @param {link} link - Navigation link to resolve.
+{% enddoc %}
+{%- liquid
+  assign link_label = link.title | handleize
+  if link_label == 'shop'
+    assign bundles_url = routes.root_url | append: 'collections/spuds-bundles'
+    echo collections['spuds-bundles'].url | default: bundles_url
+  else
+    echo link.url
+  endif
+-%}

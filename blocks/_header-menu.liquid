@@ -53,7 +53,7 @@
               {% endunless %}
               <li>
                 <a
-                  href="{{ link.url }}"
+                  href="{% render 'spuds-navigation-url', link: link %}"
                   id="MenuItem-{{ link.handle }}"
                   class="menu-list__item"
                   {% if link.current %}
@@ -114,7 +114,7 @@
           on:pointerleave="/deactivate"
         >
           <a
-            href="{{ link.url }}"
+            href="{% render 'spuds-navigation-url', link: link %}"
             data-skip-node-update="true"
             class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}"
             {%- if link.links != blank -%}

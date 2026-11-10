@@ -196,7 +196,7 @@
                   {%- endcomment -%}
                   <a
                     id="HeaderDrawer-{{ link.handle }}"
-                    href="{{ link.url }}"
+                    href="{% render 'spuds-navigation-url', link: link %}"
                     class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset"
                     {% if link.current %}
                       aria-current="page"
@@ -250,7 +250,7 @@
                   {%- endcomment -%}
                   <a
                     id="HeaderDrawer-{{ link.handle }}"
-                    href="{{ link.url }}"
+                    href="{% render 'spuds-navigation-url', link: link %}"
                     class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset"
                     {% if link.current %}
                       aria-current="page"
@@ -577,7 +577,7 @@
                   {%- endcomment -%}
                   <a
                     id="HeaderDrawer-{{ link.handle }}"
-                    href="{{ link.url }}"
+                    href="{% render 'spuds-navigation-url', link: link %}"
                     class="menu-drawer__menu-item menu-drawer__menu-item--mainlist menu-drawer__animated-element focus-inset"
                     {% if link.current %}
                       aria-current="page"

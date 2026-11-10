@@ -10,6 +10,8 @@
     echo 'spuds_foundation.navigation_label' | t
   elsif link.type == 'page_link' and link.object.template_suffix == 'about-us'
     echo 'spuds_foundation.navigation_label' | t
+  elsif link.url contains '/pages/contact'
+    echo 'spuds_navigation.contact' | t
   else
     echo link.title | escape
   endif
