@@ -1,5 +1,13 @@
 {{ 'spuds-homepage.css' | asset_url | stylesheet_tag }}
-{{ 'spuds-mobile-home.css' | asset_url | stylesheet_tag }}
+{% liquid
+  assign show_mobile_collage = false
+  if template.name == 'index' and template.suffix == 'collage' and section.settings.mobile_layout == 'collage'
+    assign show_mobile_collage = true
+  endif
+%}
+{% if show_mobile_collage %}
+  {{ 'spuds-mobile-home.css' | asset_url | stylesheet_tag }}
+{% endif %}
 {% assign hero_image = section.settings.hero_image %}
 {% assign hero_headline_graphic = section.settings.hero_headline_graphic %}
 {% assign hero_polaroid_cluster = section.settings.hero_polaroid_cluster %}
@@ -8,8 +16,8 @@
 {% assign category_accent_left = section.settings.category_accent_left %}
 {% assign category_accent_right = section.settings.category_accent_right %}
 
-<section class="spuds-home{% if section.settings.mobile_layout == 'collage' %} spuds-home--collage{% endif %}" id="SpudsHero-{{ section.id }}">
-  {% if section.settings.mobile_layout == 'collage' %}
+<section class="spuds-home{% if show_mobile_collage %} spuds-home--collage{% endif %}" id="SpudsHero-{{ section.id }}">
+  {% if show_mobile_collage %}
     {% render 'spuds-mobile-collage', section: section %}
   {% endif %}
   <div class="spuds-shell">

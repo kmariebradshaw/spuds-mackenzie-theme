@@ -1,34 +1,6 @@
 .spuds-collage { display: none; }
 
 @media screen and (max-width: 749px) {
-  .spuds-home .spuds-hero__copy .spuds-button {
-    min-height: 11.8vw;
-    padding: 3vw 4.5vw;
-    font-size: 4vw;
-    line-height: 1.2;
-  }
-
-  .spuds-home .spuds-categories { gap: 2.5vw; padding: 5vw 4vw; }
-  .spuds-home .spuds-categories::before,
-  .spuds-home .spuds-categories__accent { display: none; }
-  .spuds-home .spuds-category { min-width: 0; }
-  .spuds-home .spuds-category__link {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5vw;
-    height: 100%;
-    padding: 2.5vw 1vw;
-    border-radius: 2.5vw;
-    background: #fff;
-    text-align: center;
-  }
-  .spuds-home .spuds-category__link > div { display: contents; }
-  .spuds-home .spuds-category__image { width: 100%; height: 24vw; object-fit: contain; transform: none; }
-  .spuds-home .spuds-category h2 { position: static; width: auto; margin: 0; font-size: 4.8vw; line-height: 1.1; transform: none; }
-  .spuds-home .spuds-category h2 strong { display: none; }
-  .spuds-home .spuds-category p { display: none; }
-  .spuds-home .spuds-text-link { margin: 0; font-size: 3.2vw; line-height: 1.3; text-align: center; transform: none; }
-
   .spuds-home--collage .spuds-shell { display: none; }
   .spuds-home--collage .spuds-collage { display: block; padding: 7vw 4vw 5vw; }
   .spuds-collage__intro { margin-bottom: 5vw; text-align: center; }
