@@ -1,0 +1,76 @@
+#header-component {
+  --spuds-header-font: "Scale VF", "scale-variable", Impact, sans-serif;
+}
+
+#header-component :is(.menu-list__link, .menu-drawer__menu-item, .menu-drawer__back-button) {
+  font-family: var(--spuds-header-font);
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings: "wght" 500, "wdth" 100;
+  letter-spacing: 0;
+}
+
+#header-component .header-logo__image {
+  object-fit: contain;
+}
+
+@media screen and (min-width: 750px) {
+  #header-component .header-logo__image {
+    width: auto;
+    height: 3.9vw;
+  }
+
+  #header-component .menu-list__link {
+    font-size: 1.2vw;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  #header-component .header__columns {
+    --header-mobile-bookend: max(11.5vw, var(--minimum-touch-target));
+  }
+
+  #header-component .header__columns .header-logo {
+    grid-area: center;
+  }
+
+  #header-component .header-logo__image {
+    width: auto;
+    height: 10vw;
+    max-width: 36vw;
+  }
+
+  #header-component .header__columns .search-action {
+    grid-area: leftA;
+    justify-self: center;
+  }
+
+  #header-component .header__columns header-actions {
+    display: contents;
+  }
+
+  #header-component header-actions > .account-button {
+    grid-area: leftB;
+    justify-self: center;
+  }
+
+  #header-component header-actions > :is([aria-controls="cart-drawer"], .action__cart) {
+    grid-area: rightA;
+    justify-self: center;
+  }
+
+  #header-component .header__drawer {
+    grid-area: rightB;
+    justify-self: end;
+  }
+
+  #header-component .header__icon--menu {
+    width: max(12.5vw, var(--minimum-touch-target));
+    min-height: max(12.5vw, var(--minimum-touch-target));
+    padding: 3.5vw;
+  }
+
+  #header-component .menu-drawer__menu-item--mainlist {
+    font-size: 5.2vw;
+  }
+}

@@ -2116,5 +2116,17 @@
         "default": "equal-width-buttons"
       }
     ]
+  },
+  {
+    "name": "Spuds navigation",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "spuds_show_faq",
+        "label": "Show FAQ links",
+        "default": false,
+        "info": "Enable after the FAQ content is ready."
+      }
+    ]
   }
 ]

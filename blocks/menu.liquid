@@ -73,6 +73,12 @@
         {% if menu %}
           <ul class="list-unstyled">
             {% for link in menu.links %}
+              {% unless settings.spuds_show_faq %}
+                {% assign spuds_link_title = link.title | handleize %}
+                {% if spuds_link_title == 'faq' or spuds_link_title == 'faqs' or link.url contains '/pages/faq' %}
+                  {% continue %}
+                {% endif %}
+              {% endunless %}
               <li class="menu__item {{ block_settings.link_preset }}">
                 <a href="{{ link.url }}">
                   {{ link.title }}{% if link.data_sharing_opt_out_icon %}{{ link.data_sharing_opt_out_icon }}{% endif %}

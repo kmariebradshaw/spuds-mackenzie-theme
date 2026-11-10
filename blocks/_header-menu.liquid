@@ -45,6 +45,12 @@
             role="list"
           >
             {% for link in block_settings.menu.links %}
+              {% unless settings.spuds_show_faq %}
+                {% assign spuds_link_title = link.title | handleize %}
+                {% if spuds_link_title == 'faq' or spuds_link_title == 'faqs' or link.url contains '/pages/faq' %}
+                  {% continue %}
+                {% endif %}
+              {% endunless %}
               <li>
                 <a
                   href="{{ link.url }}"
@@ -63,9 +69,6 @@
       </div>
     {% endif %}
   {% else %}
-    {% if section.settings.spuds_simple_desktop_menu %}
-      {% render 'spuds-desktop-nav', menu: block_settings.menu, section: section, block: block %}
-    {% else %}
     {% liquid
       assign block_settings = block.settings
       assign menu_content_type = block_settings.menu_style | default: 'text'
@@ -96,6 +99,12 @@
 
     {% capture children %}
       {% for link in block_settings.menu.links %}
+              {% unless settings.spuds_show_faq %}
+                {% assign spuds_link_title = link.title | handleize %}
+                {% if spuds_link_title == 'faq' or spuds_link_title == 'faqs' or link.url contains '/pages/faq' %}
+                  {% continue %}
+                {% endif %}
+              {% endunless %}
         <li
           role="presentation"
           class="menu-list__list-item"
@@ -202,7 +211,6 @@
         fetchpriority="low"
       ></script>
     </header-menu>
-    {% endif %}
 {% endcase %}
 
 {% style %}

@@ -117,6 +117,7 @@
 
                 <div class="cart-drawer__summary">
                   {% render 'cart-summary', section_id: 'cart-drawer-section' %}
+                  <a class="spuds-cart-view-link" href="{{ routes.cart_url }}">{{ 'content.view_cart' | t }}</a>
                 </div>
               </scroll-hint>
             {%- endif -%}
@@ -137,6 +138,24 @@
 {%- endif -%}
 
 {% stylesheet %}
+  #cart-drawer .spuds-cart-view-link {
+    display: block;
+    padding: .85vw;
+    color: #071b3d;
+    font-family: "work-sans", "Work Sans", Arial, sans-serif;
+    font-size: 1vw;
+    text-align: center;
+    text-underline-offset: .2em;
+  }
+
+  @media screen and (max-width: 749px) {
+    #cart-drawer .spuds-cart-view-link {
+      padding: 3vw;
+      font-size: 3.8vw;
+      min-height: 11.8vw;
+    }
+  }
+
   cart-drawer-component {
     --cart-drawer-padding: var(--theme-drawer-padding);
     --font-paragraph--line-height: 1;

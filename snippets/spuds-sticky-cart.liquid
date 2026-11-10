@@ -1,0 +1,21 @@
+{% doc %}
+  Renders a mobile action bar connected to the existing product form.
+  @param {product} product - The product on the page.
+  @param {variant} current_variant - The initially selected variant.
+{% enddoc %}
+
+<div class="spuds-sticky-cart" data-spuds-sticky-cart hidden>
+  <div class="spuds-sticky-cart__row">
+    <div class="spuds-sticky-cart__details">
+      <span class="spuds-sticky-cart__title">{{ product.title | escape }}</span>
+      <span class="spuds-sticky-cart__selection" data-spuds-sticky-selection>
+        {% unless product.has_only_default_variant %}{{ current_variant.title | escape }}{% endunless %}
+      </span>
+      <strong data-spuds-sticky-price>{{ current_variant.price | money }}</strong>
+    </div>
+    <button type="button" class="spuds-sticky-cart__button" data-spuds-sticky-submit {% unless current_variant.available %}disabled{% endunless %}>
+      <span data-spuds-sticky-label>{{ 'actions.add_to_cart' | t }}</span>
+    </button>
+  </div>
+  <p class="spuds-sticky-cart__error" data-spuds-sticky-error role="alert" hidden></p>
+</div>

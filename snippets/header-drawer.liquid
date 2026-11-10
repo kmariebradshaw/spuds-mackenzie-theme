@@ -108,6 +108,12 @@
             {% assign first_accordion_open = false %}
             {% assign animation_index = 0 %}
             {%- for link in linklist.links -%}
+              {% unless settings.spuds_show_faq %}
+                {% assign spuds_link_title = link.title | handleize %}
+                {% if spuds_link_title == 'faq' or spuds_link_title == 'faqs' or link.url contains '/pages/faq' %}
+                  {% continue %}
+                {% endif %}
+              {% endunless %}
               {% assign animation_index = animation_index | plus: 1 %}
               <li
                 style="--menu-drawer-animation-index: {{ animation_index }};"
@@ -261,6 +267,12 @@
             {%- endcomment -%}
             {% assign animation_index = 0 %}
             {%- for link in linklist.links -%}
+              {% unless settings.spuds_show_faq %}
+                {% assign spuds_link_title = link.title | handleize %}
+                {% if spuds_link_title == 'faq' or spuds_link_title == 'faqs' or link.url contains '/pages/faq' %}
+                  {% continue %}
+                {% endif %}
+              {% endunless %}
               {% assign animation_index = animation_index | plus: 1 %}
               <li
                 class="menu-drawer__list-item"

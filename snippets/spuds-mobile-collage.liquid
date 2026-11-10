@@ -1,0 +1,31 @@
+{% doc %}
+  Renders the alternate mobile category collage using the hero's editable images and links.
+  @param {section} section - Spuds hero section.
+{% enddoc %}
+
+<div class="spuds-collage">
+  <div class="spuds-collage__intro">
+    <p>{{ section.settings.hero_kicker | escape }}</p>
+    <h1>{{ section.settings.hero_title | escape }} <span>{{ section.settings.hero_subtitle | escape }}</span></h1>
+  </div>
+  <div class="spuds-collage__grid">
+    <div class="spuds-collage__portrait">
+      {% if section.settings.hero_image != blank %}
+        {{ section.settings.hero_image | image_url: width: 1000 | image_tag: widths: '400,600,800,1000', sizes: '58vw', loading: 'eager', fetchpriority: 'high', alt: 'Spuds MacKenzie' }}
+      {% else %}
+        <img src="{{ 'spuds-photo-today.png' | asset_url }}" width="500" height="575" alt="Spuds MacKenzie" loading="eager" fetchpriority="high">
+      {% endif %}
+    </div>
+    {% for block in section.blocks %}
+      <a class="spuds-collage__category spuds-collage__category--{{ forloop.index }}" href="{{ block.settings.link | default: section.settings.hero_link }}" {{ block.shopify_attributes }}>
+        <span class="spuds-collage__category-title">{{ block.settings.title | escape }}</span>
+        {% if block.settings.image != blank %}
+          {{ block.settings.image | image_url: width: 700 | image_tag: widths: '200,350,500,700', sizes: '44vw', loading: 'eager', alt: '' }}
+        {% endif %}
+        <span class="spuds-collage__shop">{{ block.settings.link_label | escape }} <span aria-hidden="true">↗</span></span>
+      </a>
+    {% endfor %}
+  </div>
+  <a class="spuds-collage__button" href="{{ section.settings.hero_link }}">{{ section.settings.hero_button | escape }} <span aria-hidden="true">→</span></a>
+  <p class="spuds-collage__proof">{{ section.settings.hero_eyebrow | escape }}</p>
+</div>

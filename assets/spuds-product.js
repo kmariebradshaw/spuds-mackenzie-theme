@@ -161,7 +161,7 @@ const initializeSpudsProduct = (root) => {
 
     const available = option.dataset.available === 'true';
     if (addButton) addButton.disabled = !available;
-    if (addLabel) addLabel.textContent = available ? 'Add to cart' : 'Sold out';
+    if (addLabel) addLabel.textContent = available ? root.dataset.addLabel : root.dataset.soldOutLabel;
 
     const planId = option.dataset.subscriptionPlan || '';
     if (subscriptionOption) {

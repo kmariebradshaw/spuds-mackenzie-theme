@@ -97,17 +97,10 @@
   endcapture
 
   capture actions
-    echo '<div class="spuds-header-actions">'
-    if section.settings.show_search
-      render 'search', style: search_style, class: 'spuds-header-search', display_style: section.settings.actions_display_style
-    endif
     render 'header-actions', customer_account_menu: section.settings.customer_account_menu, display_style: section.settings.actions_display_style, section: section
-    echo '</div>'
   endcapture
 
-  if shop.customer_accounts_enabled
-    assign search_class = 'search-action--hidden-on-drawer'
-  endif
+  assign search_class = ''
 
   # Handle localization positioning
   if section.settings.localization_position == 'left'
@@ -134,16 +127,8 @@
     endif
   endif
   capture search
-    echo ''
+    render 'search', style: search_style, class: search_class, display_style: section.settings.actions_display_style
   endcapture
-
-  # Skip drawer search under specific conditions:
-  # Always render if search_row is bottom
-  # Don't render when shop.customer_accounts_enabled is false and search_position is left and search_style is not none
-  assign skip_drawer_search = false
-  if shop.customer_accounts_enabled == false and section.settings.search_position == 'left' and search_style != 'none'
-    assign skip_drawer_search = true
-  endif
 
   capture drawer_search
     echo ''
@@ -171,11 +156,12 @@
     endif
   endif
 
+  if section.settings.show_search and section.settings.search_row == 'bottom'
+    assign bottom_row_blocks = bottom_row_blocks | append: 'search,'
+  endif
+
   assign bottom_row_blocks = bottom_row_blocks | split: ',' | compact
 
-  # Search is intentionally grouped with account and cart so Horizon cannot
-  # place it in a separate row.
-  assign order = 'logo,menu,localization,actions'
 
   if section.settings.section_height == 'compact'
     assign header_height_class = ' header--compact'
@@ -469,7 +455,7 @@
   type="module"
 ></script>
 
-{{ 'spuds-mobile-nav.css' | asset_url | stylesheet_tag }}
+{{ 'spuds-header.css' | asset_url | stylesheet_tag }}
 
 {% stylesheet %}
   body {
@@ -1170,306 +1156,6 @@
     font-size: var(--menu-localization-font-size);
   }
 
-  /* Spuds MacKenzie header presentation.
-     Horizon's logo, menu, drawer, search, account, cart, sticky behavior,
-     and theme-editor blocks remain unchanged above. */
-  /* SPUDS-NAV-SYNC-20260824 */
-  #header-component {
-    --spuds-header-cream: #faf0e4;
-    --spuds-header-navy: #071b3d;
-    --spuds-header-pink: #f63264;
-    --spuds-header-font: "Scale VF", "scale-variable", Impact, sans-serif;
-    --cart-bubble-background: var(--spuds-header-pink);
-    --cart-bubble-text: #fff;
-    overflow: visible;
-    border-bottom-style: solid;
-    background: var(--spuds-header-cream);
-    color: var(--spuds-header-navy);
-  }
-
-  #header-component .header__underlay,
-  #header-component .header__row {
-    background: var(--spuds-header-cream) !important;
-  }
-
-  #header-component .header__row {
-    border-bottom: 0 !important;
-  }
-
-  #header-component :is(a, button, .button, .header-actions__action) {
-    color: var(--spuds-header-navy);
-  }
-
-  #header-component .menu-list__link {
-    font-family: var(--spuds-header-font);
-    font-weight: 400;
-    font-stretch: expanded;
-    font-variation-settings: "wght" 400, "wdth" 115;
-    letter-spacing: .03em;
-    text-transform: uppercase;
-  }
-
-  #header-component .header-logo {
-    position: relative;
-    z-index: calc(var(--layer-header-menu) + 2);
-  }
-
-  #header-component .header-logo img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-  }
-
-  #header-component .header-logo :is(a, span) {
-    color: var(--spuds-header-navy);
-    font-family: var(--spuds-header-font);
-    font-weight: 700;
-    text-decoration: none;
-  }
-
-  #header-component .header-actions__action svg,
-  #header-component .header__icon--menu svg {
-    color: var(--spuds-header-navy);
-    stroke: currentColor;
-  }
-
-  #header-component .cart-bubble__background {
-    background-color: var(--spuds-header-pink) !important;
-  }
-
-  #header-component .header-actions__cart-icon--has-cart svg {
-    mask: none;
-  }
-
-  #header-component .spuds-header-actions {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: inherit;
-    height: 100%;
-    line-height: 1;
-  }
-
-  #header-component .spuds-header-actions :is(.search-action, header-actions, .header-actions) {
-    display: flex;
-    align-items: center;
-  }
-
-  @media screen and (min-width: 750px) {
-    #header-component { min-height: 6vw; border-bottom-width: 0; }
-    #header-component::after {
-      content: ""; position: absolute; right: 0; bottom: 0; left: 0;
-      height: .08vw; background: var(--spuds-header-pink); pointer-events: none;
-    }
-    #header-component .header__row--top .header__columns {
-      position: relative; min-height: 6vw; width: 100%; grid-column: 1 / -1;
-      grid-template-areas: "left center right"; grid-template-columns: 1fr auto 1fr;
-      gap: 2vw; padding: .7vw 3vw; overflow: visible;
-    }
-    #header-component .header__column { display: contents; }
-    #header-component .header-logo {
-      position: relative; top: auto; left: auto; grid-area: left;
-      justify-self: start; align-self: center; width: 8vw; max-width: 8vw;
-      height: 4.6vw; padding: 0; margin: 0; transform: none;
-    }
-    #header-component .header-logo .header-logo__image {
-      width: 8vw !important; height: 4.6vw !important; max-width: 100%; object-fit: contain;
-    }
-    #header-component :is(header-menu, .spuds-desktop-nav) {
-      grid-area: center; justify-self: center; align-self: center;
-    }
-    #header-component header-menu .menu-list { justify-content: center; gap: 2.7vw; }
-    #header-component :is(.menu-list__link, .spuds-desktop-nav__link) {
-      font-family: var(--spuds-header-font); font-size: 1.15vw; font-weight: 400;
-      font-stretch: normal; font-variation-settings: "wght" 400, "wdth" 100;
-      letter-spacing: .015vw; line-height: 1.3; text-transform: uppercase;
-      text-decoration: none; padding: .8vw 0;
-    }
-    #header-component .spuds-header-actions {
-      grid-area: right; justify-self: end; align-self: center; gap: 1vw;
-    }
-    #header-component :is(header-actions, .header-actions) { display: flex; align-items: center; gap: 1vw; }
-    #header-component .spuds-header-actions :is(.search-action, .header-actions__action, .account-button) {
-      display: flex; align-items: center; justify-content: center;
-      width: 2.5vw; min-width: 2.5vw; height: 2.5vw; padding: 0;
-    }
-    #header-component .spuds-header-actions :is(.svg-wrapper, svg),
-    #header-component .account-button [slot="signed-out-avatar"] {
-      width: 1.65vw; height: 1.65vw;
-    }
-    #header-component .header-actions__cart-icon {
-      --cart-bubble-size: 1.05vw; --cart-bubble-top: -.35vw; --cart-bubble-right: -.4vw;
-    }
-    #header-component .header-actions__cart-icon--has-cart .cart-bubble {
-      top: -.35vw !important; right: -.4vw !important; width: auto !important;
-      min-width: 1.05vw !important; height: 1.05vw !important; padding: 0 .15vw !important;
-      display: flex !important; align-items: center; justify-content: center;
-      overflow: visible !important; background: var(--spuds-header-pink) !important;
-      color: #fff !important; border-radius: 1vw !important;
-    }
-    #header-component .header-actions__cart-icon--has-cart .cart-bubble__background { display: none !important; }
-    #header-component .header-actions__cart-icon--has-cart .cart-bubble__text {
-      width: 100%; height: 100%; font-family: "Work Sans", Arial, sans-serif;
-      font-size: .65vw; font-weight: 600; line-height: 1;
-    }
-    #header-component .header-actions__cart-icon--has-cart .cart-bubble__text-count { display: block; line-height: 1; }
-    #header-component .header__row--bottom { min-height: 0; }
-  }
-
-  @media screen and (max-width: 749px) {
-    #header-component {
-      min-height: 12vw;
-      border-bottom-width: .25vw;
-      border-bottom-color: var(--spuds-header-pink);
-    }
-
-    #header-component .header__row--top .header__columns {
-      position: relative;
-      grid-column: 1 / -1;
-      width: 100%;
-      min-height: 12vw;
-      display: block;
-      padding: 0;
-    }
-
-    #header-component .header__column--left,
-    #header-component .header__column--right {
-      display: contents;
-    }
-
-    #header-component header-drawer {
-      position: absolute;
-      z-index: calc(var(--layer-header-menu) + 2);
-      top: 50%;
-      left: 2.5vw;
-      transform: translateY(-50%);
-    }
-
-    #header-component .spuds-header-actions {
-      position: absolute;
-      z-index: calc(var(--layer-header-menu) + 2);
-      top: 50%;
-      right: 2.5vw;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      flex-wrap: nowrap;
-      gap: 1.5vw;
-      height: auto;
-      transform: translateY(-50%);
-    }
-
-    #header-component header-actions {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      flex-wrap: nowrap;
-      gap: 1.5vw;
-    }
-
-    #header-component .header__column--right header-actions {
-      margin-inline-start: 0;
-    }
-
-    #header-component .header-actions__action,
-    #header-component .account-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #header-component shopify-account,
-    #header-component .account-button [slot="signed-out-avatar"] {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-    }
-
-    #header-component .header-logo {
-      position: absolute;
-      z-index: calc(var(--layer-header-menu) + 2);
-      top: 50%;
-      left: 50%;
-      width: 20vw;
-      max-width: 20vw;
-      height: auto;
-      transform: translate(-50%, -50%);
-    }
-
-    #header-component .header-logo .header-logo__image {
-      width: 20vw !important;
-      height: auto !important;
-      max-width: none;
-    }
-
-    #header-component .menu-list__link {
-      font-size: 4vw;
-    }
-
-    #header-component .spuds-header-actions :is(.search-action, .header-actions__action),
-    #header-component .header__icon--menu {
-      width: 7vw;
-      min-width: 7vw;
-      height: 7vw;
-      min-height: 7vw;
-      padding: 0;
-    }
-
-    #header-component .spuds-header-actions :is(.search-action, .header-actions__action) .svg-wrapper,
-    #header-component .spuds-header-actions :is(.search-action, .header-actions__action) svg,
-    #header-component .header__icon--menu svg {
-      width: 4vw;
-      height: 4vw;
-    }
-
-    #header-component .account-button svg {
-      width: 4.2vw;
-      height: 4.2vw;
-    }
-
-    #header-component .header-actions__cart-icon {
-      --cart-bubble-size: 3.4vw;
-      --cart-bubble-top: -.9vw;
-      --cart-bubble-right: -.9vw;
-    }
-
-    #header-component .header-actions__cart-icon--has-cart .cart-bubble {
-      width: var(--cart-bubble-size) !important;
-      min-width: var(--cart-bubble-size) !important;
-      height: var(--cart-bubble-size) !important;
-      padding: 0 !important;
-      display: grid !important;
-      place-items: center;
-      overflow: visible !important;
-      background: var(--spuds-header-pink) !important;
-      color: #fff !important;
-      border-radius: 50% !important;
-    }
-
-    #header-component .header-actions__cart-icon--has-cart .cart-bubble__background {
-      display: none !important;
-    }
-
-    #header-component .header-actions__cart-icon--has-cart .cart-bubble__text {
-      width: 100%;
-      height: 100%;
-      display: grid;
-      place-items: center;
-      overflow: visible;
-      font-family: "Work Sans", Arial, sans-serif;
-      font-size: 1.7vw;
-      font-weight: 600;
-      line-height: 1;
-    }
-
-    #header-component .header-actions__cart-icon--has-cart .cart-bubble__text-count {
-      display: block;
-      line-height: 1;
-      transform: translateY(.05vw);
-    }
-  }
 {% endstylesheet %}
 
 {% unless request.design_mode %}
@@ -1487,10 +1173,7 @@
   "tag": "header",
   "class": "header-section",
   "settings": [
-    {"type": "header", "content": "Spuds desktop navigation"},
-    {"type": "checkbox", "id": "spuds_simple_desktop_menu", "label": "Use simplified desktop menu", "default": true},
     {"type": "url", "id": "spuds_about_link", "label": "About Us link", "info": "Uses your existing About menu link, or /pages/about-us."},
-    {"type": "url", "id": "spuds_contact_link", "label": "Contact link", "info": "Uses your existing Contact menu link, or /pages/contact."},
     {
       "type": "header",
       "content": "t:content.logo"
