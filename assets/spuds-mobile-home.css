@@ -17,8 +17,9 @@
   .spuds-collage__category { --collage-category-accent: var(--pink); position: relative; display: flex; flex-direction: column; align-items: center; justify-content: space-between; min-width: 0; padding: 2.5vw 3vw; border: .25vw solid var(--collage-category-accent); border-radius: 4vw; background: #fff; box-shadow: .7vw .7vw 0 var(--collage-category-accent); color: var(--navy); text-decoration: none; overflow: hidden; }
   .spuds-collage__category--health { --collage-category-accent: var(--teal); }
   .spuds-collage__category--salon { --collage-category-accent: var(--yellow); }
+  .spuds-collage__category { cursor: pointer; transition: transform 120ms ease, box-shadow 120ms ease; -webkit-tap-highlight-color: transparent; }
+  .spuds-collage__category:active { transform: translate(.7vw, .7vw); box-shadow: inset 0 .35vw .8vw rgb(7 27 61 / .14); }
   .spuds-collage__category-title { flex-shrink: 0; color: var(--collage-category-accent); font-family: var(--script); font-size: 7.5vw; font-weight: 400; line-height: .85; text-align: center; }
-  .spuds-collage__category--salon .spuds-collage__category-title { -webkit-text-stroke: .12vw var(--navy); paint-order: stroke fill; }
   .spuds-collage__category-title strong { display: block; color: var(--navy); font-family: var(--brush); font-size: 5.5vw; font-weight: 400; -webkit-text-stroke: 0; }
   .spuds-collage__category > img { min-height: 0; width: 100%; height: 21vw; object-fit: contain; }
   .spuds-collage__shop { display: flex; flex-shrink: 0; align-items: center; justify-content: space-between; width: 100%; color: var(--navy); font-family: var(--scale); font-size: 3.4vw; font-weight: 500; font-variation-settings: "wght" 500, "wdth" 120; line-height: 1.2; text-transform: uppercase; }
@@ -30,4 +31,9 @@
   .spuds-collage .spuds-collage__button svg { flex-shrink: 0; width: 10vw; height: 4vw; }
   .spuds-collage__proof { margin: 4vw 3vw 0; text-align: center; font-size: 3.7vw; line-height: 1.5; }
   .spuds-collage a:focus-visible { outline: .6vw solid var(--navy); outline-offset: 1vw; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spuds-collage__category { transition: none; }
+    .spuds-collage__category:active { transform: none; }
+  }
 }
