@@ -40,12 +40,12 @@
     max-width: 36vw;
   }
 
-  #header-component .header__columns .search-action {
+  #header-component[data-menu-style] .header__columns .search-action {
     grid-area: leftA;
     justify-self: center;
   }
 
-  #header-component .header__columns header-actions {
+  #header-component[data-menu-style] .header__columns header-actions {
     display: contents;
   }
 
@@ -59,7 +59,7 @@
     justify-self: center;
   }
 
-  #header-component .header__drawer {
+  #header-component[data-menu-style] .header__columns .header__drawer {
     grid-area: rightB;
     justify-self: end;
   }

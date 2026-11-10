@@ -1,7 +1,7 @@
-{% doc %}
+{%- doc -%}
   Preserves the Spuds Shop destination in Horizon navigation.
   @param {link} link - Navigation link to resolve.
-{% enddoc %}
+{%- enddoc -%}
 {%- liquid
   assign link_label = link.title | handleize
   if link_label == 'shop'
