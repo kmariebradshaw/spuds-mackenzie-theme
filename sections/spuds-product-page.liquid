@@ -279,8 +279,12 @@
 
             {% unless product.has_only_default_variant %}
               <div class="spuds-pdp__variant-row">
-                <label for="SpudsVariant-{{ section.id }}">Choose an option:</label>
-                <select id="SpudsVariant-{{ section.id }}" data-spuds-variant-select>
+                {% if product.variants.size == 1 %}
+                  <span class="spuds-pdp__variant-name">{{ current_variant.title | escape }}</span>
+                {% else %}
+                  <label for="SpudsVariant-{{ section.id }}">Choose an option:</label>
+                {% endif %}
+                <select id="SpudsVariant-{{ section.id }}" data-spuds-variant-select{% if product.variants.size == 1 %} hidden{% endif %}>
                   {% for variant in product.variants %}
                     {% assign variant_subscription = variant.selling_plan_allocations.first %}
                     {% assign gallery_variant_key = variant.id | append: '' %}
