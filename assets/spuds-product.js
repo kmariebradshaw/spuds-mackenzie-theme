@@ -14,9 +14,11 @@ const initializeSpudsProduct = (root) => {
   const thumbnails = [...root.querySelectorAll('[data-spuds-gallery-thumb]')];
   const previousButton = root.querySelector('[data-spuds-gallery-previous]');
   const nextButton = root.querySelector('[data-spuds-gallery-next]');
+  const galleryRail = root.querySelector('[data-spuds-gallery-rail]');
+  let visibleThumbnails = thumbnails.filter((thumbnail) => !thumbnail.hidden);
 
   const showThumbnail = (thumbnail) => {
-    if (!thumbnail || !mainImage) return;
+    if (!thumbnail || thumbnail.hidden || !mainImage) return;
 
     mainImage.removeAttribute('srcset');
     mainImage.removeAttribute('sizes');
@@ -35,14 +37,45 @@ const initializeSpudsProduct = (root) => {
   });
 
   const stepGallery = (direction) => {
-    if (!thumbnails.length) return;
+    if (!visibleThumbnails.length) return;
     const currentIndex = Math.max(
       0,
-      thumbnails.findIndex((thumbnail) => thumbnail.classList.contains('is-active'))
+      visibleThumbnails.findIndex((thumbnail) => thumbnail.classList.contains('is-active'))
     );
-    const nextIndex = (currentIndex + direction + thumbnails.length) % thumbnails.length;
-    showThumbnail(thumbnails[nextIndex]);
-    thumbnails[nextIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    const nextIndex = (currentIndex + direction + visibleThumbnails.length) % visibleThumbnails.length;
+    showThumbnail(visibleThumbnails[nextIndex]);
+    visibleThumbnails[nextIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  };
+
+  const updateGallery = (option, selectImage = false) => {
+    if (root.dataset.deliveredGallery === 'true') return;
+
+    let mediaIds;
+    try {
+      const ids = JSON.parse(option?.dataset.galleryMediaIds || 'null');
+      if (Array.isArray(ids)) mediaIds = new Set(ids.map(String));
+    } catch {
+      mediaIds = undefined;
+    }
+
+    thumbnails.forEach((thumbnail) => {
+      thumbnail.hidden = mediaIds
+        ? !mediaIds.has(thumbnail.dataset.mediaId)
+        : Boolean(option && thumbnail.dataset.variantImage === 'true' && thumbnail.dataset.mediaId !== option.dataset.mediaId);
+      if (thumbnail.hidden) {
+        thumbnail.classList.remove('is-active');
+        thumbnail.setAttribute('aria-pressed', 'false');
+      }
+    });
+    visibleThumbnails = thumbnails.filter((thumbnail) => !thumbnail.hidden);
+    if (galleryRail) galleryRail.hidden = visibleThumbnails.length < 2;
+    if (previousButton) previousButton.disabled = visibleThumbnails.length < 2;
+    if (nextButton) nextButton.disabled = visibleThumbnails.length < 2;
+
+    if (selectImage) {
+      const selectedThumbnail = visibleThumbnails.find((thumbnail) => thumbnail.dataset.mediaId === option?.dataset.mediaId);
+      showThumbnail(selectedThumbnail || visibleThumbnails[0]);
+    }
   };
 
   previousButton?.addEventListener('click', () => stepGallery(-1));
@@ -185,13 +218,10 @@ const initializeSpudsProduct = (root) => {
     updateSellingPlan();
     updateVariantContent(option.value);
 
-    if (root.dataset.deliveredGallery !== 'true' && option.dataset.image && mainImage) {
-      mainImage.removeAttribute('srcset');
-      mainImage.removeAttribute('sizes');
-      mainImage.src = option.dataset.image;
-    }
+    updateGallery(option, true);
   };
 
+  updateGallery(variantSelect?.selectedOptions[0]);
   variantSelect?.addEventListener('change', updateVariant);
 };
 

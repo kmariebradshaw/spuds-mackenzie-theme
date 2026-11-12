@@ -11,6 +11,26 @@
 {% liquid
   assign current_variant = product.selected_or_first_available_variant
   assign gallery_media = product.media | where: 'preview_image'
+  assign variant_gallery = product.metafields.custom.variant_gallery.value
+  assign current_variant_key = current_variant.id | append: ''
+  assign current_gallery_ids = variant_gallery[current_variant_key]
+  assign variant_media_ids = product.variants | map: 'featured_media' | map: 'id'
+  assign visible_gallery_media = '' | split: ','
+  for media in gallery_media
+    assign media_key = media.id | append: ''
+    if current_gallery_ids != blank
+      unless current_gallery_ids contains media_key
+        continue
+      endunless
+    elsif variant_media_ids contains media.id
+      if media.id != current_variant.featured_media.id
+        continue
+      endif
+    endif
+    assign matched_media = gallery_media | where: 'id', media.id
+    assign visible_gallery_media = visible_gallery_media | concat: matched_media
+  endfor
+  assign visible_media_ids = visible_gallery_media | map: 'id'
   assign title_downcase = product.title | downcase
   assign use_delivered_assets = false
   if section.settings.use_delivered_chicken_assets and title_downcase contains 'chicken' and title_downcase contains 'bundle'
@@ -121,7 +141,7 @@
               data-spuds-main-image
             >
           {% else %}
-            {% assign featured_media = current_variant.featured_media | default: product.featured_media %}
+            {% assign featured_media = product.selected_variant.featured_media | default: product.featured_media %}
             {% if featured_media.preview_image != blank %}
               <img
                 src="{{ featured_media.preview_image | image_url: width: 1600 }}"
@@ -139,7 +159,7 @@
         </div>
 
         {% if use_delivered_assets or gallery_media.size > 1 %}
-        <div class="spuds-pdp__thumb-rail">
+        <div class="spuds-pdp__thumb-rail" data-spuds-gallery-rail{% unless use_delivered_assets or visible_gallery_media.size > 1 %} hidden{% endunless %}>
           <button
             class="spuds-pdp__gallery-arrow spuds-pdp__gallery-arrow--previous"
             type="button"
@@ -172,7 +192,7 @@
                 </button>
               {% endfor %}
             {% else %}
-              {% for media in gallery_media limit: 5 %}
+              {% for media in gallery_media %}
                 {% if media.preview_image != blank %}
                   <button
                     class="spuds-pdp__thumbnail{% if media.id == featured_media.id %} is-active{% endif %}"
@@ -180,6 +200,9 @@
                     aria-label="View {{ media.alt | default: product.title | escape }}"
                     aria-pressed="{% if media.id == featured_media.id %}true{% else %}false{% endif %}"
                     data-spuds-gallery-thumb
+                    data-media-id="{{ media.id }}"
+                    data-variant-image="{% if variant_media_ids contains media.id %}true{% else %}false{% endif %}"
+                    {% unless visible_media_ids contains media.id %}hidden{% endunless %}
                     data-image="{{ media.preview_image | image_url: width: 1600 }}"
                     data-alt="{{ media.alt | default: product.title | escape }}"
                   >
@@ -260,11 +283,14 @@
                 <select id="SpudsVariant-{{ section.id }}" data-spuds-variant-select>
                   {% for variant in product.variants %}
                     {% assign variant_subscription = variant.selling_plan_allocations.first %}
+                    {% assign gallery_variant_key = variant.id | append: '' %}
                     <option
                       value="{{ variant.id }}"
                       data-price="{{ variant.price | money | escape }}"
                       data-available="{{ variant.available }}"
                       data-image="{% if variant.featured_media.preview_image != blank %}{{ variant.featured_media.preview_image | image_url: width: 1600 }}{% endif %}"
+                      data-media-id="{{ variant.featured_media.id }}"
+                      data-gallery-media-ids="{{ variant_gallery[gallery_variant_key] | json | escape }}"
                       data-subscription-plan="{{ variant_subscription.selling_plan.id }}"
                       data-subscription-price="{{ variant_subscription.price | money | escape }}"
                       data-subscription-name="{{ variant_subscription.selling_plan.name | escape }}"

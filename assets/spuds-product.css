@@ -131,6 +131,11 @@
   display: none;
 }
 
+.spuds-pdp__thumbnail[hidden],
+.spuds-pdp__thumb-rail[hidden] {
+  display: none;
+}
+
 .spuds-pdp__thumbnail,
 .spuds-pdp__gallery-arrow {
   border: 0;
