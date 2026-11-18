@@ -1562,15 +1562,15 @@
   .spuds-hero--extended .spuds-hero__image::before {
     content: "";
     position: absolute;
-    inset: auto 0 48.5vw;
-    height: max(51.5vw, calc(100% - 48.5vw));
+    inset: auto 0 0;
+    aspect-ratio: 1024 / 1174;
     background: var(--spuds-hero-sky, none) center bottom / 100% 100% no-repeat;
   }
 
   .spuds-hero--extended .spuds-hero__image picture {
     position: absolute;
     inset: auto 0 0;
-    mask-image: linear-gradient(to bottom, transparent, #000 3%);
+    mask-image: linear-gradient(to bottom, transparent, #000 6%);
   }
 
   .spuds-hero--extended .spuds-hero__image::after {
