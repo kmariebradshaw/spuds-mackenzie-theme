@@ -130,6 +130,45 @@ const initializeSpudsProduct = (root) => {
   updateSellingPlan();
 
   const variantSelect = root.querySelector('[data-spuds-variant-select]');
+  const picker = root.querySelector('[data-spuds-option-picker]');
+  const choices = Array.from(variantSelect?.options || [], option => ({
+    option,
+    values: JSON.parse(option.dataset.options || '[]'),
+  }));
+  const groups = picker?.querySelectorAll('[data-option-index]') || [];
+
+  const syncOptionButtons = () => {
+    const selected = choices[variantSelect?.selectedIndex];
+    if (!selected) return;
+    let matching = choices;
+    groups.forEach((group, index) => {
+      group.querySelectorAll('button').forEach(button => {
+        const matches = matching.filter(choice => choice.values[index] === button.value);
+        const soldOut = matches.length > 0 && matches.every(choice => choice.option.dataset.available !== 'true');
+        button.hidden = matches.length === 0;
+        button.setAttribute('aria-pressed', String(button.value === selected.values[index]));
+        button.classList.toggle('is-sold-out', soldOut);
+        button.setAttribute('aria-label', soldOut ? `${button.value}, ${root.dataset.soldOutLabel}` : button.value);
+      });
+      matching = matching.filter(choice => choice.values[index] === selected.values[index]);
+    });
+  };
+
+  picker?.addEventListener('click', event => {
+    const button = event.target.closest('button');
+    if (!button || button.hidden) return;
+    const index = Number(button.closest('[data-option-index]').dataset.optionIndex);
+    const current = choices[variantSelect.selectedIndex];
+    const prefix = [...current.values.slice(0, index), button.value];
+    const matches = choices.filter(choice => prefix.every((value, i) => choice.values[i] === value));
+    const next = matches.find(choice => choice.values.slice(index + 1).every((value, i) => value === current.values[index + 1 + i]))
+      || matches.find(choice => choice.option.dataset.available === 'true')
+      || matches[0];
+    if (next && next !== current) {
+      variantSelect.value = next.option.value;
+      variantSelect.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  });
   const variantInput = root.querySelector('[data-spuds-variant-id]');
   const oneTimePrice = root.querySelector('[data-spuds-one-time-price]');
   const subscriptionPrice = root.querySelector('[data-spuds-subscription-price]');
@@ -143,16 +182,12 @@ const initializeSpudsProduct = (root) => {
   let contentSequence = 0;
   if (content) contentCache.set(content.dataset.variantId, content.innerHTML);
 
-  const updateVariantContent = async (variantId) => {
+  const updateVariantContent = async (variantId, variantUrl) => {
     if (!content || root.dataset.variantContent !== 'true') return;
 
     contentRequest?.abort();
     const sequence = ++contentSequence;
     const accordionOpen = Boolean(content.querySelector('details')?.open);
-    const variantUrl = new URL(window.location.href);
-    variantUrl.searchParams.set('variant', variantId);
-    variantUrl.searchParams.delete('section_id');
-    window.history.replaceState(window.history.state, '', variantUrl);
     content.setAttribute('aria-busy', 'true');
     content.style.visibility = 'hidden';
 
@@ -189,6 +224,11 @@ const initializeSpudsProduct = (root) => {
     const option = variantSelect?.selectedOptions[0];
     if (!option) return;
 
+    syncOptionButtons();
+    const variantUrl = new URL(window.location.href);
+    variantUrl.searchParams.set('variant', option.value);
+    variantUrl.searchParams.delete('section_id');
+    window.history.replaceState(window.history.state, '', variantUrl);
     if (variantInput) variantInput.value = option.value;
     if (oneTimePrice) oneTimePrice.textContent = option.dataset.price || '';
 
@@ -216,11 +256,14 @@ const initializeSpudsProduct = (root) => {
       if (oneTimeOption) oneTimeOption.checked = true;
     }
     updateSellingPlan();
-    updateVariantContent(option.value);
+    updateVariantContent(option.value, variantUrl);
 
     updateGallery(option, true);
+    const cartButton = addButton?.closest('add-to-cart-component');
+    if (cartButton) cartButton.dataset.productVariantMedia = mainImage?.src || '';
   };
 
+  syncOptionButtons();
   updateGallery(variantSelect?.selectedOptions[0]);
   variantSelect?.addEventListener('change', updateVariant);
 };

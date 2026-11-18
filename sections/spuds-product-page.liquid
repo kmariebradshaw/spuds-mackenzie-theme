@@ -135,7 +135,7 @@
               data-spuds-main-image
             >
           {% else %}
-            {% assign featured_media = product.selected_variant.featured_media | default: product.featured_media %}
+            {% assign featured_media = current_variant.featured_media | default: visible_gallery_media.first | default: product.featured_media %}
             {% if featured_media.preview_image != blank %}
               <img
                 src="{{ featured_media.preview_image | image_url: width: 1600 }}"
@@ -264,18 +264,35 @@
             >
 
             {% unless product.has_only_default_variant %}
-              <div class="spuds-pdp__variant-row">
-                {% if product.variants.size == 1 %}
-                  <span class="spuds-pdp__variant-name">{{ current_variant.title | escape }}</span>
-                {% else %}
-                  <label for="SpudsVariant-{{ section.id }}">Choose an option:</label>
-                {% endif %}
-                <select id="SpudsVariant-{{ section.id }}" data-spuds-variant-select{% if product.variants.size == 1 %} hidden{% endif %}>
+              <div class="spuds-pdp__variant-row" data-spuds-option-picker>
+                {% for option in product.options_with_values %}
+                  <fieldset class="spuds-pdp__option-group" data-option-index="{{ forloop.index0 }}">
+                    <legend>{{ option.name | escape }}</legend>
+                    <div class="spuds-pdp__option-buttons">
+                      {% for value in option.values %}
+                        <button
+                          type="button"
+                          class="spuds-pdp__option-button"
+                          value="{{ value.name | escape }}"
+                          aria-pressed="{% if value.selected %}true{% else %}false{% endif %}"
+                        >{{ value.name | escape }}</button>
+                      {% endfor %}
+                    </div>
+                  </fieldset>
+                {% endfor %}
+                <noscript>
+                  <style>.spuds-pdp__option-group { display: none; }</style>
+                  {% for variant in product.variants %}
+                    <a href="{{ variant.url | escape }}">{{ variant.title | escape }}</a>
+                  {% endfor %}
+                </noscript>
+                <select data-spuds-variant-select hidden>
                   {% for variant in product.variants %}
                     {% assign variant_subscription = variant.selling_plan_allocations.first %}
                     {% assign gallery_variant_key = variant.id | append: '' %}
                     <option
                       value="{{ variant.id }}"
+                      data-options="{{ variant.options | json | escape }}"
                       data-price="{{ variant.price | money | escape }}"
                       data-available="{{ variant.available }}"
                       data-image="{% if variant.featured_media.preview_image != blank %}{{ variant.featured_media.preview_image | image_url: width: 1600 }}{% endif %}"
