@@ -15,7 +15,7 @@
         "snacks": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/HP-ATF-SpudsSnacks.png",
+            "image": "shopify://shop_images/spuds-snacks-category-lineup.jpg",
             "title": "Snacks",
             "products": "Treat chips\nTreat chews\nChew sticks",
             "link_label": "Shop now",
@@ -25,7 +25,7 @@
         "health": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/HP-ATF-SpudsHealth-PLACEHOLDER.png",
+            "image": "shopify://shop_images/spuds-health-category-lineup.jpg",
             "title": "Health",
             "products": "Dental chews\nJoint care chews\nVitamin chews",
             "link_label": "Shop now",
@@ -35,7 +35,7 @@
         "salon": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/HP-ATF-SpudsSalon-PLACEHOLDER.png",
+            "image": "shopify://shop_images/spuds-salon-category-lineup.jpg",
             "title": "Salon",
             "products": "Nose & paw balm\nEar wipes\nShampoo",
             "link_label": "Shop now",

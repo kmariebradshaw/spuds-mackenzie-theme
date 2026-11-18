@@ -50,7 +50,9 @@
         <div class="spuds-collection-hero__description rte">
           {{ collection.description }}
         </div>
-        <span class="spuds-collection-hero__underline" aria-hidden="true"></span>
+        {% unless collection.handle == 'spuds-health' or collection.handle == 'spuds-snacks' %}
+          <span class="spuds-collection-hero__underline" aria-hidden="true"></span>
+        {% endunless %}
       {% endif %}
     </div>
 

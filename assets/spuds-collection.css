@@ -182,16 +182,6 @@
   text-wrap: balance;
 }
 
-.spuds-collection-hero__intro h2::after {
-  content: "";
-  display: block;
-  width: clamp(68px, 8vw, 116px);
-  height: 12px;
-  margin: 7px auto 0;
-  background: var(--spuds-collection-accent);
-  mask: url("Graphic-7.svg") center / 100% 100% no-repeat;
-}
-
 .spuds-collection-hero__intro p {
   margin: 0;
   color: inherit;
