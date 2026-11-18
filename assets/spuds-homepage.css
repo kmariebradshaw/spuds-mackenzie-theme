@@ -1504,7 +1504,6 @@
   }
 }
 
-/* The shared artwork includes a cream fade below the product lineup. */
 .spuds-hero--extended {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -1518,6 +1517,7 @@
   grid-area: 1 / 1;
   align-self: end;
   margin-inline-start: 18%;
+  mask-image: linear-gradient(to bottom, #000 98.9%, transparent);
 }
 
 .spuds-hero--extended .spuds-hero__image :is(picture, img) {
@@ -1539,42 +1539,66 @@
   bottom: auto;
 }
 
+.spuds-hero--extended .spuds-hero__headline-image {
+  filter: none;
+}
+
 @media (max-width: 749px) {
   .spuds-hero--extended {
-    grid-template-rows: auto auto;
+    isolation: isolate;
+    grid-template-rows: auto auto minmax(28vw, 1fr) auto;
   }
 
   .spuds-hero--extended .spuds-hero__image {
-    grid-area: 2 / 1;
-    margin-inline-start: 0;
+    position: absolute;
+    inset: 0;
+    grid-area: 1 / 1 / 4 / 2;
+    align-self: stretch;
+    margin: 0;
+    overflow: hidden;
+    background: var(--cream);
+  }
+
+  .spuds-hero--extended .spuds-hero__image::before {
+    content: "";
+    position: absolute;
+    inset: auto 0 48.5vw;
+    height: max(51.5vw, calc(100% - 48.5vw));
+    background: var(--spuds-hero-sky, none) center bottom / 100% 100% no-repeat;
+  }
+
+  .spuds-hero--extended .spuds-hero__image picture {
+    position: absolute;
+    inset: auto 0 0;
+    mask-image: linear-gradient(to bottom, transparent, #000 3%);
   }
 
   .spuds-hero--extended .spuds-hero__image::after {
-    background: linear-gradient(to bottom, var(--cream), transparent 11%);
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgb(250 240 228 / .97), rgb(250 240 228 / .94) 27%, rgb(250 240 228 / .83) 44%, rgb(250 240 228 / .48) 59%, transparent 72%);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 29vw), transparent calc(100% - 23vw));
   }
 
   .spuds-hero--extended .spuds-hero__copy {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: clamp(8px, 2vw, 14px);
-    width: 100%;
-    padding: 2vw 4vw 0;
+    display: contents;
   }
 
   .spuds-hero--extended h1.spuds-hero__headline {
-    width: min(35vw, 170px);
-    margin: 0;
+    width: clamp(100px, 32vw, 175px);
+    margin: clamp(10px, 3vw, 20px) 0 6px 4vw;
   }
 
   .spuds-hero--extended .spuds-hero__intro {
-    width: min(92%, 30rem);
-    padding: 0;
+    width: min(62%, 24rem);
+    margin: 0;
+    padding: 0 0 0 4vw;
   }
 
   .spuds-hero--extended .spuds-hero__copy .spuds-hero__actions {
-    width: fit-content;
-    max-width: 100%;
-    margin: 0;
+    grid-area: 4 / 1;
+    width: max-content;
+    max-width: 92%;
+    margin: 8px 4vw 10px;
   }
 }

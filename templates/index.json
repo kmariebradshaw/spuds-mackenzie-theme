@@ -49,7 +49,8 @@
         "salon"
       ],
       "settings": {
-        "hero_image": "shopify://shop_images/spuds-poolside-original-labels.webp",
+        "hero_image": "shopify://shop_images/spuds-poolside-clean.webp",
+        "hero_sky_image": "shopify://shop_images/spuds-poolside-sky.webp",
         "hero_eyebrow": "Dog treats &amp; supplements inspired by a <em>legend</em>.",
         "hero_experience": "Our team brings <strong>over 70 years</strong> of combined pet industry experience.",
         "hero_kicker": "The Original",
