@@ -233,7 +233,7 @@
         <h1 class="spuds-pdp__title">{{ product.title }}</h1>
 
         {% if tagline != blank %}
-          <p class="spuds-pdp__tagline">{{ tagline | escape }}</p>
+          <p class="spuds-pdp__tagline" style="--tagline-length: {{ tagline | size }}">{{ tagline | escape }}</p>
         {% endif %}
 
         <product-form-component

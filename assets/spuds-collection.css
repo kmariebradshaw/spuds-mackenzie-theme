@@ -134,6 +134,15 @@
   mask-image: var(--photo-fade);
 }
 
+.spuds-collection-hero__media::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: clamp(24px, 4vw, 88px);
+  background: linear-gradient(to bottom, transparent, var(--spuds-collection-hero-background, var(--spuds-cream)) 98%);
+  pointer-events: none;
+}
+
 .spuds-collection-hero__media img,
 .spuds-collection-hero__placeholder {
   display: block;
