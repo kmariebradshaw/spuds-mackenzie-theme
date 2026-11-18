@@ -9,6 +9,7 @@
   {{ 'spuds-mobile-home.css' | asset_url | stylesheet_tag }}
 {% endif %}
 {% assign hero_image = section.settings.hero_image %}
+{% assign mobile_hero_image = section.settings.mobile_hero_image %}
 {% assign hero_headline_graphic = section.settings.hero_headline_graphic %}
 {% assign hero_polaroid_cluster = section.settings.hero_polaroid_cluster %}
 {% assign hero_button_accent_left = section.settings.hero_button_accent_left %}
@@ -22,12 +23,24 @@
   {% endif %}
   <div class="spuds-shell">
     <div class="spuds-hero">
-      <div class="spuds-hero__image">
-        {% if hero_image != blank %}
-          {{ hero_image | image_url: width: 2400 | image_tag: widths: '750,1100,1500,2000,2400', sizes: '(max-width: 990px) 100vw, 76vw', loading: 'eager', fetchpriority: 'high' }}
-        {% else %}
-          <img src="{{ 'spuds-hero.png' | asset_url }}" width="1537" height="1023" alt="Spuds MacKenzie relaxing at a pool party" loading="eager" fetchpriority="high">
-        {% endif %}
+      <div
+        class="spuds-hero__image{% if mobile_hero_image != blank %} spuds-hero__image--mobile{% endif %}"
+        {% if mobile_hero_image != blank %}style="--mobile-image-focus: {{ mobile_hero_image.presentation.focal_point | default: 'center' }}"{% endif %}
+      >
+        <picture>
+          {% if mobile_hero_image != blank %}
+            <source
+              media="(max-width: 749px)"
+              sizes="100vw"
+              srcset="{{ mobile_hero_image | image_url: width: 400 }} 400w, {{ mobile_hero_image | image_url: width: 750 }} 750w, {{ mobile_hero_image | image_url: width: 1100 }} 1100w, {{ mobile_hero_image | image_url: width: 1500 }} 1500w"
+            >
+          {% endif %}
+          {% if hero_image != blank %}
+            {{ hero_image | image_url: width: 2400 | image_tag: widths: '400,750,1100,1500,2000,2400', sizes: '(max-width: 749px) 88vw, 82vw', loading: 'eager', fetchpriority: 'high' }}
+          {% else %}
+            <img src="{{ 'spuds-hero.png' | asset_url }}" width="1537" height="1023" alt="Spuds MacKenzie relaxing at a pool party" loading="eager" fetchpriority="high">
+          {% endif %}
+        </picture>
       </div>
 
       <div class="spuds-hero__copy">
@@ -121,6 +134,7 @@
   "settings":[
     {"type":"select","id":"mobile_layout","label":"Mobile layout","options":[{"value":"classic","label":"Classic hero"},{"value":"collage","label":"Category collage"}],"default":"classic"},
     {"type":"image_picker","id":"hero_image","label":"Hero image"},
+    {"type":"image_picker","id":"mobile_hero_image","label":"Mobile hero image"},
     {"type":"image_picker","id":"hero_headline_graphic","label":"Hero headline graphic"},
     {"type":"image_picker","id":"hero_polaroid_cluster","label":"Polaroids and treats graphic"},
     {"type":"image_picker","id":"hero_button_accent_left","label":"Button left triangle graphic"},

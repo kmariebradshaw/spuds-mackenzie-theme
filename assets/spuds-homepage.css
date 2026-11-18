@@ -91,9 +91,14 @@
   position: relative;
 }
 
+.spuds-hero__image picture,
 .spuds-hero__image img {
+  display: block;
   width: 100%;
   height: 100%;
+}
+
+.spuds-hero__image img {
   object-fit: cover;
 }
 
@@ -104,7 +109,7 @@
 
 .spuds-hero__copy {
   position: relative;
-  z-index: 3;
+  z-index: 7;
 }
 
 .spuds-hero__eyebrow {
@@ -120,7 +125,7 @@
 
 .spuds-hero__intro {
   display: grid;
-  gap: clamp(8px, .7vw, 14px);
+  gap: 0;
   margin-bottom: clamp(15px, 1.25vw, 24px);
   color: var(--navy);
   text-align: left;
@@ -143,12 +148,14 @@
 }
 
 .spuds-hero__lead em {
-  color: #af1749;
+  padding-inline: .22em .12em;
+  color: var(--pink);
   font-family: var(--script);
-  font-size: 1.26em;
+  font-size: max(24px, 1.26em);
   font-weight: 400;
   font-style: normal;
   font-variation-settings: normal;
+  line-height: 1;
   letter-spacing: 0;
 }
 
@@ -170,19 +177,19 @@
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: minmax(0, 1fr);
-  width: min(100%, 24rem);
+  width: min(100%, 42rem);
   gap: clamp(7px, .65vw, 12px);
 }
 
 .spuds-hero__actions .spuds-button {
-  justify-content: center;
+  justify-content: space-between;
   min-width: 0;
   min-height: 44px;
-  padding: .65em .38em;
+  padding: .65em clamp(10px, 1vw, 22px);
   gap: .35em;
   white-space: nowrap;
   font-size: clamp(.78rem, 1.05vw, 1.25rem);
-  text-align: center;
+  text-align: left;
 }
 
 .spuds-hero__actions .spuds-button svg {
@@ -560,23 +567,26 @@
   }
 
   .spuds-hero {
-    min-height: 33vw;
+    min-height: 39vw;
   }
 
   .spuds-hero__image {
     position: absolute;
-    inset: 0 0 0 30%;
+    inset: 0 0 0 18%;
+  }
+
+  .spuds-hero__image img {
+    object-position: center 30%;
   }
 
   .spuds-hero__image::after {
-        inset: 0 auto 0 0;
-        width: 14%;
-        background: linear-gradient(90deg, var(--cream) 0%, rgba(255, 244, 229, .95) 10%, transparent 100%);
-        margin-left: -0.1vw;
-    }
+    inset: 0;
+    background: linear-gradient(90deg, var(--cream), rgb(250 240 228 / .9) 7%, rgb(250 240 228 / .56) 17%, transparent 33%);
+    pointer-events: none;
+  }
 
   .spuds-hero__copy {
-    width: 31%;
+    width: 40%;
     padding: clamp(6px, .65vw, 14px) 1.35vw 2vw 2.6vw;
   }
 
@@ -681,8 +691,8 @@
   }
 
   .spuds-hero__button-accent--left {
-    bottom: .3vw;
-    left: -.7vw;
+    bottom: 0;
+    left: -1.6vw;
   }
 
   .spuds-hero__button-accent--right {
@@ -962,6 +972,7 @@
 }
 
 @media (min-width: 750px) and (max-width: 989px) {
+  .spuds-hero__actions .spuds-button { padding-inline: .5em; }
   .spuds-hero__actions .spuds-button svg { display: none; }
 }
 
@@ -973,19 +984,27 @@
   }
 
   .spuds-hero__image {
-    position: relative;
-    inset: auto;
-    grid-area: 1 / 1;
-    margin-left: 32%;
+    inset: 0 0 0 12%;
+    grid-area: 1 / 1 / -1 / -1;
+  }
+
+  .spuds-hero__image--mobile {
+    inset-inline-start: 0;
   }
 
   .spuds-hero__image img {
-    position: absolute;
-    inset: 0;
+    object-position: 22% center;
+  }
+
+  .spuds-hero__image--mobile img {
+    object-position: var(--mobile-image-focus, center) !important;
   }
 
   .spuds-hero__image::after {
-    width: 22%;
+    background:
+      radial-gradient(ellipse at 0 82%, var(--cream) 6%, rgb(250 240 228 / .8) 31%, transparent 57%),
+      linear-gradient(0deg, rgb(250 240 228 / .82), transparent 35%),
+      linear-gradient(90deg, var(--cream), rgb(250 240 228 / .93) 20%, rgb(250 240 228 / .73) 38%, rgb(250 240 228 / .18) 60%, transparent 75%);
   }
 
   .spuds-hero__polaroids {
@@ -1001,7 +1020,7 @@
     z-index: 7;
     grid-area: 1 / 1;
     width: 42vw;
-    margin: 0 0 1vw 3vw;
+    margin: 1.5vw 0 1vw 4vw;
   }
 
   .spuds-hero__actions {
@@ -1012,9 +1031,9 @@
     position: relative;
     z-index: 7;
     grid-area: 3 / 1;
-    justify-self: center;
-    width: min(92%, 24rem);
-    margin: 0 0 clamp(14px, 3vw, 22px);
+    justify-self: start;
+    width: 93%;
+    margin: 0 0 clamp(14px, 3vw, 22px) 4vw;
   }
 
   .spuds-hero__copy .spuds-hero__actions:has(> :only-child) {
@@ -1024,7 +1043,7 @@
   .spuds-hero__actions .spuds-button {
     min-height: 44px;
     gap: .25em;
-    padding: .55em .25em;
+    padding: .55em clamp(8px, 2.25vw, 18px);
     box-shadow: .4vw .4vw 0 var(--pink);
     font-size: clamp(.75rem, 2.85vw, 1rem);
     letter-spacing: 0;
@@ -1106,19 +1125,11 @@
     position: relative;
     z-index: 7;
     grid-area: 2 / 1;
-    max-width: none;
+    justify-items: start;
+    width: min(56%, 26rem);
     margin: 0;
-    padding: clamp(14px, 3vw, 20px) 5vw;
-    background: var(--cream);
-  }
-
-  .spuds-home:not(.spuds-home--collage) .spuds-hero__intro {
-    justify-items: center;
-    text-align: center;
-  }
-
-  .spuds-home:not(.spuds-home--collage) .spuds-hero__experience {
-    text-wrap: balance;
+    padding: clamp(8px, 1.6vw, 12px) 0 clamp(12px, 2.8vw, 18px) 4vw;
+    text-align: left;
   }
 
   .spuds-hero__lead {
