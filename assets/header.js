@@ -77,6 +77,8 @@ class HeaderComponent extends Component {
     // We round to the nearest integer to avoid unnecessaary reflows.
     const roundedHeaderHeight = Math.round(entry.borderBoxSize[0].blockSize);
     document.body.style.setProperty('--header-height', `${roundedHeaderHeight}px`);
+    const topRow = this.querySelector('.header__row--top');
+    if (topRow instanceof HTMLElement) this.style.setProperty('--top-row-height', `${topRow.offsetHeight}px`);
 
     // Check if the menu drawer should be hidden in favor of the header menu
     if (this.#menuDrawerHiddenWidth && window.innerWidth > this.#menuDrawerHiddenWidth) {

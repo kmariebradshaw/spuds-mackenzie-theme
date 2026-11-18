@@ -137,7 +137,7 @@
             {% assign featured_media = current_variant.featured_media | default: visible_gallery_media.first | default: product.featured_media %}
             {% if featured_media.preview_image != blank %}
               <img
-                src="{{ featured_media.preview_image | image_url: width: 1600 }}"
+                src="{% render 'spuds-product-photo', photo: featured_media.preview_image, width: 1600 %}"
                 alt="{{ featured_media.alt | default: product.title | escape }}"
                 width="{{ featured_media.preview_image.width }}"
                 height="{{ featured_media.preview_image.height }}"
@@ -196,11 +196,11 @@
                     data-media-id="{{ media.id }}"
                     data-variant-image="{% if variant_media_ids contains media.id %}true{% else %}false{% endif %}"
                     {% unless visible_media_ids contains media.id %}hidden{% endunless %}
-                    data-image="{{ media.preview_image | image_url: width: 1600 }}"
+                    data-image="{% render 'spuds-product-photo', photo: media.preview_image, width: 1600 %}"
                     data-alt="{{ media.alt | default: product.title | escape }}"
                   >
                     <img
-                      src="{{ media.preview_image | image_url: width: 360 }}"
+                      src="{% render 'spuds-product-photo', photo: media.preview_image, width: 360 %}"
                       alt=""
                       width="{{ media.preview_image.width }}"
                       height="{{ media.preview_image.height }}"
@@ -285,7 +285,7 @@
                       data-options="{{ variant.options | json | escape }}"
                       data-price="{{ variant.price | money | escape }}"
                       data-available="{{ variant.available }}"
-                      data-image="{% if variant.featured_media.preview_image != blank %}{{ variant.featured_media.preview_image | image_url: width: 1600 }}{% endif %}"
+                      data-image="{% if variant.featured_media.preview_image != blank %}{% render 'spuds-product-photo', photo: variant.featured_media.preview_image, width: 1600 %}{% endif %}"
                       data-media-id="{{ variant.featured_media.id }}"
                       data-gallery-media-ids="{{ variant_gallery[gallery_variant_key] | json | escape }}"
                       {% if variant.id == current_variant.id %}selected{% endif %}
@@ -334,7 +334,7 @@
 
               <add-to-cart-component
                 ref="addToCartButtonContainer"
-                data-product-variant-media="{% if current_variant.featured_media.preview_image != blank %}{{ current_variant.featured_media.preview_image | image_url: width: 100 }}{% elsif product.featured_media.preview_image != blank %}{{ product.featured_media.preview_image | image_url: width: 100 }}{% endif %}"
+                data-product-variant-media="{% if current_variant.featured_media.preview_image != blank %}{% render 'spuds-product-photo', photo: current_variant.featured_media.preview_image, width: 100 %}{% elsif product.featured_media.preview_image != blank %}{% render 'spuds-product-photo', photo: product.featured_media.preview_image, width: 100 %}{% endif %}"
                 data-add-to-cart-animation="{{ settings.add_to_cart_animation }}"
               >
                 <button

@@ -312,13 +312,13 @@
 .spuds-pdp__purchase-option {
   display: flex;
   align-items: flex-start;
-  gap: .8vw;
+  gap: .6em;
   color: var(--spuds-pdp-navy);
   cursor: pointer;
   font-family: var(--spuds-pdp-body);
-  font-size: 1.04vw;
+  font-size: clamp(14px, 1.02vw, 17px);
   font-weight: 400;
-  line-height: 1.25;
+  line-height: 1.4;
 }
 
 .spuds-pdp__purchase-option input {
@@ -332,11 +332,12 @@
 .spuds-pdp__radio-mark {
   position: relative;
   display: block;
-  width: 1.25vw;
-  height: 1.25vw;
-  flex: 0 0 1.25vw;
-  margin-top: .02vw;
-  border: .14vw solid var(--spuds-pdp-navy);
+  width: .86em;
+  height: .86em;
+  flex: 0 0 .86em;
+  align-self: flex-start;
+  margin-top: .27em;
+  border: 1.5px solid var(--spuds-pdp-navy);
   border-radius: 50%;
 }
 
@@ -359,8 +360,8 @@
 
 .spuds-pdp__purchase-option small {
   display: block;
-  margin-top: .18vw;
-  font-size: .9vw;
+  margin-top: 2px;
+  font-size: .88em;
   font-weight: 400;
 }
 
@@ -434,9 +435,9 @@
 
 .spuds-pdp button.spuds-pdp__add-to-cart {
   min-height: max(44px, 3.35vw);
-  gap: clamp(9px, 1.2vw, 20px);
+  gap: .7em;
   padding: 10px 15px;
-  font-size: clamp(14px, 1.15vw, 19px);
+  font-size: clamp(16px, 1.35vw, 22px);
 }
 
 .spuds-pdp button.spuds-pdp__add-to-cart [data-spuds-add-label] {
@@ -450,11 +451,15 @@
 
 .spuds-pdp__add-arrow {
   display: block;
-  width: clamp(22px, 2.3vw, 36px);
+  width: 1.2em;
   height: auto;
   aspect-ratio: 1.8;
   flex: none;
   color: var(--spuds-pdp-accent, var(--spuds-pdp-pink));
+}
+
+.spuds-pdp__add-arrow path {
+  stroke-width: 1.6px;
 }
 
 .spuds-pdp__add-arrow svg {
@@ -843,28 +848,11 @@
   }
 
   .spuds-pdp__purchase-options {
-    gap: 3vw;
+    gap: 9px;
   }
 
   .spuds-pdp__purchase-option {
-    gap: 2.8vw;
-    font-size: 3.9vw;
-  }
-
-  .spuds-pdp__radio-mark {
-    width: 5vw;
-    height: 5vw;
-    flex-basis: 5vw;
-    border-width: .45vw;
-  }
-
-  .spuds-pdp__purchase-option input:checked + .spuds-pdp__radio-mark::after {
-    inset: .8vw;
-  }
-
-  .spuds-pdp__purchase-option small {
-    margin-top: .8vw;
-    font-size: 3.4vw;
+    font-size: clamp(13px, 3.2vw, 15px);
   }
 
   .spuds-pdp__actions {
@@ -889,7 +877,7 @@
     gap: 10px;
     padding: 8px 10px;
     box-shadow: 1.1vw 1.1vw 0 var(--spuds-pdp-accent, var(--spuds-pdp-pink));
-    font-size: clamp(13px, 3.4vw, 16px);
+    font-size: clamp(15px, 3.65vw, 18px);
   }
 
   .spuds-pdp__error {

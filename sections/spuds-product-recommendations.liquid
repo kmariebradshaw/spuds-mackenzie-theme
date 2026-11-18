@@ -36,7 +36,7 @@
               <a class="spuds-pdp-recommendation-card__media" href="{{ recommended_product.url }}" aria-label="View {{ recommended_product.title | escape }}">
                 {% if recommended_product.featured_image != blank %}
                   <img
-                    src="{{ recommended_product.featured_image | image_url: width: 900 }}"
+                    src="{% render 'spuds-product-photo', photo: recommended_product.featured_image, width: 900 %}"
                     alt="{{ recommended_product.featured_image.alt | default: recommended_product.title | escape }}"
                     width="{{ recommended_product.featured_image.width }}"
                     height="{{ recommended_product.featured_image.height }}"

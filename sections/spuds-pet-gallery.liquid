@@ -7,24 +7,17 @@
       {% render 'spuds-shape', shape: 'graphic-4', class: 'spuds-float-shape spuds-gallery__accent spuds-gallery__accent--lower-left' %}
       {% render 'spuds-shape', shape: 'graphic-1', class: 'spuds-float-shape spuds-shape--large spuds-gallery__accent spuds-gallery__accent--lower-right' %}
 
-      <div class="spuds-rating">
-        <div class="spuds-rating__row">
-          <img src="{{ 'HP-Amazon-Stars.svg' | asset_url }}" alt="Five stars">
-          <span>{{ section.settings.rating }}</span>
-        </div>
-        <div class="spuds-rating__caption">{{ section.settings.rating_copy }}</div>
-      </div>
       <h2>{{ section.settings.gallery_heading }} <span>{{ section.settings.gallery_accent }}</span></h2>
 
       <div class="spuds-gallery__clothesline">
-        <img class="spuds-gallery__line" src="{{ 'HP-ClothesLine.png' | asset_url }}" alt="" aria-hidden="true">
+        <img width="2048" height="297" class="spuds-gallery__line" src="{{ 'HP-ClothesLine.png' | asset_url }}" alt="" aria-hidden="true">
         <div class="spuds-gallery__grid">
           {% for block in section.blocks %}
             <div class="spuds-pet" {{ block.shopify_attributes }}>
               {% if block.settings.image != blank %}
                 {{ block.settings.image | image_url: width: 700 | image_tag: loading: 'lazy', alt: block.settings.alt }}
               {% else %}
-                <img src="{{ 'HP-Pets-' | append: forloop.index | append: '.png' | asset_url }}" alt="{{ block.settings.alt | escape }}" loading="lazy">
+                <img width="600" height="800" src="{{ 'HP-Pets-' | append: forloop.index | append: '.png' | asset_url }}" alt="{{ block.settings.alt | escape }}" loading="lazy">
               {% endif %}
             </div>
           {% endfor %}
@@ -32,7 +25,7 @@
       </div>
       <a class="spuds-button spuds-gallery__upload" href="{{ section.settings.upload_link }}">
         {{ section.settings.upload_label }}
-        <img src="{{ 'Graphic-Upload.svg' | asset_url }}" alt="" aria-hidden="true">
+        <img width="30" height="33" src="{{ 'Graphic-Upload.svg' | asset_url }}" alt="" aria-hidden="true">
       </a>
     </div>
   </div>
@@ -44,8 +37,6 @@
   "tag":"section",
   "class":"section-spuds-gallery",
   "settings":[
-    {"type":"text","id":"rating","label":"Rating","default":"4.6"},
-    {"type":"text","id":"rating_copy","label":"Rating caption","default":"Based on 50 reviews on Amazon"},
     {"type":"text","id":"gallery_heading","label":"Heading","default":"Showcase"},
     {"type":"text","id":"gallery_accent","label":"Accent heading","default":"Your Pets"},
     {"type":"text","id":"upload_label","label":"Upload button","default":"Upload your pet"},

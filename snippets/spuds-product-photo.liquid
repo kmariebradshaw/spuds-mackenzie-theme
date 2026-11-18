@@ -1,0 +1,33 @@
+{% doc %}
+  Outputs a product photo URL, or a responsive image tag when image_class is supplied.
+  @param {image} photo - Shopify product image.
+  @param {number} width - Maximum requested width in pixels.
+  @param {string} [image_class] - Class for a rendered image tag.
+  @param {string} [alt] - Alternative text.
+  @param {string} [widths] - Responsive image widths.
+  @param {string} [sizes] - Responsive display sizes.
+  @param {string} [loading] - Image loading behavior.
+  @param {string} [priority] - Fetch priority.
+  @param {string} [style] - Inline image styles.
+  @param {string} [image_ref] - Theme component reference.
+  @param {boolean} [zoom] - Include the full resolution URL for the media viewer.
+{% enddoc %}
+{%- liquid
+  assign filename = photo.src | split: '?' | first | split: '/' | last
+  assign crop = shop.metafields.custom.product_photo_crops.value[filename]
+  if crop and photo.width != photo.height
+    assign max_width = width | at_most: crop.size
+    assign url = photo | image_url: crop: 'region', crop_left: crop.left, crop_top: crop.top, crop_width: crop.size, crop_height: crop.size, width: max_width
+  else
+    assign url = photo | image_url: width: width
+  endif
+  if image_class
+    if zoom
+      assign zoom_url = url
+    endif
+    assign alternative = alt | default: photo.alt
+    echo url | image_tag: class: image_class, alt: alternative, widths: widths, sizes: sizes, loading: loading, fetchpriority: priority, style: style, ref: image_ref, data_max_resolution: zoom_url
+  else
+    echo url
+  endif
+-%}
