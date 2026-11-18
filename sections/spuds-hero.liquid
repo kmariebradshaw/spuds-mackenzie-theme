@@ -42,14 +42,7 @@
         {% if section.settings.hero_eyebrow != blank or section.settings.hero_experience != blank %}
           <div class="spuds-hero__intro">
             {% if section.settings.hero_eyebrow != blank %}
-              <p class="spuds-hero__lead">
-                {%- assign intro_words = section.settings.hero_eyebrow | split: ' ' -%}
-                {%- for word in intro_words -%}
-                  {%- unless forloop.first %} {% endunless -%}
-                  {%- assign word_key = word | handleize -%}
-                  {%- if word_key == 'legend' -%}<em>{{ word | escape }}</em>{%- else -%}{{ word | escape }}{%- endif -%}
-                {%- endfor -%}
-              </p>
+              <p class="spuds-hero__lead">{{ section.settings.hero_eyebrow }}</p>
             {% endif %}
             {% if section.settings.hero_experience != blank %}
               <p class="spuds-hero__experience">{{ section.settings.hero_experience }}</p>
@@ -134,7 +127,7 @@
     {"type":"image_picker","id":"hero_button_accent_right","label":"Button right triangle graphic"},
     {"type":"image_picker","id":"category_accent_left","label":"Category left accent graphic"},
     {"type":"image_picker","id":"category_accent_right","label":"Category right accent graphic"},
-    {"type":"text","id":"hero_eyebrow","label":"Intro headline","default":"Dog treats & supplements inspired by a legend."},
+    {"type":"inline_richtext","id":"hero_eyebrow","label":"Intro headline","default":"Dog treats &amp; supplements inspired by a <em>legend</em>."},
     {"type":"inline_richtext","id":"hero_experience","label":"Experience line"},
     {"type":"text","id":"hero_kicker","label":"Brush label","default":"The Original"},
     {"type":"text","id":"hero_title","label":"Heading","default":"Party Animal"},

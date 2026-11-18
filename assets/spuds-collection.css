@@ -309,6 +309,9 @@
 
 .spuds-collection-products .card-gallery {
   order: 2;
+  flex: none;
+  width: 100%;
+  aspect-ratio: 1;
   margin: 0;
   padding: 0;
   background: transparent;
@@ -323,29 +326,27 @@
   background: transparent !important;
 }
 
-.spuds-collection-products .card-gallery .product-media-container,
-.spuds-collection-products .card-gallery slideshow-component,
-.spuds-collection-products .card-gallery .slideshow-slide {
-  aspect-ratio: 1 / 1;
+.spuds-collection-products .card-gallery :is(slideshow-component, slideshow-container, slideshow-slides, .product-media-container, .product-media, .product-card-gallery__title-placeholder) {
+  height: 100%;
+  min-height: 0;
 }
 
 .spuds-collection-products .card-gallery img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
-.spuds-collection-products [data-spuds-collections~="spuds-snacks"] {
+.spuds-collection-products .product-grid__item {
   --card-band: #f63264;
-  --card-ink: var(--spuds-navy);
 }
 
-.spuds-collection-products [data-spuds-collections~="spuds-health"] {
+.spuds-collection-products .product-grid__item:nth-of-type(3n + 2) {
   --card-band: #48c2cc;
-  --card-ink: var(--spuds-navy);
 }
 
-.spuds-collection-products [data-spuds-collections~="spuds-salon"] {
+.spuds-collection-products .product-grid__item:nth-of-type(3n) {
   --card-band: var(--spuds-yellow);
-  --card-ink: var(--spuds-navy);
 }
 
 .spuds-collection-products [ref="productTitleLink"] {
@@ -358,8 +359,8 @@
   display: grid;
   place-items: center;
   padding: .5rem .65rem !important;
-  background: var(--card-band, var(--spuds-navy));
-  color: var(--card-ink, var(--spuds-cream));
+  background: var(--card-band);
+  color: var(--spuds-navy);
   font-family: var(--spuds-scale) !important;
   font-size: clamp(.92rem, 1.1vw, 1.06rem) !important;
   font-variation-settings: "wght" 600, "wdth" 92;

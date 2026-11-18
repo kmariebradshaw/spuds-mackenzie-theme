@@ -118,7 +118,6 @@
               class="product-grid__item product-grid__item--{{ forloop.index0 }}"
               data-page="{{ paginate.current_page }}"
               data-product-id="{{ product.id }}"
-              data-spuds-collections="{{ product.collections | map: 'handle' | join: ' ' | escape }}"
               ref="cards[]"
             >
               {% content_for 'block',

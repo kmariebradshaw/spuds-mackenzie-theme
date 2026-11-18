@@ -6,8 +6,12 @@
 {%- capture category_links -%}
   {%- for block in section.blocks reversed -%}
     {%- if block.type == 'category' and block.settings.link != blank and block.settings.title != blank -%}
-      <a class="spuds-button" href="{{ block.settings.link | escape }}">
-        {{ 'spuds_hero.shop_category' | t: category: block.settings.title | escape }}
+      <a
+        class="spuds-button"
+        href="{{ block.settings.link | escape }}"
+        aria-label="{{ 'spuds_hero.shop_category' | t: category: block.settings.title | escape }}"
+      >
+        {{ block.settings.title | escape }}
         {% render 'spuds-shape', shape: 'arrow', color: '#ff2e6c' %}
       </a>
     {%- endif -%}
