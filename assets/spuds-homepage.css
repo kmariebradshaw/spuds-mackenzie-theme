@@ -143,6 +143,16 @@
   text-wrap: balance;
 }
 
+.spuds-hero__lead em {
+  color: #af1749;
+  font-family: var(--script);
+  font-size: 1.26em;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: normal;
+  letter-spacing: 0;
+}
+
 .spuds-hero__experience {
   max-width: 40ch;
   font-family: var(--body);
@@ -159,13 +169,27 @@
 
 .spuds-hero__actions {
   display: grid;
-  width: max-content;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  width: fit-content;
   max-width: 100%;
-  gap: .55vw;
+  gap: clamp(5px, .55vw, 12px);
 }
 
 .spuds-hero__actions .spuds-button {
-  justify-content: space-between;
+  justify-content: center;
+  min-width: 0;
+  min-height: 44px;
+  padding: .65em .7em;
+  gap: .35em;
+  font-size: clamp(.78rem, 1.05vw, 1.25rem);
+  text-align: center;
+}
+
+.spuds-hero__actions .spuds-button svg {
+  flex: none;
+  width: 1em;
+  height: .65em;
 }
 
 .spuds-hero__actions .spuds-button:focus-visible {
@@ -665,7 +689,7 @@
 
   .spuds-hero__button-accent--right {
     bottom: 3vw;
-    left: 23.2vw;
+    left: 39vw;
   }
 
   .spuds-float-shape {
@@ -928,10 +952,6 @@
     scroll-snap-align: center;
   }
 
-  .spuds-pet img {
-    border-radius: .73vw;
-  }
-
   .spuds-gallery__upload {
     gap: .9vw;
     margin-top: 2.4vw;
@@ -953,7 +973,7 @@
   .spuds-hero__image {
     position: relative;
     inset: auto;
-    grid-area: 2 / 1 / 4 / 2;
+    grid-area: 1 / 1;
     margin-left: 32%;
   }
 
@@ -977,7 +997,7 @@
   .spuds-hero h1.spuds-hero__headline {
     position: relative;
     z-index: 7;
-    grid-area: 2 / 1;
+    grid-area: 1 / 1;
     width: 42vw;
     margin: 1vw 0 1vw 3vw;
   }
@@ -990,32 +1010,27 @@
     position: relative;
     z-index: 7;
     grid-area: 3 / 1;
-    align-self: start;
-    margin: 0 0 3vw 3vw;
+    justify-self: center;
+    width: min(94%, 32rem);
+    margin: 0 0 clamp(14px, 3vw, 22px);
+  }
+
+  .spuds-hero__copy .spuds-hero__actions:has(> :only-child) {
+    width: fit-content;
   }
 
   .spuds-hero__actions .spuds-button {
-    min-height: max(36px, 7vw);
-    gap: 2vw;
-    padding: 1.5vw 2.5vw;
-    box-shadow: .55vw .55vw 0 var(--pink);
-    font-size: max(13px, 3vw);
-    white-space: nowrap;
+    min-height: 44px;
+    gap: .25em;
+    padding: .55em .25em;
+    box-shadow: .4vw .4vw 0 var(--pink);
+    font-size: clamp(.75rem, 2.85vw, 1rem);
+    letter-spacing: 0;
   }
 
-  .spuds-hero__actions .spuds-button svg {
-    width: 3.4vw;
-    height: 1.8vw;
-  }
-
-  .spuds-hero__button-accent--left {
-    bottom: 1vw;
-    left: -2.5vw;
-  }
-
+  .spuds-hero__button-accent--left,
   .spuds-hero__button-accent--right {
-    bottom: 5vw;
-    left: 38vw;
+    display: none;
   }
 
   .spuds-categories {
@@ -1088,7 +1103,7 @@
   .spuds-hero__intro {
     position: relative;
     z-index: 7;
-    grid-area: 1 / 1;
+    grid-area: 2 / 1;
     max-width: none;
     margin: 0;
     padding: clamp(12px, 2.6vw, 18px) 3vw;
@@ -1459,10 +1474,6 @@
 
   .spuds-pet {
     scroll-snap-align: center;
-  }
-
-  .spuds-pet img {
-    border-radius: 3vw;
   }
 
   .spuds-gallery__upload {

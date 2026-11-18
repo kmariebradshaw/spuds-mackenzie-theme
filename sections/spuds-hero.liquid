@@ -31,16 +31,6 @@
       </div>
 
       <div class="spuds-hero__copy">
-        {% if section.settings.hero_eyebrow != blank or section.settings.hero_experience != blank %}
-          <div class="spuds-hero__intro">
-            {% if section.settings.hero_eyebrow != blank %}
-              <p class="spuds-hero__lead">{{ section.settings.hero_eyebrow | escape }}</p>
-            {% endif %}
-            {% if section.settings.hero_experience != blank %}
-              <p class="spuds-hero__experience">{{ section.settings.hero_experience }}</p>
-            {% endif %}
-          </div>
-        {% endif %}
         <h1 class="spuds-hero__headline">
           {% if hero_headline_graphic != blank %}
             {{ hero_headline_graphic | image_url: width: 1400 | image_tag: widths: '500,750,1000,1400', sizes: '(max-width: 749px) 42vw, 26vw', class: 'spuds-hero__headline-image', loading: 'eager', alt: '' }}
@@ -49,6 +39,23 @@
           {% endif %}
           <span class="visually-hidden">{{ section.settings.hero_kicker }} {{ section.settings.hero_title }} {{ section.settings.hero_subtitle }}</span>
         </h1>
+        {% if section.settings.hero_eyebrow != blank or section.settings.hero_experience != blank %}
+          <div class="spuds-hero__intro">
+            {% if section.settings.hero_eyebrow != blank %}
+              <p class="spuds-hero__lead">
+                {%- assign intro_words = section.settings.hero_eyebrow | split: ' ' -%}
+                {%- for word in intro_words -%}
+                  {%- unless forloop.first %} {% endunless -%}
+                  {%- assign word_key = word | handleize -%}
+                  {%- if word_key == 'legend' -%}<em>{{ word | escape }}</em>{%- else -%}{{ word | escape }}{%- endif -%}
+                {%- endfor -%}
+              </p>
+            {% endif %}
+            {% if section.settings.hero_experience != blank %}
+              <p class="spuds-hero__experience">{{ section.settings.hero_experience }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
         {% render 'spuds-hero-actions', section: section %}
       </div>
 

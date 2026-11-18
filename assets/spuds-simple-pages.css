@@ -8,7 +8,6 @@
   --spuds-simple-h2: 2.3vw;
   --spuds-simple-h3: 1.65vw;
   --spuds-simple-space: 2vw;
-  --spuds-simple-radius: 0.8vw;
   --spuds-simple-border: 0.08vw;
   --spuds-simple-reading-width: 58vw;
   background: var(--spuds-simple-cream);
@@ -126,7 +125,7 @@
   font-family: var(--spuds-simple-body);
   font-size: var(--spuds-simple-size);
   font-weight: 600;
-  border-radius: 0.4vw;
+  border-radius: 0;
   padding: 0.95vw 1.6vw;
   min-height: 3.3vw;
   text-transform: none;
@@ -151,7 +150,7 @@
   background: #fff;
   font-size: var(--spuds-simple-size);
   border: var(--spuds-simple-border) solid rgb(7 27 61 / 28%);
-  border-radius: 0.4vw;
+  border-radius: 0;
   min-height: 3.4vw;
 }
 
@@ -213,7 +212,7 @@
 .spuds-simple-page #MainContent .cart-summary__inner {
   background: #fff;
   border: var(--spuds-simple-border) solid rgb(7 27 61 / 14%);
-  border-radius: var(--spuds-simple-radius);
+  border-radius: 0;
   padding: var(--spuds-simple-space);
 }
 
@@ -234,7 +233,7 @@
   padding: 3.5vw;
   background: #fff;
   border: var(--spuds-simple-border) solid rgb(7 27 61 / 14%);
-  border-radius: var(--spuds-simple-radius);
+  border-radius: 0;
 }
 
 .spuds-simple-page .password-footer {
@@ -249,7 +248,7 @@
 
 .spuds-simple-page .password-dialog {
   background: var(--spuds-simple-cream);
-  border-radius: var(--spuds-simple-radius);
+  border-radius: 0;
 }
 
 .spuds-simple-page--gift-card {
@@ -267,7 +266,7 @@
   padding: 3vw;
   background: #fff;
   border: var(--spuds-simple-border) solid rgb(7 27 61 / 14%);
-  border-radius: var(--spuds-simple-radius);
+  border-radius: 0;
 }
 
 .spuds-simple-page .gift-card__price h2 {
@@ -296,7 +295,6 @@
     --spuds-simple-h2: 6.6vw;
     --spuds-simple-h3: 5.4vw;
     --spuds-simple-space: 5vw;
-    --spuds-simple-radius: 2.5vw;
     --spuds-simple-border: 0.25vw;
     --spuds-simple-reading-width: 88vw;
   }
@@ -312,13 +310,11 @@
   }
 
   .spuds-simple-page :is(#MainContent, .password-dialog, .gift-card__main) :is(.button:not(.cart-items__remove, .button-unstyled), .pc--opt-out-form-button) {
-    border-radius: 1.2vw;
     padding: 3.5vw 5vw;
     min-height: 12vw;
   }
 
   .spuds-simple-page :is(#MainContent, .password-dialog) :is(input[type="search"], input[type="email"], input[type="password"], input[type="text"], textarea) {
-    border-radius: 1.2vw;
     min-height: 12vw;
   }
 

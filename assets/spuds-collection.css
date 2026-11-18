@@ -3,9 +3,8 @@
   --spuds-navy: #071b3d;
   --spuds-pink: #ff2f69;
   --spuds-teal: #4597a7;
-  --spuds-green: #62a331;
   --spuds-cream: #faf0e4;
-  --spuds-yellow: #ffbd20;
+  --spuds-yellow: #ffc23e;
   /* Adobe Fonts is loaded globally in layout/theme.liquid. Keep this aligned
      with the homepage rather than substituting Shopify's heading font. */
   --spuds-scale: "Scale VF", "scale-variable", Impact, sans-serif;
@@ -138,15 +137,6 @@
   height: 100%;
   object-fit: cover;
   object-position: right;
-}
-
-.spuds-collection-hero__media::after {
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 4vw;
-  background: linear-gradient(90deg, var(--spuds-collection-hero-background, var(--spuds-cream)), transparent);
-  content: "";
-  pointer-events: none;
 }
 
 .spuds-collection-nav {
@@ -313,15 +303,15 @@
   gap: 0 !important;
   background: #fff;
   border: 1px solid #dfd8cf;
-  border-radius: .45rem;
+  border-radius: 0;
   overflow: hidden;
 }
 
 .spuds-collection-products .card-gallery {
   order: 2;
   margin: 0;
-  padding: .6rem .65rem .15rem;
-  background: #fff;
+  padding: 0;
+  background: transparent;
   overflow: hidden;
 }
 
@@ -330,7 +320,7 @@
 .spuds-collection-products .card-gallery .slideshow-slide,
 .spuds-collection-products .card-gallery .product-media-container,
 .spuds-collection-products .card-gallery .product-media {
-  background: #fff !important;
+  background: transparent !important;
 }
 
 .spuds-collection-products .card-gallery .product-media-container,
@@ -343,6 +333,21 @@
   object-fit: contain;
 }
 
+.spuds-collection-products [data-spuds-collections~="spuds-snacks"] {
+  --card-band: #f63264;
+  --card-ink: var(--spuds-navy);
+}
+
+.spuds-collection-products [data-spuds-collections~="spuds-health"] {
+  --card-band: #48c2cc;
+  --card-ink: var(--spuds-navy);
+}
+
+.spuds-collection-products [data-spuds-collections~="spuds-salon"] {
+  --card-band: var(--spuds-yellow);
+  --card-ink: var(--spuds-navy);
+}
+
 .spuds-collection-products [ref="productTitleLink"] {
   order: 1;
 }
@@ -353,8 +358,8 @@
   display: grid;
   place-items: center;
   padding: .5rem .65rem !important;
-  background: var(--spuds-navy);
-  color: var(--spuds-cream);
+  background: var(--card-band, var(--spuds-navy));
+  color: var(--card-ink, var(--spuds-cream));
   font-family: var(--spuds-scale) !important;
   font-size: clamp(.92rem, 1.1vw, 1.06rem) !important;
   font-variation-settings: "wght" 600, "wdth" 92;
@@ -491,7 +496,7 @@ spuds-category-filter button {
   min-height: 44px;
   padding: .55em 1.15em;
   border: 1px solid var(--spuds-navy);
-  border-radius: 3px;
+  border-radius: 0;
   background: transparent;
   color: var(--spuds-navy);
   cursor: pointer;

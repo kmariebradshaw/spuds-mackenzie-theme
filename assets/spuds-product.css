@@ -24,7 +24,6 @@
   --spuds-pdp-navy: #071b3d;
   --spuds-pdp-pink: #ff2f69;
   --spuds-pdp-teal: #4597a7;
-  --spuds-pdp-green: #62a331;
   --spuds-pdp-cream: #faf0e4;
   --spuds-pdp-scale: "Scale VF", "scale-variable", Impact, sans-serif;
   --spuds-pdp-body: "work-sans", "Work Sans", Arial, sans-serif;
@@ -84,21 +83,20 @@
 
 .spuds-pdp__grid {
   display: grid;
-  grid-template-columns: 43vw minmax(0, 1fr);
-  gap: 6.4vw;
+  grid-template-columns: 45vw minmax(0, 1fr);
+  gap: 4.4vw;
   align-items: start;
 }
 
 .spuds-pdp__main-media {
   display: flex;
   width: 100%;
-  aspect-ratio: 1.32 / 1;
+  aspect-ratio: 1;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 1.4vw;
-  border-radius: 1.65vw;
-  background: rgb(255 255 255 / 45%);
+  padding: 0;
+  background: transparent;
 }
 
 .spuds-pdp__main-media img,
@@ -150,7 +148,7 @@
   flex: 0 0 10vw;
   padding: .4vw;
   border: .14vw solid transparent;
-  border-radius: .65vw;
+  border-radius: 0;
   opacity: .78;
   transition: border-color .18s ease, opacity .18s ease;
 }
@@ -254,7 +252,7 @@
   min-width: 12vw;
   padding: .55vw 2.2vw .55vw .8vw;
   border: .1vw solid var(--spuds-pdp-navy);
-  border-radius: .35vw;
+  border-radius: 0;
   background: transparent;
   color: var(--spuds-pdp-navy);
 }
@@ -340,7 +338,7 @@
   min-height: 3.35vw;
   align-items: center;
   overflow: hidden;
-  border-radius: 1.7vw;
+  border-radius: 0;
   background: rgb(255 255 255 / 58%);
 }
 
@@ -444,7 +442,7 @@
 .spuds-pdp__error:not(.hidden):not(:empty) {
   padding: 1vw 1.2vw;
   border: .1vw solid #b81d48;
-  border-radius: .6vw;
+  border-radius: 0;
   background: #fff1f4;
   color: #921638;
   font-weight: 600;
@@ -508,7 +506,7 @@
   --details-border: .07vw;
   margin-top: 1.75vw;
   border: var(--details-border) solid rgb(7 27 61 / 12%);
-  border-radius: 1.2vw;
+  border-radius: 0;
   background: #fff;
   box-shadow: 0 .3vw 1.3vw rgb(7 27 61 / 4%);
   color: var(--spuds-pdp-navy);
@@ -548,7 +546,7 @@
   width: 2vw;
   height: 2vw;
   flex: 0 0 2vw;
-  border-radius: 50%;
+  border-radius: 0;
   background: var(--spuds-pdp-cream);
   place-items: center;
   font-family: var(--spuds-pdp-body);
@@ -663,7 +661,7 @@
   min-width: 0;
   flex-direction: column;
   overflow: hidden;
-  border-radius: 1vw;
+  border-radius: 0;
   background: #fff;
 }
 
@@ -673,7 +671,7 @@
   align-items: center;
   justify-content: center;
   padding: .8vw 1.1vw;
-  border-radius: 1vw 1vw 0 0;
+  border-radius: 0;
   background: var(--spuds-pdp-navy);
   color: #fff;
   font-family: var(--spuds-pdp-scale);
@@ -700,7 +698,7 @@
   flex: 1;
   align-items: center;
   justify-content: center;
-  padding: 1.65vw;
+  padding: 0;
 }
 
 .spuds-pdp-recommendation-card__media img {
@@ -753,12 +751,6 @@
     display: block;
   }
 
-  .spuds-pdp__main-media {
-    aspect-ratio: 1.18 / 1;
-    padding: 3.5vw;
-    border-radius: 4vw;
-  }
-
   .spuds-pdp__thumb-rail {
     grid-template-columns: 7vw minmax(0, 1fr) 7vw;
     gap: 1.4vw;
@@ -776,7 +768,6 @@
     flex-basis: 24vw;
     padding: 1vw;
     border-width: .35vw;
-    border-radius: 1.7vw;
   }
 
   .spuds-pdp__gallery-arrow {
@@ -830,7 +821,6 @@
     min-width: 0;
     padding: 3vw 8vw 3vw 3vw;
     border-width: .3vw;
-    border-radius: 1.2vw;
   }
 
   .spuds-pdp__purchase-options {
@@ -866,7 +856,6 @@
 
   .spuds-pdp__quantity {
     min-height: 13vw;
-    border-radius: 6.5vw;
   }
 
   .spuds-pdp__quantity button,
@@ -902,7 +891,6 @@
   .spuds-pdp__error:not(.hidden):not(:empty) {
     padding: 3.5vw 4vw;
     border-width: .3vw;
-    border-radius: 2vw;
   }
 
   .spuds-pdp__description,
@@ -929,7 +917,6 @@
     --details-text-gap: 2.4vw;
     --details-border: .25vw;
     margin-top: 5vw;
-    border-radius: 4vw;
     box-shadow: 0 1vw 4vw rgb(7 27 61 / 4%);
   }
 
@@ -974,19 +961,11 @@
     padding: 0 6vw;
   }
 
-  .spuds-pdp-recommendation-card {
-    border-radius: 3.5vw;
-  }
 
   .spuds-pdp-recommendation-card__title {
     min-height: 13vw;
     padding: 3vw 4vw;
-    border-radius: 3.5vw 3.5vw 0 0;
     font-size: 4.2vw;
-  }
-
-  .spuds-pdp-recommendation-card__media {
-    padding: 5vw;
   }
 
   .spuds-pdp-recommendation-card--skeleton {
