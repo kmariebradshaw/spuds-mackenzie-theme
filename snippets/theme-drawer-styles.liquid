@@ -109,10 +109,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: max-content;
     min-width: 22px;
-    height: 22px;
+    min-height: 22px;
+    aspect-ratio: 1;
     flex-shrink: 0;
-    border-radius: var(--style-border-radius-lg);
+    border-radius: 50%;
     background-color: rgb(var(--color-foreground-rgb) / 0.1);
     font-family: var(--font-paragraph--family);
     font-weight: var(--font-paragraph--weight);
@@ -143,7 +145,7 @@
     margin-inline-start: auto;
     width: var(--private-button-size);
     height: var(--private-button-size);
-    border-radius: var(--style-border-radius-buttons-secondary);
+    border-radius: 50%;
     background-color: var(--color-background);
     outline: var(--private-focus-ring-size) solid transparent;
     outline-offset: var(--private-focus-ring-size);

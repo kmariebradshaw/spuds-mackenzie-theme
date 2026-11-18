@@ -16,14 +16,16 @@
           "type": "collection_intro",
           "settings": {
             "collection": "spuds-health",
-            "text": "Veterinarians, PhD scientists and animal nutritionists formulate our supplements, from multivitamins to joint care chews."
+            "heading": "From multivitamins to joint care chews",
+            "text": "Veterinarians, PhD scientists and animal nutritionists formulate our supplements."
           }
         },
         "snacks_intro": {
           "type": "collection_intro",
           "settings": {
             "collection": "spuds-snacks",
-            "text": "Our team has developed hundreds of pet products and launched thousands. At Spuds, we put that experience into limited-ingredient treats for the dog who hears the bag open from two rooms away."
+            "heading": "For the dog who hears the bag open from two rooms away",
+            "text": "Our team has developed hundreds of pet products and launched thousands. We put that experience into our limited-ingredient treats."
           }
         }
       },

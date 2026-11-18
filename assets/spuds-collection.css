@@ -40,7 +40,7 @@
   justify-content: center;
   padding: 2vw;
   text-align: center;
-  transform: translateY(3vw);
+  padding-block: 2.8vw 1.2vw;
 }
 
 .spuds-collection-hero h1 {
@@ -92,7 +92,7 @@
 
 .spuds-collection-hero__description {
   max-width: 31vw;
-  margin: 2.25vw auto 0;
+  margin: 4.9vw auto 0;
   color: inherit;
   font-family: var(--spuds-scale);
   font-size: 1.5vw;
@@ -164,26 +164,43 @@
 }
 
 .spuds-collection-hero__intro {
-  width: 57vw;
-  margin: 0 auto;
-  padding-top: 2.4vw;
+  width: min(88%, 46rem);
+  margin: clamp(24px, 3vw, 48px) auto 0;
+  padding-inline-start: clamp(15px, 1.7vw, 24px);
+  border-inline-start: 5px solid var(--spuds-collection-accent);
+}
+
+.spuds-collection-hero__intro h2 {
+  margin: 0;
+  color: inherit;
+  font-family: var(--spuds-scale);
+  font-size: clamp(24px, 2.4vw, 38px);
+  font-weight: 750;
+  font-variation-settings: "wght" 750, "wdth" 78;
+  letter-spacing: -.015em;
+  line-height: 1.05;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.spuds-collection-hero__intro p {
+  margin: 0;
   color: inherit;
   font-family: var(--spuds-body);
-  font-size: 1.35vw;
+  font-size: clamp(16px, 1.1vw, 18px);
   line-height: 1.5;
-  text-align: center;
   text-wrap: pretty;
 }
 
-.spuds-collection-hero__intro + .spuds-collection-nav {
-  padding-top: 1.6vw;
+.spuds-collection-hero__intro h2 + p {
+  margin-block-start: 8px;
 }
 
-@media screen and (min-width: 750px) and (max-width: 989px) {
-  .spuds-collection-hero__intro {
-    width: 74vw;
-    font-size: 2vw;
-  }
+.spuds-collection-hero__intro + .spuds-collection-nav {
+  width: min(88%, 46rem);
+  margin-inline: auto;
+  justify-content: flex-start;
+  padding: clamp(18px, 1.75vw, 28px) 0 clamp(28px, 3vw, 48px);
 }
 
 .spuds-collection-nav__link {
@@ -429,16 +446,6 @@
 }
 
 @media screen and (max-width: 749px) {
-  .spuds-collection-hero__intro {
-    width: 88vw;
-    padding-top: 5vw;
-    font-size: 4.1vw;
-  }
-
-  .spuds-collection-hero__intro + .spuds-collection-nav {
-    padding-top: 4vw;
-  }
-
   .spuds-collection-hero__inner {
     min-height: 36vw;
   }
@@ -450,7 +457,7 @@
 
   .spuds-collection-hero__description {
     max-width: 100%;
-    margin-top: 3vw;
+    margin-top: max(13px, 4.9vw);
     font-size: clamp(10px, 2.2vw, 15px);
     text-wrap: balance;
   }
@@ -465,6 +472,15 @@
     justify-content: center;
     gap: 3vw;
     padding: 6vw 4vw;
+  }
+
+  .spuds-collection-hero__intro + .spuds-collection-nav {
+    align-items: stretch;
+  }
+
+  .spuds-collection-hero__intro + .spuds-collection-nav .spuds-collection-nav__link {
+    width: 100%;
+    min-height: 44px;
   }
 
   .spuds-collection-nav__link {

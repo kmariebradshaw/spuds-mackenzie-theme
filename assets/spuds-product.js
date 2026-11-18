@@ -112,22 +112,26 @@ const initializeSpudsProduct = (root) => {
     readMoreButton.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
   });
 
-  const purchaseOptions = [...root.querySelectorAll('[data-spuds-purchase-option]')];
-  const subscriptionOption = root.querySelector('[data-spuds-subscription-option]');
-  const sellingPlanInput = root.querySelector('[data-spuds-selling-plan]');
+  const purchaseOptions = root.querySelector('[data-spuds-purchase-options]');
+  const widget = root.querySelector('[data-spuds-subscription-widget]');
+  const variantInput = root.querySelector('[data-spuds-variant-id]');
 
-  const updateSellingPlan = () => {
-    if (!sellingPlanInput) return;
-    const selectedPurchase = purchaseOptions.find((option) => option.checked);
-    const useSubscription = selectedPurchase?.value === 'subscription';
-    const planId = subscriptionOption?.dataset.sellingPlanId || '';
-
-    sellingPlanInput.value = useSubscription ? planId : '';
-    sellingPlanInput.disabled = !useSubscription || !planId;
+  // The app owns the form when it renders purchase choices for this variant.
+  const syncSubscriptionWidget = () => {
+    if (!widget || !purchaseOptions) return;
+    const controls = widget.querySelectorAll('input[type="radio"], select');
+    const hasWidget = Array.from(controls).some(control => {
+      const group = control.closest('section[data-variant-id]');
+      return !group || group.dataset.variantId === variantInput.value;
+    });
+    purchaseOptions.hidden = hasWidget;
+    purchaseOptions.disabled = hasWidget;
   };
 
-  purchaseOptions.forEach((option) => option.addEventListener('change', updateSellingPlan));
-  updateSellingPlan();
+  if (widget) {
+    new MutationObserver(syncSubscriptionWidget).observe(widget, { childList: true, subtree: true });
+    syncSubscriptionWidget();
+  }
 
   const variantSelect = root.querySelector('[data-spuds-variant-select]');
   const picker = root.querySelector('[data-spuds-option-picker]');
@@ -169,10 +173,6 @@ const initializeSpudsProduct = (root) => {
       variantSelect.dispatchEvent(new Event('change', { bubbles: true }));
     }
   });
-  const variantInput = root.querySelector('[data-spuds-variant-id]');
-  const oneTimePrice = root.querySelector('[data-spuds-one-time-price]');
-  const subscriptionPrice = root.querySelector('[data-spuds-subscription-price]');
-  const subscriptionName = root.querySelector('[data-spuds-subscription-name]');
   const addButton = root.querySelector('[data-spuds-add-to-cart]');
   const addLabel = root.querySelector('[data-spuds-add-label]');
 
@@ -230,32 +230,22 @@ const initializeSpudsProduct = (root) => {
     variantUrl.searchParams.delete('section_id');
     window.history.replaceState(window.history.state, '', variantUrl);
     if (variantInput) variantInput.value = option.value;
+    const plans = root.querySelector(`template[data-spuds-plan-options="${option.value}"]`);
+    if (plans && purchaseOptions) {
+      const previousPlan = purchaseOptions.querySelector('input:checked')?.value;
+      purchaseOptions.replaceChildren(plans.content.cloneNode(true));
+      const samePlan = Array.from(purchaseOptions.querySelectorAll('input')).find(input => input.value === previousPlan);
+      if (samePlan) samePlan.checked = true;
+    }
+    const oneTimePrice = root.querySelector('[data-spuds-one-time-price]');
     if (oneTimePrice) oneTimePrice.textContent = option.dataset.price || '';
+    syncSubscriptionWidget();
+    variantInput?.dispatchEvent(new Event('change', { bubbles: true }));
 
     const available = option.dataset.available === 'true';
     if (addButton) addButton.disabled = !available;
     if (addLabel) addLabel.textContent = available ? root.dataset.addLabel : root.dataset.soldOutLabel;
 
-    const planId = option.dataset.subscriptionPlan || '';
-    if (subscriptionOption) {
-      subscriptionOption.dataset.sellingPlanId = planId;
-      subscriptionOption.classList.toggle('is-hidden', !planId);
-      const subscriptionRadio = subscriptionOption.querySelector('input[type="radio"]');
-      if (subscriptionRadio) subscriptionRadio.disabled = !planId;
-    }
-    if (subscriptionPrice) subscriptionPrice.textContent = option.dataset.subscriptionPrice || '';
-    if (subscriptionName) {
-      subscriptionName.textContent = (option.dataset.subscriptionName || '')
-        .split(',')[0]
-        .replace('Deliver every', 'Delivery every');
-    }
-
-    const selectedPurchase = purchaseOptions.find((purchaseOption) => purchaseOption.checked);
-    if (!planId && selectedPurchase?.value === 'subscription') {
-      const oneTimeOption = purchaseOptions.find((purchaseOption) => purchaseOption.value === 'one-time');
-      if (oneTimeOption) oneTimeOption.checked = true;
-    }
-    updateSellingPlan();
     updateVariantContent(option.value, variantUrl);
 
     updateGallery(option, true);

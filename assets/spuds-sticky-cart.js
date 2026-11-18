@@ -60,13 +60,14 @@ class SpudsStickyCart {
     this.button.disabled = this.pending || this.mainButton.disabled;
     this.button.setAttribute('aria-busy', String(this.pending));
     this.label.textContent = this.pending ? this.root.dataset.addingLabel : this.root.querySelector('[data-spuds-add-label]')?.textContent.trim();
-    const subscription = this.root.querySelector('[data-spuds-purchase-option]:checked')?.value === 'subscription';
-    const price = this.root.querySelector(subscription ? '[data-spuds-subscription-price]' : '[data-spuds-one-time-price]');
-    this.bar.querySelector('[data-spuds-sticky-price]').textContent = price?.textContent.trim() || '';
+    const planId = new FormData(this.mainButton.form).get('selling_plan');
+    const plan = Array.from(this.root.querySelectorAll('[data-spuds-purchase-options] [data-plan-name]'))
+      .find(input => input.value === planId);
     const option = this.root.querySelector('[data-spuds-variant-select]')?.selectedOptions[0];
+    const oneTimePrice = this.root.querySelector('[data-spuds-one-time-price]')?.textContent.trim();
+    this.bar.querySelector('[data-spuds-sticky-price]').textContent = plan?.dataset.planPrice || option?.dataset.price || oneTimePrice || '';
     const quantity = this.root.querySelector('[data-spuds-quantity-input]')?.value || '1';
-    const plan = subscription ? this.root.querySelector('[data-spuds-subscription-name]')?.textContent.trim() : '';
-    this.bar.querySelector('[data-spuds-sticky-selection]').textContent = [option?.textContent.trim(), plan, `${this.root.dataset.quantityLabel}: ${quantity}`].filter(Boolean).join(' · ');
+    this.bar.querySelector('[data-spuds-sticky-selection]').textContent = [option?.textContent.trim(), plan?.dataset.planName, `${this.root.dataset.quantityLabel}: ${quantity}`].filter(Boolean).join(' · ');
     const originalError = this.root.querySelector('[ref="addToCartTextError"]');
     const message = originalError && !originalError.classList.contains('hidden') ? originalError.textContent.trim() : '';
     this.error.textContent = message;

@@ -89,7 +89,6 @@
     assign has_ingredient_details = true
   endif
 
-  assign first_subscription = current_variant.selling_plan_allocations.first
   assign form_id = 'SpudsProductForm-' | append: section.id
 %}
 
@@ -255,14 +254,6 @@
               ref="variantId"
               data-spuds-variant-id
             >
-            <input
-              type="hidden"
-              name="selling_plan"
-              value=""
-              disabled
-              data-spuds-selling-plan
-            >
-
             {% unless product.has_only_default_variant %}
               <div class="spuds-pdp__variant-row" data-spuds-option-picker>
                 {% for option in product.options_with_values %}
@@ -288,7 +279,6 @@
                 </noscript>
                 <select data-spuds-variant-select hidden>
                   {% for variant in product.variants %}
-                    {% assign variant_subscription = variant.selling_plan_allocations.first %}
                     {% assign gallery_variant_key = variant.id | append: '' %}
                     <option
                       value="{{ variant.id }}"
@@ -298,9 +288,6 @@
                       data-image="{% if variant.featured_media.preview_image != blank %}{{ variant.featured_media.preview_image | image_url: width: 1600 }}{% endif %}"
                       data-media-id="{{ variant.featured_media.id }}"
                       data-gallery-media-ids="{{ variant_gallery[gallery_variant_key] | json | escape }}"
-                      data-subscription-plan="{{ variant_subscription.selling_plan.id }}"
-                      data-subscription-price="{{ variant_subscription.price | money | escape }}"
-                      data-subscription-name="{{ variant_subscription.selling_plan.name | escape }}"
                       {% if variant.id == current_variant.id %}selected{% endif %}
                     >
                       {{ variant.title }}
@@ -310,36 +297,24 @@
               </div>
             {% endunless %}
 
-            <fieldset class="spuds-pdp__purchase-options">
-              <legend class="visually-hidden">Purchase options</legend>
-              <label class="spuds-pdp__purchase-option">
-                <input type="radio" name="spuds-purchase-option" value="one-time" checked data-spuds-purchase-option>
-                <span class="spuds-pdp__radio-mark" aria-hidden="true"></span>
-                <span>{{ section.settings.one_time_label }}: <strong data-spuds-one-time-price>{{ current_variant.price | money }}</strong></span>
-              </label>
+            <div data-spuds-subscription-widget>
+              {% for block in section.blocks %}
+                {% render block %}
+              {% else %}
+                <div class="subscriptions_app_embed_block"></div>
+              {% endfor %}
+            </div>
 
-              <label
-                class="spuds-pdp__purchase-option spuds-pdp__purchase-option--subscription{% if first_subscription == blank %} is-hidden{% endif %}"
-                data-spuds-subscription-option
-                data-selling-plan-id="{{ first_subscription.selling_plan.id }}"
-              >
-                <input
-                  type="radio"
-                  name="spuds-purchase-option"
-                  value="subscription"
-                  data-spuds-purchase-option
-                  {% if first_subscription == blank %}disabled{% endif %}
-                >
-                <span class="spuds-pdp__radio-mark" aria-hidden="true"></span>
-                <span>
-                  {{ section.settings.subscribe_label }}:
-                  <strong data-spuds-subscription-price>{{ first_subscription.price | money }}</strong>
-                  {% if first_subscription.selling_plan.name != blank %}
-                    <small data-spuds-subscription-name>{{ first_subscription.selling_plan.name | split: ',' | first | replace: 'Deliver every', 'Delivery every' }}</small>
-                  {% endif %}
-                </span>
-              </label>
+            <fieldset class="spuds-pdp__purchase-options" data-spuds-purchase-options>
+              {% render 'spuds-purchase-options', variant: current_variant, one_time_label: section.settings.one_time_label, subscription_label: section.settings.subscribe_label, selected_plan_id: product.selected_selling_plan.id %}
             </fieldset>
+            {% if product.selling_plan_groups.size > 0 and product.variants.size > 1 %}
+              {% for variant in product.variants %}
+                <template data-spuds-plan-options="{{ variant.id }}">
+                  {% render 'spuds-purchase-options', variant: variant, one_time_label: section.settings.one_time_label, subscription_label: section.settings.subscribe_label %}
+                </template>
+              {% endfor %}
+            {% endif %}
 
             <div class="spuds-pdp__actions">
               <div class="spuds-pdp__quantity" data-spuds-quantity>
@@ -458,6 +433,7 @@
   "disabled_on": {
     "groups": ["header", "footer"]
   },
+  "blocks": [{ "type": "@app" }],
   "settings": [
     {
       "type": "text",
@@ -496,7 +472,7 @@
       "type": "text",
       "id": "subscribe_label",
       "label": "Subscription label",
-      "default": "Subscribe and Save"
+      "default": "Subscribe"
     },
     {
       "type": "color",

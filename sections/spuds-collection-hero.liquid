@@ -74,7 +74,12 @@
 
   {% for block in section.blocks %}
     {% if block.settings.collection.id == collection.id and block.settings.collection != blank and block.settings.text != blank %}
-      <p class="spuds-collection-hero__intro" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</p>
+      <div class="spuds-collection-hero__intro" {{ block.shopify_attributes }}>
+        {% if block.settings.heading != blank %}
+          <h2>{{ block.settings.heading | escape }}</h2>
+        {% endif %}
+        <p>{{ block.settings.text | escape }}</p>
+      </div>
       {% break %}
     {% endif %}
   {% endfor %}
@@ -137,6 +142,7 @@
       "name": "Collection introduction",
       "settings": [
         { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "heading", "label": "Heading" },
         { "type": "textarea", "id": "text", "label": "Introduction" }
       ]
     }

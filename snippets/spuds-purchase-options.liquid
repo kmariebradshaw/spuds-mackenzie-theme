@@ -1,0 +1,39 @@
+{% doc %}
+  @param {variant} variant - Variant whose purchase choices are displayed.
+  @param {string} one_time_label - One-time purchase label.
+  @param {string} subscription_label - Subscription purchase label.
+  @param {number} [selected_plan_id] - Selling plan selected in the product URL.
+{% enddoc %}
+{% liquid
+  assign allocations = variant.selling_plan_allocations
+  assign initial_plan = 0
+  if variant.requires_selling_plan
+    assign initial_plan = allocations.first.selling_plan.id
+  endif
+  for allocation in allocations
+    if allocation.selling_plan.id == selected_plan_id
+      assign initial_plan = selected_plan_id
+      break
+    endif
+  endfor
+%}
+<legend class="visually-hidden">{{ 'content.purchase_options' | t }}</legend>
+{% unless variant.requires_selling_plan %}
+  <label class="spuds-pdp__purchase-option">
+    <input type="radio" {% if allocations.size > 0 %}name="selling_plan"{% endif %} value="" {% if initial_plan == 0 %}checked{% endif %}>
+    <span class="spuds-pdp__radio-mark" aria-hidden="true"></span>
+    <span>{{ one_time_label | escape }}: <strong data-spuds-one-time-price>{{ variant.price | money }}</strong></span>
+  </label>
+{% endunless %}
+{% for allocation in allocations %}
+  <label class="spuds-pdp__purchase-option">
+    <input type="radio" name="selling_plan" value="{{ allocation.selling_plan.id }}"
+      data-plan-name="{{ allocation.selling_plan.name | escape }}" data-plan-price="{{ allocation.price | money | escape }}"
+      {% if allocation.selling_plan.id == initial_plan %}checked{% endif %}>
+    <span class="spuds-pdp__radio-mark" aria-hidden="true"></span>
+    <span>
+      {{ subscription_label | escape }}: <strong>{{ allocation.price | money }}</strong>
+      <small>{{ allocation.selling_plan.name | escape }}</small>
+    </span>
+  </label>
+{% endfor %}

@@ -21,7 +21,7 @@
       class="section{% if custom_color %} color-custom-{{ section.id }}{% endif %} section--{{ section.settings.section_width }}"
     >
       <div
-        class="cart-page spacing-style{% if cart.empty? %} cart-page--empty{% endif %}"
+        class="cart-page cart-page--empty spacing-style"
         style="{% render 'spacing-style', settings: section.settings %}"
       >
         <div class="cart-page__title">

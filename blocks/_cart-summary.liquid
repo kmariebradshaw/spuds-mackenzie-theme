@@ -33,6 +33,7 @@
   {{ block.shopify_attributes }}
 >
   <div class="{{ cart_summary_inner_class }}">
+    <h2 class="cart-summary__heading">{{ 'content.order_summary' | t }}</h2>
     {% render 'cart-summary', accelerated_checkout_buttons_layout: 'vertical', section_id: section.id %}
   </div>
 </div>

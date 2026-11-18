@@ -191,6 +191,8 @@
     "account_orders": "Orders",
     "account_profile": "Profile",
     "blog_details_separator": "|",
+    "purchase_options": "Purchase options",
+    "order_summary": "Order summary",
     "cart_estimated_total": "Estimated total",
     "cart_title": "Cart",
     "cart_subtotal": "Subtotal",

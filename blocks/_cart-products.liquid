@@ -1,6 +1,8 @@
+{% doc %}
+  @param {boolean} [force_empty] - Render the empty cart controls when the final item is removed.
+{% enddoc %}
 
-
-{% render 'cart-products' %}
+{% render 'cart-products', force_empty: force_empty %}
 
 {% stylesheet %}
   .cart-page__title + .cart-page__items {

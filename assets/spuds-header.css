@@ -11,6 +11,9 @@
 }
 
 #header-component .header-logo__image {
+  --logo-inset: clamp(3px, .37vw, 9px);
+  box-sizing: border-box;
+  padding: var(--logo-inset) calc(1.9 * var(--logo-inset));
   object-fit: contain;
 }
 
@@ -36,6 +39,7 @@
 
   #header-component .header-logo__image {
     width: auto;
+    --logo-inset: clamp(3px, 1vw, 7px);
     height: 10vw;
     max-width: 36vw;
   }
