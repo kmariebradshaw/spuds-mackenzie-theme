@@ -1,9 +1,10 @@
 {% assign footer_links = linklists.footer.links %}
 {% assign shop_link = footer_links | where: 'type', 'collection_link' | first %}
+{% assign footer_logo = section.settings.logo | default: images['spuds-mackenzie-logo-cream-pink.png'] %}
 <div class="spuds-footer">
   <a class="spuds-footer__brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
-    {% if section.settings.logo != blank %}
-      {{ section.settings.logo | image_url: width: 440 | image_tag: widths: '160,240,320,440', sizes: '(max-width: 749px) 144px, 198px', loading: 'lazy', alt: shop.name }}
+    {% if footer_logo != blank %}
+      {{ footer_logo | image_url: width: 440 | image_tag: widths: '160,240,320,440', sizes: '(max-width: 749px) 144px, 198px', loading: 'lazy', alt: shop.name }}
     {% else %}
       {{ shop.name | escape }}
     {% endif %}
