@@ -25,6 +25,7 @@
 }
 
 .spuds-collection-hero__inner {
+  position: relative;
   display: grid;
   grid-template-columns: 36% minmax(0, 1fr);
   min-height: 25vw;
@@ -125,9 +126,12 @@
 }
 
 .spuds-collection-hero__media {
-  position: relative;
-  min-height: 100%;
+  position: absolute;
+  inset: 0 0 0 18%;
   background: var(--spuds-teal);
+  --photo-fade: linear-gradient(90deg, transparent, rgb(0 0 0 / .1) 7%, rgb(0 0 0 / .44) 22%, #000 42%);
+  -webkit-mask-image: var(--photo-fade);
+  mask-image: var(--photo-fade);
 }
 
 .spuds-collection-hero__media img,
@@ -428,6 +432,22 @@
 
   .spuds-collection-hero__inner {
     min-height: 36vw;
+  }
+
+  .spuds-collection-hero__copy {
+    padding-block: 3vw;
+    transform: none;
+  }
+
+  .spuds-collection-hero__description {
+    max-width: 100%;
+    margin-top: 3vw;
+    font-size: clamp(10px, 2.2vw, 15px);
+    text-wrap: balance;
+  }
+
+  .spuds-collection-hero__description p {
+    white-space: normal;
   }
 
   .spuds-collection-nav {

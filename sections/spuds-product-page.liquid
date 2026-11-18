@@ -50,13 +50,7 @@
     assign eyebrow = section.settings.eyebrow
   endif
 
-  assign review_count = product.metafields.custom.review_count.value
-  if review_count == blank
-    assign review_count = product.metafields.reviews.rating_count.value
-  endif
-  if review_count == blank
-    assign review_count = section.settings.review_count
-  endif
+  assign tagline = product.metafields.custom.product_tagline.value
 
   assign use_variant_content = product.metafields.custom.variant_content_enabled.value
   assign product_type = product.type | downcase
@@ -238,17 +232,9 @@
 
         <h1 class="spuds-pdp__title">{{ product.title }}</h1>
 
-        <div class="spuds-pdp__reviews">
-          <img
-            src="{{ '5Stars.svg' | asset_url }}"
-            alt="5 out of 5 stars"
-            width="176"
-            height="31"
-          >
-          {% if review_count != blank %}
-            <span>{{ review_count }}</span>
-          {% endif %}
-        </div>
+        {% if tagline != blank %}
+          <p class="spuds-pdp__tagline">{{ tagline | escape }}</p>
+        {% endif %}
 
         <product-form-component
           id="{{ form_id }}-Component"
@@ -461,12 +447,6 @@
       "id": "eyebrow",
       "label": "Fallback category label",
       "default": "SPUDS SNACKS"
-    },
-    {
-      "type": "text",
-      "id": "review_count",
-      "label": "Fallback review text",
-      "default": "12,406 Reviews"
     },
     {
       "type": "checkbox",
