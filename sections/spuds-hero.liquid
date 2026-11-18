@@ -22,7 +22,7 @@
     {% render 'spuds-mobile-collage', section: section %}
   {% endif %}
   <div class="spuds-shell">
-    <div class="spuds-hero{% if mobile_hero_image != blank and template.suffix != 'collage' %} spuds-hero--extended{% endif %}">
+    <div class="spuds-hero{% if hero_image != blank and template.suffix != 'collage' %} spuds-hero--extended{% endif %}">
       <div
         class="spuds-hero__image{% if mobile_hero_image != blank %} spuds-hero__image--mobile{% endif %}"
         {% if mobile_hero_image != blank %}style="--mobile-image-focus: {{ mobile_hero_image.presentation.focal_point | default: 'center' }}"{% endif %}
@@ -38,7 +38,7 @@
             >
           {% endif %}
           {% if hero_image != blank %}
-            {{ hero_image | image_url: width: 2400 | image_tag: widths: '400,750,1100,1500,2000,2400', sizes: '(max-width: 749px) 88vw, 82vw', loading: 'eager', fetchpriority: 'high' }}
+            {{ hero_image | image_url: width: 2400 | image_tag: widths: '400,750,1100,1500,2000,2400', sizes: '(max-width: 749px) 100vw, 82vw', loading: 'eager', fetchpriority: 'high' }}
           {% else %}
             <img src="{{ 'spuds-hero.png' | asset_url }}" width="1537" height="1023" alt="Spuds MacKenzie relaxing at a pool party" loading="eager" fetchpriority="high">
           {% endif %}

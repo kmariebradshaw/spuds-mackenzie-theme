@@ -1504,7 +1504,7 @@
   }
 }
 
-/* The two art-directed photographs set the hero height and keep all products in frame. */
+/* The shared artwork includes a cream fade below the product lineup. */
 .spuds-hero--extended {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -1526,7 +1526,12 @@
 
 .spuds-hero--extended .spuds-hero__copy {
   grid-area: 1 / 1;
-  align-self: start;
+  align-self: center;
+  padding-block: clamp(10px, 1.5vw, 26px);
+}
+
+.spuds-hero--extended + .spuds-categories::before {
+  content: none;
 }
 
 .spuds-hero--extended .spuds-float-shape--two {
@@ -1536,16 +1541,16 @@
 
 @media (max-width: 749px) {
   .spuds-hero--extended {
-    grid-template-rows: auto minmax(80vw, 1fr);
+    grid-template-rows: auto auto;
   }
 
   .spuds-hero--extended .spuds-hero__image {
-    grid-area: 1 / 1 / 3 / 2;
+    grid-area: 2 / 1;
     margin-inline-start: 0;
   }
 
   .spuds-hero--extended .spuds-hero__image::after {
-    background: linear-gradient(148deg, var(--cream) 0%, rgb(250 240 228 / .88) 18%, transparent 47%);
+    background: linear-gradient(to bottom, var(--cream), transparent 11%);
   }
 
   .spuds-hero--extended .spuds-hero__copy {
@@ -1554,11 +1559,11 @@
     align-items: flex-start;
     gap: clamp(8px, 2vw, 14px);
     width: 100%;
-    padding: 3vw 4vw;
+    padding: 2vw 4vw 0;
   }
 
   .spuds-hero--extended h1.spuds-hero__headline {
-    width: min(42vw, 230px);
+    width: min(35vw, 170px);
     margin: 0;
   }
 
