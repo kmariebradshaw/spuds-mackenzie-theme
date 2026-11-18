@@ -1,6 +1,6 @@
 {
   "type": "footer",
   "name": "t:names.footer",
-  "sections": { "spuds_footer": { "type": "spuds-footer", "settings": {} } },
+  "sections": { "spuds_footer": { "type": "spuds-footer", "settings": { "logo": "shopify://shop_images/spuds-mackenzie-logo-cream-pink.png" } } },
   "order": ["spuds_footer"]
 }

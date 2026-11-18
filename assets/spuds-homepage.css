@@ -1095,6 +1095,15 @@
     background: var(--cream);
   }
 
+  .spuds-home:not(.spuds-home--collage) .spuds-hero__intro {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .spuds-home:not(.spuds-home--collage) .spuds-hero__experience {
+    text-wrap: balance;
+  }
+
   .spuds-hero__lead {
     font-size: clamp(18px, 4.7vw, 25px);
   }

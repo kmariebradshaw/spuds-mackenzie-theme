@@ -100,6 +100,7 @@ if (!customElements.get('product-card-link')) {
  * @property {HTMLAnchorElement} productCardLink - The product card link element.
  * @property {import('slideshow').Slideshow} [slideshow] - The slideshow component.
  * @property {import('quick-add').QuickAddComponent} [quickAdd] - The quick add component.
+ * @property {HTMLAnchorElement} [productDetailsLink] - The optional View product link.
  * @property {HTMLElement} [cardGallery] - The card gallery component.
  * @property {HTMLImageElement[]} [imagesToTransition] - The images to transition.
  * @extends {ProductCardLink<ProductCardRefs>}
@@ -372,8 +373,8 @@ export class ProductCard extends ProductCardLink {
    * @param {string | null} [options.variantId] - Variant ID to set, or null/undefined to remove it.
    */
   #updateLinks({ pathname, variantId }) {
-    const { productCardLink, productTitleLink, cardGalleryLink } = this.refs;
-    for (const linkEl of [productCardLink, cardGalleryLink, productTitleLink]) {
+    const { productCardLink, productTitleLink, cardGalleryLink, productDetailsLink } = this.refs;
+    for (const linkEl of [productCardLink, cardGalleryLink, productTitleLink, productDetailsLink]) {
       if (!(linkEl instanceof HTMLAnchorElement) || !linkEl.href) continue;
       const url = new URL(linkEl.href);
       if (pathname) url.pathname = pathname;

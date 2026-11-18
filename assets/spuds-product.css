@@ -373,8 +373,7 @@
   appearance: none;
 }
 
-.spuds-pdp button.spuds-pdp__add-to-cart,
-.spuds-pdp-recommendations button.spuds-pdp-recommendation-card__button {
+.spuds-pdp button.spuds-pdp__add-to-cart {
   position: relative;
   display: flex;
   width: 100%;
@@ -426,15 +425,12 @@
 }
 
 .spuds-pdp button.spuds-pdp__add-to-cart:hover,
-.spuds-pdp button.spuds-pdp__add-to-cart:focus-visible,
-.spuds-pdp-recommendations button.spuds-pdp-recommendation-card__button:hover,
-.spuds-pdp-recommendations button.spuds-pdp-recommendation-card__button:focus-visible {
+.spuds-pdp button.spuds-pdp__add-to-cart:focus-visible {
   box-shadow: .2vw .2vw 0 var(--spuds-pdp-accent, var(--spuds-pdp-pink));
   transform: translate(.18vw, .18vw);
 }
 
-.spuds-pdp button.spuds-pdp__add-to-cart:disabled,
-.spuds-pdp-recommendations button.spuds-pdp-recommendation-card__button:disabled {
+.spuds-pdp button.spuds-pdp__add-to-cart:disabled {
   cursor: not-allowed;
   opacity: .55;
 }
@@ -666,7 +662,7 @@
   display: flex;
   min-width: 0;
   flex-direction: column;
-  padding-bottom: 2.2vw;
+  overflow: hidden;
   border-radius: 1vw;
   background: #fff;
 }
@@ -678,7 +674,7 @@
   justify-content: center;
   padding: .8vw 1.1vw;
   border-radius: 1vw 1vw 0 0;
-  background: var(--spuds-pdp-pink);
+  background: var(--spuds-pdp-navy);
   color: #fff;
   font-family: var(--spuds-pdp-scale);
   font-size: 1.12vw;
@@ -692,12 +688,9 @@
   text-transform: uppercase;
 }
 
-.spuds-pdp-recommendation-card--2 .spuds-pdp-recommendation-card__title {
-  background: var(--spuds-pdp-teal);
-}
-
-.spuds-pdp-recommendation-card--3 .spuds-pdp-recommendation-card__title {
-  background: var(--spuds-pdp-green);
+.spuds-pdp-recommendation-card__status {
+  text-align: center;
+  padding-block: .4rem;
 }
 
 .spuds-pdp-recommendation-card__media {
@@ -715,19 +708,6 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-}
-
-.spuds-pdp-recommendation-card__form {
-  position: absolute;
-  right: 1.55vw;
-  bottom: -1.35vw;
-  left: 1.55vw;
-}
-
-.spuds-pdp-recommendations button.spuds-pdp-recommendation-card__button {
-  min-height: 3.35vw;
-  padding: .75vw 1.1vw;
-  font-size: 1.33vw;
 }
 
 .spuds-pdp-recommendation-card--skeleton {
@@ -995,7 +975,6 @@
   }
 
   .spuds-pdp-recommendation-card {
-    padding-bottom: 7vw;
     border-radius: 3.5vw;
   }
 
@@ -1008,19 +987,6 @@
 
   .spuds-pdp-recommendation-card__media {
     padding: 5vw;
-  }
-
-  .spuds-pdp-recommendation-card__form {
-    right: 5vw;
-    bottom: -5vw;
-    left: 5vw;
-  }
-
-  .spuds-pdp-recommendations button.spuds-pdp-recommendation-card__button {
-    min-height: 13vw;
-    padding: 3vw 4vw;
-    box-shadow: 1.1vw 1.1vw 0 var(--spuds-pdp-accent, var(--spuds-pdp-pink));
-    font-size: 4.8vw;
   }
 
   .spuds-pdp-recommendation-card--skeleton {

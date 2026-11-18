@@ -297,7 +297,7 @@
 .spuds-collection-products .product-grid__item {
   min-width: 0;
   overflow: visible;
-  padding-bottom: 1.25rem;
+  padding-bottom: 0;
   border: 0;
   background: transparent;
   box-shadow: none;
@@ -311,16 +311,16 @@
 .spuds-collection-products .product-card__content {
   position: relative;
   gap: 0 !important;
-  overflow: visible;
   background: #fff;
-  border-radius: .9rem;
-  box-shadow: 0 .55rem 1.1rem rgb(7 27 61 / 4%);
+  border: 1px solid #dfd8cf;
+  border-radius: .45rem;
+  overflow: hidden;
 }
 
 .spuds-collection-products .card-gallery {
   order: 2;
-  margin: 0 .75rem;
-  padding: 1.6rem .7rem .7rem;
+  margin: 0;
+  padding: .6rem .65rem .15rem;
   background: #fff;
   overflow: hidden;
 }
@@ -349,53 +349,29 @@
 
 .spuds-collection-products [ref="productTitleLink"] .text-block {
   width: 100%;
-  min-height: 3.65rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: .78rem 1rem !important;
-  border-radius: .9rem .9rem 0 0;
-  color: #fff;
-  /* Match the collection-header description exactly. */
+  min-height: 3.1rem;
+  display: grid;
+  place-items: center;
+  padding: .5rem .65rem !important;
+  background: var(--spuds-navy);
+  color: var(--spuds-cream);
   font-family: var(--spuds-scale) !important;
-  font-size: clamp(1.05rem, 1.3vw, 1.35rem) !important;
-  font-stretch: expanded;
-  font-variation-settings: "wght" 350, "wdth" 112;
+  font-size: clamp(.92rem, 1.1vw, 1.06rem) !important;
+  font-variation-settings: "wght" 600, "wdth" 92;
   font-weight: 600;
-  letter-spacing: .01em;
-  line-height: 1.25 !important;
+  line-height: 1.15 !important;
   text-align: center;
   text-transform: uppercase;
 }
 
 .spuds-collection-products [ref="productTitleLink"] .text-block > * {
-  width: 100%;
-  color: #fff !important;
-  /* Horizon assigns a font preset directly to this inner <p>. Apply the
-     collection description treatment here as well, otherwise the product
-     title falls back to the theme's heading font. */
-  font-family: var(--spuds-scale) !important;
-  font-stretch: expanded;
-  font-variation-settings: "wght" 350, "wdth" 112;
-  font-weight: 600 !important;
-  font-size: inherit !important;
-  letter-spacing: inherit !important;
-  line-height: inherit !important;
-  text-align: center;
-  text-transform: uppercase !important;
-}
-
-.spuds-collection-products .product-grid__item:nth-child(3n + 1) [ref="productTitleLink"] .text-block {
-  background: var(--spuds-pink);
-}
-
-.spuds-collection-products .product-grid__item:nth-child(3n + 2) [ref="productTitleLink"] .text-block {
-  background: var(--spuds-teal);
-}
-
-.spuds-collection-products .product-grid__item:nth-child(3n) [ref="productTitleLink"] .text-block {
-  background: var(--spuds-green);
-  color: #fff;
+  margin: 0;
+  color: inherit !important;
+  font: inherit !important;
+  font-variation-settings: inherit !important;
+  letter-spacing: .015em;
+  text-align: inherit;
+  text-transform: inherit !important;
 }
 
 .spuds-collection-products product-price.text-block {
@@ -416,68 +392,10 @@
   text-align: center;
 }
 
-.spuds-collection-products .product-card__content > .quick-add {
-  position: relative;
+.spuds-collection-products .spuds-view-product {
   order: 4;
-  inset: auto;
-  z-index: 2;
-  display: block;
-  width: min(calc(100% - 3rem), 16rem);
-  min-height: 3rem;
-  margin: .15rem auto -1.15rem;
-  pointer-events: auto;
-}
-
-.spuds-collection-products .product-card__content > .quick-add .quick-add__product-form-component,
-.spuds-collection-products .product-card__content > .quick-add .shopify-product-form {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.spuds-collection-products .product-card__content > .quick-add button.quick-add__button {
-  position: relative;
-  inset: auto;
-  display: flex;
-  width: 100%;
-  max-width: none;
-  min-width: 0;
-  min-height: 3rem;
-  justify-content: center;
-  padding: .8rem 1rem;
-  overflow: visible;
-  border: 0;
-  border-radius: 0;
-  background: var(--spuds-navy);
-  box-shadow: .32rem .32rem 0 var(--spuds-pink);
-  color: #fff;
-  font-family: var(--spuds-scale);
-  font-size: 1rem;
-  font-stretch: expanded;
-  font-variation-settings: "wght" 500, "wdth" 120;
-  font-weight: 600;
-  letter-spacing: .03em;
-  opacity: 1;
-  text-transform: uppercase;
-  white-space: normal;
-  backdrop-filter: none;
-}
-
-.spuds-collection-products .product-card__content > .quick-add button.quick-add__button:hover,
-.spuds-collection-products .product-card__content > .quick-add button.quick-add__button:focus-visible {
-  width: 100%;
-  box-shadow: .18rem .18rem 0 var(--spuds-pink);
-  translate: .14rem .14rem;
-}
-
-.spuds-collection-products .product-card__content > .quick-add .add-to-cart-icon {
-  display: none;
-}
-
-@media screen and (min-width: 990px) {
-  .spuds-collection-products .product-grid.product-grid--grid:not([product-grid-view="zoom-out"]) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+  align-self: stretch;
+  margin-top: auto;
 }
 
 @media screen and (min-width: 990px) and (max-width: 1199px) {
@@ -541,32 +459,19 @@
   }
 
   .spuds-collection-products [ref="productTitleLink"] .text-block {
-    min-height: 3.25rem;
-    padding: .7rem .75rem !important;
-    font-size: 1rem !important;
-  }
-
-  .spuds-collection-products product-price.text-block {
-    padding: .75rem .75rem .5rem !important;
+    min-height: 3rem;
+    padding: .4rem .5rem !important;
     font-size: .875rem !important;
   }
 
-  .spuds-collection-products .product-card__content > .quick-add {
-    width: calc(100% - 2rem);
-    min-height: 2.75rem;
-    margin: 0 auto -1rem;
-  }
-
-  .spuds-collection-products .product-card__content > .quick-add button.quick-add__button {
-    min-height: 2.75rem;
-    padding: .65rem .5rem;
-    font-size: .8rem;
+  .spuds-collection-products product-price.text-block {
+    padding: .35rem .5rem .5rem !important;
+    font-size: .875rem !important;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .spuds-collection-nav__link,
-  .spuds-collection-products .quick-add__button {
+  .spuds-collection-nav__link {
     transition: none;
   }
 }

@@ -22,16 +22,6 @@
 {% endstyle %}
 
 {% liquid
-  assign has_quick_add = false
-  if settings.quick_add and product.available
-    assign has_quick_add = true
-  endif
-
-  assign has_mobile_quick_add = false
-  if has_quick_add and settings.mobile_quick_add
-    assign has_mobile_quick_add = true
-  endif
-
   assign product_card_id = 'product-card-link-' | append: block.id | append: '-' | append: product.id
   assign product_card_gap_value = product_card_gap | default: block_settings.product_card_gap
 
@@ -104,9 +94,6 @@
       {% render 'layout-panel-style', settings: block_settings %}
       {% render 'spacing-style', settings: block_settings %}
       {% render 'gap-style', value: product_card_gap_value, name: 'product-card-gap' %}
-      --quick-add-display: {% if has_quick_add %}flex{% else %}none{% endif %};
-      --quick-add-mobile-display: {% if has_mobile_quick_add %}flex{% else %}none{% endif %};
-      --quick-add-mobile-opacity: {% if has_mobile_quick_add %}1{% else %}0{% endif %};
       {% if block_settings.padding-inline-start > 0 %}--zoom-out-padding-inline-start: min(var(--padding-xs), {{ block_settings.padding-inline-start | times: 0.7}}px);{% endif %}
       {% if block_settings.padding-inline-end > 0 %}--zoom-out-padding-inline-end: min(var(--padding-xs), {{ block_settings.padding-inline-end | times: 0.7}}px);{% endif %}
       {% if block_settings.padding-block-start > 0 %}--zoom-out-padding-block-start: min(var(--padding-xs), {{ block_settings.padding-block-start | times: 0.7}}px);{% endif %}
@@ -115,8 +102,8 @@
   >
     {{ children }}
 
-    {% if product_view_context == 'collection' and product.available and settings.quick_add %}
-      {% render 'quick-add', product: product, section_id: section.id %}
+    {% if product_view_context == 'collection' and product != blank %}
+      {% render 'spuds-view-product', product: product %}
     {% endif %}
   </div>
 </product-card>

@@ -1,0 +1,30 @@
+{%- doc -%}
+  A product card link for browsing a product and choosing purchase options.
+  @param {product} product - The product to open.
+{%- enddoc -%}
+<a class="spuds-view-product" href="{{ product.url | escape }}" ref="productDetailsLink">
+  {{ 'spuds_product.view_product' | t }}
+  <span class="visually-hidden"> – {{ product.title | escape }}</span>
+  <span aria-hidden="true">→</span>
+</a>
+
+{% stylesheet %}
+  .spuds-view-product {
+    position: relative;
+    display: flex;
+    gap: .5em;
+    justify-content: center;
+    align-items: center;
+    min-height: 44px;
+    padding: .55rem .75rem;
+    border-top: 1px solid #e5ddcf;
+    color: #071b3d;
+    font: 600 .95rem/1.15 "work-sans", "Work Sans", Arial, sans-serif;
+    text-align: center;
+    text-decoration: none;
+    pointer-events: auto;
+  }
+  .spuds-view-product [aria-hidden] { color: #966421; }
+  .spuds-view-product:is(:hover, :focus-visible) { background: #faf0e4; text-decoration: underline; text-underline-offset: .2em; }
+  .spuds-view-product:focus-visible { outline: 2px solid #071b3d; outline-offset: -3px; }
+{% endstylesheet %}
