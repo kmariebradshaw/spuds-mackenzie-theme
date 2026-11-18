@@ -22,7 +22,7 @@
     {% render 'spuds-mobile-collage', section: section %}
   {% endif %}
   <div class="spuds-shell">
-    <div class="spuds-hero">
+    <div class="spuds-hero{% if mobile_hero_image != blank and template.suffix != 'collage' %} spuds-hero--extended{% endif %}">
       <div
         class="spuds-hero__image{% if mobile_hero_image != blank %} spuds-hero__image--mobile{% endif %}"
         {% if mobile_hero_image != blank %}style="--mobile-image-focus: {{ mobile_hero_image.presentation.focal_point | default: 'center' }}"{% endif %}
@@ -31,6 +31,8 @@
           {% if mobile_hero_image != blank %}
             <source
               media="(max-width: 749px)"
+              width="{{ mobile_hero_image.width }}"
+              height="{{ mobile_hero_image.height }}"
               sizes="100vw"
               srcset="{{ mobile_hero_image | image_url: width: 400 }} 400w, {{ mobile_hero_image | image_url: width: 750 }} 750w, {{ mobile_hero_image | image_url: width: 1100 }} 1100w, {{ mobile_hero_image | image_url: width: 1500 }} 1500w"
             >
@@ -65,14 +67,16 @@
         {% render 'spuds-hero-actions', section: section %}
       </div>
 
-      <div class="spuds-hero__polaroids" aria-hidden="true">
-        {% if hero_polaroid_cluster != blank %}
-          {{ hero_polaroid_cluster | image_url: width: 1800 | image_tag: widths: '500,750,1000,1400,1800', sizes: '19vw', class: 'spuds-hero__polaroid-cluster', loading: 'eager', alt: '' }}
-        {% else %}
-          <img class="spuds-hero__polaroid-cluster" src="{{ 'spuds-hero-polaroids-20261020.webp' | asset_url }}" width="1009" height="1731" alt="" loading="eager">
-        {% endif %}
-        {% render 'spuds-shape', shape: 'paw', color: '#ff2e6c', class: 'spuds-hero__polaroid-paw' %}
-      </div>
+      {% if template.suffix == 'collage' %}
+        <div class="spuds-hero__polaroids" aria-hidden="true">
+          {% if hero_polaroid_cluster != blank %}
+            {{ hero_polaroid_cluster | image_url: width: 1800 | image_tag: widths: '500,750,1000,1400,1800', sizes: '19vw', class: 'spuds-hero__polaroid-cluster', loading: 'eager', alt: '' }}
+          {% else %}
+            <img class="spuds-hero__polaroid-cluster" src="{{ 'spuds-hero-polaroids-20261020.webp' | asset_url }}" width="1009" height="1731" alt="" loading="eager">
+          {% endif %}
+          {% render 'spuds-shape', shape: 'paw', color: '#ff2e6c', class: 'spuds-hero__polaroid-paw' %}
+        </div>
+      {% endif %}
       {% if hero_button_accent_left != blank %}
         {{ hero_button_accent_left | image_url: width: 300 | image_tag: widths: '100,200,300', sizes: '4vw', class: 'spuds-float-shape spuds-hero__button-accent spuds-hero__button-accent--left', loading: 'eager', alt: '' }}
       {% else %}
