@@ -364,7 +364,7 @@
 .spuds-collection-products .card-gallery img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .spuds-collection-products .product-grid__item {
