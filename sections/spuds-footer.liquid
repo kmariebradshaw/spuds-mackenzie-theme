@@ -1,0 +1,64 @@
+{% assign footer_links = linklists.footer.links %}
+{% assign shop_link = footer_links | where: 'type', 'collection_link' | first %}
+<div class="spuds-footer">
+  <a class="spuds-footer__brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
+    {% if settings.logo != blank %}
+      {{ settings.logo | image_url: width: 320 | image_tag: widths: '160,240,320', sizes: '145px', loading: 'lazy', alt: shop.name }}
+    {% else %}
+      {{ shop.name | escape }}
+    {% endif %}
+  </a>
+  {% if shop_link != blank %}
+    <nav aria-label="{{ shop_link.title | escape }}">
+      <h2><a href="{{ shop_link.url }}">{{ shop_link.title | escape }}</a></h2>
+      <ul role="list">
+        {% for link in shop_link.links %}
+          <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+  {% endif %}
+  <nav aria-label="{{ 'spuds_footer.info' | t }}">
+    <h2>{{ 'spuds_footer.info' | t }}</h2>
+    <ul role="list">
+      {% for link in footer_links %}
+        {% unless link.url == shop_link.url %}
+          <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+        {% endunless %}
+      {% endfor %}
+      {% for policy in shop.policies %}
+        {% if policy.body != blank %}
+          <li><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </nav>
+  <small>© {{ 'now' | date: '%Y' }} {{ shop.name | escape }}</small>
+</div>
+{% stylesheet %}
+  .spuds-footer {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: clamp(20px, 3vw, 56px);
+    padding: clamp(28px, 4vw, 72px) max(5vw, calc((100vw - 1400px) / 2));
+    border-top: 1px solid #071b3d33;
+    background: #faf0e4;
+    color: #071b3d;
+    font: 400 clamp(14px, 1.05vw, 18px)/1.45 "Work Sans", Arial, sans-serif;
+  }
+  .spuds-footer__brand { align-self: start; width: fit-content; }
+  .spuds-footer__brand img { display: block; width: clamp(112px, 11vw, 160px); height: auto; }
+  .spuds-footer h2 { margin: 0 0 .6em; color: inherit; font: 600 1.15em/1.1 "Scale VF", "scale-variable", Arial, sans-serif; }
+  .spuds-footer ul { list-style: none; padding: 0; margin: 0; }
+  .spuds-footer a { color: inherit; text-decoration: none; }
+  .spuds-footer li a { display: inline-block; padding-block: .25em; }
+  .spuds-footer a:is(:hover, :focus-visible) { text-decoration: underline; text-underline-offset: .2em; }
+  .spuds-footer small { grid-column: 1 / -1; padding-top: 1em; border-top: 1px solid #071b3d26; }
+  @media (max-width: 749px) {
+    .spuds-footer { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .spuds-footer__brand { grid-column: 1 / -1; }
+  }
+{% endstylesheet %}
+{% schema %}
+{"name":"Spuds footer","enabled_on":{"groups":["footer"]},"settings":[],"presets":[{"name":"Spuds footer"}]}
+{% endschema %}

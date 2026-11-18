@@ -1,4 +1,5 @@
 {{ 'spuds-homepage.css' | asset_url | stylesheet_tag }}
+{% assign today_product = section.settings.today_product %}
 {% assign story_arrow = section.settings.story_arrow %}
 {% assign mission_brush = section.settings.mission_brush %}
 
@@ -17,7 +18,7 @@
           {% if section.settings.old_image != blank %}
             {{ section.settings.old_image | image_url: width: 1000 | image_tag: class: 'spuds-story__polaroid', loading: 'lazy', alt: 'Spuds MacKenzie in 1987' }}
           {% else %}
-            <img class="spuds-story__polaroid" src="{{ 'spuds-history-1987.png' | asset_url }}" alt="Spuds MacKenzie in 1987" loading="lazy">
+            <img class="spuds-story__polaroid" width="872" height="944" src="{{ 'spuds-history-1987.png' | asset_url }}" alt="Spuds MacKenzie in 1987" loading="lazy">
           {% endif %}
         </div>
 
@@ -47,10 +48,15 @@
 
         <div class="spuds-story__era spuds-story__era--today">
           <div class="spuds-story__year">{{ section.settings.today_year }}</div>
-          {% if section.settings.today_image != blank %}
+          {% if today_product.featured_image != blank %}
+            <div class="spuds-story__polaroid spuds-story__product-frame">
+              <img src="{{ 'spuds-history-today.png' | asset_url }}" width="999" height="1107" alt="" loading="lazy">
+              {{ today_product.featured_image | image_url: width: 800 | image_tag: class: 'spuds-story__product-photo', widths: '200,400,600,800', sizes: '12vw', loading: 'lazy', alt: today_product.title }}
+            </div>
+          {% elsif section.settings.today_image != blank %}
             {{ section.settings.today_image | image_url: width: 1100 | image_tag: class: 'spuds-story__polaroid', loading: 'lazy', alt: 'Spuds MacKenzie today' }}
           {% else %}
-            <img class="spuds-story__polaroid" src="{{ 'spuds-history-today.png' | asset_url }}" alt="Spuds MacKenzie today" loading="lazy">
+            <img class="spuds-story__polaroid" width="999" height="1107" src="{{ 'spuds-history-today.png' | asset_url }}" alt="Spuds MacKenzie today" loading="lazy">
           {% endif %}
         </div>
 
@@ -77,6 +83,7 @@
     {"type":"text","id":"old_accent","label":"Script word","default":"Icon"},
     {"type":"textarea","id":"old_copy","label":"Copy","default":"Spuds MacKenzie became one of the most recognizable dogs in America."},
     {"type":"header","content":"Today side"},
+    {"type":"product","id":"today_product","label":"Featured product photo in Today frame"},
     {"type":"image_picker","id":"today_image","label":"Complete Today Polaroid graphic"},
     {"type":"text","id":"today_year","label":"Label","default":"Today"},
     {"type":"text","id":"today_heading","label":"Heading","default":"Pet"},

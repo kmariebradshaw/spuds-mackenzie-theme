@@ -1,6 +1,7 @@
 {{ 'spuds-collection.css' | asset_url | stylesheet_tag }}
 
 {% liquid
+  assign shop_link = linklists.footer.links | where: 'type', 'collection_link' | first
   assign hero_image = collection.image
   if hero_image == blank
     assign hero_image = collection.products.first.featured_image
@@ -78,6 +79,24 @@
     {% endif %}
   {% endfor %}
 
+  {% if collection.id == shop_link.object.id and shop_link.links.size > 0 %}
+    <script type="module" src="{{ 'spuds-category-filter.js' | asset_url }}"></script>
+    <spuds-category-filter
+      hidden
+      data-hub-path="{{ collection.url | escape }}"
+      data-error="{{ 'spuds_catalog.error' | t | escape }}"
+    >
+      <div role="group" aria-label="{{ 'spuds_catalog.categories' | t | escape }}">
+        <button type="button" data-category="" aria-pressed="true" aria-controls="ResultsList" data-status="{{ 'spuds_catalog.updated' | t: category: shop_link.title | escape }}">{{ 'spuds_catalog.all' | t }}</button>
+        {% for category in shop_link.links %}
+          {% if category.type == 'collection_link' and category.object != blank %}
+            <button type="button" data-category="{{ category.object.handle | escape }}" data-source="{{ category.url | escape }}" data-status="{{ 'spuds_catalog.updated' | t: category: category.object.title | escape }}" aria-pressed="false" aria-controls="ResultsList">{{ category.title | escape }}</button>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <span role="status" aria-live="polite" class="visually-hidden"></span>
+    </spuds-category-filter>
+  {% else %}
   <nav class="spuds-collection-nav" aria-label="{{ section.settings.navigation_label | escape }}">
     {% if primary_label != blank %}
       <a
@@ -101,6 +120,7 @@
       </a>
     {% endif %}
   </nav>
+  {% endif %}
 </section>
 
 {% schema %}

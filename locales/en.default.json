@@ -8,6 +8,8 @@
  * ------------------------------------------------------------
  */
 {
+  "spuds_footer": { "info": "Help & information" },
+  "spuds_catalog": { "categories": "Filter products by category", "all": "All products", "error": "This category could not load. Please try again.", "updated": "Showing {{ category }}" },
   "spuds_hero": { "shop_category": "Shop {{ category }}" },
   "spuds_navigation": {"contact": "Contact"},
   "spuds_product": {

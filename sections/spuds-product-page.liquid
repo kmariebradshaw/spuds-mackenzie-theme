@@ -115,7 +115,7 @@
 >
   <div class="spuds-pdp__inner">
     <nav class="spuds-pdp__breadcrumbs" aria-label="Breadcrumb">
-      <a href="{{ collections['spuds-bundles'].url | default: routes.all_products_collection_url }}">All Spuds</a>
+      <a href="{% render 'spuds-navigation-url' %}">All Spuds</a>
       <span aria-hidden="true">&gt;</span>
       {% if breadcrumb_collection != blank %}
         <a href="{{ breadcrumb_collection.url }}">{{ breadcrumb_collection.title }}</a>

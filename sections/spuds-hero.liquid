@@ -31,7 +31,16 @@
       </div>
 
       <div class="spuds-hero__copy">
-        <p class="spuds-hero__eyebrow">{{ section.settings.hero_eyebrow | escape }}</p>
+        {% if section.settings.hero_eyebrow != blank or section.settings.hero_experience != blank %}
+          <div class="spuds-hero__intro">
+            {% if section.settings.hero_eyebrow != blank %}
+              <p class="spuds-hero__lead">{{ section.settings.hero_eyebrow | escape }}</p>
+            {% endif %}
+            {% if section.settings.hero_experience != blank %}
+              <p class="spuds-hero__experience">{{ section.settings.hero_experience }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
         <h1 class="spuds-hero__headline">
           {% if hero_headline_graphic != blank %}
             {{ hero_headline_graphic | image_url: width: 1400 | image_tag: widths: '500,750,1000,1400', sizes: '(max-width: 749px) 42vw, 26vw', class: 'spuds-hero__headline-image', loading: 'eager', alt: '' }}
@@ -61,9 +70,7 @@
       {% else %}
         {% render 'spuds-shape', shape: 'graphic-3', class: 'spuds-float-shape spuds-hero__button-accent spuds-hero__button-accent--right' %}
       {% endif %}
-      {% render 'spuds-shape', shape: 'triangle', color: '#45c4cc', class: 'spuds-float-shape spuds-float-shape--one' %}
       {% render 'spuds-shape', shape: 'zigzag', color: '#ffbd20', class: 'spuds-float-shape spuds-float-shape--two' %}
-      {% render 'spuds-shape', shape: 'zigzag', color: '#ffbd20', class: 'spuds-float-shape spuds-float-shape--three' %}
       {% render 'spuds-shape', shape: 'triangle', color: '#45c4cc', class: 'spuds-float-shape spuds-float-shape--four' %}
     </div>
 
@@ -120,7 +127,8 @@
     {"type":"image_picker","id":"hero_button_accent_right","label":"Button right triangle graphic"},
     {"type":"image_picker","id":"category_accent_left","label":"Category left accent graphic"},
     {"type":"image_picker","id":"category_accent_right","label":"Category right accent graphic"},
-    {"type":"text","id":"hero_eyebrow","label":"Eyebrow","default":"Dog treats and supplements inspired by a legend and developed by a team with over 70 years of combined pet experience."},
+    {"type":"text","id":"hero_eyebrow","label":"Intro headline","default":"Dog treats & supplements inspired by a legend."},
+    {"type":"inline_richtext","id":"hero_experience","label":"Experience line"},
     {"type":"text","id":"hero_kicker","label":"Brush label","default":"The Original"},
     {"type":"text","id":"hero_title","label":"Heading","default":"Party Animal"},
     {"type":"text","id":"hero_subtitle","label":"Accent heading","default":"Is Back!"},
@@ -144,6 +152,7 @@
   "presets":[
     {
       "name":"Spuds hero",
+      "settings":{"hero_experience":"Developed by a team with <strong>over 70 years</strong> of combined pet industry experience."},
       "blocks":[
         {"type":"category","settings":{"title":"Snacks","products":"Treat chips\nTreat chews\nChew sticks"}},
         {"type":"category","settings":{"title":"Health","products":"Dental chews\nJoint care chews\nVitamin chews"}},

@@ -1,8 +1,7 @@
 {% liquid
-  assign bundles_url = collections['spuds-bundles'].url
-  if bundles_url == blank
-    assign bundles_url = routes.root_url | append: 'collections/spuds-bundles'
-  endif
+  capture shop_url
+    render 'spuds-navigation-url'
+  endcapture
   assign about_url = routes.root_url | append: 'pages/about-us'
   assign contact_url = routes.root_url | append: 'pages/contact'
   for link in menu.links
@@ -19,7 +18,7 @@
 <div ref="headerMenu" data-hydration-key="header-menu" class="spuds-desktop-nav" {{ block.shopify_attributes }}>
   <nav aria-label="{{ 'accessibility.header_navigation_label' | t }}">
     <ul class="spuds-desktop-nav__items" role="list">
-      <li><a class="spuds-desktop-nav__link" href="{{ bundles_url }}"{% if request.path == bundles_url %} aria-current="page"{% endif %}>Shop</a></li>
+      <li><a class="spuds-desktop-nav__link" href="{{ shop_url }}"{% if request.path == shop_url %} aria-current="page"{% endif %}>Shop</a></li>
       <li><a class="spuds-desktop-nav__link" href="{{ about_url }}"{% if request.path == about_url %} aria-current="page"{% endif %}>{{ 'spuds_foundation.navigation_label' | t }}</a></li>
       <li><a class="spuds-desktop-nav__link" href="{{ contact_url }}"{% if request.path == contact_url %} aria-current="page"{% endif %}>Contact</a></li>
     </ul>

@@ -158,6 +158,8 @@ class SectionRenderer {
    */
   #cachePageSections() {
     for (const section of document.querySelectorAll('.shopify-section')) {
+      // On a direct category URL Shopify initially delivers the hub's unfiltered HTML.
+      if (new URLSearchParams(window.location.search).has('spuds_category') && section.querySelector('results-list[data-spuds-source]')) continue;
       const url = buildSectionRenderingURL(section.id);
       if (this.#cache.get(url)) return;
       if (containsShadowRoot(section)) return;
@@ -176,6 +178,17 @@ const SECTION_ID_PREFIX = 'shopify-section-';
  * @returns {string} The section rendering URL
  */
 function buildSectionRenderingURL(sectionId, url = new URL(window.location.href)) {
+  url = new URL(url);
+  const category = url.searchParams.get('spuds_category');
+  if (category) {
+    const bar = document.querySelector('spuds-category-filter');
+    const grid = document.querySelector('results-list[data-spuds-source]');
+    if (bar?.dataset.hubPath === url.pathname && grid?.getAttribute('section-id') === normalizeSectionId(sectionId)) {
+      const choice = Array.from(bar.querySelectorAll('button[data-source]')).find(button => button.dataset.category === category);
+      if (choice) url.pathname = new URL(choice.dataset.source, url).pathname;
+      url.searchParams.delete('spuds_category');
+    }
+  }
   url.searchParams.set('section_id', normalizeSectionId(sectionId));
   url.searchParams.sort();
 

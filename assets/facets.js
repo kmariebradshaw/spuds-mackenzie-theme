@@ -58,6 +58,8 @@ class FacetsFormComponent extends Component {
     if (newParameters.get('filter.v.price.lte') === '') newParameters.delete('filter.v.price.lte');
 
     newParameters.delete('page');
+    const shopCategory = this.closest('.spuds-collection-products') && new URLSearchParams(location.search).get('spuds_category');
+    if (shopCategory && document.querySelector('spuds-category-filter')) newParameters.set('spuds_category', shopCategory);
 
     const searchQuery = this.#getSearchQuery();
     if (searchQuery) newParameters.set(SEARCH_QUERY, searchQuery);
@@ -162,6 +164,14 @@ class FacetsFormComponent extends Component {
    * @param {string} url - The URL to update filters with
    */
   updateFiltersByURL(url) {
+    const bar = this.closest('.spuds-collection-products') && document.querySelector('spuds-category-filter');
+    const category = new URLSearchParams(location.search).get('spuds_category');
+    if (bar && category) {
+      const target = new URL(url, location.href);
+      target.pathname = bar.dataset.hubPath;
+      target.searchParams.set('spuds_category', category);
+      url = target.href;
+    }
     history.pushState('', '', url);
     const renderPromise = this.#updateSection();
     if (this.dataset.pageType === 'search') {

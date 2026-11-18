@@ -1,1 +1,6 @@
-{"type":"footer","name":"t:names.footer","sections":{},"order":[]}
+{
+  "type": "footer",
+  "name": "t:names.footer",
+  "sections": { "spuds_footer": { "type": "spuds-footer", "settings": {} } },
+  "order": ["spuds_footer"]
+}

@@ -50,7 +50,8 @@
       ],
       "settings": {
         "hero_image": "shopify://shop_images/spuds-homepage-atf-2026-11-12.png",
-        "hero_eyebrow": "Dog treats and supplements inspired by a legend and developed by a team with over 70 years of combined pet experience.",
+        "hero_eyebrow": "Dog treats & supplements inspired by a legend.",
+        "hero_experience": "Developed by a team with <strong>over 70 years</strong> of combined pet industry experience.",
         "hero_kicker": "The Original",
         "hero_title": "Party Animal",
         "hero_subtitle": "Is Back!",
@@ -66,6 +67,7 @@
         "old_accent": "Icon",
         "old_copy": "Spuds MacKenzie became one of the most recognizable dogs in America.",
         "today_year": "Today",
+        "today_product": "snack-chips",
         "today_heading": "Pet",
         "today_accent": "Legend",
         "today_copy": "That legendary personality inspires a new generation of treats, wellness products, and dogs who know how to have a good time.",

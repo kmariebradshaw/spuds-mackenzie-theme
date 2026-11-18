@@ -118,6 +118,45 @@
 
 }
 
+.spuds-hero__intro {
+  display: grid;
+  gap: clamp(5px, .45vw, 9px);
+  max-width: 25vw;
+  margin-bottom: clamp(12px, 1.1vw, 22px);
+  color: var(--navy);
+  text-align: left;
+}
+
+.spuds-hero__intro p {
+  margin: 0;
+  text-transform: none;
+}
+
+.spuds-hero__lead {
+  max-width: 25ch;
+  font-family: var(--scale);
+  font-size: clamp(18px, 1.8vw, 36px);
+  font-weight: 600;
+  font-variation-settings: "wght" 600, "wdth" 95;
+  line-height: 1.08;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+
+.spuds-hero__experience {
+  max-width: 40ch;
+  font-family: var(--body);
+  font-size: clamp(14px, 1.1vw, 22px);
+  font-weight: 400;
+  line-height: 1.38;
+  letter-spacing: normal;
+  text-wrap: pretty;
+}
+
+.spuds-hero__experience strong {
+  font-weight: 700;
+}
+
 .spuds-hero__actions {
   display: grid;
   width: max-content;
@@ -318,6 +357,28 @@
   height: auto;
 }
 
+.spuds-story__product-frame {
+  position: relative;
+}
+
+.spuds-story__product-frame > img:first-child {
+  width: 100%;
+  height: auto;
+}
+
+.spuds-story__product-frame .spuds-story__product-photo {
+  position: absolute;
+  top: 30.4%;
+  left: 38.8%;
+  width: 53.2%;
+  height: 54%;
+  background: var(--cream);
+  object-fit: cover;
+  object-position: 58% center;
+  transform: rotate(2.8deg);
+  transform-origin: top left;
+}
+
 .spuds-story__label {
   text-align: center;
 }
@@ -494,7 +555,7 @@
   .spuds-hero__copy {
     width: 39%;
     min-width: 24.5vw;
-    padding: 5.8vw 1.55vw 2.35vw 2.85vw;
+    padding: 3.8vw 1.55vw 2.35vw 2.85vw;
   }
 
   .spuds-hero__eyebrow {
@@ -1024,16 +1085,22 @@
     white-space: nowrap;
   }
 
-  .spuds-hero__eyebrow {
+  .spuds-hero__intro {
     position: relative;
     z-index: 7;
     grid-area: 1 / 1;
     max-width: none;
-    padding: 3.5vw 4vw 2vw;
+    margin: 0;
+    padding: clamp(12px, 2.6vw, 18px) 3vw;
     background: var(--cream);
-    font-size: 4.2vw;
-    letter-spacing: .04vw;
-    text-shadow: none;
+  }
+
+  .spuds-hero__lead {
+    font-size: clamp(18px, 4.7vw, 25px);
+  }
+
+  .spuds-hero__experience {
+    font-size: clamp(14px, 3.4vw, 17px);
   }
 }
 
