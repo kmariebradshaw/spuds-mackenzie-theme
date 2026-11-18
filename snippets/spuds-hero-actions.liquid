@@ -1,0 +1,25 @@
+{% doc %}
+  Renders the hero buttons in the same order as the configured category blocks.
+  @param {section} section - Spuds hero section.
+{% enddoc %}
+
+{%- capture category_links -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'category' and block.settings.link != blank and block.settings.title != blank -%}
+      <a class="spuds-button" href="{{ block.settings.link | escape }}">
+        {{ 'spuds_hero.shop_category' | t: category: block.settings.title | escape }}
+        {% render 'spuds-shape', shape: 'arrow', color: '#ff2e6c' %}
+      </a>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{% if category_links != blank %}
+  <div class="spuds-hero__actions">{{ category_links }}</div>
+{% elsif section.settings.hero_link != blank and section.settings.hero_button != blank %}
+  <div class="spuds-hero__actions">
+    <a class="spuds-button" href="{{ section.settings.hero_link | escape }}">
+      {{ section.settings.hero_button | escape }}
+      {% render 'spuds-shape', shape: 'arrow', color: '#ff2e6c' %}
+    </a>
+  </div>
+{% endif %}

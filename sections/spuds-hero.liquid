@@ -31,19 +31,16 @@
       </div>
 
       <div class="spuds-hero__copy">
-        <p class="spuds-hero__eyebrow">{{ section.settings.hero_eyebrow }}</p>
+        <p class="spuds-hero__eyebrow">{{ section.settings.hero_eyebrow | escape }}</p>
         <h1 class="spuds-hero__headline">
           {% if hero_headline_graphic != blank %}
-            {{ hero_headline_graphic | image_url: width: 1400 | image_tag: widths: '500,750,1000,1400', sizes: '31vw', class: 'spuds-hero__headline-image', loading: 'eager', alt: '' }}
+            {{ hero_headline_graphic | image_url: width: 1400 | image_tag: widths: '500,750,1000,1400', sizes: '(max-width: 749px) 42vw, 26vw', class: 'spuds-hero__headline-image', loading: 'eager', alt: '' }}
           {% else %}
             <img class="spuds-hero__headline-image" src="{{ 'HP-ATF-TextVectorized.webp' | asset_url }}" width="1400" height="1297" alt="" loading="eager">
           {% endif %}
           <span class="visually-hidden">{{ section.settings.hero_kicker }} {{ section.settings.hero_title }} {{ section.settings.hero_subtitle }}</span>
         </h1>
-        <a class="spuds-button" href="{{ section.settings.hero_link }}">
-          {{ section.settings.hero_button }}
-          {% render 'spuds-shape', shape: 'arrow', color: '#ff2e6c' %}
-        </a>
+        {% render 'spuds-hero-actions', section: section %}
       </div>
 
       <div class="spuds-hero__polaroids" aria-hidden="true">
@@ -106,8 +103,6 @@
         </article>
       {% endfor %}
     </div>
-
-    <p class="spuds-hero__eyebrow spuds-hero__eyebrow--mobile">{{ section.settings.hero_eyebrow }}</p>
   </div>
 </section>
 
@@ -125,12 +120,12 @@
     {"type":"image_picker","id":"hero_button_accent_right","label":"Button right triangle graphic"},
     {"type":"image_picker","id":"category_accent_left","label":"Category left accent graphic"},
     {"type":"image_picker","id":"category_accent_right","label":"Category right accent graphic"},
-    {"type":"text","id":"hero_eyebrow","label":"Eyebrow","default":"Dog treats and supplements from a team with over 70 years of combined pet industry experience."},
+    {"type":"text","id":"hero_eyebrow","label":"Eyebrow","default":"Dog treats and supplements inspired by a legend and developed by a team with over 70 years of combined pet experience."},
     {"type":"text","id":"hero_kicker","label":"Brush label","default":"The Original"},
     {"type":"text","id":"hero_title","label":"Heading","default":"Party Animal"},
     {"type":"text","id":"hero_subtitle","label":"Accent heading","default":"Is Back!"},
-    {"type":"text","id":"hero_button","label":"Button label","default":"Shop now"},
-    {"type":"url","id":"hero_link","label":"Button link"}
+    {"type":"text","id":"hero_button","label":"Fallback button label","default":"Shop now"},
+    {"type":"url","id":"hero_link","label":"Fallback button link"}
   ],
   "blocks":[
     {

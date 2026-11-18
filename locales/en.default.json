@@ -8,6 +8,7 @@
  * ------------------------------------------------------------
  */
 {
+  "spuds_hero": { "shop_category": "Shop {{ category }}" },
   "spuds_navigation": {"contact": "Contact"},
   "spuds_product": {
     "description": "Product Description:",
