@@ -28,7 +28,7 @@
   position: relative;
   display: grid;
   grid-template-columns: 36% minmax(0, 1fr);
-  min-height: 25vw;
+  min-height: 30vw;
 }
 
 .spuds-collection-hero__copy {
@@ -445,10 +445,6 @@
 }
 
 @media screen and (max-width: 749px) {
-  .spuds-collection-hero__inner {
-    min-height: 36vw;
-  }
-
   .spuds-collection-hero__copy {
     padding-block: 3vw;
     transform: none;
