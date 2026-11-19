@@ -1505,6 +1505,8 @@
 }
 
 .spuds-hero--extended {
+  --hero-lead-size: 1.85vw;
+  --hero-button-size: 1.1vw;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto;
@@ -1545,7 +1547,8 @@
   flex-direction: column;
   align-items: flex-start;
   align-self: stretch;
-  padding-block: 1.15vw;
+  width: 40vw;
+  padding: 1.15vw 1.35vw 1.15vw 2.6vw;
 }
 
 .spuds-hero--extended h1.spuds-hero__headline {
@@ -1554,20 +1557,22 @@
 }
 
 .spuds-hero--extended .spuds-hero__intro {
-  font-size: 1.85vw;
-  margin-block-end: .65em;
+  margin-block-end: 1.2vw;
 }
 
 .spuds-hero--extended .spuds-hero__lead {
-  font-size: 1em;
+  max-width: calc(18.06 * var(--hero-lead-size));
+  font-size: var(--hero-lead-size);
 }
 
 .spuds-hero--extended .spuds-hero__lead em {
-  font-size: 1.26em;
+  padding-inline: calc(.2772 * var(--hero-lead-size)) calc(.1512 * var(--hero-lead-size));
+  font-size: calc(1.26 * var(--hero-lead-size));
 }
 
 .spuds-hero--extended .spuds-hero__experience {
-  font-size: .76em;
+  max-width: calc(17.96 * var(--hero-lead-size));
+  font-size: calc(.76 * var(--hero-lead-size));
 }
 
 .spuds-hero--extended .spuds-hero__copy .spuds-hero__actions {
@@ -1579,9 +1584,21 @@
 }
 
 .spuds-hero--extended .spuds-hero__actions .spuds-button {
-  min-height: max(32px, 2.6vw);
-  padding: .55em .85em;
-  font-size: 1.1vw;
+  min-height: 3.2vw;
+  padding: .605vw .935vw;
+  gap: .385vw;
+  font-size: var(--hero-button-size);
+}
+
+.spuds-hero--extended .spuds-hero__actions .spuds-button svg {
+  display: block;
+  width: var(--hero-button-size);
+  height: calc(.65 * var(--hero-button-size));
+}
+
+.spuds-hero--extended .spuds-hero__actions .spuds-button:focus-visible {
+  outline-width: .16vw;
+  outline-offset: .24vw;
 }
 
 .spuds-hero--extended .spuds-hero__button-accent--right {
@@ -1603,6 +1620,8 @@
 
 @media (max-width: 749px) {
   .spuds-hero--extended {
+    --hero-lead-size: 4.25vw;
+    --hero-button-size: 3.1vw;
     isolation: isolate;
     grid-template-rows: auto auto minmax(28vw, auto);
   }
@@ -1656,7 +1675,6 @@
     width: 62vw;
     margin: 0;
     padding: 0 0 0 4vw;
-    font-size: 4.25vw;
   }
 
   .spuds-hero--extended .spuds-hero__copy .spuds-hero__actions {
@@ -1669,8 +1687,13 @@
   }
 
   .spuds-hero--extended .spuds-hero__actions .spuds-button {
-    min-height: max(40px, 6.7vw);
-    padding-inline: 2vw;
-    font-size: 3.1vw;
+    min-height: 10.67vw;
+    padding: 1.705vw 2vw;
+    gap: .775vw;
+  }
+
+  .spuds-hero--extended .spuds-hero__actions .spuds-button:focus-visible {
+    outline-width: .53vw;
+    outline-offset: .8vw;
   }
 }
