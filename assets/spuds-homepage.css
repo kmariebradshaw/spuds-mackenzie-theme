@@ -1505,7 +1505,6 @@
 }
 
 .spuds-hero--extended {
-  --hero-copy-size: calc(.85rem + .73vw);
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto;
@@ -1550,12 +1549,12 @@
 }
 
 .spuds-hero--extended h1.spuds-hero__headline {
-  width: calc(3.25rem + 18vw);
-  margin-block-start: auto;
+  width: 22vw;
+  margin-block: auto .8vw;
 }
 
 .spuds-hero--extended .spuds-hero__intro {
-  font-size: var(--hero-copy-size);
+  font-size: 1.85vw;
   margin-block-end: .65em;
 }
 
@@ -1582,6 +1581,7 @@
 .spuds-hero--extended .spuds-hero__actions .spuds-button {
   min-height: max(32px, 2.6vw);
   padding: .55em .85em;
+  font-size: 1.1vw;
 }
 
 .spuds-hero--extended .spuds-hero__button-accent--right {
@@ -1648,13 +1648,15 @@
   }
 
   .spuds-hero--extended h1.spuds-hero__headline {
-    margin: clamp(10px, 3vw, 20px) 0 6px 4vw;
+    width: 32vw;
+    margin: 3vw 0 1.5vw 4vw;
   }
 
   .spuds-hero--extended .spuds-hero__intro {
-    width: min(62%, 24rem);
+    width: 62vw;
     margin: 0;
     padding: 0 0 0 4vw;
+    font-size: 4.25vw;
   }
 
   .spuds-hero--extended .spuds-hero__copy .spuds-hero__actions {
@@ -1669,5 +1671,6 @@
   .spuds-hero--extended .spuds-hero__actions .spuds-button {
     min-height: max(40px, 6.7vw);
     padding-inline: 2vw;
+    font-size: 3.1vw;
   }
 }
