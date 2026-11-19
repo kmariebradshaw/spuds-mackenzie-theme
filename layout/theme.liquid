@@ -27,8 +27,10 @@
     <link rel="preconnect" href="https://use.typekit.net" crossorigin>
     <link rel="preconnect" href="https://p.typekit.net" crossorigin>
     <link rel="stylesheet" href="https://use.typekit.net/vgg4gke.css">
-    {% if template.name == 'page' and template.suffix == 'about-us' %}
+    {% if template.name == 'page' and template.suffix == 'foundation' %}
       {{ 'spuds-about.css' | asset_url | stylesheet_tag }}
+    {% elsif template.name == 'page' and template.suffix == 'about-us' %}
+      {{ 'spuds-brand-story.css' | asset_url | stylesheet_tag }}
     {% endif %}
     {% if template.name == "page" and template.suffix == "contact" %}
       {{ 'spuds-contact.css' | asset_url | stylesheet_tag }}

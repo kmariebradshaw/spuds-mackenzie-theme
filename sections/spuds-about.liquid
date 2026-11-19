@@ -1,4 +1,4 @@
-{% if template.suffix != 'about-us' %}
+{% if template.suffix != 'foundation' %}
   {{ 'spuds-about.css' | asset_url | stylesheet_tag }}
 {% endif %}
 {% assign foundation_link = section.settings.button_link | default: 'https://spudsmackenzie.org/' %}

@@ -3,10 +3,13 @@
     render 'spuds-navigation-url'
   endcapture
   assign about_url = routes.root_url | append: 'pages/about-us'
+  assign foundation_url = pages['foundation'].url
   assign contact_url = routes.root_url | append: 'pages/contact'
   for link in menu.links
     if link.handle == 'about' or link.handle == 'about-us' or link.handle == 'our-story'
       assign about_url = link.url
+    elsif link.type == 'page_link' and link.object.template_suffix == 'foundation'
+      assign foundation_url = link.url
     elsif link.handle == 'contact' or link.handle == 'contact-us'
       assign contact_url = link.url
     endif
@@ -19,7 +22,8 @@
   <nav aria-label="{{ 'accessibility.header_navigation_label' | t }}">
     <ul class="spuds-desktop-nav__items" role="list">
       <li><a class="spuds-desktop-nav__link" href="{{ shop_url }}"{% if request.path == shop_url %} aria-current="page"{% endif %}>Shop</a></li>
-      <li><a class="spuds-desktop-nav__link" href="{{ about_url }}"{% if request.path == about_url %} aria-current="page"{% endif %}>{{ 'spuds_foundation.navigation_label' | t }}</a></li>
+      <li><a class="spuds-desktop-nav__link" href="{{ about_url }}"{% if request.path == about_url %} aria-current="page"{% endif %}>{{ pages['about-us'].title | default: 'About Us' | escape }}</a></li>
+      {% if foundation_url != blank %}<li><a class="spuds-desktop-nav__link" href="{{ foundation_url }}"{% if request.path == foundation_url %} aria-current="page"{% endif %}>{{ 'spuds_foundation.navigation_label' | t }}</a></li>{% endif %}
       <li><a class="spuds-desktop-nav__link" href="{{ contact_url }}"{% if request.path == contact_url %} aria-current="page"{% endif %}>Contact</a></li>
     </ul>
   </nav>
