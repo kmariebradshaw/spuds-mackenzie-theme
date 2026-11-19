@@ -134,7 +134,12 @@
               data-spuds-main-image
             >
           {% else %}
-            {% assign featured_media = current_variant.featured_media | default: visible_gallery_media.first | default: product.featured_media %}
+            {% liquid
+              assign featured_media = current_variant.featured_media | default: visible_gallery_media.first | default: product.featured_media
+              if product.handle == 'rawhide-dental-chews' and product.selected_variant == blank and visible_media_ids contains product.featured_media.id
+                assign featured_media = product.featured_media
+              endif
+            %}
             {% if featured_media.preview_image != blank %}
               <img
                 src="{% render 'spuds-product-photo', photo: featured_media.preview_image, width: 1600 %}"
