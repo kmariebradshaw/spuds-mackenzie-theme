@@ -536,6 +536,9 @@
 }
 
 .spuds-pdp button.spuds-pdp__add-to-cart {
+  --button-depth: .38vw;
+  --button-press: 0px;
+  --button-shadow: calc(var(--button-depth) - var(--button-press));
   position: relative;
   display: flex;
   width: 100%;
@@ -544,7 +547,7 @@
   border: 0;
   border-radius: 0;
   background: var(--spuds-pdp-navy);
-  box-shadow: .38vw .38vw 0 var(--spuds-pdp-accent, var(--spuds-pdp-pink));
+  box-shadow: var(--button-shadow) var(--button-shadow) 0 var(--spuds-pdp-accent, var(--spuds-pdp-pink));
   color: #fff;
   cursor: pointer;
   font-family: var(--spuds-pdp-scale) !important;
@@ -594,6 +597,24 @@
 .spuds-pdp button.spuds-pdp__add-to-cart:focus-visible {
   outline: 2px solid var(--spuds-pdp-navy);
   outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .spuds-pdp button.spuds-pdp__add-to-cart:enabled:hover {
+    --button-press: calc(var(--button-depth) / 2);
+  }
+}
+
+.spuds-pdp button.spuds-pdp__add-to-cart:enabled:active {
+  --button-press: var(--button-depth);
+  transition-duration: 0s;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .spuds-pdp button.spuds-pdp__add-to-cart {
+    transform: translate(var(--button-press), var(--button-press));
+    transition: transform .12s ease-out, box-shadow .12s ease-out;
+  }
 }
 
 .spuds-pdp button.spuds-pdp__add-to-cart:disabled {
@@ -990,11 +1011,11 @@
   }
 
   .spuds-pdp button.spuds-pdp__add-to-cart {
+    --button-depth: 1.1vw;
     min-height: clamp(44px, 13vw, 58px);
     min-width: 0;
     gap: 10px;
     padding: 8px 10px;
-    box-shadow: 1.1vw 1.1vw 0 var(--spuds-pdp-accent, var(--spuds-pdp-pink));
     font-size: clamp(15px, 3.65vw, 18px);
   }
 

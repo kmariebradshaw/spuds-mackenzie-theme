@@ -154,7 +154,7 @@
 
 .spuds-collection-hero__intro {
   width: min(88%, 46rem);
-  margin: clamp(24px, 3vw, 48px) auto;
+  margin: clamp(24px, 3vw, 48px) auto .45vw;
   text-align: center;
 }
 
@@ -233,7 +233,7 @@
 }
 
 .spuds-collection-products .facets-block-wrapper:not(.facets-block-wrapper--vertical) {
-  margin-bottom: clamp(1.5rem, 3vw, 3rem);
+  margin-bottom: .35vw;
 }
 
 .spuds-collection-products .facets__form,
@@ -407,7 +407,7 @@
 
   .spuds-collection-hero__intro {
     width: 89vw;
-    margin: 3.2vw auto 3.8vw;
+    margin: 3.2vw auto .9vw;
   }
 
   .spuds-collection-hero__intro h2 {
