@@ -16,8 +16,8 @@
         "use_delivered_chicken_assets": true,
         "description_override": "",
         "description_fallback": "Crunchy Chicken Chips made for backyard hangs, game days, tailgates, and treat-time celebrations everywhere.",
-        "one_time_label": "One Time Purchase",
-        "subscribe_label": "Subscribe",
+        "one_time_label": "One-time purchase",
+        "subscribe_label": "Subscribe & save",
         "accent_color": "#ff2f69"
       }
     },

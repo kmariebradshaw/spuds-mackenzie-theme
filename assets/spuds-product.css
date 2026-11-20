@@ -35,7 +35,11 @@
 
 .spuds-pdp {
   --spuds-purchase-price-size: clamp(17px, 1.4vw, 24px);
-  --spuds-subscription-size: clamp(21px, 1.75vw, 30px);
+  --spuds-choice-title-size: clamp(15px, 1.12vw, 18px);
+  --spuds-choice-price-size: clamp(17px, 1.35vw, 22px);
+  --spuds-plan-price-size: clamp(19px, 1.55vw, 25px);
+  --spuds-choice-rule: rgb(7 27 61 / 23%);
+  --spuds-choice-padding: clamp(12px, 1.1vw, 18px) clamp(13px, 1.25vw, 21px);
 }
 
 .spuds-pdp *,
@@ -305,8 +309,7 @@
 }
 
 .spuds-pdp__purchase-options {
-  display: grid;
-  gap: .75vw;
+  min-inline-size: 0;
   margin: 0;
   padding: 0;
   border: 0;
@@ -315,85 +318,133 @@
 .spuds-pdp__purchase-options[hidden] { display: none; }
 
 .spuds-pdp__purchase-option {
-  display: flex;
-  align-items: flex-start;
-  gap: .6em;
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 3px clamp(8px, .75vw, 12px);
+  min-block-size: 52px;
+  padding: var(--spuds-choice-padding);
+  border: 1px solid var(--spuds-choice-rule);
+  background: var(--spuds-pdp-cream);
   color: var(--spuds-pdp-navy);
-  cursor: pointer;
   font-family: var(--spuds-pdp-body);
-  font-size: clamp(14px, 1.02vw, 17px);
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+.spuds-pdp__purchase-option + .spuds-pdp__purchase-option {
+  border-block-start: 0;
+}
+
+.spuds-pdp__purchase-option:has(input:checked),
+.spuds-pdp .shopify_subscriptions_app_block_label:has(input:checked) {
+  background: var(--spuds-control-fill);
+}
+
+.spuds-pdp__purchase-option:has(input:focus-visible) {
+  position: relative;
+  z-index: 1;
+  outline: 2px solid var(--spuds-pdp-navy);
+  outline-offset: 2px;
+}
+
+.spuds-pdp__purchase-option input[type="radio"] {
+  appearance: auto;
+  inline-size: 16px;
+  block-size: 16px;
+  min-block-size: 0;
+  margin: 0;
+  accent-color: var(--spuds-pdp-navy);
+  cursor: pointer;
+}
+
+.spuds-pdp__choice-title,
+.spuds-pdp .shopify_subscriptions_purchase_option_wrapper > label {
+  font-size: var(--spuds-choice-title-size);
+  font-weight: 500;
+}
+
+.spuds-pdp__choice-price,
+.spuds-pdp .shopify_subscriptions_in_widget_price {
+  justify-self: end;
+  color: var(--spuds-pdp-navy);
+  font-size: var(--spuds-choice-price-size);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: -.025em;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.spuds-pdp__purchase-option--subscription .spuds-pdp__choice-title,
+.spuds-pdp .shopify_subscriptions_app_block_label > .shopify_subscriptions_purchase_option_wrapper > label {
+  font-size: clamp(16px, 1.2vw, 20px);
+  font-weight: 650;
+}
+
+.spuds-pdp__purchase-option--subscription .spuds-pdp__choice-price,
+.spuds-pdp .shopify_subscriptions_in_widget_price.allocation_price {
+  font-size: var(--spuds-plan-price-size);
+  font-weight: 700;
+}
+
+.spuds-pdp__choice-detail,
+.spuds-pdp .shopify_subscriptions_app_block_label_children label {
+  grid-column: 2;
+  color: #49566a;
+  font-size: clamp(13px, .93vw, 15px);
   font-weight: 400;
   line-height: 1.4;
 }
 
-.spuds-pdp__purchase-option input {
-  position: absolute;
-  width: .1vw;
-  height: .1vw;
-  overflow: hidden;
-  opacity: 0;
+.spuds-pdp__choice-detail:last-child {
+  grid-column-end: -1;
 }
 
-.spuds-pdp__radio-mark {
-  position: relative;
-  display: block;
-  width: .86em;
-  height: .86em;
-  flex: 0 0 .86em;
-  align-self: flex-start;
-  margin-top: .27em;
-  border: 1.5px solid var(--spuds-pdp-navy);
-  border-radius: 50%;
-}
-
-.spuds-pdp__purchase-option input:checked + .spuds-pdp__radio-mark::after {
-  display: none;
-}
-
-.spuds-pdp__purchase-option input:checked + .spuds-pdp__radio-mark {
-  background: var(--spuds-pdp-navy);
-}
-
-.spuds-pdp__purchase-option input:focus-visible + .spuds-pdp__radio-mark {
-  outline: .14vw solid var(--spuds-pdp-accent, var(--spuds-pdp-pink));
-  outline-offset: .18vw;
-}
-
-.spuds-pdp__purchase-option strong {
-  font: inherit;
-}
-
-.spuds-pdp [data-spuds-one-time-price],
-.spuds-pdp [data-spuds-sticky-price],
-.spuds-pdp .shopify_subscriptions_in_widget_price {
-  font-size: var(--spuds-purchase-price-size);
+.spuds-pdp__choice-saving {
+  justify-self: end;
+  padding: 2px 6px;
+  background: #ffe4a8;
+  color: var(--spuds-pdp-navy);
+  font-size: clamp(11px, .78vw, 13px);
   font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
-.spuds-pdp .spuds-pdp__subscription-heading,
-.spuds-pdp .shopify_subscriptions_app_block_label > .shopify_subscriptions_purchase_option_wrapper > label,
-.spuds-pdp .shopify_subscriptions_app_block_label:has([data-selling-plan-id]) > label,
-.spuds-pdp .shopify_subscriptions_in_widget_price.allocation_price {
-  font-size: var(--spuds-subscription-size);
-  font-weight: 700;
-  line-height: 1.25;
+@container (max-width: 312px) {
+  .spuds-pdp__purchase-option {
+    padding-inline: 9px;
+    column-gap: 5px;
+  }
+
+  .spuds-pdp__purchase-option--subscription .spuds-pdp__choice-title {
+    font-size: 15px;
+  }
+
+  .spuds-pdp__purchase-option--subscription .spuds-pdp__choice-price {
+    font-size: 18px;
+  }
+}
+
+.spuds-pdp .shopify_subscriptions_app_block_label {
+  padding: var(--spuds-choice-padding);
 }
 
 .spuds-pdp .shopify_subscriptions_purchase_option_wrapper {
-  flex-wrap: wrap;
-  align-items: baseline;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 
-.spuds-pdp__purchase-option small,
-.spuds-pdp .shopify_subscriptions_app_block_label_children label {
-  font-size: calc(var(--spuds-subscription-size) * .9);
-  font-weight: 500;
-  line-height: 1.35;
+.spuds-pdp .shopify_subscriptions_app_block_label input[type="radio"] {
+  accent-color: var(--spuds-pdp-navy);
 }
 
-.spuds-pdp__purchase-option small {
-  display: block;
-  margin-top: 2px;
+.spuds-pdp [data-spuds-sticky-price] {
+  font-size: var(--spuds-purchase-price-size);
+  font-weight: 600;
 }
 
 .spuds-pdp__actions {
@@ -822,7 +873,6 @@
 @media screen and (max-width: 47.999em) {
   .spuds-pdp {
     --spuds-purchase-price-size: clamp(16px, 4.45vw, 24px);
-    --spuds-subscription-size: clamp(20px, 5.4vw, 30px);
   }
 
   .spuds-pdp__inner,
@@ -881,14 +931,6 @@
 
   .spuds-pdp__product-form {
     margin-top: 8px;
-  }
-
-  .spuds-pdp__purchase-options {
-    gap: 9px;
-  }
-
-  .spuds-pdp__purchase-option {
-    font-size: clamp(13px, 3.2vw, 15px);
   }
 
   .spuds-pdp__actions {

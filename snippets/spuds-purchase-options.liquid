@@ -21,19 +21,30 @@
 {% unless variant.requires_selling_plan %}
   <label class="spuds-pdp__purchase-option">
     <input type="radio" {% if allocations.size > 0 %}name="selling_plan"{% endif %} value="" {% if initial_plan == 0 %}checked{% endif %}>
-    <span class="spuds-pdp__radio-mark" aria-hidden="true"></span>
-    <span>{{ one_time_label | escape }}: <strong data-spuds-one-time-price>{{ variant.price | money }}</strong></span>
+    <span class="spuds-pdp__choice-title">{{ one_time_label | escape }}</span>
+    <strong class="spuds-pdp__choice-price" data-spuds-one-time-price>{{ variant.price | money }}</strong>
   </label>
 {% endunless %}
 {% for allocation in allocations %}
-  <label class="spuds-pdp__purchase-option">
+  {% liquid
+    assign plan = allocation.selling_plan
+    assign detail = plan.name
+    assign discount = nil
+    assign adjustment = plan.price_adjustments.first
+    if plan.price_adjustments.size == 1 and adjustment.value_type == 'percentage' and adjustment.value > 0 and plan.options.size == 1 and plan.options.first.value != blank
+      assign detail = plan.options.first.value
+      assign discount = adjustment.value
+    endif
+  %}
+  <label class="spuds-pdp__purchase-option spuds-pdp__purchase-option--subscription">
     <input type="radio" name="selling_plan" value="{{ allocation.selling_plan.id }}"
       data-plan-name="{{ allocation.selling_plan.name | escape }}" data-plan-price="{{ allocation.price | money | escape }}"
       {% if allocation.selling_plan.id == initial_plan %}checked{% endif %}>
-    <span class="spuds-pdp__radio-mark" aria-hidden="true"></span>
-    <span>
-      <span class="spuds-pdp__subscription-heading">{{ subscription_label | escape }}: <strong>{{ allocation.price | money }}</strong></span>
-      <small>{{ allocation.selling_plan.name | escape }}</small>
-    </span>
+    <span class="spuds-pdp__choice-title">{{ subscription_label | escape }}</span>
+    <strong class="spuds-pdp__choice-price">{{ allocation.price | money }}</strong>
+    <small class="spuds-pdp__choice-detail">{{ detail | escape }}</small>
+    {% if discount %}
+      <span class="spuds-pdp__choice-saving">{{ 'spuds_product.percent_off' | t: percent: discount | escape }}</span>
+    {% endif %}
   </label>
 {% endfor %}
