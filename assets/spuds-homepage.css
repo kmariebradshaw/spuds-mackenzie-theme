@@ -1515,7 +1515,7 @@
 
 @media (min-width: 750px) {
   .spuds-hero--extended {
-    min-height: 41vw;
+    min-height: 46vw;
   }
 
   .spuds-hero--extended .spuds-hero__image {
@@ -1526,14 +1526,16 @@
 
   .spuds-hero--extended .spuds-hero__image picture {
     display: flex;
+    align-items: flex-end;
     justify-content: flex-end;
+    mask-image: linear-gradient(90deg, transparent 12%, rgb(0 0 0 / .15) 23%, rgb(0 0 0 / .58) 32%, #000 36%);
   }
 
   .spuds-hero--extended .spuds-hero__image img {
     flex: none;
     width: auto;
+    height: 106%;
     max-width: none;
-    mask-image: linear-gradient(90deg, transparent 5%, rgb(0 0 0 / .15) 17%, rgb(0 0 0 / .58) 27%, #000 33%);
   }
 
   .spuds-hero--extended .spuds-hero__image::after {
@@ -1643,6 +1645,13 @@
     inset: auto 0 0;
     aspect-ratio: 1024 / 1174;
     background: var(--spuds-hero-sky, none) center bottom / 100% 100% no-repeat;
+  }
+
+  /* Register the sky extension to the palms and canopy in the wide pool photo. */
+  .spuds-hero--extended .spuds-hero__image:not(.spuds-hero__image--mobile)::before {
+    inset: auto auto -.82vw 11%;
+    width: 90.6%;
+    mask-image: linear-gradient(to right, transparent, #000 7%);
   }
 
   .spuds-hero--extended .spuds-hero__image :is(picture, img) {
