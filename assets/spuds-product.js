@@ -249,8 +249,6 @@ const initializeSpudsProduct = (root) => {
     updateVariantContent(option.value, variantUrl);
 
     updateGallery(option, true);
-    const cartButton = addButton?.closest('add-to-cart-component');
-    if (cartButton) cartButton.dataset.productVariantMedia = mainImage?.src || '';
   };
 
   syncOptionButtons();

@@ -4,7 +4,7 @@
 <div class="spuds-footer">
   <a class="spuds-footer__brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
     {% if footer_logo != blank %}
-      {{ footer_logo | image_url: width: 440 | image_tag: widths: '160,240,320,440', sizes: '(max-width: 749px) 144px, 198px', loading: 'lazy', alt: shop.name }}
+      {{ footer_logo | image_url: width: 440 | image_tag: widths: '160,240,320,440', sizes: '(max-width: 749px) 36.9vw, 13.85vw', loading: 'lazy', alt: shop.name }}
     {% else %}
       {{ shop.name | escape }}
     {% endif %}
@@ -42,23 +42,23 @@
     --footer-cream: #faf0df;
     --footer-gold: #dfb761;
     display: grid;
-    grid-template-columns: minmax(220px, 1.2fr) repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(15.3vw, 1.2fr) repeat(2, minmax(0, 1fr));
     align-items: start;
-    gap: clamp(24px, 3vw, 48px) clamp(24px, 5vw, 80px);
-    padding: clamp(36px, 4vw, 64px) max(5vw, calc((100vw - 1280px) / 2)) 22px;
+    gap: 3vw 5vw;
+    padding: 4vw 5.6vw 1.55vw;
     background: var(--footer-ink);
-    border-top: 3px solid var(--footer-gold);
+    border-top: .21vw solid var(--footer-gold);
     color: var(--footer-cream);
-    font: 400 16px/1.4 "work-sans", "Work Sans", Arial, sans-serif;
+    font: 400 1.12vw/1.4 "work-sans", "Work Sans", Arial, sans-serif;
   }
   .spuds-footer__brand {
     position: relative;
     isolation: isolate;
     display: grid;
     place-items: start center;
-    width: min(100%, 246px);
-    min-height: 146px;
-    padding-top: 15px;
+    width: min(100%, 17.1vw);
+    min-height: 10.15vw;
+    padding-top: 1.05vw;
     font-weight: 700;
     text-align: center;
   }
@@ -77,32 +77,45 @@
     background: var(--footer-ink);
   }
   .spuds-footer h2 {
-    margin: 0 0 .6rem;
-    padding: 0 0 .45rem;
-    border-bottom: 1px solid #dfb76166;
+    margin: 0 0 .68vw;
+    padding: 0 0 .5vw;
+    border-bottom: .075vw solid #dfb76166;
     color: var(--footer-gold);
-    font: 650 1.15rem/1.15 "Scale VF", "scale-variable", Arial, sans-serif;
+    font: 650 1.3vw/1.15 "Scale VF", "scale-variable", Arial, sans-serif;
     font-variation-settings: "wght" 650, "wdth" 88;
-    letter-spacing: .055em;
+    letter-spacing: .07vw;
     text-transform: uppercase;
   }
   .spuds-footer ul { margin: 0; padding: 0; list-style: none; }
   .spuds-footer a { color: inherit; text-decoration: none; }
-  .spuds-footer li a { display: inline-block; padding: .35rem 0; }
-  .spuds-footer a:is(:hover, :focus-visible) { color: var(--footer-gold); text-decoration: underline; text-underline-offset: .2em; }
-  .spuds-footer a:focus-visible { outline: 2px solid var(--footer-gold); outline-offset: 3px; }
+  .spuds-footer li a { display: inline-block; padding: .39vw 0; }
+  .spuds-footer a:is(:hover, :focus-visible) { color: var(--footer-gold); text-decoration: underline; text-underline-offset: .22vw; }
+  .spuds-footer a:focus-visible { outline: .15vw solid var(--footer-gold); outline-offset: .2vw; }
   .spuds-footer small {
     grid-column: 1 / -1;
-    padding-top: 16px;
-    border-top: 1px solid #faf0df38;
+    padding-top: 1.1vw;
+    border-top: .075vw solid #faf0df38;
     color: #d8cebf;
-    font-size: .82rem;
+    font-size: .92vw;
+  }
+  @media (min-width: 750px) and (max-width: 1099px) {
+    .spuds-footer { font-size: 1.65vw; }
+    .spuds-footer h2 { font-size: 1.9vw; }
+    .spuds-footer small { font-size: 1.4vw; }
   }
   @media (max-width: 749px) {
-    .spuds-footer { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 20px; padding: 28px 5vw 18px; }
-    .spuds-footer__brand { grid-column: 1 / -1; justify-self: center; width: 178px; min-height: 106px; padding-top: 11px; }
-    .spuds-footer h2 { font-size: 1rem; }
-    .spuds-footer li a { padding: .45rem 0; }
+    .spuds-footer {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 5vw 4.5vw;
+      padding: 6vw 5vw 4.5vw;
+      border-top-width: .55vw;
+      font-size: 3.65vw;
+    }
+    .spuds-footer__brand { grid-column: 1 / -1; justify-self: center; width: 45.5vw; min-height: 27vw; padding-top: 2.8vw; }
+    .spuds-footer h2 { margin-bottom: 1.5vw; padding-bottom: 1.4vw; border-bottom-width: .25vw; font-size: 4.1vw; letter-spacing: .16vw; }
+    .spuds-footer li a { padding: 1.65vw 0; }
+    .spuds-footer a:focus-visible { outline-width: .5vw; outline-offset: .65vw; }
+    .spuds-footer small { padding-top: 3.4vw; border-top-width: .25vw; font-size: 3vw; }
   }
 {% endstylesheet %}
 {% schema %}

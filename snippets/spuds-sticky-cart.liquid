@@ -13,8 +13,9 @@
       </span>
       <strong data-spuds-sticky-price>{{ current_variant.price | money }}</strong>
     </div>
-    <button type="button" class="spuds-sticky-cart__button" data-spuds-sticky-submit {% unless current_variant.available %}disabled{% endunless %}>
+    <button type="button" class="spuds-pdp__add-to-cart" data-spuds-sticky-submit {% unless current_variant.available %}disabled{% endunless %}>
       <span data-spuds-sticky-label>{{ 'actions.add_to_cart' | t }}</span>
+      <span class="spuds-pdp__add-arrow" aria-hidden="true">{{- 'spuds-cta-arrow.svg' | inline_asset_content -}}</span>
     </button>
   </div>
   <p class="spuds-sticky-cart__error" data-spuds-sticky-error role="alert" hidden></p>

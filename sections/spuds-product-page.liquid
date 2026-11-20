@@ -37,9 +37,17 @@
     assign use_delivered_assets = true
   endif
 
-  assign breadcrumb_collection = collection
-  if breadcrumb_collection == blank
-    assign breadcrumb_collection = product.collections.first
+  assign category_handles = 'spuds-snacks,spuds-health,spuds-salon' | split: ','
+  assign breadcrumb_collection = nil
+  if category_handles contains collection.handle
+    assign breadcrumb_collection = collection
+  else
+    for product_collection in product.collections
+      if category_handles contains product_collection.handle
+        assign breadcrumb_collection = product_collection
+        break
+      endif
+    endfor
   endif
 
   assign eyebrow = product.metafields.custom.pdp_eyebrow.value
@@ -108,13 +116,8 @@
 >
   <div class="spuds-pdp__inner">
     <nav class="spuds-pdp__breadcrumbs" aria-label="Breadcrumb">
-      <a href="{% render 'spuds-navigation-url' %}">All Spuds</a>
-      <span aria-hidden="true">&gt;</span>
       {% if breadcrumb_collection != blank %}
-        <a href="{{ breadcrumb_collection.url }}">{{ breadcrumb_collection.title }}</a>
-        <span aria-hidden="true">&gt;</span>
-      {% elsif eyebrow != blank %}
-        <span>{{ eyebrow }}</span>
+        <a href="{{ breadcrumb_collection.url }}">{{ breadcrumb_collection.title | remove_first: 'Spuds ' | escape }}</a>
         <span aria-hidden="true">&gt;</span>
       {% endif %}
       <span aria-current="page">{{ product.title }}</span>
@@ -340,17 +343,12 @@
                 <button type="button" aria-label="Increase quantity" data-spuds-quantity-plus>&plus;</button>
               </div>
 
-              <add-to-cart-component
-                ref="addToCartButtonContainer"
-                data-product-variant-media="{% if current_variant.featured_media.preview_image != blank %}{% render 'spuds-product-photo', photo: current_variant.featured_media.preview_image, width: 100 %}{% elsif product.featured_media.preview_image != blank %}{% render 'spuds-product-photo', photo: product.featured_media.preview_image, width: 100 %}{% endif %}"
-                data-add-to-cart-animation="{{ settings.add_to_cart_animation }}"
-              >
+              <add-to-cart-component ref="addToCartButtonContainer">
                 <button
                   type="submit"
                   name="add"
                   class="spuds-pdp__add-to-cart"
                   ref="addToCartButton"
-                  on:click="/handleClick"
                   {% unless current_variant.available %}disabled{% endunless %}
                   data-spuds-add-to-cart
                 >
@@ -359,11 +357,6 @@
                   </span>
                   <span class="spuds-pdp__add-arrow" aria-hidden="true">
                     {{- 'spuds-cta-arrow.svg' | inline_asset_content -}}
-                  </span>
-                  <span class="add-to-cart__added" aria-hidden="true">
-                    <span class="svg-wrapper add-to-cart__added-icon">
-                      {{- 'icon-checkmark-burst.svg' | inline_asset_content -}}
-                    </span>
                   </span>
                 </button>
               </add-to-cart-component>

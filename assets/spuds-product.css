@@ -563,7 +563,7 @@
   font-size: clamp(16px, 1.35vw, 22px);
 }
 
-.spuds-pdp button.spuds-pdp__add-to-cart [data-spuds-add-label] {
+.spuds-pdp button.spuds-pdp__add-to-cart :is([data-spuds-add-label], [data-spuds-sticky-label]) {
   flex: 0 0 auto;
   font-family: var(--spuds-pdp-scale) !important;
   font-stretch: expanded !important;
@@ -591,10 +591,9 @@
   height: 100%;
 }
 
-.spuds-pdp button.spuds-pdp__add-to-cart:hover,
 .spuds-pdp button.spuds-pdp__add-to-cart:focus-visible {
-  box-shadow: .2vw .2vw 0 var(--spuds-pdp-accent, var(--spuds-pdp-pink));
-  transform: translate(.18vw, .18vw);
+  outline: 2px solid var(--spuds-pdp-navy);
+  outline-offset: 3px;
 }
 
 .spuds-pdp button.spuds-pdp__add-to-cart:disabled {

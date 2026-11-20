@@ -1061,7 +1061,7 @@
   .spuds-categories {
     gap: .75vw;
     margin-top: 0;
-    padding: 4vw 1vw 4.5vw;
+    padding: 3.3vw 1vw .9vw;
   }
 
   .spuds-category__link {
@@ -1083,9 +1083,8 @@
     grid-column: 1;
     grid-row: 1 / 3;
     width: 100%;
-    height: 22vw;
+    height: 17vw;
     margin: 0;
-    transform: translateY(-3vw);
   }
 
   .spuds-category h2 {
@@ -1111,7 +1110,6 @@
     margin: 0 0 1vw;
     font-size: 1.4vw;
     text-align: left;
-    transform: translateY(-3vw);
   }
 
   .spuds-text-link {
@@ -1121,7 +1119,6 @@
     display: block;
     font-size: 1.55vw;
     text-align: left;
-    transform: translateY(-3vw);
     white-space: nowrap;
   }
 
