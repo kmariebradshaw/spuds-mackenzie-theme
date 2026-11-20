@@ -12,7 +12,7 @@
     "main": {
       "type": "spuds-product-page",
       "settings": {
-        "eyebrow": "SPUDS SNACKS",
+        "eyebrow": "SPUDS TREATS",
         "use_delivered_chicken_assets": true,
         "description_override": "",
         "description_fallback": "Crunchy Chicken Chips made for backyard hangs, game days, tailgates, and treat-time celebrations everywhere.",
