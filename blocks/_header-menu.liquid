@@ -107,7 +107,7 @@
               {% endunless %}
         <li
           role="presentation"
-          class="menu-list__list-item"
+          class="menu-list__list-item{% if link.handle == 'shop' and link.links != blank %} spuds-shop-menu{% endif %}"
           on:focus="/activate"
           on:blur="/deactivate"
           on:pointerenter="/activate"
@@ -127,7 +127,7 @@
             {% endif %}
             ref="menuitem"
           >
-            <span class="menu-list__link-title{% if link.handle == 'shop' and link.links != blank %} spuds-shop-trigger{% endif %}">{%- render 'spuds-navigation-label', link: link, section: section -%}</span>
+            <span class="menu-list__link-title">{%- render 'spuds-navigation-label', link: link, section: section -%}</span>
           </a>
           {%- if link.links != blank -%}
             <div class="menu-list__submenu{{ background_color_classes }}" ref="submenu[]">

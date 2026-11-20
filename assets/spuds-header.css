@@ -27,19 +27,31 @@
     font-size: 1.2vw;
   }
 
-  .spuds-shop-trigger {
-    display: inline-flex;
-    align-items: center;
-    gap: .5vw;
+  .spuds-shop-menu .mega-menu__link--parent {
+    display: block;
+    margin-block-end: .45vw;
+    padding-block: 0 .45vw;
+    border-bottom: max(1px, .07vw) solid #071b3d2b;
+    color: #071b3d;
+    font-family: var(--spuds-header-font);
+    font-size: max(17px, 1.38vw);
+    font-weight: 650;
+    font-variation-settings: "wght" 650, "wdth" 100;
+    line-height: 1.2;
+    text-transform: uppercase;
   }
 
-  .spuds-shop-trigger::before {
-    content: "";
-    width: 1.12vw;
-    height: .8vw;
-    box-sizing: border-box;
-    border-block: max(1px, .1vw) solid currentColor;
-    background: linear-gradient(currentColor, currentColor) center / 100% max(1px, .1vw) no-repeat;
+  .spuds-shop-menu .mega-menu__column ul .mega-menu__link {
+    padding-block: .26vw;
+    font-size: max(14px, 1.02vw);
+    font-weight: 400;
+    line-height: 1.4;
+    text-transform: none;
+  }
+
+  .spuds-shop-menu .mega-menu__link:is(:hover, :focus-visible) {
+    text-decoration: underline;
+    text-underline-offset: .2vw;
   }
 }
 
