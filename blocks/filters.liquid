@@ -28,6 +28,9 @@
   assign products_count = results_size
   assign sort_by = results.sort_by | default: results.default_sort_by
   assign filters = filters | default: results.filters
+  if request.page_type == 'collection'
+    assign filters = filters | reject: 'type', 'price_range'
+  endif
   assign total_active_values = 0
 
   # Calculate facets margin style

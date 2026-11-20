@@ -4,7 +4,7 @@
 
 {% capture children %}
   {% unless product == blank %}
-    {%- if product.available == false or product.compare_at_price > product.price -%}
+    {%- if product.available == false or request.page_type != 'collection' and product.compare_at_price > product.price -%}
       <div
         class="product-badges product-badges--{{ settings.badge_position }}"
         style="
