@@ -26,6 +26,21 @@
   #header-component .menu-list__link {
     font-size: 1.2vw;
   }
+
+  .spuds-shop-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: .5vw;
+  }
+
+  .spuds-shop-trigger::before {
+    content: "";
+    width: 1.12vw;
+    height: .8vw;
+    box-sizing: border-box;
+    border-block: max(1px, .1vw) solid currentColor;
+    background: linear-gradient(currentColor, currentColor) center / 100% max(1px, .1vw) no-repeat;
+  }
 }
 
 @media screen and (max-width: 749px) {
