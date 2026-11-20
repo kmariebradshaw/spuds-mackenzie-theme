@@ -38,8 +38,9 @@
   --spuds-choice-title-size: clamp(15px, 1.12vw, 18px);
   --spuds-choice-price-size: clamp(17px, 1.35vw, 22px);
   --spuds-plan-price-size: clamp(19px, 1.55vw, 25px);
-  --spuds-choice-rule: rgb(7 27 61 / 23%);
-  --spuds-choice-padding: clamp(12px, 1.1vw, 18px) clamp(13px, 1.25vw, 21px);
+  --spuds-choice-rule: rgb(7 27 61 / 15%);
+  --spuds-choice-inset: clamp(14px, 1.55vw, 26px);
+  --spuds-choice-row-padding: clamp(16px, 1.4vw, 24px);
 }
 
 .spuds-pdp *,
@@ -309,36 +310,64 @@
 }
 
 .spuds-pdp__purchase-options {
-  min-inline-size: 0;
+  display: block;
+  width: 100%;
+  min-width: 0;
   margin: 0;
-  padding: 0;
-  border: 0;
+  padding: 0 var(--spuds-choice-inset);
+  border: 1px solid var(--spuds-choice-rule);
+  background: #fff;
 }
 
-.spuds-pdp__purchase-options[hidden] { display: none; }
+.spuds-pdp__purchase-options[hidden],
+.spuds-pdp__purchase-options:not(:has(.spuds-pdp__purchase-option)) {
+  display: none;
+}
 
-.spuds-pdp__purchase-option {
+/* The theme's generic radio labels use inline-flex. Both choices span this panel. */
+.spuds-pdp__purchase-options > .spuds-pdp__purchase-option {
   display: grid;
+  width: 100%;
   grid-template-columns: 16px minmax(0, 1fr) auto;
+  grid-template-areas: "radio title price";
   align-items: center;
-  gap: 3px clamp(8px, .75vw, 12px);
-  min-block-size: 52px;
-  padding: var(--spuds-choice-padding);
-  border: 1px solid var(--spuds-choice-rule);
-  background: var(--spuds-pdp-cream);
+  gap: 6px clamp(9px, .9vw, 15px);
+  margin: 0;
+  padding: var(--spuds-choice-row-padding) 0;
   color: var(--spuds-pdp-navy);
   font-family: var(--spuds-pdp-body);
   line-height: 1.3;
   cursor: pointer;
 }
 
-.spuds-pdp__purchase-option + .spuds-pdp__purchase-option {
-  border-block-start: 0;
+.spuds-pdp__purchase-options > .spuds-pdp__purchase-option--subscription {
+  grid-template-areas:
+    "radio title price"
+    ".     meta  meta";
 }
 
-.spuds-pdp__purchase-option:has(input:checked),
-.spuds-pdp .shopify_subscriptions_app_block_label:has(input:checked) {
-  background: var(--spuds-control-fill);
+.spuds-pdp__purchase-option + .spuds-pdp__purchase-option {
+  border-block-start: 1px solid var(--spuds-choice-rule);
+}
+
+.spuds-pdp__purchase-option > input {
+  grid-area: radio;
+}
+
+.spuds-pdp__choice-title {
+  grid-area: title;
+}
+
+.spuds-pdp__choice-price {
+  grid-area: price;
+}
+
+.spuds-pdp__choice-meta {
+  grid-area: meta;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px clamp(8px, .65vw, 12px);
 }
 
 .spuds-pdp__purchase-option:has(input:focus-visible) {
@@ -356,6 +385,10 @@
   margin: 0;
   accent-color: var(--spuds-pdp-navy);
   cursor: pointer;
+}
+
+.spuds-pdp__purchase-option input[type="radio"]::after {
+  content: none;
 }
 
 .spuds-pdp__choice-title,
@@ -390,19 +423,13 @@
 
 .spuds-pdp__choice-detail,
 .spuds-pdp .shopify_subscriptions_app_block_label_children label {
-  grid-column: 2;
   color: #49566a;
   font-size: clamp(13px, .93vw, 15px);
   font-weight: 400;
   line-height: 1.4;
 }
 
-.spuds-pdp__choice-detail:last-child {
-  grid-column-end: -1;
-}
-
 .spuds-pdp__choice-saving {
-  justify-self: end;
   padding: 2px 6px;
   background: #ffe4a8;
   color: var(--spuds-pdp-navy);
@@ -413,9 +440,12 @@
 }
 
 @container (max-width: 312px) {
-  .spuds-pdp__purchase-option {
-    padding-inline: 9px;
-    column-gap: 5px;
+  .spuds-pdp__purchase-options {
+    padding-inline: 10px;
+  }
+
+  .spuds-pdp__purchase-options > .spuds-pdp__purchase-option {
+    column-gap: 6px;
   }
 
   .spuds-pdp__purchase-option--subscription .spuds-pdp__choice-title {
@@ -427,8 +457,19 @@
   }
 }
 
+/* The app renders its own fieldset when a subscription block is enabled. */
+.spuds-pdp .shopify_subscriptions_fieldset {
+  width: 100%;
+  min-width: 0;
+}
+
+.spuds-pdp .shopify_subscriptions_fieldset > div {
+  padding-inline: var(--spuds-choice-inset);
+  background: #fff !important; /* The app sets its panel background inline. */
+}
+
 .spuds-pdp .shopify_subscriptions_app_block_label {
-  padding: var(--spuds-choice-padding);
+  padding: var(--spuds-choice-row-padding) 0;
 }
 
 .spuds-pdp .shopify_subscriptions_purchase_option_wrapper {

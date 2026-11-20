@@ -42,9 +42,11 @@
       {% if allocation.selling_plan.id == initial_plan %}checked{% endif %}>
     <span class="spuds-pdp__choice-title">{{ subscription_label | escape }}</span>
     <strong class="spuds-pdp__choice-price">{{ allocation.price | money }}</strong>
-    <small class="spuds-pdp__choice-detail">{{ detail | escape }}</small>
-    {% if discount %}
-      <span class="spuds-pdp__choice-saving">{{ 'spuds_product.percent_off' | t: percent: discount | escape }}</span>
-    {% endif %}
+    <span class="spuds-pdp__choice-meta">
+      <small class="spuds-pdp__choice-detail">{{ detail | escape }}</small>
+      {% if discount %}
+        <span class="spuds-pdp__choice-saving">{{ 'spuds_product.percent_off' | t: percent: discount | escape }}</span>
+      {% endif %}
+    </span>
   </label>
 {% endfor %}
