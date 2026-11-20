@@ -1,17 +1,16 @@
 {% doc %}
-  Renders the hero buttons with the first configured category at the right edge.
+  Renders the hero buttons in the configured category order.
   @param {section} section - Spuds hero section.
 {% enddoc %}
 
 {%- capture category_links -%}
-  {%- for block in section.blocks reversed -%}
+  {%- for block in section.blocks -%}
     {%- if block.type == 'category' and block.settings.link != blank and block.settings.title != blank -%}
       <a
         class="spuds-button"
         href="{{ block.settings.link | escape }}"
-        aria-label="{{ 'spuds_hero.shop_category' | t: category: block.settings.title | escape }}"
       >
-        {{ block.settings.title | escape }}
+        {{ 'spuds_hero.shop_category' | t: category: block.settings.title | escape }}
         {% render 'spuds-shape', shape: 'arrow', color: '#ff2e6c' %}
       </a>
     {%- endif -%}

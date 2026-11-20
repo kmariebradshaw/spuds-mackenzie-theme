@@ -9,16 +9,6 @@
 
   assign hero_alt = collection.image.alt | default: collection.title
 
-  assign primary_label = collection.metafields.custom.custom_header_button_1_label.value | default: section.settings.primary_label
-  assign primary_link_value = collection.metafields.custom.custom_header_button_1_link.value
-  assign primary_link = primary_link_value.url | default: primary_link_value | default: section.settings.primary_link | default: routes.all_products_collection_url
-  assign primary_button_accent = collection.metafields.custom.custom_header_button_1_accent_color.value | default: section.settings.primary_button_accent_color
-
-  assign secondary_label = collection.metafields.custom.custom_header_button_2_label.value | default: section.settings.secondary_label
-  assign secondary_link_value = collection.metafields.custom.custom_header_button_2_link.value
-  assign secondary_link = secondary_link_value.url | default: secondary_link_value | default: section.settings.secondary_link | default: routes.root_url
-  assign secondary_button_accent = collection.metafields.custom.custom_header_button_2_accent_color.value | default: section.settings.secondary_button_accent_color
-
   assign title_words = collection.title | strip | split: ' '
   assign accent_color = collection.metafields.custom.custom_accent_color.value | default: section.settings.accent_color
 %}
@@ -75,12 +65,9 @@
   </div>
 
   {% for block in section.blocks %}
-    {% if block.settings.collection.id == collection.id and block.settings.collection != blank and block.settings.text != blank %}
+    {% if block.settings.collection.id == collection.id and block.settings.collection != blank and block.settings.heading != blank %}
       <div class="spuds-collection-hero__intro" {{ block.shopify_attributes }}>
-        {% if block.settings.heading != blank %}
-          <h2>{{ block.settings.heading | escape }}</h2>
-        {% endif %}
-        <p>{{ block.settings.text | escape }}</p>
+        <h2>{{ block.settings.heading | escape }}</h2>
       </div>
       {% break %}
     {% endif %}
@@ -103,30 +90,6 @@
       </div>
       <span role="status" aria-live="polite" class="visually-hidden"></span>
     </spuds-category-filter>
-  {% else %}
-  <nav class="spuds-collection-nav" aria-label="{{ section.settings.navigation_label | escape }}">
-    {% if primary_label != blank %}
-      <a
-        class="spuds-collection-nav__link"
-        href="{{ primary_link }}"
-        style="--spuds-collection-button-accent: {{ primary_button_accent }};"
-      >
-        {{ primary_label | escape }}
-        {% render 'spuds-shape', shape: 'arrow', color: '#ffffff', class: 'spuds-collection-nav__arrow' %}
-      </a>
-    {% endif %}
-
-    {% if secondary_label != blank %}
-      <a
-        class="spuds-collection-nav__link"
-        href="{{ secondary_link }}"
-        style="--spuds-collection-button-accent: {{ secondary_button_accent }};"
-      >
-        {{ secondary_label | escape }}
-        {% render 'spuds-shape', shape: 'arrow', color: '#ffffff', class: 'spuds-collection-nav__arrow' %}
-      </a>
-    {% endif %}
-  </nav>
   {% endif %}
 </section>
 
@@ -141,61 +104,14 @@
   "blocks": [
     {
       "type": "collection_intro",
-      "name": "Collection introduction",
+      "name": "Collection tagline",
       "settings": [
         { "type": "collection", "id": "collection", "label": "Collection" },
-        { "type": "text", "id": "heading", "label": "Heading" },
-        { "type": "textarea", "id": "text", "label": "Introduction" }
+        { "type": "text", "id": "heading", "label": "Tagline" }
       ]
     }
   ],
   "settings": [
-    {
-      "type": "header",
-      "content": "Navigation buttons"
-    },
-    {
-      "type": "text",
-      "id": "navigation_label",
-      "label": "Accessible navigation label",
-      "default": "Shop Spuds collections"
-    },
-    {
-      "type": "text",
-      "id": "primary_label",
-      "label": "First button label",
-      "default": "Shop all"
-    },
-    {
-      "type": "url",
-      "id": "primary_link",
-      "label": "First button link"
-    },
-    {
-      "type": "text",
-      "id": "secondary_label",
-      "label": "Second button label",
-      "default": "Meet Spuds"
-    },
-    {
-      "type": "url",
-      "id": "secondary_link",
-      "label": "Second button link"
-    },
-    {
-      "type": "color",
-      "id": "primary_button_accent_color",
-      "label": "First button accent",
-      "info": "Fallback for custom.header_button_1_accent_color.",
-      "default": "#ff2f69"
-    },
-    {
-      "type": "color",
-      "id": "secondary_button_accent_color",
-      "label": "Second button accent",
-      "info": "Fallback for custom.header_button_2_accent_color.",
-      "default": "#ff2f69"
-    },
     {
       "type": "header",
       "content": "Colors"

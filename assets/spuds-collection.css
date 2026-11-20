@@ -152,20 +152,9 @@
   object-position: right;
 }
 
-.spuds-collection-nav {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: clamp(1rem, 2.2vw, 2.25rem);
-  padding: clamp(1.75rem, 3.5vw, 3.5rem) 1.5rem;
-  background: var(--spuds-cream);
-}
-
 .spuds-collection-hero__intro {
   width: min(88%, 46rem);
-  margin: clamp(24px, 3vw, 48px) auto 0;
+  margin: clamp(24px, 3vw, 48px) auto;
   text-align: center;
 }
 
@@ -180,62 +169,6 @@
   line-height: 1.05;
   text-transform: uppercase;
   text-wrap: balance;
-}
-
-.spuds-collection-hero__intro p {
-  margin: 0;
-  color: inherit;
-  font-family: var(--spuds-body);
-  font-size: clamp(16px, 1.1vw, 18px);
-  line-height: 1.5;
-  text-wrap: pretty;
-}
-
-.spuds-collection-hero__intro h2 + p {
-  margin-block-start: 8px;
-}
-
-.spuds-collection-hero__intro + .spuds-collection-nav {
-  width: min(88%, 46rem);
-  margin-inline: auto;
-  justify-content: center;
-  padding: clamp(18px, 1.75vw, 28px) 0 clamp(28px, 3vw, 48px);
-}
-
-.spuds-collection-nav__link {
-  display: inline-flex;
-  min-width: clamp(12rem, 18vw, 17rem);
-  align-items: center;
-  justify-content: center;
-  gap: .75rem;
-  padding: 1rem 1.35rem;
-  background: var(--spuds-navy);
-  box-shadow: .38rem .38rem 0 var(--spuds-collection-button-accent, var(--spuds-pink));
-  color: #fff;
-  font-family: var(--spuds-scale);
-  font-size: clamp(1rem, 1.25vw, 1.3rem);
-  font-stretch: expanded;
-  font-variation-settings: "wght" 350, "wdth" 115;
-  font-weight: 600;
-  letter-spacing: .035em;
-  line-height: 1;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: box-shadow .18s ease, transform .18s ease;
-}
-
-
-
-.spuds-collection-nav__link:hover,
-.spuds-collection-nav__link:focus-visible {
-  box-shadow: .2rem .2rem 0 var(--spuds-collection-button-accent, var(--spuds-pink));
-  transform: translate(.18rem, .18rem);
-}
-
-.spuds-collection-nav__arrow {
-  width: 1.8rem;
-  height: .9rem;
-  flex: 0 0 auto;
 }
 
 .spuds-collection-products {
@@ -461,37 +394,6 @@
     white-space: normal;
   }
 
-  .spuds-collection-nav {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3vw;
-    padding: 6vw 4vw;
-  }
-
-  .spuds-collection-hero__intro + .spuds-collection-nav {
-    align-items: stretch;
-  }
-
-  .spuds-collection-hero__intro + .spuds-collection-nav .spuds-collection-nav__link {
-    width: 100%;
-    min-height: 44px;
-  }
-
-  .spuds-collection-nav__link {
-    width: 68vw;
-    min-width: 0;
-    gap: 1.8vw;
-    padding: 2.5vw 3vw;
-    box-shadow: .9vw .9vw 0 var(--spuds-collection-button-accent, var(--spuds-pink));
-    font-size: 3.4vw;
-  }
-
-  .spuds-collection-nav__arrow {
-    width: 5vw;
-    height: 2.5vw;
-  }
-
   .spuds-collection-products .facets-block-wrapper:not(.facets-block-wrapper--vertical) {
     display: none;
   }
@@ -513,12 +415,6 @@
   .spuds-collection-products product-price.text-block {
     padding: .35rem .5rem .5rem !important;
     font-size: .875rem !important;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .spuds-collection-nav__link {
-    transition: none;
   }
 }
 

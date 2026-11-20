@@ -33,6 +33,11 @@
   font-family: var(--spuds-pdp-body);
 }
 
+.spuds-pdp {
+  --spuds-purchase-price-size: clamp(17px, 1.4vw, 24px);
+  --spuds-subscription-size: clamp(21px, 1.75vw, 30px);
+}
+
 .spuds-pdp *,
 .spuds-pdp *::before,
 .spuds-pdp *::after,
@@ -358,11 +363,37 @@
   font: inherit;
 }
 
+.spuds-pdp [data-spuds-one-time-price],
+.spuds-pdp [data-spuds-sticky-price],
+.spuds-pdp .shopify_subscriptions_in_widget_price {
+  font-size: var(--spuds-purchase-price-size);
+  font-weight: 600;
+}
+
+.spuds-pdp .spuds-pdp__subscription-heading,
+.spuds-pdp .shopify_subscriptions_app_block_label > .shopify_subscriptions_purchase_option_wrapper > label,
+.spuds-pdp .shopify_subscriptions_app_block_label:has([data-selling-plan-id]) > label,
+.spuds-pdp .shopify_subscriptions_in_widget_price.allocation_price {
+  font-size: var(--spuds-subscription-size);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.spuds-pdp .shopify_subscriptions_purchase_option_wrapper {
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.spuds-pdp__purchase-option small,
+.spuds-pdp .shopify_subscriptions_app_block_label_children label {
+  font-size: calc(var(--spuds-subscription-size) * .9);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
 .spuds-pdp__purchase-option small {
   display: block;
   margin-top: 2px;
-  font-size: .88em;
-  font-weight: 400;
 }
 
 .spuds-pdp__actions {
@@ -789,6 +820,11 @@
 }
 
 @media screen and (max-width: 47.999em) {
+  .spuds-pdp {
+    --spuds-purchase-price-size: clamp(16px, 4.45vw, 24px);
+    --spuds-subscription-size: clamp(20px, 5.4vw, 30px);
+  }
+
   .spuds-pdp__inner,
   .spuds-pdp-recommendations__inner {
     width: 90vw;
