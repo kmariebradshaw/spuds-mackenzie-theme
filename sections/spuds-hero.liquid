@@ -16,6 +16,7 @@
   endif
 %}
 {% assign mobile_hero_image = section.settings.mobile_hero_image %}
+{% assign mobile_headline_url = section.settings.mobile_headline_url %}
 {% assign hero_headline_graphic = section.settings.hero_headline_graphic %}
 {% assign hero_polaroid_cluster = section.settings.hero_polaroid_cluster %}
 {% assign hero_button_accent_left = section.settings.hero_button_accent_left %}
@@ -28,7 +29,7 @@
     {% render 'spuds-mobile-collage', section: section %}
   {% endif %}
   <div class="spuds-shell">
-    <div class="spuds-hero{% if shared_hero_url != blank %} spuds-hero--extended{% endif %}"{% if shared_hero_url != blank and section.settings.hero_sky_image != blank %} style="--spuds-hero-sky: url('{{ section.settings.hero_sky_image | image_url: width: 1024 | escape }}')"{% endif %}>
+    <div class="spuds-hero{% if shared_hero_url != blank %} spuds-hero--extended{% endif %}{% if mobile_hero_image != blank and template.suffix != 'collage' %} spuds-hero--mobile-photo{% endif %}"{% if shared_hero_url != blank and section.settings.hero_sky_image != blank %} style="--spuds-hero-sky: url('{{ section.settings.hero_sky_image | image_url: width: 1024 | escape }}')"{% endif %}>
       <div
         class="spuds-hero__image{% if mobile_hero_image != blank %} spuds-hero__image--mobile{% endif %}"
         {% if mobile_hero_image != blank %}style="--mobile-image-focus: {{ mobile_hero_image.presentation.focal_point | default: 'center' }}"{% endif %}
@@ -55,12 +56,20 @@
 
       <div class="spuds-hero__copy">
         <h1 class="spuds-hero__headline">
-          {% if hero_headline_graphic != blank %}
-            {{ hero_headline_graphic | image_url: width: 1400 | image_tag: widths: '500,750,1000,1400', sizes: '(max-width: 749px) 42vw, 26vw', class: 'spuds-hero__headline-image', loading: 'eager', alt: '' }}
-          {% else %}
-            <img class="spuds-hero__headline-image" src="{{ 'HP-ATF-TextVectorized.webp' | asset_url }}" width="1400" height="1297" alt="" loading="eager">
-          {% endif %}
+          <picture>
+            {% if mobile_headline_url != blank %}
+              <source media="(max-width: 749px)" srcset="{{ mobile_headline_url | escape }}" width="1119" height="448">
+            {% endif %}
+            {% if hero_headline_graphic != blank %}
+              {{ hero_headline_graphic | image_url: width: 1400 | image_tag: widths: '500,750,1000,1400', sizes: '(max-width: 749px) 42vw, 26vw', class: 'spuds-hero__headline-image', loading: 'eager', alt: '' }}
+            {% else %}
+              <img class="spuds-hero__headline-image" src="{{ 'HP-ATF-TextVectorized.webp' | asset_url }}" width="1400" height="1297" alt="" loading="eager">
+            {% endif %}
+          </picture>
           <span class="visually-hidden">{{ section.settings.hero_kicker }} {{ section.settings.hero_title }} {{ section.settings.hero_subtitle }}</span>
+          {% if mobile_headline_url != blank and section.settings.hero_link != blank %}
+            <a class="spuds-hero__headline-link" href="{{ section.settings.hero_link | escape }}" aria-label="{{ section.settings.hero_button | default: section.settings.hero_title | escape }}"></a>
+          {% endif %}
         </h1>
         {% if section.settings.hero_eyebrow != blank or section.settings.hero_experience != blank %}
           <div class="spuds-hero__intro">
@@ -148,6 +157,7 @@
     {"type":"image_picker","id":"hero_image","label":"Hero image"},
     {"type":"image_picker","id":"hero_sky_image","label":"Sky above the shared hero on mobile"},
     {"type":"image_picker","id":"mobile_hero_image","label":"Mobile hero image"},
+    {"type":"url","id":"mobile_headline_url","label":"Mobile headline artwork URL"},
     {"type":"image_picker","id":"hero_headline_graphic","label":"Hero headline graphic"},
     {"type":"image_picker","id":"hero_polaroid_cluster","label":"Polaroids and treats graphic"},
     {"type":"image_picker","id":"hero_button_accent_left","label":"Button left triangle graphic"},

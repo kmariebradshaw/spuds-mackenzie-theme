@@ -50,6 +50,8 @@
       ],
       "settings": {
         "mobile_layout": "classic",
+        "mobile_hero_image": "shopify://shop_images/SpudsATF-Mobile.png",
+        "mobile_headline_url": "https://cdn.shopify.com/s/files/1/0832/1590/9092/files/HP-ATF-TextVectorized-MOBILE.svg?v=1795470425",
         "hero_image": "shopify://shop_images/SpudsATF_2.png",
         "hero_sky_image": "shopify://shop_images/spuds-poolside-sky-blend.webp",
         "hero_eyebrow": "Dog treats & supplements inspired by a <em>legend</em>.",
