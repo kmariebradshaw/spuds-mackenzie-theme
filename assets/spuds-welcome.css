@@ -1,0 +1,166 @@
+dialog.spuds-welcome {
+  --welcome-navy: #091b3e;
+  --welcome-pink: #f52463;
+  --welcome-cream: #fdf1e5;
+  position: fixed;
+  inset: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--welcome-navy);
+  font-family: "work-sans", "Work Sans", Arial, sans-serif;
+}
+.spuds-welcome:not([open]) { display: none; }
+.spuds-welcome[open] { display: grid; place-items: center; }
+.spuds-welcome::backdrop { background: rgb(75 54 35 / 34%); backdrop-filter: blur(.45vw); }
+html:has(.spuds-welcome[open]) { overflow: hidden; }
+.spuds-welcome__panel {
+  position: relative;
+  isolation: isolate;
+  container-type: inline-size;
+  width: min(74.6vw, 146dvh);
+  aspect-ratio: 1432 / 828;
+  max-height: 88dvh;
+  overflow: auto;
+  border-radius: .7vw;
+  background: var(--welcome-cream);
+  box-shadow: 0 1.4vw 3.6vw rgb(16 22 35 / 27%);
+}
+.spuds-welcome__art {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image: var(--welcome-art);
+  background-size: 134.08% 130.44%;
+  background-position: 50% 47.62%;
+  background-repeat: no-repeat;
+  /* Reveal the illustration and logo from the supplied design. The offer and form are live HTML. */
+  mask: linear-gradient(90deg, transparent 47.5%, #000 55%),
+    linear-gradient(#000 18%, transparent 31%),
+    linear-gradient(0deg, #000 15%, transparent 20%),
+    linear-gradient(90deg, transparent 44%, #000 45.5%) bottom / 100% 46% no-repeat;
+}
+.spuds-welcome__panel--custom .spuds-welcome__art {
+  background-size: cover;
+  background-position: center;
+  mask: linear-gradient(90deg, transparent 17%, #000 65%);
+}
+.spuds-welcome__content {
+  display: grid;
+  justify-items: center;
+  width: 57.4%;
+  padding: 18.4cqw 0 3cqw;
+  text-align: center;
+}
+.spuds-welcome__mobile-logo { display: none; }
+.spuds-welcome h2 {
+  margin: 0 0 1.55cqw;
+  color: var(--welcome-navy);
+  font: 700 4.2cqw/1.05 "work-sans", Arial, sans-serif;
+  letter-spacing: -.12cqw;
+}
+.spuds-welcome__form {
+  display: grid;
+  justify-items: center;
+  width: 100%;
+  margin: 0;
+}
+.spuds-welcome__offer, .spuds-welcome__result {
+  width: 38cqw;
+  color: var(--welcome-navy);
+  font-size: 1.88cqw;
+  line-height: 1.42;
+}
+.spuds-welcome__offer p, .spuds-welcome__result p { margin: 0; }
+.spuds-welcome__input, .spuds-welcome__button {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 19cqw;
+  min-height: 4.3cqw;
+  padding: .72cqw 1.2cqw;
+  border-radius: .78cqw;
+  font: inherit;
+}
+.spuds-welcome__input {
+  margin-top: 3cqw;
+  border: .11cqw solid var(--welcome-navy);
+  background: white;
+  color: var(--welcome-navy);
+  font-size: 1.55cqw;
+}
+.spuds-welcome__button {
+  margin: 1.45cqw auto 0;
+  border: 0;
+  background: var(--welcome-pink);
+  color: white;
+  cursor: pointer;
+  font-size: 1.65cqw;
+  font-weight: 700;
+  line-height: 1.15;
+  text-decoration: none;
+}
+.spuds-welcome__button:hover { background: #c91551; }
+.spuds-welcome small, .spuds-welcome__error {
+  max-width: 33cqw;
+  margin-top: .8cqw;
+  color: var(--welcome-navy);
+  font-size: max(.84cqw, .7rem);
+  line-height: 1.35;
+}
+.spuds-welcome__error ul { margin: 0; padding: 0; list-style: none; }
+.spuds-welcome__result strong { white-space: nowrap; }
+.spuds-welcome__close {
+  position: fixed;
+  top: 1.45vw;
+  right: 1.45vw;
+  display: grid;
+  place-items: center;
+  width: max(3.25vw, 2.75rem);
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--welcome-navy);
+  color: white;
+  cursor: pointer;
+}
+.spuds-welcome__close svg { width: 48%; height: auto; }
+.spuds-welcome :is(button, input, a):focus-visible { outline: .2rem solid var(--welcome-navy); outline-offset: .17rem; }
+.spuds-welcome h2:focus { outline: none; }
+
+@media (min-width: 750px) and (max-width: 1100px) {
+  .spuds-welcome__panel { width: min(88vw, 146dvh); }
+}
+@media (max-width: 749px), (max-height: 460px) {
+  .spuds-welcome__panel { width: min(89vw, 31rem); max-height: 84dvh; aspect-ratio: auto; border-radius: 2.5vw; }
+  .spuds-welcome__content { width: 100%; padding: 5cqw 6cqw; }
+  .spuds-welcome__mobile-logo { display: block; width: 26cqw; height: auto; margin: 0 auto 3cqw; }
+  .spuds-welcome h2 { font-size: 10cqw; margin-bottom: 2.4cqw; }
+  .spuds-welcome__offer, .spuds-welcome__result { width: 100%; font-size: 4.65cqw; line-height: 1.35; }
+  .spuds-welcome__input, .spuds-welcome__button { width: 82%; min-height: max(12cqw, 2.75rem); padding: 2cqw 3.5cqw; font-size: max(4.7cqw, 1rem); border-radius: 2.5cqw; }
+  .spuds-welcome__input { margin-top: 4cqw; border-width: .4cqw; }
+  .spuds-welcome__button { margin-top: 2.5cqw; }
+  .spuds-welcome small, .spuds-welcome__error { max-width: 88%; margin-top: 2.6cqw; font-size: max(3.15cqw, .7rem); }
+  .spuds-welcome__panel { display: flex; flex-direction: column; }
+  .spuds-welcome__art {
+    position: relative;
+    z-index: auto;
+    order: 1;
+    flex: none;
+    width: 100%;
+    aspect-ratio: 740 / 565;
+    background-size: 259.46% 191.15%;
+    background-position: 79.32% 74.56%;
+    mask: linear-gradient(transparent, #000 9%);
+  }
+  .spuds-welcome__panel--custom .spuds-welcome__art { background-size: cover; background-position: right; mask: none; }
+  .spuds-welcome__close { top: 1.2dvh; right: 1.75vw; }
+}
