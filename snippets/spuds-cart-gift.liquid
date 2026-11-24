@@ -1,28 +1,19 @@
 {% doc %}
-  Displays the gift that Shopify Flow adds to qualifying orders after checkout.
+  Loads the commemorative gift cart integration and identifies carts that need an initial update.
 {% enddoc %}
-<div class="spuds-cart-gift">
-  {% assign can = images['spuds-welcome-commemorative-can.png'] %}
-  {% if can != blank %}
-    {{ can | image_url: height: 128 | image_tag: class: 'spuds-cart-gift__image', alt: '', loading: 'lazy' }}
-  {% endif %}
-  <div>
-    <strong>{{ 'spuds_gift.title' | t }}</strong>
-    <span>{{ 'spuds_gift.detail' | t }}</span>
-    <small>{{ 'spuds_gift.qualification' | t }}</small>
-  </div>
-</div>
-
-{% stylesheet %}
-  .spuds-cart-gift {
-    display: flex;
-    align-items: center;
-    gap: clamp(0.6rem, 1vw, 1rem);
-    padding: clamp(0.65rem, 1vw, 1rem);
-    background: #faf0e4;
-    color: #071b3d;
-    border-inline-start: 0.25rem solid #f63264;
-  }
-  .spuds-cart-gift__image { height: clamp(2.8rem, 4vw, 4rem); width: auto; }
-  .spuds-cart-gift strong, .spuds-cart-gift span, .spuds-cart-gift small { display: block; }
-{% endstylesheet %}
+{% liquid
+  assign gift_id = 68489683534052
+  assign gift_count = cart | item_count_for_variant: gift_id
+  assign target = 0
+  if cart.currency.iso_code == 'USD' and cart.total_price >= 7500
+    assign target = 1
+  endif
+%}
+<script
+  id="spuds-gift-config"
+  src="{{ 'spuds-cart-gift.js' | asset_url }}"
+  type="module"
+  data-variant="{{ gift_id }}"
+  data-threshold="7500"
+  {% if target != gift_count %}data-needs-sync{% endif %}
+></script>

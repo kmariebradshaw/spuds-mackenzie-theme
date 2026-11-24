@@ -8,10 +8,6 @@
 {% render 'text-component-shimmer-styles' %}
 {% render 'cart-typography-styles' %}
 
-{% if cart.currency.iso_code == 'USD' and cart.total_price >= 7500 %}
-  {% render 'spuds-cart-gift' %}
-{% endif %}
-
 <div class="cart-totals">
   {% # We need to keep this node in place to allow morphing to work properly # %}
   <div class="cart-totals__original-container cart-primary-typography">
@@ -261,6 +257,7 @@
   </div>
 </div>
 
+<p data-spuds-gift-error role="alert" hidden>{{ 'spuds_gift.retry' | t }}</p>
 <div class="cart__ctas">
   <button
     type="submit"
@@ -290,6 +287,12 @@
 </div>
 
 {% stylesheet %}
+  html[data-spuds-gift-busy] .additional-checkout-buttons,
+  html[data-spuds-quantity-pending] .additional-checkout-buttons,
+  html:has(#spuds-gift-config[data-needs-sync]) .additional-checkout-buttons {
+    visibility: hidden;
+  }
+
   .cart-actions {
     display: flex;
     flex-direction: column;

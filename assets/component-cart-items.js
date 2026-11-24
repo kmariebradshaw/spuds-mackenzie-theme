@@ -221,8 +221,9 @@ export class CartItemsComponent extends createViewEventElement(Component) {
       }
     });
 
+    const lineId = this.refs.cartItemRows[line - 1]?.dataset.key;
     const body = JSON.stringify({
-      line: line,
+      ...(lineId ? { id: lineId } : { line }),
       quantity: quantity,
       sections: Array.from(sectionsToUpdate).join(','),
       sections_url: window.location.pathname,
@@ -231,12 +232,11 @@ export class CartItemsComponent extends createViewEventElement(Component) {
     cartTotal?.shimmer();
 
     const deferredUpdatePromise = CartLinesUpdateEvent.createPromise();
-    const lineId = this.refs.cartItemRows[line - 1]?.dataset.key ?? '';
     this.dispatchEvent(
       new CartLinesUpdateEvent({
         action: config.action === 'change' && quantity > 0 ? 'update' : 'remove',
         context: 'cart',
-        lines: [{ id: lineId, quantity }],
+        lines: [{ id: lineId ?? '', quantity }],
         promise: deferredUpdatePromise.promise,
       })
     );

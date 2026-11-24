@@ -142,6 +142,8 @@
 
           <tbody role="rowgroup">
             {% for item in cart.items %}
+              {% assign is_spuds_gift = false %}
+              {% if item.variant.id == 68489683534052 %}{% assign is_spuds_gift = true %}{% endif %}
               <tr
                 id="CartItem-{{ item.key }}"
                 role="row"
@@ -334,7 +336,11 @@
                   {% assign can_update_quantity = item.instructions.can_update_quantity
                     | default: true, allow_false: true
                   %}
-                  <div class="cart-items__quantity-controls">
+                  {% if is_spuds_gift %}
+                    {% assign can_update_quantity = false %}
+                    <input type="hidden" name="updates[]" value="{{ item.quantity }}">
+                  {% endif %}
+                  <div class="cart-items__quantity-controls{% if is_spuds_gift %} hidden{% endif %}"{% if is_spuds_gift %} hidden{% endif %}>
                     {% render 'volume-pricing-info',
                       variant: item.variant,
                       unique_id: item.index,
@@ -364,6 +370,7 @@
                       <span class="visually-hidden">{{ 'accessibility.remove' | t }}</span>
                     </button>
                   </div>
+                  {% if is_spuds_gift %}<span>{{ 'spuds_gift.line' | t }}</span>{% endif %}
                 </td>
                 <td
                   class="cart-items__error hidden"

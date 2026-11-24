@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<h1>{{ product.title | escape }}</h1><p>{{ 'spuds_gift.qualification' | t }}</p>",
+        "section_width": "page-width",
+        "padding-block-start": 40,
+        "padding-block-end": 40
+      }
+    }
+  },
+  "order": ["main"]
+}
