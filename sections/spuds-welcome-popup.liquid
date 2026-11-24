@@ -75,7 +75,7 @@
   "settings": [
     { "type": "checkbox", "id": "enabled", "label": "Show welcome popup", "default": true },
     { "type": "range", "id": "delay", "label": "Delay before opening", "min": 0, "max": 20, "step": 1, "unit": "s", "default": 5 },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "20% OFF" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Get 20% Off" },
     { "type": "richtext", "id": "offer", "label": "Offer", "default": "<p>Enter your email to get 20% off your first order and a <strong>Free Commemorative 2.3oz. Spuds Can</strong> with orders over $75.</p>" },
     { "type": "text", "id": "cta", "label": "Signup button", "default": "GET MY 20% OFF" },
     { "type": "text", "id": "code", "label": "Active Shopify discount code", "default": "WELCOME20" },
@@ -83,7 +83,7 @@
     { "type": "image_picker", "id": "can_image", "label": "Commemorative can" },
     { "type": "image_picker", "id": "popup_logo", "label": "Popup logo" },
     { "type": "header", "content": "Pre-launch flags" },
-    { "type": "checkbox", "id": "snooze_on_dismiss", "label": "Hide for 7 days after dismissal", "info": "Leave off during preview testing. Enable before launch.", "default": false }
+    { "type": "checkbox", "id": "snooze_on_dismiss", "label": "Hide for 7 days after dismissal", "info": "Turn off to preview the popup again after each page reload.", "default": true }
   ]
 }
 {% endschema %}
