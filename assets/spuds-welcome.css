@@ -35,21 +35,34 @@ html:has(.spuds-welcome[open]) { overflow: hidden; }
 .spuds-welcome__art {
   position: absolute;
   z-index: -1;
-  inset: 0;
-  background-image: var(--welcome-art);
-  background-size: 134.08% 130.44%;
-  background-position: 50% 47.62%;
-  background-repeat: no-repeat;
-  /* Reveal the illustration and logo from the supplied design. The offer and form are live HTML. */
-  mask: linear-gradient(90deg, transparent 47.5%, #000 55%),
-    linear-gradient(#000 18%, transparent 31%),
-    linear-gradient(0deg, #000 15%, transparent 20%),
-    linear-gradient(90deg, transparent 44%, #000 45.5%) bottom / 100% 46% no-repeat;
+  inset: 0 0 0 auto;
+  width: 68%;
+  pointer-events: none;
 }
-.spuds-welcome__panel--custom .spuds-welcome__art {
-  background-size: cover;
-  background-position: center;
-  mask: linear-gradient(90deg, transparent 17%, #000 65%);
+.spuds-welcome__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  mask-image: linear-gradient(90deg, transparent 0%, rgb(0 0 0 / .12) 15%, #000 47%);
+}
+.spuds-welcome__can {
+  position: absolute;
+  top: 32%;
+  left: 42%;
+  width: 16%;
+  height: auto;
+  transform: rotate(-3deg);
+  filter: drop-shadow(.35cqw .55cqw .5cqw rgb(7 27 61 / 30%));
+}
+.spuds-welcome__gift-arrow {
+  position: absolute;
+  left: 21%;
+  top: 55%;
+  width: 20%;
+  height: auto;
+  color: var(--welcome-pink);
 }
 .spuds-welcome__content {
   display: grid;
@@ -58,7 +71,15 @@ html:has(.spuds-welcome[open]) { overflow: hidden; }
   padding: 18.4cqw 0 3cqw;
   text-align: center;
 }
-.spuds-welcome__mobile-logo { display: none; }
+.spuds-welcome__logo {
+  position: absolute;
+  top: 2.4%;
+  left: 50%;
+  width: 15.4%;
+  height: auto;
+  transform: translateX(-50%);
+  filter: drop-shadow(.07cqw 0 .06cqw var(--welcome-navy)) drop-shadow(-.07cqw .08cqw .06cqw var(--welcome-navy));
+}
 .spuds-welcome h2 {
   margin: 0 0 1.55cqw;
   color: var(--welcome-navy);
@@ -142,7 +163,15 @@ html:has(.spuds-welcome[open]) { overflow: hidden; }
 @media (max-width: 749px), (max-height: 460px) {
   .spuds-welcome__panel { width: min(89vw, 31rem); max-height: 84dvh; aspect-ratio: auto; border-radius: 2.5vw; }
   .spuds-welcome__content { width: 100%; padding: 5cqw 6cqw; }
-  .spuds-welcome__mobile-logo { display: block; width: 26cqw; height: auto; margin: 0 auto 3cqw; }
+  .spuds-welcome__logo {
+    position: static;
+    transform: none;
+    display: block;
+    width: 26cqw;
+    height: auto;
+    margin: 0 auto 3cqw;
+    filter: drop-shadow(.18cqw .13cqw .1cqw var(--welcome-navy)) drop-shadow(-.16cqw -.1cqw .1cqw var(--welcome-navy));
+  }
   .spuds-welcome h2 { font-size: 10cqw; margin-bottom: 2.4cqw; }
   .spuds-welcome__offer, .spuds-welcome__result { width: 100%; font-size: 4.65cqw; line-height: 1.35; }
   .spuds-welcome__input, .spuds-welcome__button { width: 82%; min-height: max(12cqw, 2.75rem); padding: 2cqw 3.5cqw; font-size: max(4.7cqw, 1rem); border-radius: 2.5cqw; }
@@ -153,14 +182,18 @@ html:has(.spuds-welcome[open]) { overflow: hidden; }
   .spuds-welcome__art {
     position: relative;
     z-index: auto;
+    inset: auto;
     order: 1;
     flex: none;
     width: 100%;
     aspect-ratio: 740 / 565;
-    background-size: 259.46% 191.15%;
-    background-position: 79.32% 74.56%;
-    mask: linear-gradient(transparent, #000 9%);
   }
-  .spuds-welcome__panel--custom .spuds-welcome__art { background-size: cover; background-position: right; mask: none; }
+  .spuds-welcome__photo {
+    position: absolute;
+    inset: 0;
+    mask-image: linear-gradient(transparent, #000 10%);
+  }
+  .spuds-welcome__can { top: 17%; left: 31%; width: 17%; }
+  .spuds-welcome__gift-arrow { top: 39%; left: 7%; width: 23%; }
   .spuds-welcome__close { top: 1.2dvh; right: 1.75vw; }
 }

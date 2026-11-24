@@ -2,7 +2,9 @@
   assign cfg = section.settings
   assign eligible_pages = 'index,collection,list-collections,product,page,blog,article,search' | split: ','
   assign signup_id = 'SpudsWelcomeSignup-' | append: section.id
-  assign artwork = cfg.artwork | default: images['spuds-welcome-signup-design.webp']
+  assign artwork = cfg.artwork | default: images['SpudsATF-Mobile.png']
+  assign can = cfg.can_image | default: images['spuds-welcome-commemorative-can.png']
+  assign brand_logo = cfg.popup_logo | default: images['spuds-mackenzie-logo-cream-pink.png']
   assign known_customer = false
   if customer.accepts_marketing or customer.orders_count > 0
     assign known_customer = true
@@ -13,17 +15,27 @@
   <script src="{{ 'spuds-welcome.js' | asset_url }}" type="module"></script>
   <spuds-welcome-popup
     data-delay="{{ cfg.delay | times: 1000 }}"
+    {% if cfg.snooze_on_dismiss %}data-snooze-on-dismiss{% endif %}
     data-form-id="{{ signup_id | escape }}"
     {% if known_customer %}data-known-customer{% endif %}
     {% if request.design_mode %}data-editor{% endif %}
   >
     <dialog class="spuds-welcome" aria-labelledby="SpudsWelcomeTitle-{{ section.id }}">
-      <div class="spuds-welcome__panel{% if cfg.artwork != blank %} spuds-welcome__panel--custom{% endif %}"
-        {% if artwork != blank %}style="--welcome-art: url('{{ artwork | image_url: width: 1920 | escape }}')"{% endif %}>
-        <div class="spuds-welcome__art" aria-hidden="true"></div>
+      <div class="spuds-welcome__panel">
+        <div class="spuds-welcome__art" aria-hidden="true">
+          {% if artwork != blank %}
+            {{ artwork | image_url: width: 1600 | image_tag: class: 'spuds-welcome__photo', widths: '400,600,800,1100,1600', sizes: '(max-width: 749px) 89vw, 52vw', alt: '', loading: 'lazy' }}
+          {% endif %}
+          {% if can != blank %}
+            <svg class="spuds-welcome__gift-arrow" aria-hidden="true" viewBox="0 0 160 56" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 7c16 49 94 61 146 5m-16 4 20-9-4 20"/>
+            </svg>
+            {{ can | image_url: width: can.width | image_tag: class: 'spuds-welcome__can', widths: '100,160,222,400', sizes: '(max-width: 749px) 16vw, 9vw', alt: '', loading: 'lazy' }}
+          {% endif %}
+        </div>
         <div class="spuds-welcome__content">
-          {% if settings.logo != blank %}
-            {{ settings.logo | image_url: width: 320 | image_tag: class: 'spuds-welcome__mobile-logo', widths: '160,240,320', sizes: '25vw', alt: shop.name, loading: 'lazy' }}
+          {% if brand_logo != blank %}
+            {{ brand_logo | image_url: width: 640 | image_tag: class: 'spuds-welcome__logo', widths: '160,320,480,640', sizes: '(max-width: 749px) 25vw, 12vw', alt: shop.name, loading: 'lazy' }}
           {% endif %}
           <h2 id="SpudsWelcomeTitle-{{ section.id }}" tabindex="-1">{{ cfg.heading | escape }}</h2>
           {% form 'customer', id: signup_id, class: 'spuds-welcome__form' %}
@@ -67,7 +79,11 @@
     { "type": "richtext", "id": "offer", "label": "Offer", "default": "<p>Enter your email to get 20% off your first order and a <strong>Free Commemorative 2.3oz. Spuds Can</strong> with orders over $75.</p>" },
     { "type": "text", "id": "cta", "label": "Signup button", "default": "GET MY 20% OFF" },
     { "type": "text", "id": "code", "label": "Active Shopify discount code", "default": "WELCOME20" },
-    { "type": "image_picker", "id": "artwork", "label": "Replace the poolside artwork", "info": "Optional. Use a clean landscape image with room for text on the left." }
+    { "type": "image_picker", "id": "artwork", "label": "Poolside photo", "info": "Defaults to the square mobile homepage photo." },
+    { "type": "image_picker", "id": "can_image", "label": "Commemorative can" },
+    { "type": "image_picker", "id": "popup_logo", "label": "Popup logo" },
+    { "type": "header", "content": "Pre-launch flags" },
+    { "type": "checkbox", "id": "snooze_on_dismiss", "label": "Hide for 7 days after dismissal", "info": "Leave off during preview testing. Enable before launch.", "default": false }
   ]
 }
 {% endschema %}

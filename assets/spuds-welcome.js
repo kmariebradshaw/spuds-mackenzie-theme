@@ -21,12 +21,13 @@ class SpudsWelcomePopup extends HTMLElement {
     const options = { signal: this.events.signal };
     const form = this.querySelector('form');
     const editor = this.hasAttribute('data-editor');
+    const snoozeOnDismiss = this.hasAttribute('data-snooze-on-dismiss');
     const result = form.querySelector('[data-signup-result]')?.dataset.signupResult;
     const ownReturn = location.hash === '#' + this.dataset.formId ||
       Number(stored('sessionStorage', pendingKey)) > Date.now() - 30 * 60 * 1000;
 
     const dismiss = () => {
-      if (!editor && stored('localStorage', storageKey) !== 'subscribed') {
+      if (snoozeOnDismiss && !editor && stored('localStorage', storageKey) !== 'subscribed') {
         stored('localStorage', storageKey, String(Date.now() + week));
       }
       this.dialog.close();
@@ -55,7 +56,7 @@ class SpudsWelcomePopup extends HTMLElement {
       return;
     }
     const previous = stored('localStorage', storageKey);
-    if (result || this.hasAttribute('data-known-customer') || previous === 'subscribed' || Number(previous) > Date.now()) return;
+    if (result || this.hasAttribute('data-known-customer') || previous === 'subscribed' || (snoozeOnDismiss && Number(previous) > Date.now())) return;
     this.timer = setTimeout(() => this.openWhenIdle(), Number(this.dataset.delay));
   }
 
