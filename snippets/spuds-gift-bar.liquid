@@ -1,0 +1,26 @@
+{% doc %}
+  Displays the commemorative can promotion above the storefront header.
+{% enddoc %}
+{% if cart.currency.iso_code == 'USD' %}
+  <aside class="spuds-gift-bar">
+    <span>{{ 'spuds_gift.announcement' | t }}</span>
+  </aside>
+{% endif %}
+
+{% stylesheet %}
+  .spuds-gift-bar {
+    margin: 0;
+    padding: clamp(0.4rem, 0.55vw, 0.7rem) 3vw;
+    background: #071b3d;
+    color: #fff2db;
+    text-align: center;
+    font: 700 clamp(0.8rem, 1.05vw, 1.15rem)/1.35 var(--font-body--family, sans-serif);
+    text-wrap: balance;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .spuds-gift-bar span { animation: spuds-gift-flash 2s ease-in-out 2; }
+    @keyframes spuds-gift-flash {
+      50% { color: #ffcf51; }
+    }
+  }
+{% endstylesheet %}

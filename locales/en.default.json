@@ -8,6 +8,12 @@
  * ------------------------------------------------------------
  */
 {
+  "spuds_gift": {
+    "announcement": "Get a free 2.3 oz commemorative Spuds Chicken Chips can with orders $75+",
+    "title": "Free commemorative Spuds can",
+    "detail": "2.3 oz Chicken Chips · 1 per order",
+    "qualification": "Included after checkout with a $75+ merchandise subtotal after discounts."
+  },
   "spuds_footer": { "info": "Help & information" },
   "spuds_catalog": { "categories": "Filter products by category", "all": "All products", "error": "This category could not load. Please try again.", "updated": "Showing {{ category }}" },
   "spuds_hero": { "shop_category": "Shop {{ category }}" },
